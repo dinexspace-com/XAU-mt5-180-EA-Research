@@ -2,13 +2,21 @@
 
 Welcome to my GitHub profile! I specialize in developing, backtesting, and optimizing automated trading strategies (Expert Advisors) for financial markets, with a focus on Gold (XAUUSD).
 
-## 🚀 Active Project: EA-001 (XAUUSD Trading Bot)
+---
 
+## 🚀 Active Projects
+
+### 📌 EA-001 (XAUUSD Trading Bot)
 A quantitative trading algorithm built on MetaTrader using EMA crossover strategies combined with risk management protocols.
 
-### 📊 Development & Research Workflow
+### 📌 EA-002 (Trend EMA 13/34 Cross - M1)
+A high-frequency trend-following EA on M1 timeframe utilizing EMA 13/34 crossover and same-color candle filters.
+
+---
+
+## 📊 Development & Research Workflow
 - **Backtesting:** 100% Real Ticks history data backtesting for maximum precision.
-- **Methodology:** Systematic hypothesis-driven experiments (`docs/methodology.md`).
+- **Methodology:** Systematic hypothesis-driven experiments (`docs/methodology.md` & `docs/methodology-EA-002.md`).
 - **Research:** Continuous optimization on timeframes, trend filters, and volatility controls (`Research/`).
 
 ---
@@ -21,8 +29,16 @@ A quantitative trading algorithm built on MetaTrader using EMA crossover strateg
 
 ---
 
-## 📈 Current Project Status
+## 📈 Current Projects Status
+
+### EA-001
 - [x] Baseline Backtest Completed
 - [x] Research & Experiment Framework Setup
 - [ ] Experiment 01: Timeframe Optimization
 - [ ] Experiment 02: Trend Filter Integration
+
+### EA-002
+- [x] Baseline Backtest Completed (#01)
+- [x] Strategy Code & Documentations Setup
+- [ ] Experiment 01: Break Even & Trailing Stop Integration
+- [ ] Experiment 02: Higher Timeframe (H1 EMA 200) Trend Filter
