@@ -1,6 +1,6 @@
 # Hi there, I'm an Algorithmic Trader & EA Developer! 👋
 
-Welcome to my GitHub profile! I specialize in developing, backtesting, and optimizing automated trading strategies (Expert Advisors) for financial markets, with a focus on Gold (XAUUSD)[cite: 1].
+Welcome to my GitHub profile! I specialize in developing, backtesting, and optimizing automated trading strategies (Expert Advisors) for financial markets, with a focus on Gold (XAUUSD).
 
 ---
 
@@ -19,7 +19,10 @@ A trend-following EA on M1 timeframe utilizing EMA 20/50 crossover with price-lo
 A fast-reacting moving average crossover strategy on M1 timeframe, executed strictly upon M1 candle closure with standard risk parameters (SL 300, TP 600, BE 150, Trailing 200).
 
 ### 📌 EA-005 (Trend SMA 20/100 Cross - M1)
-A medium-period moving average crossover strategy on M1 timeframe designed to capture larger swings, using SMA 20 & SMA 100 on XAUUSD[cite: 1].
+A medium-period moving average crossover strategy on M1 timeframe designed to capture larger swings, using SMA 20 & SMA 100 on XAUUSD.
+
+### 📌 EA-006 (EMA 5/20 Pullback - M1)
+A high-frequency pullback strategy on M1 timeframe based on fast EMA 5 & EMA 20 crossovers with fixed risk controls (SL 300, TP 600).
 
 ---
 
@@ -34,7 +37,7 @@ A medium-period moving average crossover strategy on M1 timeframe designed to ca
 - **Trading Platforms:** MetaTrader 4 / MetaTrader 5 (MQL4 / MQL5)
 - **Languages:** MQL4, MQL5, Python (Data Analysis)
 - **Version Control:** Git, GitHub
-- **Analysis:** Backtest Reports, Quantitative Metrics (Profit Factor, Drawdown, Sharpe Ratio)[cite: 1]
+- **Analysis:** Backtest Reports, Quantitative Metrics (Profit Factor, Drawdown, Sharpe Ratio)
 
 ---
 
@@ -65,7 +68,13 @@ A medium-period moving average crossover strategy on M1 timeframe designed to ca
 - [ ] Experiment 02: Timeframe Shift (M5/M15) & Parameter Optimization
 
 ### EA-005
-- [x] Strategy Code & Technical Specifications Setup (`EAs/EA-005_SMA_20_100_Cross/`)[cite: 1]
-- [x] Baseline Backtest Completed (#01) (`Backtest/EA-005_SMA_20_100_Cross/`)[cite: 1]
+- [x] Strategy Code & Technical Specifications Setup (`EAs/EA-005_SMA_20_100_Cross/`)
+- [x] Baseline Backtest Completed (#01) (`Backtest/EA-005_SMA_20_100_Cross/`)
 - [ ] Experiment 01: Timeframe Shift (M15/H1) & EMA Replacement (Reduce Whipsaw Losses)
 - [ ] Experiment 02: Trend Filter (ADX > 25) & Dynamic Risk-per-Trade Implementation
+
+### EA-006
+- [x] Strategy Code & Technical Specifications Setup (`EAs/EA-006_EMA_5_20_Pullback/`)
+- [x] Baseline Backtest Completed (#01) (`Backtest/EA-006_EMA_5_20_Pullback/`)
+- [ ] Experiment 01: Multi-Timeframe Filter Integration (HTF EMA 200)
+- [ ] Experiment 02: BreakEven & Trailing Stop Optimization
