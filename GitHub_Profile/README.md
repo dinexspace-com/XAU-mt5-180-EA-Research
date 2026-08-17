@@ -24,6 +24,9 @@ A medium-period moving average crossover strategy on M1 timeframe designed to ca
 ### 📌 EA-006 (EMA 5/20 Pullback - M1)
 A high-frequency pullback strategy on M1 timeframe based on fast EMA 5 & EMA 20 crossovers with fixed risk controls (SL 300, TP 600).
 
+### 📌 EA-007 (EMA 9/50 Pullback - M1)
+A fast trend-following pullback strategy on M1 timeframe using EMA 9 & EMA 50 crossovers combined with strict spread filters, BreakEven, and Trailing Stop management.
+
 ---
 
 ## 📊 Development & Research Workflow
@@ -78,3 +81,9 @@ A high-frequency pullback strategy on M1 timeframe based on fast EMA 5 & EMA 20 
 - [x] Baseline Backtest Completed (#01) (`Backtest/EA-006_EMA_5_20_Pullback/`)
 - [ ] Experiment 01: Multi-Timeframe Filter Integration (HTF EMA 200)
 - [ ] Experiment 02: BreakEven & Trailing Stop Optimization
+
+### EA-007
+- [x] Strategy Code & Technical Specifications Setup (`EAs/EA-007_EMA_9_50_Pullback/`)
+- [x] Baseline Backtest Completed (#01) (`Backtest/EA-007_EMA_9_50_Pullback/`)
+- [ ] Experiment 01: Multi-Timeframe Filter Integration (HTF EMA 200)
+- [ ] Experiment 02: Volatility / ADX Filter Implementation & Timeframe Shift (M5/M15)
