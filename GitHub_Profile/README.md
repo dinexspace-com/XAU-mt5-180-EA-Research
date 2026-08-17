@@ -15,6 +15,9 @@ A high-frequency trend-following EA on M1 timeframe utilizing EMA 13/34 crossove
 ### 📌 EA-003 (Trend EMA 20/50 Cross - M1)
 A trend-following EA on M1 timeframe utilizing EMA 20/50 crossover with price-location confirmation, strict spread filtering, and dynamic risk management (BreakEven & Trailing Stop).
 
+### 📌 EA-004 (Trend SMA 10/30 Cross - M1)
+A fast-reacting moving average crossover strategy on M1 timeframe, executed strictly upon M1 candle closure with standard risk parameters (SL 300, TP 600, BE 150, Trailing 200).
+
 ---
 
 ## 📊 Development & Research Workflow
@@ -51,3 +54,9 @@ A trend-following EA on M1 timeframe utilizing EMA 20/50 crossover with price-lo
 - [x] Baseline Backtest Completed (#01) (`Backtest/EA-003TrendEMA_20_50_Cross/`)
 - [ ] Experiment 01: Filter Relaxation to Increase Trade Frequency
 - [ ] Experiment 02: Multi-Timeframe (M5/M15) Evaluation
+
+### EA-004
+- [x] Strategy Code & Technical Specifications Setup (`EAs/EA-004_SMA_10_30_Cross/`)
+- [x] Baseline Backtest Completed (#01) (`Backtest/EA-004_SMA_10_30_Cross/`)
+- [ ] Experiment 01: Trend Filter Integration (HTF EMA 200 / ADX) to Reduce Whipsaws
+- [ ] Experiment 02: Timeframe Shift (M5/M15) & Parameter Optimization
