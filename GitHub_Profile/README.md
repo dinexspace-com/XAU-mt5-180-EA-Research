@@ -12,6 +12,9 @@ A quantitative trading algorithm built on MetaTrader using EMA crossover strateg
 ### 📌 EA-002 (Trend EMA 13/34 Cross - M1)
 A high-frequency trend-following EA on M1 timeframe utilizing EMA 13/34 crossover and same-color candle filters.
 
+### 📌 EA-003 (Trend EMA 20/50 Cross - M1)
+A trend-following EA on M1 timeframe utilizing EMA 20/50 crossover with price-location confirmation, strict spread filtering, and dynamic risk management (BreakEven & Trailing Stop).
+
 ---
 
 ## 📊 Development & Research Workflow
@@ -42,3 +45,9 @@ A high-frequency trend-following EA on M1 timeframe utilizing EMA 13/34 crossove
 - [x] Strategy Code & Documentations Setup
 - [ ] Experiment 01: Break Even & Trailing Stop Integration
 - [ ] Experiment 02: Higher Timeframe (H1 EMA 200) Trend Filter
+
+### EA-003
+- [x] Strategy Code & Technical Specifications Setup (`EAs/EA-003TrendEMA_20_50_Cross/`)
+- [x] Baseline Backtest Completed (#01) (`Backtest/EA-003TrendEMA_20_50_Cross/`)
+- [ ] Experiment 01: Filter Relaxation to Increase Trade Frequency
+- [ ] Experiment 02: Multi-Timeframe (M5/M15) Evaluation
