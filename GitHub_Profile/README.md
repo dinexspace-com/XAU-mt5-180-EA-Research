@@ -27,6 +27,9 @@ A high-frequency pullback strategy on M1 timeframe based on fast EMA 5 & EMA 20 
 ### 📌 EA-007 (EMA 9/50 Pullback - M1)
 A fast trend-following pullback strategy on M1 timeframe using EMA 9 & EMA 50 crossovers combined with strict spread filters, BreakEven, and Trailing Stop management.
 
+### 📌 EA-008 (EMA 21/55 First Bounce Pullback - M1)
+A pullback trading strategy on M1 timeframe based on EMA 21 & EMA 55 trend identification, capturing the first bounce upon returning to EMA 21 with standardized risk management (SL 300, TP 600, BE 150, Trailing 200, Spread <= 30).
+
 ---
 
 ## 📊 Development & Research Workflow
@@ -87,3 +90,9 @@ A fast trend-following pullback strategy on M1 timeframe using EMA 9 & EMA 50 cr
 - [x] Baseline Backtest Completed (#01) (`Backtest/EA-007_EMA_9_50_Pullback/`)
 - [ ] Experiment 01: Multi-Timeframe Filter Integration (HTF EMA 200)
 - [ ] Experiment 02: Volatility / ADX Filter Implementation & Timeframe Shift (M5/M15)
+
+### EA-008
+- [x] Strategy Code & Technical Specifications Setup (`EAs/EA-008_EMA_21_55_Pullback/`)
+- [x] Baseline Backtest Completed (#01) (`Backtest/EA-008_EMA_21_55_Pullback/`)
+- [ ] Experiment 01: Higher Timeframe Trend Filter (HTF EMA 200) Integration
+- [ ] Experiment 02: Timeframe Scaling (M5/M15) & Risk-Reward Parameter Tuning
