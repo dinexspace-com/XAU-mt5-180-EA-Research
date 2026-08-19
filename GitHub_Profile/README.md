@@ -33,6 +33,9 @@ A pullback trading strategy on M1 timeframe based on EMA 21 & EMA 55 trend ident
 ### 📌 EA-009 (EMA 34/89 Pullback - M1)
 A medium-term exponential moving average pullback strategy on M1 timeframe utilizing EMA 34 & EMA 89 crossovers with fixed risk management parameters (SL 300, TP 600, BE 150, Trailing 200, Spread <= 30).
 
+### 📌 EA-010 (EMA 50/200 Trend - M1)
+A long-term trend-following crossover strategy on M1 timeframe using EMA 50 & EMA 200 to capture major trend shifts on XAUUSD with standard fixed risk controls (SL 300, TP 600, Spread <= 30).
+
 ---
 
 ## 📊 Development & Research Workflow
@@ -105,3 +108,9 @@ A medium-term exponential moving average pullback strategy on M1 timeframe utili
 - [x] Baseline Backtest Completed (#01) (`Backtest/EA-009_EMA_34_89_Pullback/`)
 - [ ] Experiment 01: Higher Timeframe Trend Filter (HTF EMA 200) Integration
 - [ ] Experiment 02: Timeframe Scaling (M5/M15) & Volatility (ADX/ATR) Filter Integration
+
+### EA-010
+- [x] Strategy Code & Technical Specifications Setup (`EAs/EA-010_EMA_50_200_Trend/`)
+- [x] Baseline Backtest Completed (#01) (`Backtest/EA-010_EMA_50_200_Trend/`)
+- [ ] Experiment 01: Enable Dynamic Risk Controls (BreakEven & Trailing Stop)
+- [ ] Experiment 02: Multi-Timeframe (H1/H4) Trend Filter & Timeframe Scaling (M5/M15)
