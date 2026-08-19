@@ -36,6 +36,9 @@ A medium-term exponential moving average pullback strategy on M1 timeframe utili
 ### 📌 EA-010 (EMA 50/200 Trend - M1)
 A long-term trend-following crossover strategy on M1 timeframe using EMA 50 & EMA 200 to capture major trend shifts on XAUUSD with standard fixed risk controls (SL 300, TP 600, Spread <= 30).
 
+### 📌 EA-011 (EMA 50/200 Retest - M1)
+A retest-based strategy on M1 timeframe identifying price pullbacks to EMA 50/200 dynamic support/resistance zones after a confirmed trend breakout.
+
 ---
 
 ## 📊 Development & Research Workflow
@@ -114,3 +117,9 @@ A long-term trend-following crossover strategy on M1 timeframe using EMA 50 & EM
 - [x] Baseline Backtest Completed (#01) (`Backtest/EA-010_EMA_50_200_Trend/`)
 - [ ] Experiment 01: Enable Dynamic Risk Controls (BreakEven & Trailing Stop)
 - [ ] Experiment 02: Multi-Timeframe (H1/H4) Trend Filter & Timeframe Scaling (M5/M15)
+
+### EA-011
+- [x] Strategy Code & Technical Specifications Setup (`EAs/EA-011_EMA_50_200_Retest/`)
+- [x] Baseline Backtest Completed (#01) (`Backtest/EA-011_EMA_50_200_Retest/`)
+- [ ] Experiment 01: Higher Timeframe Trend Filter Integration (H1/M15 EMA Slope)
+- [ ] Experiment 02: Enable Dynamic Risk Controls (BreakEven & Trailing Stop)
