@@ -45,6 +45,9 @@ A multi-EMA momentum crossover strategy on M1 timeframe utilizing ultra-fast EMA
 ### 📌 EA-013 (Triple EMA 10/30/100 - M1)
 A triple moving average trend-following strategy on M1 timeframe utilizing EMA 10, EMA 30, and EMA 100 alignment with dynamic trade management controls (SL 300, TP 600, BE 150, Trailing 200, Spread <= 30).
 
+### 📌 EA-014 (Triple SMA 10/30/60 - M1)
+A triple simple moving average strategy on M1 timeframe using SMA 10, SMA 30, and SMA 60 alignment for trend confirmation with dynamic trade controls (SL 300, TP 600, BE 150, Trailing 200, Spread <= 30).
+
 ---
 
 ## 📊 Development & Research Workflow
@@ -141,3 +144,9 @@ A triple moving average trend-following strategy on M1 timeframe utilizing EMA 1
 - [x] Baseline Backtest Completed (#01) (`Backtest/EA-013_Triple_EMA_10_30_100/`)
 - [ ] Experiment 01: Volatility & Higher Timeframe Trend Filter Integration (ADX / HTF EMA 200)
 - [ ] Experiment 02: BreakEven & Trailing Stop Parameter Relaxation & Risk-Reward Tuning
+
+### EA-014
+- [x] Strategy Code & Technical Specifications Setup (`EAs/EA-014_Triple_SMA_10_30_60/`)
+- [x] Baseline Backtest Completed (#01) (`Backtest/EA-014_Triple_SMA_10_30_60/`)
+- [ ] Experiment 01: Trend Filter (HTF EMA 200 / ADX) Integration to Reduce Whipsaws
+- [ ] Experiment 02: Timeframe Shift (M5/M15) & Risk-Reward Ratio Tuning
