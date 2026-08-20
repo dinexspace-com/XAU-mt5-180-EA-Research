@@ -42,6 +42,9 @@ A retest-based strategy on M1 timeframe identifying price pullbacks to EMA 50/20
 ### 📌 EA-012 (Triple EMA 5/20/50 - M1)
 A multi-EMA momentum crossover strategy on M1 timeframe utilizing ultra-fast EMA 5, fast EMA 20, and baseline EMA 50 alignment for high-frequency scalp entries.
 
+### 📌 EA-013 (Triple EMA 10/30/100 - M1)
+A triple moving average trend-following strategy on M1 timeframe utilizing EMA 10, EMA 30, and EMA 100 alignment with dynamic trade management controls (SL 300, TP 600, BE 150, Trailing 200, Spread <= 30).
+
 ---
 
 ## 📊 Development & Research Workflow
@@ -132,3 +135,9 @@ A multi-EMA momentum crossover strategy on M1 timeframe utilizing ultra-fast EMA
 - [x] Baseline Backtest Completed (#01) (`Backtest/EA-012_Triple_EMA_5_20_50/`)
 - [ ] Experiment 01: Higher Timeframe Trend Filter Integration & Volatility Thresholds (ADX/ATR)
 - [ ] Experiment 02: Enable Active Trade Management (BreakEven & Trailing) & Session Window Limits
+
+### EA-013
+- [x] Strategy Code & Technical Specifications Setup (`EAs/EA-013_Triple_EMA_10_30_100/`)
+- [x] Baseline Backtest Completed (#01) (`Backtest/EA-013_Triple_EMA_10_30_100/`)
+- [ ] Experiment 01: Volatility & Higher Timeframe Trend Filter Integration (ADX / HTF EMA 200)
+- [ ] Experiment 02: BreakEven & Trailing Stop Parameter Relaxation & Risk-Reward Tuning
