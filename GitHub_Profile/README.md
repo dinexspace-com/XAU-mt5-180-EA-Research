@@ -39,6 +39,9 @@ A long-term trend-following crossover strategy on M1 timeframe using EMA 50 & EM
 ### 📌 EA-011 (EMA 50/200 Retest - M1)
 A retest-based strategy on M1 timeframe identifying price pullbacks to EMA 50/200 dynamic support/resistance zones after a confirmed trend breakout.
 
+### 📌 EA-012 (Triple EMA 5/20/50 - M1)
+A multi-EMA momentum crossover strategy on M1 timeframe utilizing ultra-fast EMA 5, fast EMA 20, and baseline EMA 50 alignment for high-frequency scalp entries.
+
 ---
 
 ## 📊 Development & Research Workflow
@@ -123,3 +126,9 @@ A retest-based strategy on M1 timeframe identifying price pullbacks to EMA 50/20
 - [x] Baseline Backtest Completed (#01) (`Backtest/EA-011_EMA_50_200_Retest/`)
 - [ ] Experiment 01: Higher Timeframe Trend Filter Integration (H1/M15 EMA Slope)
 - [ ] Experiment 02: Enable Dynamic Risk Controls (BreakEven & Trailing Stop)
+
+### EA-012
+- [x] Strategy Code & Technical Specifications Setup (`EAs/EA-012_Triple_EMA_5_20_50/`)
+- [x] Baseline Backtest Completed (#01) (`Backtest/EA-012_Triple_EMA_5_20_50/`)
+- [ ] Experiment 01: Higher Timeframe Trend Filter Integration & Volatility Thresholds (ADX/ATR)
+- [ ] Experiment 02: Enable Active Trade Management (BreakEven & Trailing) & Session Window Limits
