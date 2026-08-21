@@ -66,6 +66,10 @@ A triple simple moving average strategy on M1 timeframe using SMA 10, SMA 30, an
 
 A short-term trend-following strategy on XAUUSD M1 based on the directional slope of EMA20 combined with price-location confirmation. BUY signals require a rising EMA20 with the previous closed candle above EMA20, while SELL signals require a falling EMA20 with the previous closed candle below EMA20. The EA supports fixed SL/TP, spread filtering, Break Even, and Trailing Stop trade management.
 
+### 📌 EA-016 (EMA50 Slope - M1)
+
+A trend-following strategy on XAUUSD M1 based on the directional slope of EMA50 combined with price-location confirmation. BUY signals require a rising EMA50 with the previous closed candle above EMA50, while SELL signals require a falling EMA50 with the previous closed candle below EMA50. The EA supports fixed SL/TP, spread filtering, Break Even, and Trailing Stop trade management.
+
 ---
 
 ## 📊 Development & Research Workflow
@@ -203,6 +207,23 @@ A short-term trend-following strategy on XAUUSD M1 based on the directional slop
 **Baseline #01 Result:** 3,508 trades, Net Profit **-$992.93**, Profit Factor **0.87**, Expected Payoff **-$0.28**, Sharpe Ratio **-5.00**, Maximum Drawdown approximately **99.32%**.
 
 The baseline configuration is rejected. EA-015 remains under research because alternative configurations and hypotheses have not yet been independently tested.
+
+### EA-016
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-016_EMA50_Slope/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-016_EMA50_Slope/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [ ] Experiment 02: Test Alternative EMA50 Trend Persistence
+* [ ] Experiment 03: Evaluate BUY vs SELL Directional Filtering
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** EMA50 / Minimum Trend Bars = 2 / SL 300 / TP 600 / Break Even OFF / Trailing OFF.
+
+**Baseline #01 Result:** 3,338 trades, Net Profit **-$992.38**, Profit Factor **0.86**, Expected Payoff **-$0.30**, Sharpe Ratio **-5.00**, Maximum Drawdown approximately **99.28%**.
+
+The baseline configuration is rejected. EA-016 remains under research because alternative configurations and hypotheses have not yet been independently tested.
 
 ---
 
