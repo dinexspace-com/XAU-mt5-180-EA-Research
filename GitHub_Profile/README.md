@@ -1,316 +1,260 @@
-Hi there, I'm an Algorithmic Trader & EA Developer! 👋
+# Hi there, I'm an Algorithmic Trader & EA Developer! 👋
 
 Welcome to my GitHub profile! I specialize in developing, backtesting, and optimizing automated trading strategies (Expert Advisors) for financial markets, with a focus on Gold (XAUUSD).
 
-🚀 Active Projects
+---
 
-📌 EA-001 (XAUUSD Trading Bot)
+## 🚀 Active Projects
+
+### 📌 EA-001 (XAUUSD Trading Bot)
 
 A quantitative trading algorithm built on MetaTrader using EMA crossover strategies combined with risk management protocols.
 
-📌 EA-002 (Trend EMA 13/34 Cross - M1)
+### 📌 EA-002 (Trend EMA 13/34 Cross - M1)
 
 A high-frequency trend-following EA on M1 timeframe utilizing EMA 13/34 crossover and same-color candle filters.
 
-📌 EA-003 (Trend EMA 20/50 Cross - M1)
+### 📌 EA-003 (Trend EMA 20/50 Cross - M1)
 
 A trend-following EA on M1 timeframe utilizing EMA 20/50 crossover with price-location confirmation, strict spread filtering, and dynamic risk management (BreakEven & Trailing Stop).
 
-📌 EA-004 (Trend SMA 10/30 Cross - M1)
+### 📌 EA-004 (Trend SMA 10/30 Cross - M1)
 
 A fast-reacting moving average crossover strategy on M1 timeframe, executed strictly upon M1 candle closure with standard risk parameters (SL 300, TP 600, BE 150, Trailing 200).
 
-📌 EA-005 (Trend SMA 20/100 Cross - M1)
+### 📌 EA-005 (Trend SMA 20/100 Cross - M1)
 
 A medium-period moving average crossover strategy on M1 timeframe designed to capture larger swings, using SMA 20 & SMA 100 on XAUUSD.
 
-📌 EA-006 (EMA 5/20 Pullback - M1)
+### 📌 EA-006 (EMA 5/20 Pullback - M1)
 
 A high-frequency pullback strategy on M1 timeframe based on fast EMA 5 & EMA 20 crossovers with fixed risk controls (SL 300, TP 600).
 
-📌 EA-007 (EMA 9/50 Pullback - M1)
+### 📌 EA-007 (EMA 9/50 Pullback - M1)
 
 A fast trend-following pullback strategy on M1 timeframe using EMA 9 & EMA 50 crossovers combined with strict spread filters, BreakEven, and Trailing Stop management.
 
-📌 EA-008 (EMA 21/55 First Bounce Pullback - M1)
+### 📌 EA-008 (EMA 21/55 First Bounce Pullback - M1)
 
 A pullback trading strategy on M1 timeframe based on EMA 21 & EMA 55 trend identification, capturing the first bounce upon returning to EMA 21 with standardized risk management (SL 300, TP 600, BE 150, Trailing 200, Spread <= 30).
 
-📌 EA-009 (EMA 34/89 Pullback - M1)
+### 📌 EA-009 (EMA 34/89 Pullback - M1)
 
 A medium-term exponential moving average pullback strategy on M1 timeframe utilizing EMA 34 & EMA 89 crossovers with fixed risk management parameters (SL 300, TP 600, BE 150, Trailing 200, Spread <= 30).
 
-📌 EA-010 (EMA 50/200 Trend - M1)
+### 📌 EA-010 (EMA 50/200 Trend - M1)
 
 A long-term trend-following crossover strategy on M1 timeframe using EMA 50 & EMA 200 to capture major trend shifts on XAUUSD with standard fixed risk controls (SL 300, TP 600, Spread <= 30).
 
-📌 EA-011 (EMA 50/200 Retest - M1)
+### 📌 EA-011 (EMA 50/200 Retest - M1)
 
 A retest-based strategy on M1 timeframe identifying price pullbacks to EMA 50/200 dynamic support/resistance zones after a confirmed trend breakout.
 
-📌 EA-012 (Triple EMA 5/20/50 - M1)
+### 📌 EA-012 (Triple EMA 5/20/50 - M1)
 
 A multi-EMA momentum crossover strategy on M1 timeframe utilizing ultra-fast EMA 5, fast EMA 20, and baseline EMA 50 alignment for high-frequency scalp entries.
 
-📌 EA-013 (Triple EMA 10/30/100 - M1)
+### 📌 EA-013 (Triple EMA 10/30/100 - M1)
 
 A triple moving average trend-following strategy on M1 timeframe utilizing EMA 10, EMA 30, and EMA 100 alignment with dynamic trade management controls (SL 300, TP 600, BE 150, Trailing 200, Spread <= 30).
 
-📌 EA-014 (Triple SMA 10/30/60 - M1)
+### 📌 EA-014 (Triple SMA 10/30/60 - M1)
 
 A triple simple moving average strategy on M1 timeframe using SMA 10, SMA 30, and SMA 60 alignment for trend confirmation with dynamic trade controls (SL 300, TP 600, BE 150, Trailing 200, Spread <= 30).
 
-📌 EA-015 (EMA20 Slope - M1)
+### 📌 EA-015 (EMA20 Slope - M1)
 
 A short-term trend-following strategy on XAUUSD M1 based on the directional slope of EMA20 combined with price-location confirmation. BUY signals require a rising EMA20 with the previous closed candle above EMA20, while SELL signals require a falling EMA20 with the previous closed candle below EMA20. The EA supports fixed SL/TP, spread filtering, Break Even, and Trailing Stop trade management.
 
-📌 EA-016 (EMA50 Slope - M1)
+### 📌 EA-016 (EMA50 Slope - M1)
 
 A trend-following strategy on XAUUSD M1 based on the directional slope of EMA50 combined with price-location confirmation. BUY signals require a rising EMA50 with the previous closed candle above EMA50, while SELL signals require a falling EMA50 with the previous closed candle below EMA50. The EA supports fixed SL/TP, spread filtering, Break Even, and Trailing Stop trade management.
 
-📌 EA-017 (ADX + EMA 20/50 - M1)
+### 📌 EA-017 (ADX + EMA 20/50 - M1)
 
 A trend-following EA on XAUUSD M1 using EMA 20/50 crossover signals confirmed by ADX 14 and directional movement (+DI / -DI). The baseline configuration uses Minimum ADX 25, fixed SL 300, TP 600, Spread <= 30, with Break Even and Trailing Stop disabled for the initial validation test.
 
-📊 Development & Research Workflow
+---
 
-Backtesting: 100% Real Ticks history data backtesting for maximum precision.
+## 📊 Development & Research Workflow
 
-Methodology: Systematic hypothesis-driven experiments (docs/methodology.md & project-specific docs).
+* **Backtesting:** 100% Real Ticks history data backtesting for maximum precision.
+* **Methodology:** Systematic hypothesis-driven experiments (`docs/methodology.md` & project-specific docs).
+* **Research:** Controlled experiments on signal parameters, timeframes, trend filters, volatility controls, and trade management (`Research/`).
+* **Evidence:** Original MetaTrader 5 Strategy Tester reports are retained as the numerical source of truth for individual backtests.
+* **Experiment Tracking:** Failed configurations are preserved as research evidence rather than removed or hidden.
 
-Research: Controlled experiments on signal parameters, timeframes, trend filters, volatility controls, and trade management (Research/).
+---
 
-Evidence: Original MetaTrader 5 Strategy Tester reports are retained as the numerical source of truth for individual backtests.
+## 🛠️ Tech Stack & Tools
 
-Experiment Tracking: Failed configurations are preserved as research evidence rather than removed or hidden.
+* **Trading Platforms:** MetaTrader 4 / MetaTrader 5 (MQL4 / MQL5)
+* **Languages:** MQL4, MQL5, Python (Data Analysis)
+* **Version Control:** Git, GitHub
+* **Analysis:** Backtest Reports, Quantitative Metrics (Profit Factor, Drawdown, Sharpe Ratio)
 
-🛠️ Tech Stack & Tools
+---
 
-Trading Platforms: MetaTrader 4 / MetaTrader 5 (MQL4 / MQL5)
+## 📈 Current Projects Status
 
-Languages: MQL4, MQL5, Python (Data Analysis)
+### EA-001
 
-Version Control: Git, GitHub
+* [x] Baseline Backtest Completed
+* [x] Research & Experiment Framework Setup
+* [ ] Experiment 01: Timeframe Optimization
+* [ ] Experiment 02: Trend Filter Integration
 
-Analysis: Backtest Reports, Quantitative Metrics (Profit Factor, Drawdown, Sharpe Ratio)
+### EA-002
 
-📈 Current Projects Status
+* [x] Baseline Backtest Completed (#01)
+* [x] Strategy Code & Documentations Setup
+* [ ] Experiment 01: Break Even & Trailing Stop Integration
+* [ ] Experiment 02: Higher Timeframe (H1 EMA 200) Trend Filter
 
-EA-001
+### EA-003
 
-Baseline Backtest Completed
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-003TrendEMA_20_50_Cross/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-003TrendEMA_20_50_Cross/`)
+* [ ] Experiment 01: Filter Relaxation to Increase Trade Frequency
+* [ ] Experiment 02: Multi-Timeframe (M5/M15) Evaluation
 
-Research & Experiment Framework Setup
+### EA-004
 
-Experiment 01: Timeframe Optimization
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-004_SMA_10_30_Cross/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-004_SMA_10_30_Cross/`)
+* [ ] Experiment 01: Trend Filter Integration (HTF EMA 200 / ADX) to Reduce Whipsaws
+* [ ] Experiment 02: Timeframe Shift (M5/M15) & Parameter Optimization
 
-Experiment 02: Trend Filter Integration
+### EA-005
 
-EA-002
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-005_SMA_20_100_Cross/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-005_SMA_20_100_Cross/`)
+* [ ] Experiment 01: Timeframe Shift (M15/H1) & EMA Replacement (Reduce Whipsaw Losses)
+* [ ] Experiment 02: Trend Filter (ADX > 25) & Dynamic Risk-per-Trade Implementation
 
-Baseline Backtest Completed (#01)
+### EA-006
 
-Strategy Code & Documentations Setup
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-006_EMA_5_20_Pullback/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-006_EMA_5_20_Pullback/`)
+* [ ] Experiment 01: Multi-Timeframe Filter Integration (HTF EMA 200)
+* [ ] Experiment 02: BreakEven & Trailing Stop Optimization
 
-Experiment 01: Break Even & Trailing Stop Integration
+### EA-007
 
-Experiment 02: Higher Timeframe (H1 EMA 200) Trend Filter
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-007_EMA_9_50_Pullback/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-007_EMA_9_50_Pullback/`)
+* [ ] Experiment 01: Multi-Timeframe Filter Integration (HTF EMA 200)
+* [ ] Experiment 02: Volatility / ADX Filter Implementation & Timeframe Shift (M5/M15)
 
-EA-003
+### EA-008
 
-Strategy Code & Technical Specifications Setup (EAs/EA-003TrendEMA_20_50_Cross/)
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-008_EMA_21_55_Pullback/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-008_EMA_21_55_Pullback/`)
+* [ ] Experiment 01: Higher Timeframe Trend Filter (HTF EMA 200) Integration
+* [ ] Experiment 02: Timeframe Scaling (M5/M15) & Risk-Reward Parameter Tuning
 
-Baseline Backtest Completed (#01) (Backtest/EA-003TrendEMA_20_50_Cross/)
+### EA-009
 
-Experiment 01: Filter Relaxation to Increase Trade Frequency
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-009_EMA_34_89_Pullback/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-009_EMA_34_89_Pullback/`)
+* [ ] Experiment 01: Higher Timeframe Trend Filter (HTF EMA 200) Integration
+* [ ] Experiment 02: Timeframe Scaling (M5/M15) & Volatility (ADX/ATR) Filter Integration
 
-Experiment 02: Multi-Timeframe (M5/M15) Evaluation
+### EA-010
 
-EA-004
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-010_EMA_50_200_Trend/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-010_EMA_50_200_Trend/`)
+* [ ] Experiment 01: Enable Dynamic Risk Controls (BreakEven & Trailing Stop)
+* [ ] Experiment 02: Multi-Timeframe (H1/H4) Trend Filter & Timeframe Scaling (M5/M15)
 
-Strategy Code & Technical Specifications Setup (EAs/EA-004_SMA_10_30_Cross/)
+### EA-011
 
-Baseline Backtest Completed (#01) (Backtest/EA-004_SMA_10_30_Cross/)
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-011_EMA_50_200_Retest/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-011_EMA_50_200_Retest/`)
+* [ ] Experiment 01: Higher Timeframe Trend Filter Integration (H1/M15 EMA Slope)
+* [ ] Experiment 02: Enable Dynamic Risk Controls (BreakEven & Trailing Stop)
 
-Experiment 01: Trend Filter Integration (HTF EMA 200 / ADX) to Reduce Whipsaws
+### EA-012
 
-Experiment 02: Timeframe Shift (M5/M15) & Parameter Optimization
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-012_Triple_EMA_5_20_50/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-012_Triple_EMA_5_20_50/`)
+* [ ] Experiment 01: Higher Timeframe Trend Filter Integration & Volatility Thresholds (ADX/ATR)
+* [ ] Experiment 02: Enable Active Trade Management (BreakEven & Trailing) & Session Window Limits
 
-EA-005
+### EA-013
 
-Strategy Code & Technical Specifications Setup (EAs/EA-005_SMA_20_100_Cross/)
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-013_Triple_EMA_10_30_100/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-013_Triple_EMA_10_30_100/`)
+* [ ] Experiment 01: Volatility & Higher Timeframe Trend Filter Integration (ADX / HTF EMA 200)
+* [ ] Experiment 02: BreakEven & Trailing Stop Parameter Relaxation & Risk-Reward Tuning
 
-Baseline Backtest Completed (#01) (Backtest/EA-005_SMA_20_100_Cross/)
+### EA-014
 
-Experiment 01: Timeframe Shift (M15/H1) & EMA Replacement (Reduce Whipsaw Losses)
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-014_Triple_SMA_10_30_60/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-014_Triple_SMA_10_30_60/`)
+* [ ] Experiment 01: Trend Filter (HTF EMA 200 / ADX) Integration to Reduce Whipsaws
+* [ ] Experiment 02: Timeframe Shift (M5/M15) & Risk-Reward Ratio Tuning
 
-Experiment 02: Trend Filter (ADX > 25) & Dynamic Risk-per-Trade Implementation
+### EA-015
 
-EA-006
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-015_EMA20_Slope/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-015_EMA20_Slope/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [ ] Experiment 02: Test Alternative EMA Trend Persistence
+* [ ] Experiment 03: Evaluate BUY vs SELL Directional Filtering
 
-Strategy Code & Technical Specifications Setup (EAs/EA-006_EMA_5_20_Pullback/)
+**Current Research Status:** `IN PROGRESS`
 
-Baseline Backtest Completed (#01) (Backtest/EA-006_EMA_5_20_Pullback/)
+**Baseline #01:** EMA20 / Minimum Trend Bars = 3 / SL 300 / TP 600 / Break Even OFF / Trailing OFF.
 
-Experiment 01: Multi-Timeframe Filter Integration (HTF EMA 200)
-
-Experiment 02: BreakEven & Trailing Stop Optimization
-
-EA-007
-
-Strategy Code & Technical Specifications Setup (EAs/EA-007_EMA_9_50_Pullback/)
-
-Baseline Backtest Completed (#01) (Backtest/EA-007_EMA_9_50_Pullback/)
-
-Experiment 01: Multi-Timeframe Filter Integration (HTF EMA 200)
-
-Experiment 02: Volatility / ADX Filter Implementation & Timeframe Shift (M5/M15)
-
-EA-008
-
-Strategy Code & Technical Specifications Setup (EAs/EA-008_EMA_21_55_Pullback/)
-
-Baseline Backtest Completed (#01) (Backtest/EA-008_EMA_21_55_Pullback/)
-
-Experiment 01: Higher Timeframe Trend Filter (HTF EMA 200) Integration
-
-Experiment 02: Timeframe Scaling (M5/M15) & Risk-Reward Parameter Tuning
-
-EA-009
-
-Strategy Code & Technical Specifications Setup (EAs/EA-009_EMA_34_89_Pullback/)
-
-Baseline Backtest Completed (#01) (Backtest/EA-009_EMA_34_89_Pullback/)
-
-Experiment 01: Higher Timeframe Trend Filter (HTF EMA 200) Integration
-
-Experiment 02: Timeframe Scaling (M5/M15) & Volatility (ADX/ATR) Filter Integration
-
-EA-010
-
-Strategy Code & Technical Specifications Setup (EAs/EA-010_EMA_50_200_Trend/)
-
-Baseline Backtest Completed (#01) (Backtest/EA-010_EMA_50_200_Trend/)
-
-Experiment 01: Enable Dynamic Risk Controls (BreakEven & Trailing Stop)
-
-Experiment 02: Multi-Timeframe (H1/H4) Trend Filter & Timeframe Scaling (M5/M15)
-
-EA-011
-
-Strategy Code & Technical Specifications Setup (EAs/EA-011_EMA_50_200_Retest/)
-
-Baseline Backtest Completed (#01) (Backtest/EA-011_EMA_50_200_Retest/)
-
-Experiment 01: Higher Timeframe Trend Filter Integration (H1/M15 EMA Slope)
-
-Experiment 02: Enable Dynamic Risk Controls (BreakEven & Trailing Stop)
-
-EA-012
-
-Strategy Code & Technical Specifications Setup (EAs/EA-012_Triple_EMA_5_20_50/)
-
-Baseline Backtest Completed (#01) (Backtest/EA-012_Triple_EMA_5_20_50/)
-
-Experiment 01: Higher Timeframe Trend Filter Integration & Volatility Thresholds (ADX/ATR)
-
-Experiment 02: Enable Active Trade Management (BreakEven & Trailing) & Session Window Limits
-
-EA-013
-
-Strategy Code & Technical Specifications Setup (EAs/EA-013_Triple_EMA_10_30_100/)
-
-Baseline Backtest Completed (#01) (Backtest/EA-013_Triple_EMA_10_30_100/)
-
-Experiment 01: Volatility & Higher Timeframe Trend Filter Integration (ADX / HTF EMA 200)
-
-Experiment 02: BreakEven & Trailing Stop Parameter Relaxation & Risk-Reward Tuning
-
-EA-014
-
-Strategy Code & Technical Specifications Setup (EAs/EA-014_Triple_SMA_10_30_60/)
-
-Baseline Backtest Completed (#01) (Backtest/EA-014_Triple_SMA_10_30_60/)
-
-Experiment 01: Trend Filter (HTF EMA 200 / ADX) Integration to Reduce Whipsaws
-
-Experiment 02: Timeframe Shift (M5/M15) & Risk-Reward Ratio Tuning
-
-EA-015
-
-Strategy Code & Technical Specifications Setup (EAs/EA-015_EMA20_Slope/)
-
-Baseline Backtest Completed (#01) (Backtest/EA-015_EMA20_Slope/)
-
-Baseline Experiment #01 Assessed: FAIL
-
-Research Documentation Updated (Research/)
-
-Experiment 02: Test Alternative EMA Trend Persistence
-
-Experiment 03: Evaluate BUY vs SELL Directional Filtering
-
-Current Research Status: IN PROGRESS
-
-Baseline #01: EMA20 / Minimum Trend Bars = 3 / SL 300 / TP 600 / Break Even OFF / Trailing OFF.
-
-Baseline #01 Result: 3,508 trades, Net Profit -$992.93, Profit Factor 0.87, Expected Payoff -$0.28, Sharpe Ratio -5.00, Maximum Drawdown approximately 99.32%.
+**Baseline #01 Result:** 3,508 trades, Net Profit **-$992.93**, Profit Factor **0.87**, Expected Payoff **-$0.28**, Sharpe Ratio **-5.00**, Maximum Drawdown approximately **99.32%**.
 
 The baseline configuration is rejected. EA-015 remains under research because alternative configurations and hypotheses have not yet been independently tested.
 
-EA-016
+### EA-016
 
-Strategy Code & Technical Specifications Setup (EAs/EA-016_EMA50_Slope/)
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-016_EMA50_Slope/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-016_EMA50_Slope/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [ ] Experiment 02: Test Alternative EMA50 Trend Persistence
+* [ ] Experiment 03: Evaluate BUY vs SELL Directional Filtering
 
-Baseline Backtest Completed (#01) (Backtest/EA-016_EMA50_Slope/)
+**Current Research Status:** `IN PROGRESS`
 
-Baseline Experiment #01 Assessed: FAIL
+**Baseline #01:** EMA50 / Minimum Trend Bars = 2 / SL 300 / TP 600 / Break Even OFF / Trailing OFF.
 
-Research Documentation Updated (Research/)
-
-Experiment 02: Test Alternative EMA50 Trend Persistence
-
-Experiment 03: Evaluate BUY vs SELL Directional Filtering
-
-Current Research Status: IN PROGRESS
-
-Baseline #01: EMA50 / Minimum Trend Bars = 2 / SL 300 / TP 600 / Break Even OFF / Trailing OFF.
-
-Baseline #01 Result: 3,338 trades, Net Profit -$992.38, Profit Factor 0.86, Expected Payoff -$0.30, Sharpe Ratio -5.00, Maximum Drawdown approximately 99.28%.
+**Baseline #01 Result:** 3,338 trades, Net Profit **-$992.38**, Profit Factor **0.86**, Expected Payoff **-$0.30**, Sharpe Ratio **-5.00**, Maximum Drawdown approximately **99.28%**.
 
 The baseline configuration is rejected. EA-016 remains under research because alternative configurations and hypotheses have not yet been independently tested.
 
-EA-017
+### EA-017
 
-Strategy Code & Technical Specifications Setup (EAs/EA-017_ADX_EMA/)
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-017_ADX_EMA/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-017_ADX_EMA/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] Experiment 01: ADX Threshold Evaluation (20 / 25 / 30 / 35)
+* [ ] Experiment 02: Multi-Timeframe Evaluation (M1 / M5 / M15)
+* [ ] Experiment 03: Break Even & Trailing Stop Validation after timer fix
 
-Baseline Backtest Completed (#01) (Backtest/EA-017_ADX_EMA/)
+**Current Research Status:** `IN PROGRESS`
 
-Baseline Experiment #01 Assessed: FAIL
+**Baseline #01:** EMA20 / EMA50 crossover + ADX14 / Minimum ADX 25 / +DI & -DI confirmation / SL 300 / TP 600 / Break Even OFF / Trailing OFF.
 
-Research Documentation Updated (Research/)
-
-Research Methodology Documented (docs/methodology.md)
-
-Experiment 01: ADX Threshold Evaluation (20 / 25 / 30 / 35)
-
-Experiment 02: Multi-Timeframe Evaluation (M1 / M5 / M15)
-
-Experiment 03: Break Even & Trailing Stop Validation after timer fix
-
-Current Research Status: IN PROGRESS
-
-Baseline #01: EMA20 / EMA50 crossover + ADX14 / Minimum ADX 25 / +DI & -DI confirmation / SL 300 / TP 600 / Break Even OFF / Trailing OFF.
-
-Baseline #01 Result: 1,818 trades, Net Profit -$184.67, Profit Factor 0.95, Expected Payoff -$0.10, Sharpe Ratio -4.45, Maximum Equity Drawdown 28.26%.
+**Baseline #01 Result:** 1,818 trades, Net Profit **-$184.67**, Profit Factor **0.95**, Expected Payoff **-$0.10**, Sharpe Ratio **-4.45**, Maximum Equity Drawdown **28.26%**.
 
 The baseline configuration is rejected as a profitable candidate, but retained as the reference baseline. EA-017 remains under research because the current result is close to break-even and the next controlled experiment will test whether changing the ADX threshold improves entry quality without changing the core strategy.
 
-🔬 Research Philosophy
+---
+
+## 🔬 Research Philosophy
 
 Every strategy follows a simple evidence-driven process:
 
-Hypothesis → Implementation → Backtest → Evidence → Analysis → Controlled Experiment
+**Hypothesis → Implementation → Backtest → Evidence → Analysis → Controlled Experiment**
 
 A failed backtest is not removed from the research history.
 
@@ -318,7 +262,9 @@ A successful backtest is not automatically considered ready for live trading.
 
 Each configuration is evaluated independently, and promising strategies must progress through additional robustness, out-of-sample, and forward-testing stages before being considered for live deployment.
 
-⚠️ Disclaimer
+---
+
+## ⚠️ Disclaimer
 
 This repository documents algorithmic trading research, strategy development, and historical backtesting.
 
