@@ -74,6 +74,13 @@ A trend-following strategy on XAUUSD M1 based on the directional slope of EMA50 
 
 A trend-following EA on XAUUSD M1 using EMA 20/50 crossover signals confirmed by ADX 14 and directional movement (+DI / -DI). The baseline configuration uses Minimum ADX 25, fixed SL 300, TP 600, Spread <= 30, with Break Even and Trailing Stop disabled for the initial validation test.
 
+### 📌 EA-018 (DI Trend - M1)
+
+A trend-following EA on XAUUSD M1 combining DMI directional movement (+DI / -DI) with EMA50 slope confirmation.
+
+BUY signals require +DI to dominate -DI together with a rising EMA50, while SELL signals require -DI to dominate +DI together with a falling EMA50.
+
+The baseline configuration uses EMA50, DMI/ADX14, fixed SL 300, TP 600, Spread <= 30, with Break Even and Trailing Stop disabled for the initial validation test.
 ---
 
 ## 📊 Development & Research Workflow
@@ -247,6 +254,34 @@ The baseline configuration is rejected. EA-016 remains under research because al
 **Baseline #01 Result:** 1,818 trades, Net Profit **-$184.67**, Profit Factor **0.95**, Expected Payoff **-$0.10**, Sharpe Ratio **-4.45**, Maximum Equity Drawdown **28.26%**.
 
 The baseline configuration is rejected as a profitable candidate, but retained as the reference baseline. EA-017 remains under research because the current result is close to break-even and the next controlled experiment will test whether changing the ADX threshold improves entry quality without changing the core strategy.
+
+### EA-018
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-018_DI_Trend/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-018_DI_Trend/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] RQ-01: Verify EMA Slope Implementation / `CopyBuffer()` Indexing
+* [ ] Experiment 02: DI State vs DI Crossover
+* [ ] Experiment 03: ADX Strength Filter Evaluation
+* [ ] Experiment 04: Multi-Timeframe Evaluation (M5 / M15 / M30 / H1)
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Implementation verification required`
+
+**Baseline #01:** XAUUSD.PRO / M1 / EMA50 + DMI/ADX14 / SL 300 / TP 600 / Lot 0.01 / Spread <= 30 / Break Even OFF / Trailing OFF.
+
+**Test Period:** 2026-01-02 → 2026-06-08 using 100% real ticks.
+
+**Baseline #01 Result:** 4,096 trades, Net Profit **-$993.61**, Profit Factor **0.89**, Expected Payoff **-$0.24**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.36%**, Win Rate **31.20%**.
+
+The baseline configuration is rejected as a profitable candidate. The balance curve shows persistent deterioration and the test ends with almost the entire initial deposit lost.
+
+EA-018 remains under research because the current baseline does not by itself prove that the underlying DI + EMA trend concept has no edge. Before any parameter optimization, the EMA slope implementation and `CopyBuffer()` indexing must be verified to ensure that the EA implementation matches the intended strategy logic.
+
+The next controlled research steps are to verify EMA slope direction first, then compare DI state-based entries against DI crossover entries, evaluate ADX strength filtering, and finally test higher timeframes without changing multiple strategy components simultaneously.
 
 ---
 
