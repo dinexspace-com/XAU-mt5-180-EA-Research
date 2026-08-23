@@ -81,6 +81,17 @@ A trend-following EA on XAUUSD M1 combining DMI directional movement (+DI / -DI)
 BUY signals require +DI to dominate -DI together with a rising EMA50, while SELL signals require -DI to dominate +DI together with a falling EMA50.
 
 The baseline configuration uses EMA50, DMI/ADX14, fixed SL 300, TP 600, Spread <= 30, with Break Even and Trailing Stop disabled for the initial validation test.
+
+### 📌 EA-019 (MACD Zero Trend - M1)
+
+A MACD-based trend-following EA on XAUUSD combining MACD zero-line positioning, MACD Main/Signal state confirmation, and an EMA50 trend filter.
+
+BUY signals require MACD Main above zero, MACD Main above the Signal line, and the previous closed candle above EMA50.
+
+SELL signals require MACD Main below zero, MACD Main below the Signal line, and the previous closed candle below EMA50.
+
+The baseline configuration uses MACD 12/26/9, EMA50, fixed SL 300, TP 600, Break Even 150, Trailing Stop 200, Lot 0.01, and Spread <= 30.
+
 ---
 
 ## 📊 Development & Research Workflow
@@ -282,6 +293,69 @@ The baseline configuration is rejected as a profitable candidate. The balance cu
 EA-018 remains under research because the current baseline does not by itself prove that the underlying DI + EMA trend concept has no edge. Before any parameter optimization, the EMA slope implementation and `CopyBuffer()` indexing must be verified to ensure that the EA implementation matches the intended strategy logic.
 
 The next controlled research steps are to verify EMA slope direction first, then compare DI state-based entries against DI crossover entries, evaluate ADX strength filtering, and finally test higher timeframes without changing multiple strategy components simultaneously.
+
+### EA-019
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-019_MACD_Zero_Trend/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-019_MACD_Zero_Trend/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] R01: MACD State vs Strict MACD Crossover
+* [ ] R02: EMA50 Filter ON vs OFF
+* [ ] R03: MACD Zero-Line Filter ON vs OFF
+* [ ] R04: Break Even ON vs OFF
+* [ ] R05: Trailing Stop ON vs OFF
+* [ ] R06: BUY vs SELL Directional Evaluation
+* [ ] R07: Multi-Timeframe Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / MACD 12/26/9 / MACD Zero-Line confirmation / EMA50 trend filter / SL 300 / TP 600 / Lot 0.01 / Break Even 150 / Trailing Stop 200 / Spread <= 30.
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 5,695 trades, Net Profit **-$992.55**, Profit Factor **0.91**, Expected Payoff **-$0.17**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **99.27%**, Win Rate **39.82%**.
+
+**Directional Results:**
+
+* BUY: 2,852 trades / **41.76%** won
+* SELL: 2,843 trades / **37.88%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$4.24**
+* Average losing trade: **-$3.10**
+* Maximum consecutive losses: **15**
+* Average holding time: **00:03:17**
+
+The baseline configuration is rejected as a profitable candidate. The Strategy Tester report shows negative expectancy, Profit Factor below 1.0, an extremely high drawdown, and a balance curve that ends with almost the entire initial deposit lost.
+
+The baseline does not by itself prove that the underlying MACD Zero Trend concept has no edge.
+
+A key implementation characteristic is that the current EA uses the **state** of MACD Main relative to the Signal line rather than requiring a new MACD crossover event. This may materially affect trade frequency and entry quality.
+
+The first controlled research experiment will therefore compare:
+
+```text
+Baseline:
+MACD Main > Signal / MACD Main < Signal
+
+vs
+
+Variant:
+Strict MACD crossover event
+```
+
+All unrelated strategy components should remain unchanged during this experiment.
+
+No parameter optimization should be performed before the main strategy components have been isolated through controlled experiments.
 
 ---
 
