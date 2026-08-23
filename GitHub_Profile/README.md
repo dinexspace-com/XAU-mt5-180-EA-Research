@@ -92,6 +92,17 @@ SELL signals require MACD Main below zero, MACD Main below the Signal line, and 
 
 The baseline configuration uses MACD 12/26/9, EMA50, fixed SL 300, TP 600, Break Even 150, Trailing Stop 200, Lot 0.01, and Spread <= 30.
 
+### 📌 EA-020 (MACD Signal Trend - M1)
+
+A MACD crossover trend-following EA on XAUUSD M1 designed to test whether strict MACD Main/Signal crossover events combined with zero-line confirmation can improve entry quality.
+
+BUY signals require MACD Main to cross above the Signal line while MACD Main is above zero.
+
+SELL signals require MACD Main to cross below the Signal line while MACD Main is below zero.
+
+The baseline configuration uses MACD 12/26/9, fixed SL 300, TP 600, Lot 0.01, Spread <= 30, Break Even 150, and Trailing Stop 200.
+
+
 ---
 
 ## 📊 Development & Research Workflow
@@ -356,6 +367,59 @@ Strict MACD crossover event
 All unrelated strategy components should remain unchanged during this experiment.
 
 No parameter optimization should be performed before the main strategy components have been isolated through controlled experiments.
+
+### EA-020
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-020_MACD_Signal_Trend/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-020_MACD_Signal_Trend/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] RQ-01: Verify Break Even & Trailing Stop Execution
+* [ ] RQ-02: Analyze MACD Entry Quality / Losing Signal Conditions
+* [ ] RQ-03: Trading Session / Time Filter Evaluation
+* [ ] RQ-04: Higher-Timeframe Trend Filter Evaluation
+* [ ] RQ-05: BUY vs SELL Directional Evaluation
+* [ ] RQ-06: Exit Parameter Evaluation after Entry Research
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Execution validation and controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / MACD 12/26/9 strict Main/Signal crossover / MACD Zero-Line trend confirmation / SL 300 / TP 600 / Lot 0.01 / Spread <= 30 / Break Even 150 / Trailing Stop 200.
+
+**Test Period:** 2026-01-02 → 2026-08-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 2,813 trades, Net Profit **-$993.58**, Profit Factor **0.84**, Expected Payoff **-$0.35**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.38%**, Win Rate **29.61%**.
+
+**Directional Results:**
+
+* BUY: 1,369 trades / **28.41%** won
+* SELL: 1,444 trades / **30.75%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.18**
+* Average losing trade: **-$3.10**
+* Largest profitable trade: **$40.02**
+* Largest losing trade: **-$13.80**
+* Maximum consecutive losses: **16**
+* Average holding time: **00:09:00**
+
+The baseline configuration is rejected as a profitable candidate. Profit Factor remains below 1.0, expected payoff is negative, and the strategy reaches a **99.38% maximum drawdown**, leaving almost the entire initial deposit lost.
+
+The baseline nevertheless provides a useful controlled comparison with EA-019. While EA-019 uses the **state** of MACD Main relative to the Signal line, EA-020 requires a **strict MACD crossover event** together with zero-line confirmation.
+
+The EA-020 baseline produced a **29.61% win rate** and Profit Factor of **0.84**, so strict crossover by itself does not demonstrate a profitable edge under the tested XAUUSD.PRO M1 conditions.
+
+A technical issue must also be resolved before parameter optimization: the current source requires verification that **Break Even and Trailing Stop position management are actually executed as intended**.
+
+The next research step is therefore execution validation first, followed by controlled investigation of entry quality. No broad parameter optimization should be performed until these components have been independently verified.
+
 
 ---
 
