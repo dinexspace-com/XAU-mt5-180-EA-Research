@@ -112,6 +112,15 @@ SELL signals require the MACD histogram to remain below zero and decrease relati
 
 The baseline configuration uses MACD/OsMA 12/26/9, fixed SL 300, TP 600, Lot 0.01, Spread <= 30, with Break Even and Trailing Stop disabled to isolate the core entry hypothesis.
 
+### 📌 EA-022 (Supertrend Direction - M1)
+
+A Supertrend direction-change EA on XAUUSD M1 designed to test whether transitions between bullish and bearish Supertrend states can provide a standalone directional trading edge.
+
+BUY signals are generated when the Supertrend direction changes from bearish to bullish, while SELL signals are generated when the direction changes from bullish to bearish.
+
+The baseline configuration uses ATR Period 10, Supertrend Multiplier 3.0, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 50, Break Even disabled, and Trailing Stop enabled.
+
+
 
 
 ---
@@ -488,6 +497,61 @@ Both BUY and SELL directions show similarly weak results, with win rates of **32
 The failed baseline is retained as research evidence and as a benchmark for any future EA-021 experiments.
 
 No conclusion is made about alternative timeframes, additional filters, different exit logic, or other MACD histogram configurations because these were not evaluated in this baseline test.
+
+### EA-022
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-022_Supertrend_Direction/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-022_Supertrend_Direction/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] RQ-01: Trailing Stop ON vs OFF
+* [ ] RQ-02: BUY vs SELL Directional Evaluation
+* [ ] RQ-03: Multi-Timeframe Evaluation (M1 / M5 / M15)
+* [ ] RQ-04: Supertrend ATR Period / Multiplier Evaluation
+* [ ] RQ-05: Additional Market Filters — only after core strategy research
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Supertrend ATR Period 10 / Multiplier 3.0 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 50 / Maximum Positions 1 / Break Even OFF / Trailing Stop ON (Start 200 / Distance 200 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-08-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 2,429 trades, Net Profit **-$992.78**, Profit Factor **0.74**, Expected Payoff **-$0.41**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.28%**, Win Rate **46.93%**.
+
+**Directional Results:**
+
+* BUY: 1,211 trades / **45.00%** won
+* SELL: 1,218 trades / **48.85%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$2.46**
+* Average losing trade: **-$2.95**
+* Largest profitable trade: **$33.85**
+* Largest losing trade: **-$40.44**
+* Maximum consecutive wins: **10**
+* Maximum consecutive losses: **11**
+* Average holding time: **00:03:32**
+
+The baseline configuration is rejected as a profitable candidate. Profit Factor is below 1.0, expected payoff is negative, and maximum drawdown reaches **99.28%**, resulting in the loss of almost the entire initial deposit.
+
+The balance curve shows persistent deterioration rather than an isolated period of poor performance. Both trade directions are unprofitable under the tested configuration, although SELL trades produced a higher win rate (**48.85%**) than BUY trades (**45.00%**).
+
+The failed baseline does not by itself establish that the underlying Supertrend concept has no trading edge. It establishes that the tested combination of raw Supertrend direction changes, M1 execution, and the current exit configuration does not demonstrate a viable edge.
+
+The first controlled experiment will therefore isolate the effect of trade management by comparing the current **Trailing Stop ON** baseline against an otherwise identical **Trailing Stop OFF** configuration.
+
+Subsequent experiments will evaluate BUY versus SELL directionality and M1 versus higher timeframes before broad Supertrend parameter optimization is considered.
+
+No conclusion is made about alternative ATR periods, Supertrend multipliers, higher timeframes, additional filters, or different exit configurations because these have not yet been independently tested.
+
 
 
 ---
