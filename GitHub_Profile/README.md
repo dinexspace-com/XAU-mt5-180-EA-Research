@@ -102,6 +102,17 @@ SELL signals require MACD Main to cross below the Signal line while MACD Main is
 
 The baseline configuration uses MACD 12/26/9, fixed SL 300, TP 600, Lot 0.01, Spread <= 30, Break Even 150, and Trailing Stop 200.
 
+### 📌 EA-021 (MACD Histogram Trend - M1)
+
+A MACD histogram momentum-continuation EA on XAUUSD M1 designed to test whether expansion of the MACD histogram can provide a standalone directional trading edge.
+
+BUY signals require the MACD histogram to remain above zero and increase relative to the previous closed bar.
+
+SELL signals require the MACD histogram to remain below zero and decrease relative to the previous closed bar.
+
+The baseline configuration uses MACD/OsMA 12/26/9, fixed SL 300, TP 600, Lot 0.01, Spread <= 30, with Break Even and Trailing Stop disabled to isolate the core entry hypothesis.
+
+
 
 ---
 
@@ -434,6 +445,50 @@ A failed backtest is not removed from the research history.
 A successful backtest is not automatically considered ready for live trading.
 
 Each configuration is evaluated independently, and promising strategies must progress through additional robustness, out-of-sample, and forward-testing stages before being considered for live deployment.
+
+### EA-021
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-021_MACD_Histogram_Trend/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-021_MACD_Histogram_Trend/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+
+**Current Research Status:** `BASELINE COMPLETE — FAIL`
+
+**Baseline #01:** XAUUSD.PRO / M1 / MACD-OsMA 12/26/9 histogram momentum continuation / SL 300 / TP 600 / Lot 0.01 / Spread <= 30 / Break Even OFF / Trailing OFF.
+
+**Test Period:** 2026-01-02 → 2026-08-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 8,367 trades, Net Profit **-$994.28**, Profit Factor **0.94**, Expected Payoff **-$0.12**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **99.45%**, Win Rate **32.62%**.
+
+**Directional Results:**
+
+* BUY: 4,089 trades / **32.11%** won
+* SELL: 4,278 trades / **33.10%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.15**
+* Average losing trade: **-$3.15**
+* Largest profitable trade: **$40.10**
+* Largest losing trade: **-$43.71**
+* Maximum consecutive wins: **9**
+* Maximum consecutive losses: **18**
+* Average holding time: **00:04:34**
+
+The baseline configuration is rejected as a profitable candidate. Profit Factor is below 1.0, expected payoff is negative, and maximum drawdown reaches approximately **99.45%**, resulting in the loss of almost the entire initial deposit.
+
+Both BUY and SELL directions show similarly weak results, with win rates of **32.11%** and **33.10%** respectively. The tested baseline therefore does not demonstrate that simple MACD histogram expansion provides a profitable standalone trading edge on XAUUSD.PRO M1.
+
+The failed baseline is retained as research evidence and as a benchmark for any future EA-021 experiments.
+
+No conclusion is made about alternative timeframes, additional filters, different exit logic, or other MACD histogram configurations because these were not evaluated in this baseline test.
+
 
 ---
 
