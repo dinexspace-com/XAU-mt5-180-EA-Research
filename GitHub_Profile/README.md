@@ -120,6 +120,14 @@ BUY signals are generated when the Supertrend direction changes from bearish to 
 
 The baseline configuration uses ATR Period 10, Supertrend Multiplier 3.0, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 50, Break Even disabled, and Trailing Stop enabled.
 
+### 📌 EA-023 (Supertrend Retest - M1)
+
+A Supertrend retest strategy on XAUUSD M1 designed to test whether waiting for price to retest the Supertrend line after a confirmed direction change can improve entry quality compared with entering immediately on the Supertrend flip.
+
+BUY signals begin when Supertrend changes from bearish to bullish, while SELL signals begin when Supertrend changes from bullish to bearish. Instead of entering immediately, the EA creates a pending signal and waits for price to retest the corresponding Supertrend level within a limited number of bars.
+
+The baseline configuration uses ATR Period 10, Supertrend Multiplier 3.0, Retest Window 5 bars, Retest Buffer 5 points, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 30, Maximum Positions 1, Break Even 150, and Trailing Stop enabled (Start 200 / Distance 200 / Step 10).
+
 
 
 
@@ -551,6 +559,64 @@ The first controlled experiment will therefore isolate the effect of trade manag
 Subsequent experiments will evaluate BUY versus SELL directionality and M1 versus higher timeframes before broad Supertrend parameter optimization is considered.
 
 No conclusion is made about alternative ATR periods, Supertrend multipliers, higher timeframes, additional filters, or different exit configurations because these have not yet been independently tested.
+
+### EA-023
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-023_Supertrend_Retest/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-023_Supertrend_Retest/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] RQ-01: BUY vs SELL Directional Evaluation
+* [ ] RQ-02: Trading Hour / Session Evaluation
+* [ ] RQ-03: Break Even ON vs OFF
+* [ ] RQ-04: Trailing Stop ON vs OFF
+* [ ] RQ-05: Retest Window / Buffer Evaluation
+* [ ] RQ-06: Supertrend ATR Period / Multiplier Evaluation
+* [ ] RQ-07: Stop Loss / Take Profit Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Supertrend ATR Period 10 / Multiplier 3.0 / Retest Window 5 bars / Retest Buffer 5.0 points / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even ON (Trigger 150) / Trailing Stop ON (Start 200 / Distance 200 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 139 trades, Net Profit **-$18.71**, Profit Factor **0.89**, Expected Payoff **-$0.13**, Recovery Factor **-0.34**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **5.51%**, Win Rate **48.20%**.
+
+**Directional Results:**
+
+* BUY: 49 trades / **44.90%** won
+* SELL: 90 trades / **50.00%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$2.34**
+* Average losing trade: **-$2.44**
+* Largest profitable trade: **$7.42**
+* Largest losing trade: **-$3.92**
+* Maximum consecutive wins: **9**
+* Maximum consecutive losses: **6**
+* Average holding time: **00:02:38**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, while Profit Factor remains below 1.0.
+
+Unlike several earlier failed M1 baselines, EA-023 produced a relatively limited Maximum Equity Drawdown of **5.51%** during this test. However, low drawdown alone does not establish a profitable trading edge.
+
+SELL trades produced a higher win rate (**50.00%**) than BUY trades (**44.90%**), but this difference is treated only as an observation. A controlled BUY-versus-SELL experiment is required before making any directional filtering decision.
+
+The realized average profitable trade (**$2.34**) is slightly smaller than the average losing trade (**-$2.44**) despite the baseline using a nominal fixed SL 300 / TP 600 configuration. Break Even and Trailing Stop are active, so their effect on realized trade outcomes requires separate controlled testing.
+
+The failed baseline does not establish that the underlying Supertrend Retest concept has no trading edge. It establishes only that the tested combination of Supertrend direction change, retest entry logic, M1 execution, and the current trade-management configuration does not demonstrate positive expectancy during the tested period.
+
+The next research steps will isolate BUY versus SELL performance, trading-hour/session effects, Break Even, Trailing Stop, and retest parameters before broad Supertrend parameter optimization is considered.
+
+No conclusion is made about alternative ATR periods, Supertrend multipliers, higher timeframes, session filters, or different exit configurations because these have not yet been independently tested.
 
 
 
