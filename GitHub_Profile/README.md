@@ -128,7 +128,13 @@ BUY signals begin when Supertrend changes from bearish to bullish, while SELL si
 
 The baseline configuration uses ATR Period 10, Supertrend Multiplier 3.0, Retest Window 5 bars, Retest Buffer 5 points, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 30, Maximum Positions 1, Break Even 150, and Trailing Stop enabled (Start 200 / Distance 200 / Step 10).
 
+### 📌 EA-024 (Donchian Trend - M1)
 
+A Donchian-inspired trend-following breakout EA on XAUUSD M1 designed to test whether price breakouts relative to recent channel levels can provide a directional trading edge.
+
+The baseline configuration uses Donchian Period 20, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 30, Maximum Positions 1, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Step 10).
+
+Code review identified implementation issues in the baseline version: the current Donchian calculation references the High/Low at bar shift 20 rather than calculating the Highest High / Lowest Low across the previous 20 bars. Position-management execution for Break Even and Trailing Stop also requires correction and validation.
 
 
 ---
@@ -617,6 +623,62 @@ The failed baseline does not establish that the underlying Supertrend Retest con
 The next research steps will isolate BUY versus SELL performance, trading-hour/session effects, Break Even, Trailing Stop, and retest parameters before broad Supertrend parameter optimization is considered.
 
 No conclusion is made about alternative ATR periods, Supertrend multipliers, higher timeframes, session filters, or different exit configurations because these have not yet been independently tested.
+
+### EA-024
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-024_Donchian_Trend/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-024_Donchian_Trend/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] RQ-01: Correct Donchian Highest High / Lowest Low Implementation
+* [ ] RQ-02: Verify Break Even & Trailing Stop Execution
+* [ ] RQ-03: Retest Corrected Implementation Under Identical Baseline Conditions
+* [ ] RQ-04: Donchian Period Evaluation — only after implementation validation
+* [ ] RQ-05: Multi-Timeframe Evaluation — only after implementation validation
+
+**Current Research Status:** `IN PROGRESS — IMPLEMENTATION CORRECTION REQUIRED`
+
+**Optimization Status:** `BLOCKED — Core implementation must be corrected and validated before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Donchian Period 20 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even ON (Trigger 150) / Trailing Stop ON (Start 200 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 9,320 trades, Net Profit **-$992.04**, Profit Factor **0.95**, Expected Payoff **-$0.11**, Recovery Factor **-0.94**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.26%**, Win Rate **32.79%**.
+
+**Directional Results:**
+
+* BUY: 4,509 trades / **33.13%** won
+* SELL: 4,811 trades / **32.47%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.14**
+* Average losing trade: **-$3.15**
+* Largest profitable trade: **$33.87**
+* Largest losing trade: **-$43.09**
+* Maximum consecutive wins: **8**
+* Maximum consecutive losses: **19**
+* Average holding time: **00:03:13**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Drawdown reaches **99.26%**, resulting in the loss of almost the entire initial deposit.
+
+However, this baseline must not be interpreted as evidence that a correctly implemented Donchian breakout strategy has no trading edge.
+
+Source-code review identified a critical implementation issue: the current EA uses `iHigh()` and `iLow()` with `InpDonchianPeriod` as a bar shift. With `InpDonchianPeriod = 20`, the EA therefore references the High and Low of the bar at shift 20 rather than calculating the Highest High and Lowest Low across the previous 20 bars.
+
+A second implementation issue affects position management. Break Even and Trailing Stop execution require correction and validation because the current execution flow may stop processing after the maximum-position condition is reached.
+
+The baseline is therefore retained as an **implementation-failed reference baseline**, not as a rejection of the underlying Donchian strategy concept.
+
+The next research step is to correct the Donchian calculation first, verify position-management execution, and then repeat the backtest under the same conditions.
+
+No broad parameter optimization should be performed until the corrected implementation has been independently validated.
 
 
 
