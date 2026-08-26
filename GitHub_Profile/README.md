@@ -136,6 +136,17 @@ The baseline configuration uses Donchian Period 20, fixed SL 300, TP 600, Lot 0.
 
 Code review identified implementation issues in the baseline version: the current Donchian calculation references the High/Low at bar shift 20 rather than calculating the Highest High / Lowest Low across the previous 20 bars. Position-management execution for Break Even and Trailing Stop also requires correction and validation.
 
+### 📌 EA-025 (Donchian Midline - M1)
+
+A Donchian Midline directional EA on XAUUSD M1 designed to test whether price position relative to the midpoint of a 20-period Donchian Channel can provide a standalone directional trading edge.
+
+The Donchian Channel is calculated using the Highest High and Lowest Low over the configured period, with the Midline defined as `(Upper + Lower) / 2`.
+
+BUY signals are generated when price is above the Donchian Midline, while SELL signals are generated when price is below the Donchian Midline.
+
+The baseline configuration uses Donchian Period 20, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 30, Break Even enabled (Trigger 150), and Trailing Stop enabled (200).
+
+
 
 ---
 
@@ -679,6 +690,52 @@ The baseline is therefore retained as an **implementation-failed reference basel
 The next research step is to correct the Donchian calculation first, verify position-management execution, and then repeat the backtest under the same conditions.
 
 No broad parameter optimization should be performed until the corrected implementation has been independently validated.
+
+### EA-025
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-025_Donchian_Midline/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-025_Donchian_Midline/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+
+**Current Research Status:** `BASELINE COMPLETE — FAIL`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Donchian Period 20 / Midline directional entry / SL 300 / TP 600 / Lot 0.01 / Spread <= 30 / Break Even ON (Trigger 150) / Trailing Stop ON (200).
+
+**Test Period:** 2026-01-02 → 2026-08-24 using 100% real ticks.
+
+**Initial Deposit:** $10,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 37,212 trades, Net Profit **-$9,994.04**, Profit Factor **0.88**, Expected Payoff **-$0.27**, Recovery Factor **-1.00**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.94%**, Win Rate **30.75%**.
+
+**Directional Results:**
+
+* BUY: 18,846 trades / **30.57%** won
+* SELL: 18,366 trades / **30.93%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.13**
+* Average losing trade: **-$3.11**
+* Largest profitable trade: **$70.38**
+* Largest losing trade: **-$75.88**
+* Maximum consecutive wins: **8**
+* Maximum consecutive losses: **28**
+* Average holding time: **00:04:37**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Drawdown reaches **99.94%**, resulting in the loss of almost the entire initial deposit.
+
+Both trade directions produced similarly weak results. BUY trades achieved a **30.57%** win rate and SELL trades achieved **30.93%**, providing no clear evidence of a directional advantage under the tested configuration.
+
+The baseline therefore does not demonstrate that using price position relative to the Donchian Midline as a standalone directional signal provides a viable trading edge on XAUUSD.PRO M1.
+
+The failed baseline is retained as research evidence and as a reference for future Donchian-based experiments.
+
+No conclusion is made about alternative Donchian periods, higher timeframes, additional trend or volatility filters, or different exit configurations because these were not independently evaluated in this baseline test.
+
 
 
 
