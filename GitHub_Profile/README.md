@@ -146,6 +146,17 @@ BUY signals are generated when price is above the Donchian Midline, while SELL s
 
 The baseline configuration uses Donchian Period 20, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 30, Break Even enabled (Trigger 150), and Trailing Stop enabled (200).
 
+### 📌 EA-026 (Keltner Midline - M1)
+
+A Keltner Midline directional EA on XAUUSD M1 designed to test whether price position relative to a directional EMA-based Keltner midline can provide a standalone trading edge.
+
+BUY signals are generated when price is above the midline and the midline is rising, while SELL signals are generated when price is below the midline and the midline is falling.
+
+The baseline configuration uses Keltner Period 20, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 30, Maximum Positions 1, Break Even enabled (Trigger 150), and Trailing Stop enabled (200).
+
+The current version uses the Keltner midline for entry decisions. Although ATR and the Keltner Multiplier are available in the implementation, the upper and lower Keltner bands are not currently part of the entry logic.
+
+
 
 
 ---
@@ -736,6 +747,61 @@ The failed baseline is retained as research evidence and as a reference for futu
 
 No conclusion is made about alternative Donchian periods, higher timeframes, additional trend or volatility filters, or different exit configurations because these were not independently evaluated in this baseline test.
 
+### EA-026
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-026_Keltner_Midline/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-026_Keltner_Midline/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] RQ-01: BUY vs SELL Directional Evaluation
+* [ ] RQ-02: Full Keltner Channel Entry Evaluation
+* [ ] RQ-03: Midline Slope / Trend Strength Filter Evaluation
+* [ ] RQ-04: Trading Hour / Session Evaluation
+* [ ] RQ-05: Exit Logic Evaluation — Break Even / Trailing Stop
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Keltner Midline Period 20 / Multiplier 2.0 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even ON (Trigger 150) / Trailing Stop ON (200).
+
+**Test Period:** 2026-01-02 → 2026-02-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 4,919 trades, Net Profit **-$996.39**, Profit Factor **0.83**, Expected Payoff **-$0.20**, Recovery Factor **-0.97**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.65%**, Win Rate **48.16%**.
+
+**Directional Results:**
+
+* BUY: 2,442 trades / **50.12%** won
+* SELL: 2,477 trades / **46.23%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$2.12**
+* Average losing trade: **-$2.36**
+* Largest profitable trade: **$35.46**
+* Largest losing trade: **-$27.62**
+* Maximum consecutive wins: **11**
+* Maximum consecutive losses: **14**
+* Average holding time: **00:03:59**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Drawdown reaches **99.65%**, resulting in the loss of almost the entire initial deposit.
+
+The EA generated **4,919 trades** during approximately one month of M1 testing, indicating that the current midline directional condition produces a very high number of short-duration entries.
+
+BUY trades performed better than SELL trades by win rate (**50.12% vs 46.23%**), but this observation alone is insufficient to justify directional filtering. BUY-only and SELL-only configurations must be tested independently.
+
+A key implementation characteristic is that the current EA uses only the **Keltner midline direction and price position** for entry decisions. The ATR calculation and Keltner Multiplier are present, but the upper and lower Keltner Channel bands are not currently used as entry conditions.
+
+The failed baseline therefore establishes that the tested EMA/Keltner midline directional rule does not demonstrate a viable trading edge on XAUUSD.PRO M1 under the current configuration.
+
+The next controlled research step is to isolate BUY versus SELL performance before testing full Keltner Channel structure, trend-strength filtering, trading-session effects, or exit modifications.
+
+No broad parameter optimization should be performed until the core entry hypothesis has been investigated through controlled experiments.
 
 
 
