@@ -164,6 +164,16 @@ BUY signals are generated when price is above the Upper Keltner Band, while SELL
 
 The baseline configuration uses Keltner Period 20, ATR Multiplier 2.0, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 45, Maximum Positions 1, with Break Even and Trailing Stop disabled.
 
+### 📌 EA-028 (Ichimoku Cloud - M1)
+
+An Ichimoku Cloud trend-following EA on XAUUSD M1 designed to test whether price position relative to the Kumo combined with Tenkan-sen / Kijun-sen directional alignment can provide a standalone trading edge.
+
+BUY signals require price to be above the Ichimoku Cloud with Tenkan-sen above Kijun-sen, while SELL signals require price to be below the Cloud with Tenkan-sen below Kijun-sen.
+
+The current implementation evaluates the **state** of Tenkan-sen relative to Kijun-sen rather than requiring a new crossover event.
+
+The baseline configuration uses Ichimoku 9/26/52, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 60, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Step 50).
+
 
 ---
 
@@ -862,6 +872,63 @@ The failed baseline establishes that the tested Keltner outer-band directional r
 The next controlled research step is to isolate BUY versus SELL performance before testing trend filters, stronger breakout requirements, trading-session effects, or alternative exit logic.
 
 No broad parameter optimization should be performed until the core entry hypothesis has been investigated through controlled experiments.
+
+### EA-028
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-028_Ichimoku_Cloud/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-028_Ichimoku_Cloud/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EXP-028-001: Multi-Timeframe Evaluation (M1 / M5 / M15 / H1)
+* [ ] EXP-028-002: Tenkan/Kijun State vs Strict Crossover
+* [ ] EXP-028-003: Market Regime Analysis
+* [ ] EXP-028-004: Exit Management Evaluation
+* [ ] EXP-028-005: Trading Session Analysis
+* [ ] EXP-028-006: Volatility-Based Exit Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Ichimoku 9/26/52 / Price vs Kumo + Tenkan/Kijun directional state / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 60 / Break Even ON (Trigger 150) / Trailing Stop ON (Start 200 / Step 50).
+
+**Test Period:** 2026-01-02 → 2026-03-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:100
+
+**Baseline #01 Result:** 6,457 trades, Net Profit **-$953.45**, Profit Factor **0.92**, Expected Payoff **-$0.15**, Recovery Factor **-0.94**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **95.63%**, Win Rate **38.98%**.
+
+**Directional Results:**
+
+* BUY: 3,489 trades / **39.84%** won
+* SELL: 2,968 trades / **37.97%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$4.42**
+* Average losing trade: **-$3.07**
+* Largest profitable trade: **$32.85**
+* Largest losing trade: **-$43.09**
+* Maximum consecutive wins: **8**
+* Maximum consecutive losses: **14**
+* Average holding time: **00:03:13**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Equity Drawdown reaches **95.63%**, resulting in the loss of most of the initial deposit.
+
+The EA generated **6,457 trades** during approximately two months of M1 testing. Although the average profitable trade (**$4.42**) was larger than the average losing trade (**-$3.07**), the overall win rate of **38.98%** was insufficient to produce positive expectancy.
+
+BUY trades achieved a slightly higher win rate than SELL trades (**39.84% vs 37.97%**). This is retained only as a research observation and does not establish a profitable directional advantage.
+
+A key implementation characteristic is that the current EA uses the **state** of Tenkan-sen relative to Kijun-sen rather than requiring a fresh Tenkan/Kijun crossover event. The baseline therefore does not establish whether stricter crossover-based entry logic would improve signal quality.
+
+The failed baseline establishes only that the tested Ichimoku Cloud configuration does not demonstrate a viable trading edge on XAUUSD.PRO M1 under the tested conditions.
+
+The next controlled research step is **EXP-028-001: Multi-Timeframe Evaluation (M1 / M5 / M15 / H1)** while keeping the core strategy unchanged.
+
+No broad parameter optimization should be performed until the core entry hypothesis and timeframe sensitivity have been investigated through controlled experiments.
 
 ---
 
