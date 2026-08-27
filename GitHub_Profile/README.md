@@ -156,7 +156,13 @@ The baseline configuration uses Keltner Period 20, fixed SL 300, TP 600, Lot 0.0
 
 The current version uses the Keltner midline for entry decisions. Although ATR and the Keltner Multiplier are available in the implementation, the upper and lower Keltner bands are not currently part of the entry logic.
 
+### 📌 EA-027 (Keltner Outer Trend - M1)
 
+A Keltner Channel outer-band trend-following EA on XAUUSD M1 designed to test whether price movement beyond the upper or lower Keltner Channel can provide a directional continuation edge.
+
+BUY signals are generated when price is above the Upper Keltner Band, while SELL signals are generated when price is below the Lower Keltner Band.
+
+The baseline configuration uses Keltner Period 20, ATR Multiplier 2.0, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 45, Maximum Positions 1, with Break Even and Trailing Stop disabled.
 
 
 ---
@@ -803,7 +809,59 @@ The next controlled research step is to isolate BUY versus SELL performance befo
 
 No broad parameter optimization should be performed until the core entry hypothesis has been investigated through controlled experiments.
 
+### EA-027
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-027_Keltner_Outer_Trend/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-027_Keltner_Outer_Trend/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] RQ-01: BUY vs SELL Directional Evaluation
+* [ ] RQ-02: Trend Filter Evaluation
+* [ ] RQ-03: Stronger Keltner Breakout Threshold Evaluation
+* [ ] RQ-04: Trading Hour / Session Evaluation
+* [ ] RQ-05: Exit Logic Evaluation — Stop Loss / Take Profit / Break Even / Trailing Stop
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Keltner Period 20 / ATR Multiplier 2.0 / Outer-band directional entry / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 45 / Maximum Positions 1 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-03-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:100
+
+**Baseline #01 Result:** 2,595 trades, Net Profit **-$789.66**, Profit Factor **0.86**, Expected Payoff **-$0.30**, Recovery Factor **-0.83**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **87.47%**, Win Rate **30.33%**.
+
+**Directional Results:**
+
+* BUY: 1,193 trades / **33.11%** won
+* SELL: 1,402 trades / **27.96%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.35**
+* Average losing trade: **-$3.20**
+* Largest profitable trade: **$35.82**
+* Largest losing trade: **-$40.44**
+* Maximum consecutive wins: **8**
+* Maximum consecutive losses: **17**
+* Average holding time: **00:04:43**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Equity Drawdown reaches **87.47%**.
+
+The strategy produced **2,595 trades** during approximately two months of M1 testing. Although the average profitable trade (**$6.35**) was approximately twice the size of the average losing trade (**-$3.20**), the overall win rate was only **30.33%**, which was insufficient to produce positive expectancy.
+
+BUY trades achieved a higher win rate than SELL trades (**33.11% vs 27.96%**). This is treated only as a research observation and does not establish that BUY-only trading is profitable.
+
+The failed baseline establishes that the tested Keltner outer-band directional rule does not demonstrate a viable standalone trading edge on XAUUSD.PRO M1 under the current configuration.
+
+The next controlled research step is to isolate BUY versus SELL performance before testing trend filters, stronger breakout requirements, trading-session effects, or alternative exit logic.
+
+No broad parameter optimization should be performed until the core entry hypothesis has been investigated through controlled experiments.
 
 ---
 
