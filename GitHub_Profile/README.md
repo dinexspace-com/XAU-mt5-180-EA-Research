@@ -182,6 +182,21 @@ BUY signals require price to remain above the Kijun-sen, pull back to or touch t
 
 The baseline configuration uses Ichimoku 9/26/52, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 60, Maximum Positions 1, with Break Even and Trailing Stop disabled for the baseline test.
 
+### 📌 EA-030 (Parabolic SAR - M1)
+
+A Parabolic SAR directional EA on XAUUSD M1 designed to test whether price position relative to the Parabolic SAR can provide a standalone trend-following trading edge.
+
+BUY signals are generated when the Parabolic SAR is below the current price, while SELL signals are generated when the Parabolic SAR is above the current price.
+
+The baseline configuration uses Parabolic SAR Step 0.02 / Maximum 0.2, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 60, Maximum Positions 1, with Break Even and Trailing Stop disabled for the baseline test.
+
+
+
+
+
+
+
+
 
 ---
 
@@ -992,6 +1007,71 @@ The failed baseline establishes that the tested raw Kijun-sen pullback configura
 The next controlled research steps are to investigate trend confirmation, trading-session effects, BUY versus SELL performance, market-regime filtering, and timeframe sensitivity while keeping unrelated strategy components unchanged.
 
 No broad parameter optimization should be performed until the core Kijun pullback hypothesis has been investigated through controlled experiments.
+
+### EA-030
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-030_Parabolic_SAR/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-030_Parabolic_SAR/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EXP-030-001: Trend Filter Evaluation
+* [ ] EXP-030-002: BUY vs SELL Directional Evaluation
+* [ ] EXP-030-003: Trading Session / Time Filter Evaluation
+* [ ] EXP-030-004: Multi-Timeframe Evaluation
+* [ ] EXP-030-005: Parabolic SAR Parameter Evaluation
+* [ ] EXP-030-006: Exit Management Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Parabolic SAR Step 0.02 / Maximum 0.2 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 60 / Maximum Positions 1 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-03-01 using 100% real ticks.
+
+**Initial Deposit:** $100.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 410 trades, Net Profit **-$92.43**, Profit Factor **0.89**, Expected Payoff **-$0.23**, Recovery Factor **-0.90**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **93.11%**, Win Rate **30.24%**.
+
+**Directional Results:**
+
+* BUY: 206 trades / **34.47%** won
+* SELL: 204 trades / **25.98%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.34**
+* Average losing trade: **-$3.07**
+* Largest profitable trade: **$34.93**
+* Largest losing trade: **-$4.92**
+* Maximum consecutive wins: **4**
+* Maximum consecutive losses: **12**
+* Average holding time: **00:09:19**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Equity Drawdown reaches **93.11%**, resulting in the loss of most of the initial deposit.
+
+Although the average profitable trade (**$6.34**) was approximately twice the size of the average losing trade (**-$3.07**), the overall win rate of **30.24%** was insufficient to produce positive expectancy.
+
+BUY trades achieved a higher win rate than SELL trades (**34.47% vs 25.98%**). This is retained only as a research observation and does not establish that BUY-only trading has a profitable edge.
+
+The failed baseline establishes that the tested raw Parabolic SAR directional configuration does not demonstrate a viable standalone trading edge on XAUUSD.PRO M1 under the tested conditions.
+
+The primary research question is whether low-quality Parabolic SAR signals can be filtered while preserving enough profitable trend moves to improve expectancy and reduce drawdown.
+
+The next controlled research steps are to evaluate trend filtering, BUY versus SELL directionality, trading-session effects, timeframe sensitivity, Parabolic SAR parameters, and exit management while keeping unrelated strategy components unchanged.
+
+No broad parameter optimization should be performed until the core Parabolic SAR entry hypothesis has been investigated through controlled experiments.
+
+
+
+
+
+
+
+
 
 ---
 
