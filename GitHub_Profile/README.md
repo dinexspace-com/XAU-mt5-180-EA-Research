@@ -174,6 +174,14 @@ The current implementation evaluates the **state** of Tenkan-sen relative to Kij
 
 The baseline configuration uses Ichimoku 9/26/52, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 60, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Step 50).
 
+### 📌 EA-029 (Ichimoku Kijun Pullback - M1)
+
+An Ichimoku Kijun-sen pullback EA on XAUUSD M1 designed to test whether price rejection from the Kijun-sen in the direction of the prevailing price/Kijun relationship can provide a standalone trading edge.
+
+BUY signals require price to remain above the Kijun-sen, pull back to or touch the Kijun-sen, and then produce a bullish close above it. SELL signals apply the inverse logic below the Kijun-sen.
+
+The baseline configuration uses Ichimoku 9/26/52, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 60, Maximum Positions 1, with Break Even and Trailing Stop disabled for the baseline test.
+
 
 ---
 
@@ -929,6 +937,61 @@ The failed baseline establishes only that the tested Ichimoku Cloud configuratio
 The next controlled research step is **EXP-028-001: Multi-Timeframe Evaluation (M1 / M5 / M15 / H1)** while keeping the core strategy unchanged.
 
 No broad parameter optimization should be performed until the core entry hypothesis and timeframe sensitivity have been investigated through controlled experiments.
+
+### EA-029
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-029_Ichimoku_Kijun_Pullback/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-029_Ichimoku_Kijun_Pullback/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EXP-029-001: Trend Confirmation Evaluation
+* [ ] EXP-029-002: Trading Session / Hour Evaluation
+* [ ] EXP-029-003: BUY vs SELL Directional Evaluation
+* [ ] EXP-029-004: Market Regime Filter Evaluation
+* [ ] EXP-029-005: Multi-Timeframe Evaluation (M1 / M5 / M15 / H1)
+* [ ] EXP-029-006: Exit Management Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Ichimoku 9/26/52 / Kijun-sen pullback entry / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 60 / Maximum Positions 1 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-03-01 using 100% real ticks.
+
+**Initial Deposit:** $100.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 1,769 trades, Net Profit **-$22.77**, Profit Factor **0.99**, Expected Payoff **-$0.01**, Recovery Factor **-0.07**, Sharpe Ratio **-0.95**, Maximum Equity Drawdown **91.54%**, Win Rate **32.90%**.
+
+**Directional Results:**
+
+* BUY: 860 trades / **30.70%** won
+* SELL: 909 trades / **34.98%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.34**
+* Average losing trade: **-$3.13**
+* Largest profitable trade: **$35.35**
+* Largest losing trade: **-$8.79**
+* Maximum consecutive wins: **6**
+* Maximum consecutive losses: **17**
+* Average holding time: **00:07:26**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Equity Drawdown reaches **91.54%**.
+
+The strategy produced **1,769 trades** during approximately two months of M1 testing. Although the average profitable trade (**$6.34**) was approximately twice the average losing trade (**-$3.13**), the overall win rate of **32.90%** was insufficient to produce positive expectancy.
+
+SELL trades achieved a higher win rate than BUY trades (**34.98% vs 30.70%**). This is retained only as a research observation and does not establish a profitable SELL-only advantage.
+
+The failed baseline establishes that the tested raw Kijun-sen pullback configuration does not demonstrate a viable standalone trading edge on XAUUSD.PRO M1 under the tested conditions.
+
+The next controlled research steps are to investigate trend confirmation, trading-session effects, BUY versus SELL performance, market-regime filtering, and timeframe sensitivity while keeping unrelated strategy components unchanged.
+
+No broad parameter optimization should be performed until the core Kijun pullback hypothesis has been investigated through controlled experiments.
 
 ---
 
