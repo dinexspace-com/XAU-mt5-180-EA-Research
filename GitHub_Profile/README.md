@@ -200,6 +200,23 @@ SELL signals require the Parabolic SAR to be above the current price while price
 
 The baseline configuration uses Parabolic SAR Step 0.02 / Maximum 0.20, EMA50, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 30, Maximum Positions 1, with Break Even and Trailing Stop disabled for the baseline test.
 
+### 📌 EA-032 (Linear Regression Slope - M1)
+
+A Linear Regression Slope directional EA on XAUUSD M1 designed to test whether the direction of a rolling linear regression combined with price position relative to its regression midpoint can provide a standalone short-term trading edge.
+
+BUY signals require the regression slope to be positive while price is above the regression midpoint. SELL signals require the regression slope to be negative while price is below the regression midpoint.
+
+The baseline configuration uses Regression Period 20, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 30, Maximum Positions 1, with Break Even and Trailing Stop disabled for baseline validation.
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1124,6 +1141,70 @@ EA-031 extends the Parabolic SAR research by adding EMA50 as a trend filter. The
 The first controlled research comparison should evaluate EA-031 against EA-030 to determine whether the EMA50 filter materially improves signal quality, Profit Factor, expectancy, or drawdown relative to the raw Parabolic SAR baseline.
 
 No broad parameter optimization should be performed until the effect of the EMA50 filter and other core strategy components has been investigated through controlled experiments.
+
+### EA-032
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-032_Linear_Regression_Slope/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-032_Linear_Regression_Slope/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EXP-032-001: Minimum Linear Regression Slope Threshold Evaluation
+* [ ] EXP-032-002: Regression Period Evaluation
+* [ ] EXP-032-003: Price / Regression Midpoint Filter Evaluation
+* [ ] EXP-032-004: Market Regime / Trend Filter Evaluation
+* [ ] EXP-032-005: Multi-Timeframe Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Linear Regression Period 20 / positive-negative slope directional state / price relative to regression midpoint / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 5,039 trades, Net Profit **-$993.19**, Profit Factor **0.91**, Expected Payoff **-$0.20**, Recovery Factor **-0.94**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.36%**, Win Rate **31.40%**.
+
+**Directional Results:**
+
+* BUY: 2,568 trades / **30.65%** won
+* SELL: 2,471 trades / **32.17%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.25**
+* Average losing trade: **-$3.15**
+* Largest profitable trade: **$40.00**
+* Largest losing trade: **-$27.60**
+* Maximum consecutive wins: **8**
+* Maximum consecutive losses: **24**
+* Average holding time: **00:06:02**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Drawdown reaches **99.36%**, resulting in the loss of almost the entire initial deposit.
+
+Both directions produced similarly weak results. SELL trades achieved a **32.17%** win rate and BUY trades achieved **30.65%**, providing no clear evidence of a profitable directional advantage under the tested configuration.
+
+The baseline produced a relatively high number of short-duration trades. The current entry rule accepts any positive or negative regression slope, meaning weak regression slopes may still qualify as valid directional signals.
+
+The first controlled research experiment will therefore evaluate whether introducing a minimum Linear Regression Slope threshold reduces weak entries and improves expectancy without changing unrelated strategy components.
+
+A source-code review also identified two implementation characteristics that must be considered during future research:
+
+* `InpSensibility` is currently declared but is not applied to the entry signal.
+* The current regression midpoint is calculated from the average closing price of the regression window rather than directly from the fitted regression line.
+
+No broad parameter optimization should be performed until the core Linear Regression signal and its implementation have been investigated through controlled experiments.
+
+
+
+
+
+
+
 
 
 
