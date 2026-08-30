@@ -208,7 +208,13 @@ BUY signals require the regression slope to be positive while price is above the
 
 The baseline configuration uses Regression Period 20, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 30, Maximum Positions 1, with Break Even and Trailing Stop disabled for baseline validation.
 
+### 📌 EA-033 (VWAP Trend - M1)
 
+A VWAP-based trend-following EA on XAUUSD M1 designed to test whether price position relative to a rolling Volume Weighted Average Price (VWAP), combined with VWAP slope direction, can provide a standalone short-term directional trading edge.
+
+BUY signals require price to be above the current VWAP while the VWAP is rising. SELL signals require price to be below the current VWAP while the VWAP is falling.
+
+The baseline configuration uses VWAP Period 20, Typical Price `(High + Low + Close) / 3` weighted by tick volume, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 30, Maximum Positions 1, with Break Even and Trailing Stop disabled for baseline validation.
 
 
 
@@ -1199,7 +1205,60 @@ A source-code review also identified two implementation characteristics that mus
 
 No broad parameter optimization should be performed until the core Linear Regression signal and its implementation have been investigated through controlled experiments.
 
+### EA-033
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-033_VWAP_Trend/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-033_VWAP_Trend/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EXP-033-001: VWAP Period Evaluation
+* [ ] EXP-033-002: Trading Session Evaluation
+* [ ] EXP-033-003: Trend Confirmation / Market Regime Filter Evaluation
+* [ ] EXP-033-004: Break Even ON vs OFF
+* [ ] EXP-033-005: Trailing Stop ON vs OFF
+* [ ] EXP-033-006: Multi-Timeframe Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / VWAP Period 20 / Typical Price weighted by tick volume / price relative to VWAP + VWAP slope directional state / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 3,490 trades, Net Profit **-$992.07**, Profit Factor **0.87**, Expected Payoff **-$0.28**, Recovery Factor **-0.98**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.22%**, Win Rate **30.60%**.
+
+**Directional Results:**
+
+* BUY: 1,763 trades / **33.13%** won
+* SELL: 1,727 trades / **28.03%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.16**
+* Average losing trade: **-$3.13**
+* Largest profitable trade: **$35.88**
+* Largest losing trade: **-$42.23**
+* Maximum consecutive wins: **6**
+* Maximum consecutive losses: **15**
+* Average holding time: **00:07:03**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Drawdown reaches **99.22%**, resulting in the loss of almost the entire initial deposit.
+
+Although the average profitable trade (**$6.16**) was approximately twice the magnitude of the average losing trade (**-$3.13**), the overall win rate of **30.60%** was insufficient to produce positive expectancy.
+
+BUY trades achieved a higher win rate than SELL trades (**33.13% vs 28.03%**). This is retained only as a research observation and does not establish a profitable BUY-only advantage.
+
+The failed baseline establishes that the tested VWAP directional rule does not demonstrate a viable standalone trading edge on XAUUSD.PRO M1 under the tested configuration.
+
+The next controlled research steps are to investigate VWAP period sensitivity, trading-session effects, trend or market-regime confirmation, trade-management effects, and timeframe sensitivity while keeping unrelated strategy components unchanged.
+
+No broad parameter optimization should be performed until the core VWAP trend hypothesis has been investigated through controlled experiments.
 
 
 
