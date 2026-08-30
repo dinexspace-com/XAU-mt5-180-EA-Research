@@ -190,7 +190,15 @@ BUY signals are generated when the Parabolic SAR is below the current price, whi
 
 The baseline configuration uses Parabolic SAR Step 0.02 / Maximum 0.2, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 60, Maximum Positions 1, with Break Even and Trailing Stop disabled for the baseline test.
 
+### 📌 EA-031 (Parabolic SAR + EMA50 - M1)
 
+A trend-filtered Parabolic SAR EA on XAUUSD M1 designed to test whether combining Parabolic SAR directional signals with an EMA50 trend filter can improve entry quality compared with raw SAR direction alone.
+
+BUY signals require the Parabolic SAR to be below the current price while price is above EMA50.
+
+SELL signals require the Parabolic SAR to be above the current price while price is below EMA50.
+
+The baseline configuration uses Parabolic SAR Step 0.02 / Maximum 0.20, EMA50, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 30, Maximum Positions 1, with Break Even and Trailing Stop disabled for the baseline test.
 
 
 
@@ -1064,6 +1072,62 @@ The primary research question is whether low-quality Parabolic SAR signals can b
 The next controlled research steps are to evaluate trend filtering, BUY versus SELL directionality, trading-session effects, timeframe sensitivity, Parabolic SAR parameters, and exit management while keeping unrelated strategy components unchanged.
 
 No broad parameter optimization should be performed until the core Parabolic SAR entry hypothesis has been investigated through controlled experiments.
+
+### EA-031
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-031_SAR_EMA50/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-031_SAR_EMA50/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EXP-031-001: Compare EA-031 vs EA-030 — EMA50 Filter Effect
+* [ ] EXP-031-002: BUY vs SELL Directional Evaluation
+* [ ] EXP-031-003: Multi-Timeframe Evaluation
+* [ ] EXP-031-004: Trading Session / Time Filter Evaluation
+* [ ] EXP-031-005: Exit Management Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Parabolic SAR Step 0.02 / Maximum 0.20 / EMA50 trend filter / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 5,680 trades, Net Profit **-$991.82**, Profit Factor **0.92**, Expected Payoff **-$0.17**, Recovery Factor **-0.96**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.22%**, Win Rate **31.94%**.
+
+**Directional Results:**
+
+* BUY: 2,820 trades / **32.73%** won
+* SELL: 2,860 trades / **31.15%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.24**
+* Average losing trade: **-$3.18**
+* Largest profitable trade: **$35.77**
+* Largest losing trade: **-$42.23**
+* Maximum consecutive wins: **7**
+* Maximum consecutive losses: **25**
+* Average holding time: **00:04:07**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Drawdown reaches **99.22%**, resulting in the loss of almost the entire initial deposit.
+
+Both trade directions produced similarly weak results. BUY trades achieved a **32.73%** win rate and SELL trades achieved **31.15%**, providing no clear evidence of a directional advantage under the tested configuration.
+
+EA-031 extends the Parabolic SAR research by adding EMA50 as a trend filter. The baseline result does not demonstrate that the tested SAR + EMA50 combination provides a viable trading edge on XAUUSD.PRO M1.
+
+The first controlled research comparison should evaluate EA-031 against EA-030 to determine whether the EMA50 filter materially improves signal quality, Profit Factor, expectancy, or drawdown relative to the raw Parabolic SAR baseline.
+
+No broad parameter optimization should be performed until the effect of the EMA50 filter and other core strategy components has been investigated through controlled experiments.
+
+
+
+
 
 
 
