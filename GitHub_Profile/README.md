@@ -216,6 +216,22 @@ BUY signals require price to be above the current VWAP while the VWAP is rising.
 
 The baseline configuration uses VWAP Period 20, Typical Price `(High + Low + Close) / 3` weighted by tick volume, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 30, Maximum Positions 1, with Break Even and Trailing Stop disabled for baseline validation.
 
+### 📌 EA-034 (VWAP Pullback - M1)
+
+A VWAP pullback continuation EA on XAUUSD M1 designed to test whether short-term directional continuation after price returns near the intraday VWAP can provide a standalone trading edge.
+
+BUY signals require the previous close to remain above VWAP while current price continues above the previous close. SELL signals apply the inverse condition below VWAP.
+
+When the VWAP filter is enabled, the current implementation requires price to remain within 100 points of VWAP.
+
+The baseline configuration uses intraday VWAP based on Typical Price `(High + Low + Close) / 3` weighted by volume, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 30, Maximum Positions 1, Break Even disabled, and Trailing Stop enabled (Start 200 / Step 50).
+
+
+
+
+
+
+
 
 
 
@@ -1259,6 +1275,69 @@ The failed baseline establishes that the tested VWAP directional rule does not d
 The next controlled research steps are to investigate VWAP period sensitivity, trading-session effects, trend or market-regime confirmation, trade-management effects, and timeframe sensitivity while keeping unrelated strategy components unchanged.
 
 No broad parameter optimization should be performed until the core VWAP trend hypothesis has been investigated through controlled experiments.
+
+### EA-034
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-034_VWAP_Pullback/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-034_VWAP_Pullback/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EXP-034-001: Entry Quality Evaluation
+* [ ] EXP-034-002: VWAP Distance Evaluation
+* [ ] EXP-034-003: Trading Session / Hour Evaluation
+* [ ] EXP-034-004: BUY vs SELL Directional Evaluation
+* [ ] EXP-034-005: Trailing Stop ON vs OFF
+* [ ] EXP-034-006: Market Regime Evaluation
+* [ ] EXP-034-007: Multi-Timeframe Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Intraday VWAP / VWAP proximity <= 100 points / directional continuation entry / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even OFF / Trailing Stop ON (Start 200 / Step 50).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 939 trades, Net Profit **-$335.57**, Profit Factor **0.84**, Expected Payoff **-$0.36**, Recovery Factor **-0.91**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **36.07%**, Win Rate **29.82%**.
+
+**Directional Results:**
+
+* BUY: 482 trades / **29.05%** won
+* SELL: 457 trades / **30.63%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.13**
+* Average losing trade: **-$3.11**
+* Largest profitable trade: **$7.44**
+* Largest losing trade: **-$6.22**
+* Maximum consecutive wins: **4**
+* Maximum consecutive losses: **17**
+* Average holding time: **00:07:51**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Equity Drawdown reaches **36.07%**.
+
+Although the average profitable trade (**$6.13**) was approximately twice the magnitude of the average losing trade (**-$3.11**), the overall win rate of **29.82%** was insufficient to produce positive expectancy.
+
+SELL trades achieved a slightly higher win rate than BUY trades (**30.63% vs 29.05%**). This is retained only as a research observation and does not establish a profitable SELL-only advantage.
+
+The failed baseline establishes that the tested VWAP Pullback configuration does not demonstrate a viable trading edge on XAUUSD.PRO M1 under the documented test conditions.
+
+The baseline does not establish that the underlying VWAP Pullback concept is invalid. Further controlled research is required to isolate entry quality, VWAP distance, trading-session effects, directional behavior, trade management, market regime, and timeframe sensitivity.
+
+No broad parameter optimization should be performed until the core VWAP Pullback hypothesis has been investigated through controlled experiments.
+
+
+
+
+
+
+
 
 
 
