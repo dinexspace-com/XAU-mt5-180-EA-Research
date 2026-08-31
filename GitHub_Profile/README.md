@@ -226,7 +226,13 @@ When the VWAP filter is enabled, the current implementation requires price to re
 
 The baseline configuration uses intraday VWAP based on Typical Price `(High + Low + Close) / 3` weighted by volume, fixed SL 300, TP 600, Lot 0.01, Maximum Spread 30, Maximum Positions 1, Break Even disabled, and Trailing Stop enabled (Start 200 / Step 50).
 
+📌 EA-035 (HH/HL Structure - M1)
 
+A market-structure EA on XAUUSD M1 designed to test whether simple Higher High / Higher Low and Lower High / Lower Low structure can provide a standalone directional trading edge.
+
+BUY signals are generated when the latest structure forms both a Higher High (HH) and Higher Low (HL). SELL signals are generated when the latest structure forms both a Lower High (LH) and Lower Low (LL).
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Break Even OFF, and Trailing Stop OFF. The baseline test produced 6,651 trades with Profit Factor 0.93, Net Profit -$994.57, Win Rate 32.22%, and Maximum Drawdown 99.49%, so the raw HH/HL structure baseline is classified as FAIL and retained as a research reference.
 
 
 
@@ -1332,7 +1338,73 @@ The baseline does not establish that the underlying VWAP Pullback concept is inv
 
 No broad parameter optimization should be performed until the core VWAP Pullback hypothesis has been investigated through controlled experiments.
 
+EA-035
 
+Strategy Code & Technical Specifications Setup (EAs/EA-035_HH_HL_Structure/)
+
+Baseline Backtest Completed (#01) (Backtest/EA-035_HH_HL_Structure/)
+
+Baseline Experiment #01 Assessed: FAIL
+
+Research Documentation Updated (Research/)
+
+Research Methodology Documented (docs/methodology.md)
+
+EXP-035-001: Higher-Timeframe Trend Filter Evaluation
+
+EXP-035-002: Structure Strength / Minimum Swing Distance Evaluation
+
+EXP-035-003: Volatility Filter Evaluation
+
+EXP-035-004: Trading Session / Hour Evaluation
+
+EXP-035-005: Entry Confirmation Evaluation
+
+EXP-035-006: Exit Management Evaluation
+
+Current Research Status: IN PROGRESS
+
+Optimization Status: BLOCKED — Controlled research required before parameter optimization
+
+Baseline #01: XAUUSD.PRO / M1 / HH + HL → BUY / LH + LL → SELL / Swing confirmation using 2 bars on each side / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 35 / Break Even OFF / Trailing Stop OFF.
+
+Test Period: 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+Initial Deposit: $1,000.00
+
+Leverage: 1:500
+
+Baseline #01 Result: 6,651 trades, Net Profit -$994.57, Profit Factor 0.93, Expected Payoff -$0.15, Recovery Factor -0.94, Sharpe Ratio -5.00, Maximum Drawdown 99.49%, Win Rate 32.22%.
+
+Directional Results:
+
+BUY: 3,277 trades / 31.92% won
+
+SELL: 3,374 trades / 32.51% won
+
+Average Trade Results:
+
+Average profitable trade: $6.24
+
+Average losing trade: -$3.19
+
+Largest profitable trade: $35.88
+
+Largest losing trade: -$42.23
+
+Maximum consecutive wins: 8
+
+Maximum consecutive losses: 30
+
+Average holding time: 00:03:47
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Drawdown reaches 99.49%, resulting in near-total loss of the initial deposit.
+
+The baseline generated a large sample of 6,651 trades, and BUY and SELL directions performed similarly poorly. Although the average profitable trade ($6.24) was approximately twice the magnitude of the average losing trade (-$3.19), the overall win rate of 32.22% was insufficient to produce positive expectancy.
+
+The failed baseline establishes that raw HH/HL and LH/LL market-structure classification alone does not demonstrate a viable standalone trading edge on XAUUSD.PRO M1 under the documented test conditions.
+
+The baseline is retained as the reference experiment. Future EA-035 research should isolate one major variable at a time, beginning with signal-quality filters such as higher-timeframe context, structure strength, volatility, session effects, and entry confirmation before any broad parameter optimization.
 
 
 
