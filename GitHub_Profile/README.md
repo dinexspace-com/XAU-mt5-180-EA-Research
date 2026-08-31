@@ -234,6 +234,17 @@ BUY signals are generated when the latest structure forms both a Higher High (HH
 
 The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Break Even OFF, and Trailing Stop OFF. The baseline test produced 6,651 trades with Profit Factor 0.93, Net Profit -$994.57, Win Rate 32.22%, and Maximum Drawdown 99.49%, so the raw HH/HL structure baseline is classified as FAIL and retained as a research reference.
 
+📌 EA-036 (Swing Break Trend - M1)
+
+A market-structure breakout EA on XAUUSD M1 designed to test whether breaks of confirmed Swing High and Swing Low levels can provide a standalone directional continuation edge.
+
+BUY signals are generated when price breaks above a confirmed Swing High, while SELL signals are generated when price breaks below a confirmed Swing Low. The baseline uses InpSwingBars = 5 to confirm swing structure.
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Break Even OFF, and Trailing Stop ON (Start 200 / Step 50). The baseline test produced 4,573 trades with Profit Factor 0.89, Net Profit -$994.01, Win Rate 40.35%, and Maximum Drawdown 99.42%, so the raw Swing Break baseline is classified as FAIL and retained as a research reference.
+
+
+
+
 
 
 
@@ -1406,7 +1417,73 @@ The failed baseline establishes that raw HH/HL and LH/LL market-structure classi
 
 The baseline is retained as the reference experiment. Future EA-035 research should isolate one major variable at a time, beginning with signal-quality filters such as higher-timeframe context, structure strength, volatility, session effects, and entry confirmation before any broad parameter optimization.
 
+EA-036
 
+Strategy Code & Technical Specifications Setup (EAs/EA-036_Swing_Break_Trend/)
+
+Baseline Backtest Completed (#01) (Backtest/EA-036_Swing_Break_Trend/)
+
+Baseline Experiment #01 Assessed: FAIL
+
+Research Documentation Updated (Research/)
+
+Research Methodology Documented (docs/methodology.md)
+
+RQ-01: BUY vs SELL Directional Evaluation
+
+RQ-02: Timeframe Evaluation (M1 / M5 / M15)
+
+RQ-03: Swing Strength Evaluation
+
+RQ-04: Trend Filter Evaluation
+
+RQ-05: Trading Hour / Session Evaluation
+
+RQ-06: Exit Logic Evaluation
+
+Current Research Status: IN PROGRESS
+
+Optimization Status: BLOCKED — Controlled research required before parameter optimization
+
+Baseline #01: XAUUSD.PRO / M1 / Swing High breakout → BUY / Swing Low breakout → SELL / Swing Bars 5 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 35 / Break Even OFF / Trailing Stop ON (Start 200 / Step 50).
+
+Test Period: 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+Initial Deposit: $1,000.00
+
+Leverage: 1:500
+
+Baseline #01 Result: 4,573 trades, Net Profit -$994.01, Profit Factor 0.89, Expected Payoff -$0.22, Recovery Factor -0.97, Sharpe Ratio -5.00, Maximum Drawdown 99.42%, Win Rate 40.35%.
+
+Directional Results:
+
+BUY: 2,436 trades / 43.06% won
+
+SELL: 2,137 trades / 37.25% won
+
+Average Trade Results:
+
+Average profitable trade: $4.16
+
+Average losing trade: -$3.18
+
+Largest profitable trade: $34.34
+
+Largest losing trade: -$27.60
+
+Maximum consecutive wins: 8
+
+Maximum consecutive losses: 16
+
+Average holding time: 00:03:04
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Drawdown reaches 99.42%, resulting in near-total loss of the initial deposit.
+
+The baseline generated a large sample of 4,573 trades. BUY trades achieved a higher win rate than SELL trades (43.06% vs 37.25%), but this observation alone does not establish a profitable BUY-only advantage.
+
+The failed baseline establishes that the tested raw Swing High / Swing Low breakout rule does not demonstrate a viable standalone trading edge on XAUUSD.PRO M1 under the documented baseline conditions.
+
+The baseline is retained as the reference experiment. The next controlled research step is RQ-01: BUY vs SELL Directional Evaluation, followed by timeframe, swing-strength, trend-filter, trading-session, and exit-logic experiments before any broad parameter optimization.
 
 
 
