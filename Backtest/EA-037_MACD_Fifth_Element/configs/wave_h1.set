@@ -1,0 +1,7 @@
+InpSignalTimeframe=16385
+InpStopModel=0
+InpTp1R=1.0
+InpTp2R=2.0
+InpTp1ClosePercent=50.0
+InpMoveStopToBE=true
+InpRiskPercent=1.0
