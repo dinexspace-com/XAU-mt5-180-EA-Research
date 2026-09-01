@@ -37,3 +37,21 @@ EA được coi là đạt yêu cầu khi đáp ứng đủ các tiêu chí sau:
 | **Win Rate** | > 40.0% | > 50.0% |
 | **Max Drawdown** | < 30.0% | < 20.0% |
 | **Expected Payoff** | > 0.5 USD / lệnh | > 1.5 USD / lệnh |
+
+---
+
+## EA-037 — MACD Fifth Element Research Methodology
+
+- [x] Strategy code and technical specification: `EAs/EA-037_MACD_Fifth_Element/`
+- [x] Four technical backtests preserved: `Backtest/EA-037_MACD_Fifth_Element/`
+- [x] Research record: `Research/EA-037_MACD_Fifth_Element/`
+- [x] Current result: **FAIL / RESEARCH ONLY**
+- [ ] Complete real-tick retest
+- [ ] Exposure-normalized stop comparison
+- [ ] IS/OOS and walk-forward validation
+
+The baseline tests four same-sign MACD 12/26/9 histogram bars and evaluates entry at the fifth bar. Stop models are the previous opposite histogram-wave price extreme and ATR(14) × 2.0. Position management uses 50% partial close at 1R, final target at 2R and break-even after TP1.
+
+M15 wave baseline: Net Profit -$1,711.25, Profit Factor 0.99 and Equity Drawdown 83.29%. M15 ATR, H1 wave and H1 ATR produced positive nominal profit in their recorded runs, but Equity Drawdown remained 88.72%, 52.46% and 68.34%, respectively. All variants fail the risk requirement.
+
+Broad optimization remains blocked. The next sequence is exposure normalization, complete real-tick testing, controlled direction/timeframe/stop/exit experiments, parameter-neighborhood analysis, out-of-sample validation and walk-forward testing.
