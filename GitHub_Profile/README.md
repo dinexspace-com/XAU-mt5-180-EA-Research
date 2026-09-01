@@ -1514,3 +1514,10 @@ This repository documents algorithmic trading research, strategy development, an
 Backtest results do not guarantee future performance.
 
 Nothing in this repository should be considered financial or investment advice.
+
+📌 EA-037 (MACD Fifth Element — M15/H1)
+
+A MACD momentum-continuation research EA that waits for four completed same-sign MACD 12/26/9 histogram bars and evaluates entry at the beginning of the fifth bar. It compares a previous-opposite-wave stop against ATR(14) × 2.0, with partial profit at 1R and a final 2R target.
+
+The M15 wave-stop baseline produced Net Profit -$1,711.25, Profit Factor 0.99 and Equity Drawdown 83.29%. Several ATR/H1 variants produced positive nominal profit, but drawdown remained between 52.46% and 88.72%. All current configurations are classified as FAIL / research only; live deployment and broad optimization are not approved.
+
