@@ -250,6 +250,21 @@ BUY signals require the Fast EMA to cross above the Slow EMA while the current A
 
 The baseline configuration uses EMA 20/50, ATR Period 14, ATR Average Period 50, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, with Break Even and Trailing Stop disabled for baseline validation.
 
+### 📌 EA-038 (EMA Distance Trend - M1)
+
+An EMA-distance trend-following EA on XAUUSD M1 designed to test whether the separation between a fast EMA and slow EMA, normalized by current ATR volatility, can provide a standalone directional trading edge.
+
+BUY signals require EMA20 to be above EMA50 while the distance between the two averages is at least `ATR(14) × 0.5`. SELL signals require EMA20 to be below EMA50 while the inverse EMA distance satisfies the same ATR-based threshold.
+
+The baseline configuration uses EMA 20/50, ATR Period 14, ATR Ratio 0.5, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Maximum Positions 1, with Break Even and Trailing Stop disabled for baseline validation.
+
+
+
+
+
+
+
+
 
 
 
@@ -1532,6 +1547,70 @@ against:
 while keeping all unrelated parameters and test conditions unchanged.
 
 No broad parameter optimization should be performed until the contribution of the ATR filter has been isolated.
+
+### EA-038
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-038_EMA_Distance_Trend/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-038_EMA_Distance_Trend/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EXP-038-001: Multi-Timeframe Evaluation
+* [ ] EXP-038-002: EMA Period Evaluation
+* [ ] EXP-038-003: ATR Distance Threshold Evaluation
+* [ ] EXP-038-004: Trading Session / Hour Evaluation
+* [ ] EXP-038-005: Entry Confirmation Evaluation
+* [ ] EXP-038-006: Exit Management Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / EMA20 > EMA50 + minimum EMA distance → BUY / EMA20 < EMA50 + minimum EMA distance → SELL / ATR Period 14 / ATR Ratio 0.5 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 35 / Maximum Positions 1 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 7,198 trades, Net Profit **-$991.90**, Profit Factor **0.94**, Expected Payoff **-$0.14**, Recovery Factor **-0.89**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.27%**, Win Rate **32.43%**.
+
+**Directional Results:**
+
+* BUY: 3,680 trades / **31.98%** won
+* SELL: 3,518 trades / **32.89%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.24**
+* Average losing trade: **-$3.20**
+* Largest profitable trade: **$34.90**
+* Largest losing trade: **-$42.23**
+* Maximum consecutive wins: **8**
+* Maximum consecutive losses: **23**
+* Average holding time: **00:03:12**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Drawdown reaches **99.27%**, resulting in the loss of almost the entire initial deposit.
+
+The EA generated **7,198 trades** during approximately three months of XAUUSD.PRO M1 testing. Although the average profitable trade (**$6.24**) was approximately twice the magnitude of the average losing trade (**-$3.20**), the overall win rate of **32.43%** was insufficient to produce positive expectancy.
+
+BUY and SELL directions performed similarly poorly, with win rates of **31.98%** and **32.89%** respectively. The baseline therefore provides no clear evidence of a directional advantage.
+
+The failed baseline establishes that the tested EMA 20/50 distance rule with an ATR-normalized minimum separation of **0.5 × ATR(14)** does not demonstrate a viable standalone trading edge on XAUUSD.PRO M1 under the documented baseline conditions.
+
+The baseline is retained as the reference experiment. Future EA-038 research should isolate one major variable at a time, beginning with timeframe, EMA periods, and ATR distance threshold before investigating trading-session filters, additional entry confirmation, or exit-management changes.
+
+No broad parameter optimization should be performed until the core EMA-distance hypothesis has been investigated through controlled experiments.
+
+
+
+
+
+
+
+
+
 
 
 
