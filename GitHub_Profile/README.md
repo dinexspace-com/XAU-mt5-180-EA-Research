@@ -242,7 +242,13 @@ BUY signals are generated when price breaks above a confirmed Swing High, while 
 
 The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Break Even OFF, and Trailing Stop ON (Start 200 / Step 50). The baseline test produced 4,573 trades with Profit Factor 0.89, Net Profit -$994.01, Win Rate 40.35%, and Maximum Drawdown 99.42%, so the raw Swing Break baseline is classified as FAIL and retained as a research reference.
 
+### 📌 EA-037 (ATR Trend Filter - M1)
 
+An ATR-filtered trend-following EA on XAUUSD M1 designed to test whether a volatility filter can improve the entry quality of a standard EMA 20/50 crossover strategy.
+
+BUY signals require the Fast EMA to cross above the Slow EMA while the current ATR is greater than its recent ATR average. SELL signals require the Fast EMA to cross below the Slow EMA under the same volatility condition.
+
+The baseline configuration uses EMA 20/50, ATR Period 14, ATR Average Period 50, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, with Break Even and Trailing Stop disabled for baseline validation.
 
 
 
@@ -1466,7 +1472,66 @@ The failed baseline establishes that the tested raw Swing High / Swing Low break
 
 The baseline is retained as the reference experiment. The next controlled research step is RQ-01: BUY vs SELL Directional Evaluation, followed by timeframe, swing-strength, trend-filter, trading-session, and exit-logic experiments before any broad parameter optimization.
 
+### EA-037
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-037_ATR_Trend_Filter/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-037_ATR_Trend_Filter/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EXP-037-001: ATR Filter ON vs OFF
+* [ ] EXP-037-002: ATR Threshold Evaluation
+* [ ] EXP-037-003: EMA Period Evaluation
+* [ ] EXP-037-004: Trading Session / Hour Evaluation
+* [ ] EXP-037-005: Multi-Timeframe Evaluation
+* [ ] EXP-037-006: Exit Management Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / EMA 20/50 crossover / ATR Period 14 / ATR Average Period 50 / Current ATR > Average ATR / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 35 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 621 trades, Net Profit **-$26.73**, Profit Factor **0.98**, Expected Payoff **-$0.04**, Recovery Factor **-0.21**, Sharpe Ratio **-2.24**, Maximum Equity Drawdown **12.39%**, Win Rate **33.17%**.
+
+**Directional Results:**
+
+* BUY: 256 trades / **35.55%** won
+* SELL: 365 trades / **31.51%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.17**
+* Average losing trade: **-$3.12**
+* Largest profitable trade: **$8.63**
+* Largest losing trade: **-$7.04**
+* Maximum consecutive wins: **6**
+* Maximum consecutive losses: **16**
+* Average holding time: **00:06:26**
+
+The baseline configuration is rejected as a profitable candidate because Net Profit and Expected Payoff are negative and Profit Factor remains below 1.0.
+
+However, EA-037 produced a substantially more controlled baseline than many earlier failed M1 experiments, with a Maximum Equity Drawdown of **12.39%** and a Profit Factor of **0.98**. This result is close enough to break-even to justify controlled investigation rather than broad parameter optimization.
+
+The baseline does not establish that the ATR filter itself improves the EMA crossover strategy because the same EMA 20/50 strategy without the ATR filter has not yet been tested under identical conditions.
+
+The first controlled experiment will therefore compare:
+
+`EMA 20/50 + ATR Filter`
+
+against:
+
+`EMA 20/50 without ATR Filter`
+
+while keeping all unrelated parameters and test conditions unchanged.
+
+No broad parameter optimization should be performed until the contribution of the ATR filter has been isolated.
 
 
 
