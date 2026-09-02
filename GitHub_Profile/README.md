@@ -262,32 +262,7 @@ The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 3
 
 
 
-📌 EA-037 (MACD Fifth Element — M15/H1)
 
-A MACD momentum-continuation research EA that waits for four completed same-sign MACD 12/26/9 histogram bars and evaluates entry at the beginning of the fifth bar. It compares a previous-opposite-wave stop against ATR(14) × 2.0, with partial profit at 1R and a final 2R target.
-
-The M15 wave-stop baseline produced Net Profit -$1,711.25, Profit Factor 0.99 and Equity Drawdown 83.29%. Several ATR/H1 variants produced positive nominal profit, but drawdown remained between 52.46% and 88.72%. All current configurations are classified as FAIL / research only; live deployment and broad optimization are not approved.
-
----
-
-## 📊 Development & Research Workflow
-
-* **Backtesting:** 100% Real Ticks history data backtesting for maximum precision.
-* **Methodology:** Systematic hypothesis-driven experiments (`docs/methodology.md` & project-specific docs).
-* **Research:** Controlled experiments on signal parameters, timeframes, trend filters, volatility controls, and trade management (`Research/`).
-* **Evidence:** Original MetaTrader 5 Strategy Tester reports are retained as the numerical source of truth for individual backtests.
-* **Experiment Tracking:** Failed configurations are preserved as research evidence rather than removed or hidden.
-
----
-
-## 🛠️ Tech Stack & Tools
-
-* **Trading Platforms:** MetaTrader 4 / MetaTrader 5 (MQL4 / MQL5)
-* **Languages:** MQL4, MQL5, Python (Data Analysis)
-* **Version Control:** Git, GitHub
-* **Analysis:** Backtest Reports, Quantitative Metrics (Profit Factor, Drawdown, Sharpe Ratio)
-
----
 
 ## 📈 Current Projects Status
 
