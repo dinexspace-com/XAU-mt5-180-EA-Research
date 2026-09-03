@@ -258,6 +258,23 @@ BUY signals require EMA20 to be above EMA50 while the distance between the two a
 
 The baseline configuration uses EMA 20/50, ATR Period 14, ATR Ratio 0.5, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Maximum Positions 1, with Break Even and Trailing Stop disabled for baseline validation.
 
+### 📌 EA-039 (Trend Score - M1)
+
+A multi-factor trend-scoring EA on XAUUSD M1 designed to test whether combining EMA trend direction, MACD momentum, ADX directional strength, and price structure into a weighted confirmation score can provide a viable directional trading edge.
+
+The Trend Score combines four components: EMA Trend (±30), MACD Momentum (±30), ADX Direction (±40), and Price Structure (±10), producing a maximum theoretical directional score of ±110.
+
+BUY signals are generated when the combined Trend Score reaches or exceeds +70, while SELL signals are generated when the score reaches or falls below -70.
+
+The baseline configuration uses EMA 20/50, MACD 12/26/9, ADX Period 14 with Minimum ADX 25, Score Threshold 70, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Maximum Positions 1, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Step 50).
+
+
+
+
+
+
+
+
 
 
 
@@ -1603,7 +1620,64 @@ The baseline is retained as the reference experiment. Future EA-038 research sho
 
 No broad parameter optimization should be performed until the core EMA-distance hypothesis has been investigated through controlled experiments.
 
+### EA-039
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-039_Trend_Score/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-039_Trend_Score/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EXP-039-001: Signal Selectivity / Score Threshold Evaluation
+* [ ] EXP-039-002: Indicator Contribution & Redundancy Evaluation
+* [ ] EXP-039-003: Multi-Timeframe Evaluation
+* [ ] EXP-039-004: BUY vs SELL Directional Evaluation
+* [ ] EXP-039-005: Market Regime Evaluation
+* [ ] EXP-039-006: Exit Management Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / EMA Trend ±30 / MACD Momentum ±30 / ADX Direction ±40 / Price Structure ±10 / Score Threshold ±70 / EMA 20/50 / MACD 12/26/9 / ADX Period 14 / Minimum ADX 25 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even ON (Trigger 150) / Trailing Stop ON (Start 200 / Step 50).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 4,217 trades, Net Profit **-$993.61**, Profit Factor **0.89**, Expected Payoff **-$0.24**, Recovery Factor **-0.97**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.38%**, Win Rate **31.30%**.
+
+**Directional Results:**
+
+* BUY: 2,054 trades / **31.30%** won
+* SELL: 2,163 trades / **31.30%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.25**
+* Average losing trade: **-$3.19**
+* Largest profitable trade: **$33.16**
+* Largest losing trade: **-$43.09**
+* Maximum consecutive wins: **8**
+* Maximum consecutive losses: **17**
+* Average holding time: **00:04:06**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Drawdown reaches **99.38%**, resulting in the loss of almost the entire initial deposit.
+
+The EA generated **4,217 trades** during approximately three months of XAUUSD.PRO M1 testing. The high trade frequency indicates that the current Score Threshold of 70 does not provide sufficient signal selectivity under the tested M1 conditions.
+
+Although the average profitable trade (**$6.25**) was approximately 1.96 times the magnitude of the average losing trade (**-$3.19**), the overall win rate of **31.30%** was insufficient to produce positive expectancy.
+
+BUY and SELL directions produced the same reported **31.30% win rate**, providing no evidence that the baseline failure is isolated to one trade direction.
+
+The failed baseline establishes that the tested combination of EMA trend direction, MACD momentum, ADX directional strength, price structure, Score Threshold 70, and the current trade-management configuration does not demonstrate a viable trading edge on XAUUSD.PRO M1 under the documented baseline conditions.
+
+The result does not establish that the Trend Score concept itself has no trading edge. The current scoring components may contain correlated information, particularly because EMA, MACD, and directional movement all derive information from price behavior.
+
+The baseline is retained as the reference experiment. Future EA-039 research should isolate one major variable at a time, beginning with signal selectivity and indicator contribution before evaluating timeframe, directional behavior, market regimes, or exit-management changes.
+
+No broad parameter optimization should be performed until the contribution of the individual Trend Score components has been investigated through controlled experiments.
 
 
 
