@@ -268,7 +268,19 @@ BUY signals are generated when the combined Trend Score reaches or exceeds +70, 
 
 The baseline configuration uses EMA 20/50, MACD 12/26/9, ADX Period 14 with Minimum ADX 25, Score Threshold 70, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Maximum Positions 1, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Step 50).
 
+### 📌 EA-040 (Two-Candle Continuation - M1)
 
+A two-candle trend-continuation EA on XAUUSD M1 designed to test whether two consecutive directional candles aligned with a simple moving-average trend filter can provide a standalone continuation trading edge.
+
+BUY signals require SMA20 to be above SMA50 together with two consecutive bullish closed candles.
+
+SELL signals require SMA20 to be below SMA50 together with two consecutive bearish closed candles.
+
+The baseline configuration uses SMA 20/50, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Maximum Positions 1, Break Even enabled (Trigger 150 / Shift 10), and Trailing Stop enabled (Start 200 / Step 50).
+
+The baseline test produced 4,630 trades with Net Profit **-$993.54**, Profit Factor **0.88**, Expected Payoff **-$0.21**, Maximum Drawdown **99.37%**, and Win Rate **42.76%**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
 
 
 
@@ -1679,7 +1691,60 @@ The baseline is retained as the reference experiment. Future EA-039 research sho
 
 No broad parameter optimization should be performed until the contribution of the individual Trend Score components has been investigated through controlled experiments.
 
+### EA-040
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-040_Two-Candle_Continuation/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-040_Two-Candle_Continuation/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EXP-040-001: Two-Candle Signal Quality Evaluation
+* [ ] EXP-040-002: SMA Trend Filter Evaluation
+* [ ] EXP-040-003: Trading Session / Hour Evaluation
+* [ ] EXP-040-004: Multi-Timeframe Evaluation
+* [ ] EXP-040-005: Break Even ON vs OFF
+* [ ] EXP-040-006: Trailing Stop ON vs OFF
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / SMA20 > SMA50 + two bullish candles → BUY / SMA20 < SMA50 + two bearish candles → SELL / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even ON (Trigger 150 / Shift 10) / Trailing Stop ON (Start 200 / Step 50).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 4,630 trades, Net Profit **-$993.54**, Profit Factor **0.88**, Expected Payoff **-$0.21**, Recovery Factor **-0.97**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.37%**, Win Rate **42.76%**.
+
+**Directional Results:**
+
+* BUY: 2,418 trades / **44.38%** won
+* SELL: 2,212 trades / **41.00%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$3.66**
+* Average losing trade: **-$3.11**
+* Largest profitable trade: **$32.66**
+* Largest losing trade: **-$26.02**
+* Maximum consecutive wins: **9**
+* Maximum consecutive losses: **14**
+* Average holding time: **00:03:05**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Drawdown reaches **99.37%**, resulting in the loss of almost the entire initial deposit.
+
+The baseline generated a substantial sample of **4,630 trades**. BUY trades achieved a higher win rate than SELL trades (**44.38% vs 41.00%**), but this observation alone does not establish a profitable directional advantage.
+
+The failed baseline establishes that the tested combination of a SMA20/50 trend filter, two consecutive directional candles, and the current trade-management configuration does not demonstrate a viable trading edge on XAUUSD.PRO M1 under the documented baseline conditions.
+
+The result does not establish that the underlying Two-Candle Continuation concept itself has no trading edge.
+
+The baseline is retained as the reference experiment. Future EA-040 research should isolate one major variable at a time, beginning with the quality of the two-candle signal and the SMA trend filter before evaluating trading sessions, alternative timeframes, Break Even, or Trailing Stop behavior.
+
+No broad parameter optimization should be performed until the core entry hypothesis has been investigated through controlled experiments.
 
 
 
