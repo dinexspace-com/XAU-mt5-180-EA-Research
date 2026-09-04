@@ -282,7 +282,19 @@ The baseline test produced 4,630 trades with Net Profit **-$993.54**, Profit Fac
 
 The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
 
+### 📌 EA-041 (Inside Pullback Trend - M1)
 
+An Inside Bar trend-continuation EA on XAUUSD M1 designed to test whether consolidation inside a Mother Bar followed by a breakout in the direction of the EMA50 trend can provide a viable continuation trading edge.
+
+BUY signals require price to be above EMA50, a valid Inside Bar to form, and price to break above the Mother Bar High.
+
+SELL signals require price to be below EMA50, a valid Inside Bar to form, and price to break below the Mother Bar Low.
+
+The baseline configuration uses EMA50, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Maximum Positions 1, with Break Even OFF and Trailing Stop OFF.
+
+The baseline test produced 57 trades with Net Profit **+$26.78**, Profit Factor **1.21**, Maximum Equity Drawdown **4.50%**, and Win Rate **31.58%**.
+
+The baseline is classified as **PASS FOR FURTHER RESEARCH**, not as validated for live trading.
 
 
 
@@ -1746,7 +1758,60 @@ The baseline is retained as the reference experiment. Future EA-040 research sho
 
 No broad parameter optimization should be performed until the core entry hypothesis has been investigated through controlled experiments.
 
+### EA-041
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-041_Inside_Pullback_Trend/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-041_Inside_Pullback_Trend/`)
+* [x] Baseline Experiment #01 Assessed: **PASS FOR FURTHER RESEARCH**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] Experiment 01: Long-History Validation
+* [ ] Experiment 02: Multi-Timeframe Evaluation (M1 / M5 / M15 / H1)
+* [ ] Experiment 03: Mother Bar Quality Evaluation
+* [ ] Experiment 04: Inside Bar Size Evaluation
+* [ ] Experiment 05: ATR / Volatility Filter Evaluation
+* [ ] Experiment 06: Exit & Trade Management Evaluation
+
+**Current Research Status:** `IN PROGRESS — PROMISING BASELINE`
+
+**Optimization Status:** `BLOCKED — Long-history and multi-timeframe validation required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / EMA50 trend filter / Inside Bar + Mother Bar breakout / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 35 / Maximum Positions 1 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-09-03 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 57 trades, Net Profit **+$26.78**, Profit Factor **1.21**, Expected Payoff **+$0.47**, Recovery Factor **0.56**, Maximum Equity Drawdown **4.50%**, Win Rate **31.58%**.
+
+**Directional Results:**
+
+* BUY: 23 trades / **34.78%** won
+* SELL: 34 trades / **29.41%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **+$8.48**
+* Average losing trade: **-$3.23**
+* Largest profitable trade: **+$47.71**
+* Largest losing trade: **-$6.75**
+* Maximum consecutive wins: **3**
+* Maximum consecutive losses: **8**
+* Average holding time: **00:16:51**
+
+Unlike many previous M1 baseline experiments, EA-041 produced positive expectancy under the tested configuration. Net Profit is positive, Profit Factor is above 1.0, and Maximum Equity Drawdown remained below 5%.
+
+However, the result is based on only **57 trades**, which is insufficient to establish a robust trading edge. The relatively small sample and dependence on comparatively large winning trades require further validation.
+
+The baseline therefore passes only as a **candidate for continued research**. It is not classified as production-ready or approved for live trading.
+
+The next controlled research step is to increase the historical sample and evaluate the same core strategy across M1, M5, M15, and H1 before introducing additional filters or broad parameter optimization.
+
+If the underlying edge survives those tests, subsequent experiments will evaluate Mother Bar quality, Inside Bar size, volatility filtering, and exit management.
+
+No broad parameter optimization should be performed until the core Inside Bar + EMA50 trend-continuation hypothesis has demonstrated reasonable robustness across a substantially larger sample.
 
 
 
