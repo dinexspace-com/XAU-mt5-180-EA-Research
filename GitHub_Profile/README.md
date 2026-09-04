@@ -296,6 +296,37 @@ The baseline test produced 57 trades with Net Profit **+$26.78**, Profit Factor 
 
 The baseline is classified as **PASS FOR FURTHER RESEARCH**, not as validated for live trading.
 
+### 📌 EA-042 (Three-Bar Continuation - M1)
+
+A three-bar momentum-continuation EA on XAUUSD M1 designed to test whether three consecutive directional closes can provide a standalone short-term continuation trading edge.
+
+BUY signals are generated when three consecutive closed bars form progressively higher closes:
+
+`Close[1] > Close[2] > Close[3]`
+
+SELL signals are generated when three consecutive closed bars form progressively lower closes:
+
+`Close[1] < Close[2] < Close[3]`
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Maximum Positions 1, with Break Even OFF and Trailing Stop OFF.
+
+The baseline test produced 5,815 trades with Net Profit **-$992.09**, Profit Factor **0.92**, Expected Payoff **-$0.17**, Maximum Drawdown **99.28%**, Sharpe Ratio **-5.00**, and Win Rate **32.02%**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1812,6 +1843,70 @@ The next controlled research step is to increase the historical sample and evalu
 If the underlying edge survives those tests, subsequent experiments will evaluate Mother Bar quality, Inside Bar size, volatility filtering, and exit management.
 
 No broad parameter optimization should be performed until the core Inside Bar + EMA50 trend-continuation hypothesis has demonstrated reasonable robustness across a substantially larger sample.
+
+### EA-042
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-042_Three-Bar_Continuation/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-042_Three-Bar_Continuation/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] Experiment 02: Trend Filter Evaluation
+* [ ] Experiment 03: Momentum / Volatility Filter Evaluation
+* [ ] Experiment 04: Trading Hour / Session Evaluation
+* [ ] Experiment 05: Pullback / Continuation Confirmation
+
+**Current Research Status:** `IN PROGRESS — BASELINE FAILED`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Three consecutive directional closes / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 35 / Maximum Positions 1 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 5,815 trades, Net Profit **-$992.09**, Profit Factor **0.92**, Expected Payoff **-$0.17**, Recovery Factor **-0.91**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.28%**, Win Rate **32.02%**.
+
+**Directional Results:**
+
+* BUY: 2,969 trades / **32.87%** won
+* SELL: 2,846 trades / **31.13%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.22**
+* Average losing trade: **-$3.18**
+* Largest profitable trade: **$35.33**
+* Largest losing trade: **-$42.23**
+* Maximum consecutive wins: **6**
+* Maximum consecutive losses: **26**
+* Average holding time: **00:04:18**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Drawdown reaches **99.28%**, resulting in the loss of almost the entire initial deposit.
+
+The EA generated **5,815 trades** during approximately three months of XAUUSD.PRO M1 testing. The high trade frequency indicates that three consecutive directional closes occur frequently and, by themselves, do not provide sufficient signal selectivity under the tested M1 conditions.
+
+Both trade directions produced similarly weak results. BUY trades achieved a **32.87%** win rate and SELL trades achieved **31.13%**, providing no clear evidence that the baseline failure is isolated to one trade direction.
+
+The failed baseline establishes that the tested raw Three-Bar Continuation rule does not demonstrate a viable standalone trading edge on XAUUSD.PRO M1 under the documented baseline conditions.
+
+The result does not establish that the broader Three-Bar Continuation concept itself has no trading edge. The current implementation does not account for trend context, impulse strength, volatility regime, trading session, pullback structure, or other market-context conditions.
+
+The baseline is retained as the reference experiment.
+
+The next controlled research step is to test whether adding **one simple trend filter** improves signal quality while leaving the remaining strategy components unchanged.
+
+No broad parameter optimization should be performed until the core entry hypothesis has been investigated through controlled experiments.
+
+
+
+
+
+
+
 
 
 
