@@ -328,7 +328,19 @@ The baseline test produced 4,961 trades with Net Profit **-$991.99**, Profit Fac
 
 The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
 
+### 📌 EA-044 (Trend Exhaustion Filter - M1)
 
+A volatility-adjusted trend-extension EA on XAUUSD M1 designed to test whether a large price displacement away from a long-term EMA can provide a standalone directional continuation trading edge.
+
+BUY signals require price to be above EMA200 while the absolute distance between price and EMA200 exceeds `ATR(14) × 2.0`.
+
+SELL signals require price to be below EMA200 while the absolute distance between price and EMA200 exceeds `ATR(14) × 2.0`.
+
+The baseline configuration uses EMA200, ATR Period 14, ATR Multiplier 2.0, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Maximum Positions 1, Break Even enabled (Trigger 150 / Shift 20), and Trailing Stop enabled (Start 200 / Step 50).
+
+The baseline test produced 8,742 trades with Net Profit **-$991.88**, Profit Factor **0.94**, Expected Payoff **-$0.11**, Maximum Drawdown **99.25%**, Sharpe Ratio **-5.00**, and Win Rate **43.56%**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
 
 
 
@@ -1968,6 +1980,75 @@ The baseline does not establish that the underlying trend-acceleration concept i
 The next controlled research steps are to evaluate trend strength, minimum EMA separation / acceleration thresholds, volatility filtering, higher-timeframe trend confirmation, and trading-session effects while keeping unrelated strategy components unchanged.
 
 No broad parameter optimization should be performed until the core trend-acceleration hypothesis has been investigated through controlled experiments.
+
+### EA-044
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-044_Trend_Exhaustion_Filter/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-044_Trend_Exhaustion_Filter/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] RQ-01: ATR Distance Threshold Evaluation
+* [ ] RQ-02: Trend Exhaustion vs Trend Continuation Hypothesis Evaluation
+* [ ] RQ-03: BUY vs SELL Directional Evaluation
+* [ ] RQ-04: Trading Session / Hour Evaluation
+* [ ] RQ-05: Higher-Timeframe Evaluation
+* [ ] RQ-06: Break Even / Trailing Stop Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / EMA200 trend direction / ATR14 volatility-adjusted price distance / ATR Multiplier 2.0 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even ON (Trigger 150 / Shift 20) / Trailing Stop ON (Start 200 / Step 50).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 8,742 trades, Net Profit **-$991.88**, Profit Factor **0.94**, Expected Payoff **-$0.11**, Recovery Factor **-0.92**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.25%**, Win Rate **43.56%**.
+
+**Directional Results:**
+
+* BUY: 4,779 trades / **46.52%** won
+* SELL: 3,963 trades / **39.99%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$3.97**
+* Average losing trade: **-$3.26**
+* Largest profitable trade: **$32.74**
+* Largest losing trade: **-$8.69**
+* Maximum consecutive wins: **19**
+* Maximum consecutive losses: **19**
+* Average holding time: **00:02:17**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Drawdown reaches **99.25%**, resulting in near-total loss of the initial deposit.
+
+The EA generated a large sample of **8,742 trades** during approximately three months of XAUUSD.PRO M1 testing. Despite the volatility-adjusted distance requirement, the current EMA200 + ATR extension condition does not provide sufficient signal quality to produce positive expectancy under the documented baseline conditions.
+
+BUY trades performed materially better than SELL trades by win rate (**46.52% vs 39.99%**). This is retained only as a research observation and does not establish that BUY-only trading has a profitable edge.
+
+The failed baseline establishes that the tested combination of EMA200 trend direction and `ATR(14) × 2.0` price-extension filtering does not demonstrate a viable standalone trading edge on XAUUSD.PRO M1 under the documented baseline conditions.
+
+The result does not establish that the broader Trend Exhaustion / Trend Extension concept itself has no trading edge. The current implementation effectively trades in the direction of the price extension rather than testing a reversal after confirmed exhaustion, making the distinction between **trend continuation** and **trend exhaustion reversal** an important research question.
+
+The baseline is retained as the reference experiment.
+
+The next controlled research step is to investigate the core hypothesis before broad parameter optimization. Research should first determine whether the ATR-distance condition is more useful as a continuation signal, an exhaustion/reversal signal, or only when combined with additional market context.
+
+No broad parameter optimization should be performed until the core entry hypothesis has been investigated through controlled experiments.
+
+
+
+
+
+
+
+
+
+
 
 
 
