@@ -314,7 +314,19 @@ The baseline test produced 5,815 trades with Net Profit **-$992.09**, Profit Fac
 
 The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
 
+### 📌 EA-043 (Trend Acceleration - M1)
 
+A trend-acceleration EA on XAUUSD M1 designed to test whether expansion in the distance between EMA20 and EMA50, combined with fast-EMA direction, can provide a standalone trend-continuation trading edge.
+
+BUY signals require EMA20 to be above EMA50, EMA20 to be rising, and the EMA gap to be expanding.
+
+SELL signals require EMA20 to be below EMA50, EMA20 to be falling, and the bearish EMA gap to be expanding.
+
+The baseline configuration uses EMA 20/50, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Maximum Positions 1, with Break Even OFF and Trailing Stop OFF.
+
+The baseline test produced 4,961 trades with Net Profit **-$991.99**, Profit Factor **0.91**, Expected Payoff **-$0.20**, Maximum Drawdown approximately **99.26%**, Sharpe Ratio **-5.00**, and Win Rate **31.63%**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
 
 
 
@@ -1901,7 +1913,61 @@ The next controlled research step is to test whether adding **one simple trend f
 
 No broad parameter optimization should be performed until the core entry hypothesis has been investigated through controlled experiments.
 
+### EA-043
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-043_Trend_Acceleration/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-043_Trend_Acceleration/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] RQ-01: Trend Strength Filter Evaluation
+* [ ] RQ-02: Minimum EMA Separation / Acceleration Threshold Evaluation
+* [ ] RQ-03: Volatility Filter Evaluation
+* [ ] RQ-04: Higher-Timeframe Trend Confirmation
+* [ ] RQ-05: Trading Session / Hour Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / EMA20 + EMA50 Trend Acceleration / expanding EMA gap / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 35 / Maximum Positions 1 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 4,961 trades, Net Profit **-$991.99**, Profit Factor **0.91**, Expected Payoff **-$0.20**, Recovery Factor **-0.93**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **99.26%**, Win Rate **31.63%**.
+
+**Directional Results:**
+
+* BUY: 2,427 trades / **31.56%** won
+* SELL: 2,534 trades / **31.69%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.26**
+* Average losing trade: **-$3.19**
+* Largest profitable trade: **$34.14**
+* Largest losing trade: **-$42.23**
+* Maximum consecutive wins: **8**
+* Maximum consecutive losses: **20**
+* Average holding time: **00:03:51**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Equity Drawdown reaches approximately **99.26%**, resulting in the loss of almost the entire initial deposit.
+
+Both trade directions produced almost identical results. BUY trades achieved a **31.56%** win rate and SELL trades achieved **31.69%**, providing no clear evidence of a directional advantage under the tested configuration.
+
+The average profitable trade (**$6.26**) was approximately twice the magnitude of the average losing trade (**-$3.19**), but the overall win rate of **31.63%** was insufficient to produce positive expectancy.
+
+The failed baseline establishes that the tested raw EMA trend-acceleration rule does not demonstrate a viable standalone trading edge on XAUUSD.PRO M1 under the documented test conditions.
+
+The baseline does not establish that the underlying trend-acceleration concept is invalid. The primary research question is whether low-quality acceleration signals can be filtered while preserving stronger trend-continuation moves.
+
+The next controlled research steps are to evaluate trend strength, minimum EMA separation / acceleration thresholds, volatility filtering, higher-timeframe trend confirmation, and trading-session effects while keeping unrelated strategy components unchanged.
+
+No broad parameter optimization should be performed until the core trend-acceleration hypothesis has been investigated through controlled experiments.
 
 
 
