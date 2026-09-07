@@ -356,6 +356,17 @@ The baseline test produced 3,757 trades with Net Profit **-$991.65**, Profit Fac
 
 The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
 
+### 📌 EA-046 (Previous Candle Break - M1)
+
+A previous-candle breakout EA on XAUUSD M1 designed to test whether a close beyond the High or Low of the immediately preceding candle can provide a standalone short-term breakout trading edge.
+
+BUY signals are generated when the current Close is above the previous candle High, while SELL signals are generated when the current Close is below the previous candle Low.
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Maximum Positions 1, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Step 50).
+
+The baseline test produced 2,760 trades with Net Profit **-$592.81**, Profit Factor **0.87**, Expected Payoff **-$0.21**, Maximum Equity Drawdown **59.88%**, Sharpe Ratio **-5.00**, and Win Rate **39.67%**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
 
 
 
@@ -2182,7 +2193,126 @@ Production Ready    : NO
 
 The failed baseline is retained as the reference experiment against which all subsequent EA-045 modifications must be compared.
 
+### EA-046
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-046_Previous_Candle_Break/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-046_Previous_Candle_Break/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EA046-R01: Multi-Timeframe Evaluation (M5 / M15 / H1)
+* [ ] EA046-R02: Trend Filter Evaluation
+* [ ] EA046-R03: ATR Breakout-Distance Filter Evaluation
+* [ ] EA046-R04: Breakout Candle Quality Evaluation
+* [ ] EA046-R05: Trading Session Evaluation
+* [ ] EA046-R06: Breakout Confirmation / Retest Evaluation
+* [ ] EA046-R07: Exit Management Evaluation
+* [ ] EA046-R08: Structural Breakout Level Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Previous Candle High-Low Breakout / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 35 / Maximum Positions 1 / Break Even ON (Trigger 150) / Trailing Stop ON (Start 200 / Step 50).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 2,760 trades, Net Profit **-$592.81**, Gross Profit **$4,098.96**, Gross Loss **-$4,691.77**, Profit Factor **0.87**, Expected Payoff **-$0.21**, Recovery Factor **-0.98**, Sharpe Ratio **-5.00**, Maximum Balance Drawdown **59.79%**, Maximum Equity Drawdown **59.88%**, Win Rate **39.67%**.
+
+**Directional Results:**
+
+* BUY: 1,439 trades / **40.03%** won
+* SELL: 1,321 trades / **39.29%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$3.74**
+* Average losing trade: **-$2.82**
+* Largest profitable trade: **$47.71**
+* Largest losing trade: **-$33.39**
+* Maximum consecutive wins: **8**
+* Maximum consecutive losses: **13**
+* Average holding time: **00:04:13**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, Sharpe Ratio is negative, and Maximum Equity Drawdown reaches **59.88%**.
+
+The EA generated **2,760 trades** during approximately three months of XAUUSD.PRO M1 testing. The sample therefore provides substantial evidence that the tested raw Previous Candle Break configuration does not demonstrate positive expectancy under the documented baseline conditions.
+
+BUY and SELL directions performed similarly. BUY trades achieved a **40.03%** win rate while SELL trades achieved **39.29%**, providing no clear evidence that the baseline failure is isolated to one trade direction.
+
+The failed baseline establishes that using a close beyond the immediately previous M1 candle High or Low as a standalone breakout signal does not demonstrate a viable trading edge on XAUUSD.PRO under the tested configuration.
+
+The result does **not** establish that the broader Previous Candle Break concept has no trading edge.
+
+The current implementation uses only one previous candle as the breakout structure. On M1 this may expose the strategy to market noise, weak structural levels, and false breakouts.
+
+The primary research objective is therefore to determine whether the breakout concept improves when market noise is reduced or when breakout quality is filtered, before broad parameter optimization is attempted.
+
+The first controlled experiment will compare the existing M1 baseline against higher execution timeframes while preserving the core strategy logic and parameters where technically meaningful:
+
+    M1
+    vs
+    M5
+    vs
+    M15
+    vs
+    H1
+
+No EMA, ATR, session, news, RSI, ADX, or other additional filter should be introduced during EA046-R01.
+
+The purpose of EA046-R01 is only to determine whether the Previous Candle Break concept behaves materially differently when executed on higher timeframes.
+
+Subsequent controlled experiments will independently evaluate:
+
+    Trend Filter
+    ATR Breakout Distance
+    Breakout Candle Quality
+    Trading Session
+    Breakout Confirmation / Retest
+    Exit Management
+    Structural Breakout Levels
+
+These components must be tested separately.
+
+No broad parameter optimization should be performed at this stage.
+
+The research sequence for EA-046 is:
+
+    EA046-M1-BASELINE-001
+            ↓
+    Multi-Timeframe Test
+            ↓
+    Trend Filter
+            ↓
+    ATR Breakout Distance
+            ↓
+    Breakout Candle Quality
+            ↓
+    Session Analysis
+            ↓
+    Confirmation / Retest
+            ↓
+    Exit Research
+            ↓
+    Structural Breakout Research
+            ↓
+    Out-of-Sample Validation
+
+Current verdict:
+
+    Strategy Code       : COMPLETE
+    Baseline Backtest   : COMPLETE
+    Technical Execution : PASS
+    Baseline Performance: FAIL
+    Research            : IN PROGRESS
+    Optimization        : BLOCKED
+    Production Ready    : NO
+
+The failed baseline is retained as the reference experiment against which all subsequent EA-046 modifications must be compared.
 
 
 
