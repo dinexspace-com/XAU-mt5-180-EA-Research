@@ -342,6 +342,26 @@ The baseline test produced 8,742 trades with Net Profit **-$991.88**, Profit Fac
 
 The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
 
+### 📌 EA-045 (Trend Pullback Structure - M1)
+
+A trend-pullback continuation EA on XAUUSD M1 designed to test whether EMA-defined trend direction combined with Higher-Low / Lower-High market structure and swing breakout confirmation can provide a viable directional trading edge.
+
+BUY signals require EMA20 to remain above EMA50, the current structure to preserve a Higher-Low relative to the detected Swing Low, and price to break above the previous confirmed Swing High.
+
+SELL signals require EMA20 to remain below EMA50, the current structure to preserve a Lower-High relative to the detected Swing High, and price to break below the previous confirmed Swing Low.
+
+The baseline configuration uses EMA 20/50, Swing Bars 5, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Maximum Positions 1, with Break Even OFF and Trailing Stop OFF.
+
+The baseline test produced 3,757 trades with Net Profit **-$991.65**, Profit Factor **0.88**, Expected Payoff **-$0.26**, Maximum Drawdown **99.17%**, Sharpe Ratio **-5.00**, and Win Rate **30.88%**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+
+
+
+
+
+
 
 
 
@@ -2039,6 +2059,132 @@ The baseline is retained as the reference experiment.
 The next controlled research step is to investigate the core hypothesis before broad parameter optimization. Research should first determine whether the ATR-distance condition is more useful as a continuation signal, an exhaustion/reversal signal, or only when combined with additional market context.
 
 No broad parameter optimization should be performed until the core entry hypothesis has been investigated through controlled experiments.
+
+### EA-045
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-045_Trend_Pullback_Structure/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-045_Trend_Pullback_Structure/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EXP-045-001: Multi-Timeframe Evaluation (M1 / M5 / M15)
+* [ ] EXP-045-002: Higher-Timeframe Trend Filter Evaluation
+* [ ] EXP-045-003: Closed-Bar Breakout Confirmation
+* [ ] EXP-045-004: Explicit Pullback Quality Evaluation
+* [ ] EXP-045-005: Volatility-Normalized Stop Loss Evaluation
+* [ ] EXP-045-006: Trading Session / Hour Evaluation
+* [ ] EXP-045-007: BUY vs SELL Directional Evaluation
+* [ ] EXP-045-008: Exit Management Evaluation — only after entry research
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled entry-quality research required before parameter optimization`
+
+**Baseline ID:** `EA045-M1-BASELINE-001`
+
+**Baseline #01:** XAUUSD.PRO / M1 / EMA20 > EMA50 bullish trend / EMA20 < EMA50 bearish trend / Swing Bars 5 / Higher-Low + Swing High breakout → BUY / Lower-High + Swing Low breakdown → SELL / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 35 / Magic Number 123456 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 3,757 trades, Net Profit **-$991.65**, Profit Factor **0.88**, Expected Payoff **-$0.26**, Recovery Factor **-0.99**, Sharpe Ratio **-5.00**, Maximum Drawdown **99.17%**, Win Rate **30.88%**.
+
+**Directional Results:**
+
+* BUY: 1,828 trades / **31.62%** won
+* SELL: 1,929 trades / **30.17%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.20**
+* Average losing trade: **-$3.15**
+* Largest profitable trade: **$14.66**
+* Largest losing trade: **-$13.98**
+* Maximum consecutive wins: **5**
+* Maximum consecutive losses: **17**
+* Average holding time: **00:04:23**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, Sharpe Ratio is negative, and Maximum Drawdown reaches **99.17%**, resulting in the loss of almost the entire initial deposit.
+
+The EA generated **3,757 trades** during approximately three months of XAUUSD.PRO M1 testing. The average profitable trade (**$6.20**) was approximately **1.97 times** the magnitude of the average losing trade (**-$3.15**), which is close to the strategy's nominal 2:1 Take Profit / Stop Loss relationship.
+
+However, the overall win rate was only **30.88%**. A simplified 2:1 reward/risk structure requires approximately **33.33%** winners before trading costs to reach theoretical break-even. The observed win rate was therefore insufficient to produce positive expectancy.
+
+BUY and SELL directions performed similarly poorly. BUY trades achieved a **31.62%** win rate while SELL trades achieved **30.17%**, providing no strong evidence that the baseline failure is isolated to one trade direction.
+
+The failed baseline establishes that the tested combination of EMA20/50 trend direction, local swing structure, Higher-Low / Lower-High preservation, and structural breakout confirmation does not demonstrate a viable standalone trading edge on XAUUSD.PRO M1 under the documented conditions.
+
+The result does **not** establish that the broader Trend Pullback Structure concept has no trading edge.
+
+The current implementation uses trend detection and entry structure at essentially the same short-term market scale. On M1 this may expose the EA to excessive market noise, weak trends, local swing fluctuations, and false structural breakouts.
+
+The primary research objective is therefore to improve **entry quality and market-regime selection** before modifying reward/risk parameters.
+
+The first controlled experiment will compare the existing M1 baseline against higher execution timeframes while keeping the core strategy parameters unchanged where technically meaningful:
+
+```text
+M1
+vs
+M5
+vs
+M15
+```
+
+The next experiments will independently evaluate:
+
+```text
+Higher-Timeframe Trend Confirmation
+Closed-Bar Structural Breakout
+Explicit Pullback Requirement
+Volatility-Normalized Risk
+Trading Session Behavior
+BUY vs SELL Directionality
+```
+
+These components must be tested separately.
+
+No broad parameter optimization should be performed at this stage.
+
+The research sequence for EA-045 is:
+
+```text
+EA045-M1-BASELINE-001
+        ↓
+Multi-Timeframe Test
+        ↓
+Higher-Timeframe Trend Filter
+        ↓
+Breakout Confirmation
+        ↓
+Pullback Quality
+        ↓
+Volatility / Session Analysis
+        ↓
+Exit Research
+        ↓
+Out-of-Sample Validation
+```
+
+Current verdict:
+
+```text
+Strategy Code       : COMPLETE
+Baseline Backtest   : COMPLETE
+Technical Execution : PASS
+Baseline Performance: FAIL
+Research            : IN PROGRESS
+Optimization        : BLOCKED
+Production Ready    : NO
+```
+
+The failed baseline is retained as the reference experiment against which all subsequent EA-045 modifications must be compared.
+
+
+
+
 
 
 
