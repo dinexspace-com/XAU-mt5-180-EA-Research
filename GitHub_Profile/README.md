@@ -368,7 +368,21 @@ The baseline test produced 2,760 trades with Net Profit **-$592.81**, Profit Fac
 
 The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
 
+### 📌 EA-047 (5 Bar Range Break - M5)
 
+A rolling-range breakout EA on XAUUSD M5 designed to test whether breaks beyond the Highest High or Lowest Low of the previous five completed candles can provide a standalone short-term breakout trading edge.
+
+BUY signals are generated when the current Ask price exceeds the Highest High of the previous 5 completed bars, while SELL signals are generated when the current Bid price falls below the Lowest Low of the previous 5 completed bars.
+
+The EA evaluates breakout entries on new-bar detection and allows only one active position for the same symbol and Magic Number.
+
+The baseline configuration uses `InpBarsCount = 5`, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Break Even OFF, and Trailing Stop OFF.
+
+The baseline test was performed on XAUUSD.PRO M5 from 2026-01-02 to 2026-04-01 using 100% real ticks and produced 424 trades with Net Profit **-$89.70**, Profit Factor **0.90**, Expected Payoff **-$0.21**, Maximum Equity Drawdown **13.18%**, and Win Rate **30.66%**.
+
+The average profitable trade was **$6.47** while the average losing trade was **-$3.16**, producing an approximate realized winner-to-loser size relationship of **2.05:1**. However, the win rate remained too low to produce positive expectancy.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for controlled research into breakout confirmation, volatility filtering, market-regime selection, timeframe behavior, and exit management.
 
 
 
@@ -2314,7 +2328,240 @@ Current verdict:
 
 The failed baseline is retained as the reference experiment against which all subsequent EA-046 modifications must be compared.
 
+### EA-047
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-047_5_Bar_Range_Break/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-047/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EA047-R01: Candle Close Breakout Confirmation
+* [ ] EA047-R02: Breakout Buffer / ATR-Normalized Breakout Distance
+* [ ] EA047-R03: ATR Volatility Confirmation
+* [ ] EA047-R04: Range Size / ATR Regime Evaluation
+* [ ] EA047-R05: Directional Trend / ADX Filter Evaluation
+* [ ] EA047-R06: Trading Hour / Session / Weekday Evaluation
+* [ ] EA047-R07: Breakout Bars Count Evaluation
+* [ ] EA047-R08: Break Even / Trailing Stop / Exit Management Evaluation
+* [ ] EA047-R09: Out-of-Sample Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M5 / Previous 5 Completed Bars Highest-High / Lowest-Low Breakout / Bars Count 5 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 35 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 424 trades, Net Profit **-$89.70**, Gross Profit **$840.59**, Gross Loss **-$930.29**, Profit Factor **0.90**, Expected Payoff **-$0.21**, Recovery Factor **-0.65**, Sharpe Ratio **-5.00**, Maximum Balance Drawdown **13.02%**, Maximum Equity Drawdown **13.18%**, Win Rate **30.66%**.
+
+**Directional Results:**
+
+* BUY / Long: 382 trades / **30.89%** won
+* SELL / Short: 42 trades / **28.57%** won
+
+The baseline produced a strong directional imbalance:
+
+* Long Trades: **382**
+* Short Trades: **42**
+
+Approximately **90% of all trades were Long positions** during the tested historical sample.
+
+This directional imbalance is recorded as a research observation only. It is not sufficient evidence to disable either trade direction without controlled validation across additional historical periods.
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.47**
+* Average losing trade: **-$3.16**
+* Largest profitable trade: **$47.71**
+* Largest losing trade: **-$8.69**
+* Maximum consecutive wins: **5**
+* Maximum consecutive losses: **19**
+* Maximal consecutive profit: **$47.71 (1 trade)**
+* Maximal consecutive loss: **-$58.34 (19 trades)**
+* Average consecutive wins: **2**
+* Average consecutive losses: **4**
+* Average holding time: **00:07:27**
+* Minimum holding time: **00:00:01**
+* Maximum holding time: **02:05:00**
+
+**MFE / MAE Correlations:**
+
+* Profit vs MFE: **0.87**
+* Profit vs MAE: **0.80**
+* MFE vs MAE: **0.5993**
+
+The baseline configuration is rejected as a profitable candidate.
+
+Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, Recovery Factor is negative, Sharpe Ratio is negative, and the balance curve finishes below the initial deposit.
+
+However, EA-047 differs materially from several earlier failed M1 experiments.
+
+The strategy lost **$89.70** from a $1,000 initial deposit and reached a Maximum Equity Drawdown of **13.18%**, rather than exhausting most of the account during the tested period.
+
+The strategy also preserved a favorable relationship between average winning and losing trades:
+
+    Average Win  = $6.47
+    Average Loss = $3.16
+
+which produces an approximate realized winner-to-loser size ratio of:
+
+    6.47 / 3.16 ≈ 2.05 : 1
+
+With an approximate 2:1 payoff structure, the theoretical break-even win rate before trading costs is approximately:
+
+    1 / (1 + 2) ≈ 33.33%
+
+The actual baseline win rate was:
+
+    30.66%
+
+The strategy therefore missed the theoretical break-even threshold by approximately:
+
+    2.67 percentage points
+
+This does not mean that increasing the win rate by 2.67 percentage points would automatically create a robust trading system because spread, slippage, execution differences, commissions where applicable, and out-of-sample degradation must also be considered.
+
+However, the result identifies a clear research problem.
+
+The baseline's main weakness is not that profitable trades are too small.
+
+The primary weakness is:
+
+**Too many breakout entries fail.**
+
+The current strategy enters when:
+
+    BUY:
+    Ask > Highest High of previous 5 completed bars
+
+    SELL:
+    Bid < Lowest Low of previous 5 completed bars
+
+No additional confirmation is required for:
+
+    Candle Close
+    Breakout Distance
+    Volatility Expansion
+    Trend Strength
+    Retest
+    Range Quality
+    Trading Session
+
+This makes false-breakout exposure the primary research target.
+
+The first controlled experiment will therefore test:
+
+**EA047-R01 — Candle Close Breakout Confirmation**
+
+Baseline:
+
+    Intrabar / new-bar price condition
+    Ask > Previous Range High
+    or
+    Bid < Previous Range Low
+
+Variant:
+
+    Completed candle must close beyond
+    the previous 5-bar breakout boundary
+
+The experiment must keep all unrelated baseline parameters unchanged:
+
+    Symbol          : XAUUSD.PRO
+    Timeframe       : M5
+    Test Period     : 2026-01-02 → 2026-04-01
+    Lot             : 0.01
+    Stop Loss       : 300
+    Take Profit     : 600
+    Break Even      : OFF
+    Trailing Stop   : OFF
+    Maximum Spread  : 35
+    Bars Count      : 5
+
+The purpose of EA047-R01 is to answer one question only:
+
+**Does requiring candle-close confirmation improve breakout entry quality compared with the original penetration-based baseline?**
+
+No ATR, EMA, ADX, session, weekday, news, RSI, retest, alternative Stop Loss, Take Profit, Break Even, or Trailing Stop modification should be introduced during EA047-R01.
+
+If candle-close confirmation produces useful evidence, subsequent experiments will independently evaluate:
+
+    Breakout Buffer
+            ↓
+    ATR Volatility Confirmation
+            ↓
+    Range Size / ATR Regime
+            ↓
+    Trend / ADX Confirmation
+            ↓
+    Trading Hour / Session
+            ↓
+    Weekday Behavior
+            ↓
+    Bars Count
+            ↓
+    Break Even
+            ↓
+    Trailing Stop
+            ↓
+    SL / TP Research
+            ↓
+    Out-of-Sample Validation
+
+Each major component must be tested separately before combinations are considered.
+
+No broad parameter optimization should be performed at this stage.
+
+The research sequence for EA-047 is:
+
+    EA047-M5-BASELINE-001
+            ↓
+    Candle Close Confirmation
+            ↓
+    Breakout Buffer
+            ↓
+    ATR Volatility Confirmation
+            ↓
+    Range Regime Analysis
+            ↓
+    Trend Filter
+            ↓
+    Session / Weekday Analysis
+            ↓
+    Bars Count Evaluation
+            ↓
+    Exit Research
+            ↓
+    Out-of-Sample Validation
+            ↓
+    Forward Test
+
+Current verdict:
+
+    Strategy Code       : COMPLETE
+    Baseline Backtest   : COMPLETE
+    Technical Execution : PASS
+    Baseline Performance: FAIL
+    Research            : IN PROGRESS
+    Optimization        : BLOCKED
+    Out-of-Sample       : NOT STARTED
+    Forward Test        : NOT STARTED
+    Production Ready    : NO
+
+The failed baseline is retained as the reference experiment against which all subsequent EA-047 modifications must be compared.
+
+EA-047 is **not rejected as a research concept**.
+
+Only the tested baseline configuration is rejected as a profitable candidate.
+
+The next authorized research step is:
+
+**EA047-R01 — Candle Close Breakout Confirmation.**
 
 
 
