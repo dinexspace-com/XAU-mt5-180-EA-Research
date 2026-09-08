@@ -384,6 +384,30 @@ The average profitable trade was **$6.47** while the average losing trade was **
 
 The baseline is classified as **FAIL** and retained as the reference experiment for controlled research into breakout confirmation, volatility filtering, market-regime selection, timeframe behavior, and exit management.
 
+### 📌 EA-048 (10-Bar Donchian Breakout - M1)
+
+A short-horizon Donchian breakout EA on XAUUSD M1 designed to test whether a close beyond the Highest High or Lowest Low of the previous 10 completed bars can provide a standalone directional breakout edge.
+
+BUY signals are generated when the current Close exceeds the Highest High of the previous 10 completed bars, while SELL signals are generated when the current Close falls below the Lowest Low of the previous 10 completed bars.
+
+The EA evaluates trading logic on new-bar detection and allows only one active position for the same symbol and Magic Number.
+
+The baseline configuration uses Donchian Period 10, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-04-01 using 100% real ticks and produced 748 trades with Net Profit **-$30.84**, Profit Factor **0.98**, Expected Payoff **-$0.04**, Maximum Equity Drawdown **12.95%**, and Win Rate **40.51%**.
+
+The average profitable trade was **$4.16**, while the average losing trade was **-$2.90**.
+
+The baseline is classified as **FAIL** because Net Profit and Expected Payoff are negative and Profit Factor remains below 1.00.
+
+However, the failed baseline is retained as a research reference rather than discarded. The result does not establish that the broader Donchian breakout concept has no trading edge; it establishes only that the tested 10-bar M1 configuration did not demonstrate positive expectancy under the documented baseline conditions.
+
+
+
+
+
+
+
 
 
 
@@ -2562,6 +2586,73 @@ Only the tested baseline configuration is rejected as a profitable candidate.
 The next authorized research step is:
 
 **EA047-R01 — Candle Close Breakout Confirmation.**
+
+### EA-048
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-048_10_Bar_Donchian/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-048_10_Bar_Donchian/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EA048-R01: Multi-Timeframe Evaluation (M5 / M15)
+* [ ] EA048-R02: Donchian Lookback Evaluation
+* [ ] EA048-R03: Breakout Confirmation Evaluation
+* [ ] EA048-R04: Volatility / ATR Filter Evaluation
+* [ ] EA048-R05: Trading Session Evaluation
+* [ ] EA048-R06: BUY vs SELL Directional Evaluation
+* [ ] EA048-R07: Break Even / Trailing Stop Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Donchian Period 10 / Close breakout of previous 10-bar Highest High / Lowest Low / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 35 / Break Even ON (Trigger 150) / Trailing Stop ON (Start 200).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 748 trades, Net Profit **-$30.84**, Profit Factor **0.98**, Expected Payoff **-$0.04**, Recovery Factor **-0.23**, Sharpe Ratio **-2.62**, Maximum Equity Drawdown **12.95%**, Win Rate **40.51%**.
+
+**Directional Results:**
+
+* BUY: 408 trades / **43.14%** won
+* SELL: 340 trades / **37.35%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$4.16**
+* Average losing trade: **-$2.90**
+* Largest profitable trade: **$47.71**
+* Largest losing trade: **-$8.69**
+* Maximum consecutive wins: **6**
+* Maximum consecutive losses: **10**
+* Average holding time: **00:04:20**
+
+The baseline configuration is classified as **FAIL**. Net Profit is negative, Expected Payoff is negative, Profit Factor remains below 1.00, and Recovery Factor is negative.
+
+However, EA-048 is materially closer to break-even than many earlier failed baseline experiments.
+
+The strategy produced a Profit Factor of **0.98** with Maximum Equity Drawdown of **12.95%**, while the average profitable trade (**$4.16**) remained larger than the average losing trade (**-$2.90**).
+
+BUY trades also produced a higher win rate (**43.14%**) than SELL trades (**37.35%**). This is recorded as an observation only and is not sufficient evidence to disable SELL trading without a controlled directional experiment.
+
+The baseline therefore identifies entry quality as the primary research problem rather than establishing that the Donchian breakout concept itself should be rejected.
+
+The next research stage will test major components independently, beginning with timeframe and breakout confirmation before broad parameter optimization.
+
+No conclusion is made about alternative Donchian periods, higher timeframes, ATR filters, session filters, directional filtering, or alternative exit management because these have not yet been independently tested.
+
+No broad parameter optimization should be performed at this stage.
+
+
+
+
+
+
+
 
 
 
