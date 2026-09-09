@@ -418,6 +418,28 @@ The baseline is classified as **PASS FOR FURTHER RESEARCH**, not as a validated 
 
 A major directional asymmetry was observed: BUY trades achieved a **68.18%** win rate, while SELL trades achieved only **7.14%**. Because the sample contains only 36 trades, this observation is not sufficient to justify disabling SELL trades without further controlled testing.
 
+### 📌 EA-050 (50-Bar Donchian Breakout - M5)
+
+A longer-horizon Donchian breakout EA on XAUUSD M5 designed to test whether increasing the Donchian lookback from 20 bars to 50 bars can provide a more selective directional breakout edge.
+
+BUY signals are generated when the current Close exceeds the Highest High of the previous 50 completed bars, while SELL signals are generated when the current Close falls below the Lowest Low of the previous 50 completed bars.
+
+The EA evaluates trading logic on new-bar detection and allows only one active position for the same symbol and Magic Number.
+
+The baseline configuration uses Donchian Period 50, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200).
+
+The baseline test was performed on XAUUSD.PRO M5 from 2026-01-02 to 2026-04-01 using 100% real ticks and produced 20 trades with Net Profit **+$8.57**, Profit Factor **1.21**, Expected Payoff **+$0.43**, Maximum Equity Drawdown **1.93%**, and Win Rate **45.00%**.
+
+The baseline is classified as **PASS FOR FURTHER RESEARCH**, not as a validated trading strategy.
+
+A directional asymmetry was observed: BUY trades achieved a **53.33%** win rate, while SELL trades achieved only **20.00%**. Because the entire baseline contains only 20 trades, this observation is treated as a research hypothesis and is not sufficient evidence to disable SELL trading.
+
+The 50-bar configuration generated fewer trades than the 20-bar Donchian baseline, indicating that the longer lookback produces a substantially more selective breakout sample under the tested M5 conditions.
+
+
+
+
+
 
 
 
@@ -2729,6 +2751,91 @@ The next controlled research step is:
 The strategy must first be tested over a substantially longer XAUUSD M5 history while keeping the baseline configuration unchanged.
 
 No broad parameter optimization should be performed until the directional behavior and larger-sample baseline have been evaluated.
+
+### EA-050
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-050_50-Bar_Donchian/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-050_50-Bar_Donchian/`)
+* [x] Baseline Experiment #01 Assessed: **PASS FOR FURTHER RESEARCH**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EA050-RQ01: LONG vs SHORT Robustness Evaluation
+* [ ] EA050-RQ02: Donchian Period Evaluation
+* [ ] EA050-RQ03: Stop Loss / Take Profit Evaluation
+* [ ] EA050-RQ04: Break Even / Trailing Stop Evaluation
+* [ ] Longer Historical Backtest
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `PENDING — Baseline sample too small for final parameter selection`
+
+**Baseline #01:** XAUUSD.PRO / M5 / Donchian Period 50 / Close breakout of previous 50-bar Highest High / Lowest Low / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150) / Trailing Stop ON (Start 200).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 20 trades, Net Profit **+$8.57**, Profit Factor **1.21**, Expected Payoff **+$0.43**, Recovery Factor **0.43**, Maximum Equity Drawdown **1.93%**, Win Rate **45.00%**.
+
+**Directional Results:**
+
+* BUY: 15 trades / **53.33%** won
+* SELL: 5 trades / **20.00%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$5.51**
+* Average losing trade: **-$3.73**
+* Largest profitable trade: **$6.41**
+* Largest losing trade: **-$8.69**
+* Maximum consecutive wins: **3**
+* Maximum consecutive losses: **5**
+* Average holding time: **00:02:06**
+
+The baseline produced positive Net Profit, Profit Factor above 1.0, positive Expected Payoff, and a relatively low Maximum Equity Drawdown of **1.93%**.
+
+However, the baseline contains only **20 trades over approximately three months**. This sample is too small to establish that the observed positive expectancy represents a persistent trading edge.
+
+BUY trades produced a **53.33%** win rate compared with **20.00%** for SELL trades. This directional difference is recorded as a research hypothesis only because the SELL sample contains just five trades.
+
+The average profitable trade (**$5.51**) was larger than the average losing trade (**-$3.73**), allowing the baseline to remain profitable despite an overall win rate below 50%.
+
+EA-050 is therefore classified as **PASS FOR FURTHER RESEARCH**, not as validated for live trading.
+
+The immediate research objective is to determine whether the positive baseline survives a larger historical sample and reasonable parameter variation.
+
+The next controlled research stages are:
+
+```text
+EA050-M5-BASELINE-001
+        ↓
+Longer Historical Baseline
+        ↓
+LONG vs SHORT Evaluation
+        ↓
+Donchian Period Research
+        ↓
+SL / TP Research
+        ↓
+Break Even / Trailing Research
+        ↓
+Out-of-Sample Validation
+        ↓
+Robustness Testing
+```
+
+No final strategy or production conclusion should be made from the current 20-trade baseline.
+
+
+
+
+
+
+
 
 
 
