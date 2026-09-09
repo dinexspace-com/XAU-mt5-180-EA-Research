@@ -402,6 +402,27 @@ The baseline is classified as **FAIL** because Net Profit and Expected Payoff ar
 
 However, the failed baseline is retained as a research reference rather than discarded. The result does not establish that the broader Donchian breakout concept has no trading edge; it establishes only that the tested 10-bar M1 configuration did not demonstrate positive expectancy under the documented baseline conditions.
 
+### 📌 EA-049 (20-Bar Donchian Breakout - M5)
+
+A Donchian breakout EA on XAUUSD M5 designed to test whether a close beyond the Highest High or Lowest Low of the previous 20 completed bars can provide a directional breakout edge.
+
+BUY signals are generated when the current bar Close exceeds the Highest High of the previous 20 completed bars, while SELL signals are generated when the current bar Close falls below the Lowest Low of the previous 20 completed bars.
+
+The EA evaluates trading logic on new-bar detection and allows only one active position for the same symbol and Magic Number.
+
+The baseline configuration uses Donchian Period 20, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200).
+
+The baseline test was performed on XAUUSD.PRO M5 from 2026-01-02 to 2026-04-01 using 100% real ticks and produced 36 trades with Net Profit **+$14.59**, Profit Factor **1.20**, Maximum Equity Drawdown **2.64%**, and Win Rate **44.44%**.
+
+The baseline is classified as **PASS FOR FURTHER RESEARCH**, not as a validated trading strategy.
+
+A major directional asymmetry was observed: BUY trades achieved a **68.18%** win rate, while SELL trades achieved only **7.14%**. Because the sample contains only 36 trades, this observation is not sufficient to justify disabling SELL trades without further controlled testing.
+
+
+
+
+
+
 
 
 
@@ -2647,7 +2668,67 @@ No conclusion is made about alternative Donchian periods, higher timeframes, ATR
 
 No broad parameter optimization should be performed at this stage.
 
+### EA-049
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-049_20-Bar_Donchian/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-049_20-Bar_Donchian/`)
+* [x] Baseline Experiment #01 Assessed: **PASS FOR FURTHER RESEARCH**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EA049-RQ01: LONG vs SHORT Robustness Evaluation
+* [ ] EA049-RQ02: Donchian Period Evaluation
+* [ ] EA049-RQ03: Exit Logic Evaluation
+* [ ] EA049-RQ04: Volatility / ATR Risk Management Evaluation
+* [ ] Longer Historical Backtest
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Longer sample and controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M5 / Donchian Period 20 / Close breakout of previous 20-bar Highest High / Lowest Low / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150) / Trailing Stop ON (Start 200).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 36 trades, Net Profit **+$14.59**, Profit Factor **1.20**, Expected Payoff **+$0.41**, Recovery Factor **0.54**, Maximum Equity Drawdown **2.64%**, Win Rate **44.44%**.
+
+**Directional Results:**
+
+* BUY: 22 trades / **68.18%** won
+* SELL: 14 trades / **7.14%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$5.46**
+* Average losing trade: **-$3.64**
+* Largest profitable trade: **$6.41**
+* Largest losing trade: **-$8.69**
+* Maximum consecutive wins: **4**
+* Maximum consecutive losses: **5**
+* Average holding time: **00:02:14**
+
+The baseline produced positive Net Profit, Profit Factor above 1.0, positive Expected Payoff, and relatively low Maximum Equity Drawdown.
+
+However, the sample contains only **36 trades over approximately three months**, so the result is not sufficient to establish a robust trading edge.
+
+The most important baseline observation is the substantial directional asymmetry between BUY and SELL trades. BUY trades achieved a **68.18%** win rate, while SELL trades achieved only **7.14%**.
+
+This difference is treated as a research hypothesis rather than a strategy modification signal because the SELL sample contains only 14 trades.
+
+EA-049 is therefore classified as **PASS FOR FURTHER RESEARCH**, not as validated for live trading.
+
+The next controlled research step is:
+
+**EA049-RQ01 — LONG vs SHORT Robustness Evaluation.**
+
+The strategy must first be tested over a substantially longer XAUUSD M5 history while keeping the baseline configuration unchanged.
+
+No broad parameter optimization should be performed until the directional behavior and larger-sample baseline have been evaluated.
 
 
 
