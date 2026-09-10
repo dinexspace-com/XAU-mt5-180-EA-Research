@@ -454,7 +454,34 @@ However, the win rate remained below the approximate break-even requirement for 
 
 The baseline is classified as **FAIL** and retained as the reference experiment for controlled research into breakout quality, lookback sensitivity, volatility filtering, session behavior, directional asymmetry, higher-timeframe confirmation, and exit management.
 
+### 📌 EA-052 (30-Bar Extremes - M1)
 
+A price-extreme breakout EA on XAUUSD M1 designed to test whether extending the breakout lookback to 30 bars can provide a more selective directional continuation edge than shorter-horizon extreme breakout configurations.
+
+BUY signals require price to break above the previous 30-bar Highest High while the breakout candle closes near its upper extreme.
+
+SELL signals require price to break below the previous 30-bar Lowest Low while the breakout candle closes near its lower extreme.
+
+The breakout candle close-location condition requires the Close to remain within approximately 25% of the candle range from the corresponding breakout extreme.
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Maximum Positions 1, Break Even enabled (Trigger 150 / Lock 0), and Trailing Stop enabled (Start 200 / Step 50).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced 1,511 trades with Net Profit **-$369.82**, Profit Factor **0.85**, Expected Payoff **-$0.24**, Maximum Equity Drawdown **37.93%**, and Win Rate **40.44%**.
+
+The baseline is classified as **FAIL** and retained as a research reference.
+
+Both trade directions produced almost identical win rates:
+
+* BUY: 744 trades / **40.46%** won
+* SELL: 767 trades / **40.42%** won
+
+The baseline therefore does not provide evidence that simply disabling one trade direction would resolve the strategy weakness.
+
+The failed result does **not** establish that all 30-bar breakout strategies or price-extreme systems have no trading edge.
+
+It establishes only that the tested EA-052 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+The strategy remains under research.
 
 
 
@@ -2922,6 +2949,110 @@ Suggested research values:
     50
 
 No broad parameter optimization should be performed until the main breakout components have been independently evaluated.
+
+### EA-052
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-052_30-Bar_Extremes/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-052_30-Bar_Extremes/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EA052-RQ01: Lookback Sensitivity Evaluation
+* [ ] EA052-RQ02: Breakout Candle Quality / Close-Location Evaluation
+* [ ] EA052-RQ03: Breakout Buffer / Distance Evaluation
+* [ ] EA052-RQ04: ATR Volatility Filter Evaluation
+* [ ] EA052-RQ05: Trading Session Evaluation
+* [ ] EA052-RQ06: Higher-Timeframe Trend Filter Evaluation
+* [ ] EA052-RQ07: BUY vs SELL Directional Evaluation
+* [ ] EA052-RQ08: Break Even ON vs OFF
+* [ ] EA052-RQ09: Trailing Stop ON vs OFF
+* [ ] EA052-RQ10: Multi-Timeframe Evaluation
+* [ ] Longer Historical Backtest
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Previous 30-Bar Highest High / Lowest Low breakout / breakout candle close-location confirmation / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even ON (Trigger 150 / Lock 0) / Trailing Stop ON (Start 200 / Step 50).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 1,511 trades, Net Profit **-$369.82**, Gross Profit **$2,133.14**, Gross Loss **-$2,502.96**, Profit Factor **0.85**, Expected Payoff **-$0.24**, Recovery Factor **-0.96**, Sharpe Ratio **-5.00**, Maximum Balance Drawdown **37.81%**, Maximum Equity Drawdown **37.93%**, Win Rate **40.44%**.
+
+**Directional Results:**
+
+* BUY: 744 trades / **40.46%** won
+* SELL: 767 trades / **40.42%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$3.49**
+* Average losing trade: **-$2.78**
+* Largest profitable trade: **$36.33**
+* Largest losing trade: **-$33.80**
+* Maximum consecutive wins: **6**
+* Maximum consecutive losses: **13**
+* Average holding time: **00:04:26**
+* Minimum holding time: **00:00:01**
+* Maximum holding time: **03:33:35**
+
+The baseline configuration is rejected as a profitable candidate.
+
+Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, Recovery Factor is negative, Sharpe Ratio is negative, and Maximum Equity Drawdown reached **37.93%**.
+
+Unlike several shorter-horizon breakout baselines, EA-052 produced nearly identical directional win rates. BUY trades won **40.46%** of the time while SELL trades won **40.42%**.
+
+This result provides no baseline evidence that the strategy weakness is concentrated primarily in one direction.
+
+The failed baseline does not establish that the underlying 30-Bar Extremes concept has no trading edge.
+
+It establishes only that the tested combination of a 30-bar breakout, breakout-candle close-location confirmation, M1 execution, and the current trade-management configuration did not demonstrate positive expectancy during the tested period.
+
+The baseline is preserved as the reference experiment against which all subsequent EA-052 modifications must be compared.
+
+The first controlled research priority is to determine whether the 30-bar lookback itself improves breakout quality relative to shorter lookback configurations.
+
+Subsequent experiments should independently evaluate breakout candle quality, volatility filtering, trading-session behavior, higher-timeframe confirmation, trade direction, Break Even, Trailing Stop, and execution timeframe.
+
+No broad parameter optimization should be performed until these components have been independently evaluated.
+
+**Current Verdict:**
+
+Strategy Code: **COMPLETE**
+
+Baseline Backtest: **COMPLETE**
+
+Baseline Performance: **FAIL**
+
+Research: **IN PROGRESS**
+
+Optimization: **BLOCKED**
+
+Out-of-Sample Validation: **NOT YET PERFORMED**
+
+Robustness Validation: **NOT YET PERFORMED**
+
+Forward Testing: **NOT YET PERFORMED**
+
+Production Ready: **NO**
+
+
+
+
+
+
+
+
+
+
+
 
 
 
