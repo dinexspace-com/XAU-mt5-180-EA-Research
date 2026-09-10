@@ -436,7 +436,23 @@ A directional asymmetry was observed: BUY trades achieved a **53.33%** win rate,
 
 The 50-bar configuration generated fewer trades than the 20-bar Donchian baseline, indicating that the longer lookback produces a substantially more selective breakout sample under the tested M5 conditions.
 
+### 📌 EA-051 (15-Bar Extremes - M1)
 
+A short-term price-extreme breakout EA on XAUUSD M1 designed to test whether breakouts beyond the Highest High or Lowest Low of the previous 15 completed bars can provide a standalone directional continuation edge.
+
+BUY signals require price to break above the previous 15-bar Highest High while the breakout candle closes near its upper extreme.
+
+SELL signals require price to break below the previous 15-bar Lowest Low while the breakout candle closes near its lower extreme.
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Maximum Positions 1, with Break Even OFF and Trailing Stop OFF.
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced 2,046 trades with Net Profit **-$743.41**, Profit Factor **0.84**, Expected Payoff **-$0.36**, Maximum Equity Drawdown **77.75%**, and Win Rate **29.96%**.
+
+The average profitable trade was **$6.19**, while the average losing trade was **-$3.17**, producing an approximate realized winner-to-loser size relationship of **1.95:1**.
+
+However, the win rate remained below the approximate break-even requirement for this payoff structure.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for controlled research into breakout quality, lookback sensitivity, volatility filtering, session behavior, directional asymmetry, higher-timeframe confirmation, and exit management.
 
 
 
@@ -2830,7 +2846,82 @@ Robustness Testing
 
 No final strategy or production conclusion should be made from the current 20-trade baseline.
 
+### EA-051
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-051_15-Bar_Extremes/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-051_15-Bar_Extremes/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EA051-RQ01: Lookback Sensitivity Evaluation
+* [ ] EA051-RQ02: Breakout Candle Quality / Close-Location Evaluation
+* [ ] EA051-RQ03: Breakout Buffer / Distance Evaluation
+* [ ] EA051-RQ04: ATR Volatility Filter Evaluation
+* [ ] EA051-RQ05: Trading Session Evaluation
+* [ ] EA051-RQ06: Higher-Timeframe Trend Filter Evaluation
+* [ ] EA051-RQ07: BUY vs SELL Directional Evaluation
+* [ ] EA051-RQ08: Exit Management Evaluation
+* [ ] Longer Historical Backtest
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Previous 15-Bar Highest High / Lowest Low breakout / breakout candle close-location confirmation / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 35 / Maximum Positions 1 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 2,046 trades, Net Profit **-$743.41**, Profit Factor **0.84**, Expected Payoff **-$0.36**, Recovery Factor **-0.93**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **77.75%**, Win Rate **29.96%**.
+
+**Directional Results:**
+
+* BUY: 1,041 trades / **31.03%** won
+* SELL: 1,005 trades / **28.86%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$6.19**
+* Average losing trade: **-$3.17**
+* Largest profitable trade: **$36.63**
+* Largest losing trade: **-$38.29**
+* Maximum consecutive wins: **8**
+* Maximum consecutive losses: **26**
+* Average holding time: **00:06:48**
+
+The baseline configuration is rejected as a profitable candidate.
+
+The strategy generated winners approximately **1.95 times** larger than average losses, but the observed win rate of **29.96%** remained below the approximate break-even requirement for this payoff structure.
+
+Profit Factor remained below 1.0, Expected Payoff was negative, Recovery Factor was negative, Sharpe Ratio was negative, and Maximum Equity Drawdown reached **77.75%**.
+
+The result does **not** establish that all 15-bar breakout strategies or price-channel breakout systems have no trading edge.
+
+It establishes only that the tested EA-051 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+The primary research objective is to determine whether the high false-breakout rate can be reduced without destroying the larger profitable moves captured by the strategy.
+
+The first controlled research step is:
+
+**EA051-RQ01 — Lookback Sensitivity Evaluation.**
+
+The initial comparison should test neighboring breakout windows while keeping unrelated strategy components unchanged.
+
+Suggested research values:
+
+    10
+    15
+    20
+    30
+    50
+
+No broad parameter optimization should be performed until the main breakout components have been independently evaluated.
 
 
 
