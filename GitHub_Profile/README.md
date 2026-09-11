@@ -483,7 +483,25 @@ It establishes only that the tested EA-052 baseline configuration did not demons
 
 The strategy remains under research.
 
+### 📌 EA-053 (Compression Break - M1)
 
+A volatility-compression breakout EA on XAUUSD M1 designed to test whether a sequence of progressively contracting candle ranges followed by a confirmed breakout can provide a standalone short-term directional trading edge.
+
+The strategy identifies a configurable sequence of candles whose High-to-Low ranges progressively decrease. Once a valid compression structure is detected, the Highest High and Lowest Low of the compression candles define the breakout zone.
+
+BUY signals require the completed breakout candle to trade above and close above the Compression Zone High while remaining bullish.
+
+SELL signals require the completed breakout candle to trade below and close below the Compression Zone Low while remaining bearish.
+
+The baseline configuration uses 4 Compression Bars, Minimum Range Decrease 0.0%, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 35, Maximum Positions 1, Break Even enabled (Trigger 150 / Lock 0), and Trailing Stop enabled (Start 200 / Distance 150 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced 1,133 trades with Net Profit **-$239.65**, Profit Factor **0.84**, Expected Payoff **-$0.21**, Maximum Equity Drawdown **26.61%**, and Win Rate **49.25%**.
+
+BUY trades produced a **50.80%** win rate across 628 trades, while SELL trades produced a **47.33%** win rate across 505 trades.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+The result does not establish that the broader volatility-compression breakout concept has no trading edge. It establishes only that the tested 4-bar Compression Break configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
 
 
 
@@ -3043,7 +3061,89 @@ Forward Testing: **NOT YET PERFORMED**
 
 Production Ready: **NO**
 
+### EA-053
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-053_Compression_Break/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-053_Compression_Break/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] RQ-01: Compression Bars Evaluation
+* [ ] RQ-02: Minimum Range Decrease Evaluation
+* [ ] RQ-03: Breakout Confirmation Quality
+* [ ] RQ-04: BUY vs SELL Directional Evaluation
+* [ ] RQ-05: Break Even ON vs OFF
+* [ ] RQ-06: Trailing Stop ON vs OFF
+* [ ] RQ-07: Trading Session Evaluation
+* [ ] RQ-08: Multi-Timeframe Evaluation
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / 4-Bar Range Compression / Minimum Range Decrease 0.0% / confirmed breakout close outside Compression Zone / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 35 / Maximum Positions 1 / Break Even ON (Trigger 150 / Lock 0) / Trailing Stop ON (Start 200 / Distance 150 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 1,133 trades, Net Profit **-$239.65**, Gross Profit **$1,238.71**, Gross Loss **-$1,478.36**, Profit Factor **0.84**, Expected Payoff **-$0.21**, Recovery Factor **-0.90**, Sharpe Ratio **-5.00**, Maximum Balance Drawdown **26.35%**, Maximum Equity Drawdown **26.61%**, Win Rate **49.25%**.
+
+**Directional Results:**
+
+* BUY: 628 trades / **50.80%** won
+* SELL: 505 trades / **47.33%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$2.22**
+* Average losing trade: **-$2.57**
+* Largest profitable trade: **$8.77**
+* Largest losing trade: **-$12.16**
+* Maximum consecutive wins: **7**
+* Maximum consecutive losses: **8**
+* Average holding time: **00:02:50**
+
+The baseline configuration is rejected as a profitable candidate.
+
+Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, and Maximum Equity Drawdown reached **26.61%**.
+
+The strategy generated a substantial baseline sample of **1,133 trades**, providing sufficient signal frequency for further controlled research.
+
+BUY trades achieved a moderately higher win rate than SELL trades (**50.80% vs 47.33%**). This observation alone is not sufficient evidence to disable SELL trading.
+
+The average losing trade (**-$2.57**) was larger than the average profitable trade (**$2.22**), contributing to negative expectancy under the tested configuration.
+
+The failed baseline does not establish that the underlying Compression Break concept has no trading edge. It establishes only that the tested baseline configuration did not demonstrate positive expectancy.
+
+The baseline is preserved as the reference experiment against which subsequent EA-053 modifications must be compared.
+
+No broad parameter optimization should be performed until the main strategy components have been independently evaluated.
+
+**Current Verdict:**
+
+Strategy Code: **COMPLETE**
+
+Baseline Backtest: **COMPLETE**
+
+Baseline Performance: **FAIL**
+
+Research: **IN PROGRESS**
+
+Optimization: **BLOCKED**
+
+Out-of-Sample Validation: **NOT YET PERFORMED**
+
+Robustness Validation: **NOT YET PERFORMED**
+
+Forward Testing: **NOT YET PERFORMED**
+
+Production Ready: **NO**
 
 
 
