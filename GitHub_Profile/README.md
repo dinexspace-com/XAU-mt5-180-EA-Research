@@ -503,7 +503,27 @@ The baseline is classified as **FAIL** and retained as the reference experiment 
 
 The result does not establish that the broader volatility-compression breakout concept has no trading edge. It establishes only that the tested 4-bar Compression Break configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
 
+### 📌 EA-054 (Inside Bar Break - M1)
 
+An Inside Bar breakout EA on XAUUSD M1 designed to test whether volatility contraction inside a Mother Bar followed by a breakout beyond the Mother Bar range can provide a standalone short-term directional trading edge.
+
+The strategy identifies an Inside Bar when the completed candle remains entirely within the High-Low range of the preceding Mother Bar.
+
+BUY signals are generated when the Ask price breaks above the stored Mother Bar High, while SELL signals are generated when the Bid price breaks below the stored Mother Bar Low.
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Maximum Positions 1, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 150).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced 7,172 trades with Net Profit **+$75.40**, Profit Factor **1.01**, Expected Payoff **+$0.01**, Recovery Factor **0.21**, Sharpe Ratio **1.08**, Maximum Equity Drawdown **34.10%**, and Win Rate **51.69%**.
+
+BUY trades produced a **50.71%** win rate across 3,987 trades, while SELL trades produced a **52.90%** win rate across 3,185 trades.
+
+The average profitable trade was **+$2.27**, while the average losing trade was **-$2.41**.
+
+The baseline is classified as **PASS FOR FURTHER RESEARCH**, not as a validated trading strategy.
+
+Although the test finished with positive Net Profit, the Profit Factor of **1.01** and Recovery Factor of **0.21** indicate that the current configuration operates very close to break-even and produces excessive drawdown relative to retained profit.
+
+The result is retained as the reference baseline for controlled research into entry quality, trend filtering, volatility filtering, trading-session behavior, breakout confirmation, directional asymmetry, and exit management.
 
 
 
@@ -3145,7 +3165,59 @@ Forward Testing: **NOT YET PERFORMED**
 
 Production Ready: **NO**
 
+### EA-054
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-054_Inside_Bar_Break/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-054_Inside_Bar_Break/`)
+* [x] Baseline Experiment #01 Assessed: **PASS FOR FURTHER RESEARCH**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] RQ-01: Entry Quality / False Breakout Analysis
+* [ ] RQ-02: Trend Filter Evaluation
+* [ ] RQ-03: ATR / Volatility Filter Evaluation
+* [ ] RQ-04: Trading Session Evaluation
+* [ ] RQ-05: BUY vs SELL Directional Evaluation
+* [ ] RQ-06: Break Even / Trailing Stop Evaluation
+* [ ] RQ-07: Out-of-Sample Validation
+
+**Current Research Status:** `IN PROGRESS — BASELINE POSITIVE`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Mother Bar + Inside Bar breakout / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 150).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 7,172 trades, Net Profit **+$75.40**, Profit Factor **1.01**, Expected Payoff **+$0.01**, Recovery Factor **0.21**, Sharpe Ratio **1.08**, Maximum Equity Drawdown **34.10%**, Win Rate **51.69%**.
+
+**Directional Results:**
+
+* BUY: 3,987 trades / **50.71%** won
+* SELL: 3,185 trades / **52.90%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **+$2.27**
+* Average losing trade: **-$2.41**
+* Largest profitable trade: **+$35.96**
+* Largest losing trade: **-$33.78**
+* Average holding time: **00:02:44**
+
+The EA-054 baseline finishes with positive Net Profit and a win rate above 50%, so the raw Inside Bar / Mother Bar breakout hypothesis is retained for further research.
+
+However, the strategy is **not considered validated**. Profit Factor is only **1.01**, Recovery Factor is **0.21**, and Maximum Equity Drawdown reaches **34.10%**.
+
+The current evidence therefore indicates that the strategy has only a very small historical edge under the tested configuration.
+
+The next research stage should focus on determining whether low-quality Inside Bar breakouts can be filtered without eliminating useful breakout opportunities.
+
+Trend, volatility, session, directional, and exit-management variables should be evaluated through controlled experiments rather than broad parameter optimization.
+
+The baseline remains unchanged as the reference configuration for all subsequent EA-054 experiments.
 
 
 
