@@ -525,7 +525,27 @@ Although the test finished with positive Net Profit, the Profit Factor of **1.01
 
 The result is retained as the reference baseline for controlled research into entry quality, trend filtering, volatility filtering, trading-session behavior, breakout confirmation, directional asymmetry, and exit management.
 
+### 📌 EA-055 (Double Top / Bottom Break - M1)
 
+A Double Top / Double Bottom neckline-breakout EA on XAUUSD M1 designed to test whether classical two-swing reversal structures can provide a standalone short-term directional trading edge when confirmed by a closed-candle neckline breakout.
+
+For Double Top setups, the EA identifies two comparable Swing Highs, defines the neckline as the Lowest Low between the two peaks, and generates a SELL signal after a completed candle closes below the neckline breakout level.
+
+For Double Bottom setups, the EA identifies two comparable Swing Lows, defines the neckline as the Highest High between the two troughs, and generates a BUY signal after a completed candle closes above the neckline breakout level.
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Lookback 100 bars, Swing Strength 2, Pattern Width 5–60 bars, Pattern Tolerance 100 points, Breakout Buffer 0, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 150).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-04-01 using 100% real ticks and produced 2,719 trades with Net Profit **-$489.98**, Profit Factor **0.86**, Expected Payoff **-$0.18**, Recovery Factor **-0.89**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **52.16%**, and Win Rate **47.74%**.
+
+BUY trades produced a **47.41%** win rate across 1,274 trades, while SELL trades produced a **48.03%** win rate across 1,445 trades.
+
+The average profitable trade was **+$2.26**, while the average losing trade was **-$2.41**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+The result does not establish that the broader Double Top / Double Bottom concept has no trading edge. It establishes only that the tested M1 neckline-breakout implementation and baseline parameter set did not demonstrate positive expectancy under the documented XAUUSD.PRO conditions.
+
+Future research should focus on pattern quality, breakout confirmation, timeframe behavior, volatility filtering, trend/regime filtering, session effects, directional asymmetry, and exit management before broad parameter optimization.
 
 
 
@@ -3219,7 +3239,65 @@ Trend, volatility, session, directional, and exit-management variables should be
 
 The baseline remains unchanged as the reference configuration for all subsequent EA-054 experiments.
 
+### EA-055
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-055_Double_Top_Bottom_Break/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-055_Double_Top_Bottom_Break/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] RQ-01: Pattern Quality / Swing Strength Evaluation
+* [ ] RQ-02: Pattern Tolerance Evaluation
+* [ ] RQ-03: Breakout Buffer / Closed-Candle Confirmation Evaluation
+* [ ] RQ-04: Multi-Timeframe Evaluation (M1 / M5 / M15)
+* [ ] RQ-05: Trend / Market-Regime Filter Evaluation
+* [ ] RQ-06: Trading Session Evaluation
+* [ ] RQ-07: BUY vs SELL Directional Evaluation
+* [ ] RQ-08: Break Even / Trailing Stop Evaluation
+* [ ] RQ-09: Out-of-Sample Validation
+
+**Current Research Status:** `IN PROGRESS — BASELINE FAIL`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Double Top & Double Bottom / neckline breakout / Lookback 100 / Swing Strength 2 / Pattern Width 5–60 bars / Pattern Tolerance 100 points / Breakout Buffer 0 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 150).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 2,719 trades, Net Profit **-$489.98**, Profit Factor **0.86**, Expected Payoff **-$0.18**, Recovery Factor **-0.89**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **52.16%**, Win Rate **47.74%**.
+
+**Directional Results:**
+
+* BUY: 1,274 trades / **47.41%** won
+* SELL: 1,445 trades / **48.03%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **+$2.26**
+* Average losing trade: **-$2.41**
+* Largest profitable trade: **+$34.29**
+* Largest losing trade: **-$27.58**
+* Maximum consecutive wins: **9**
+* Maximum consecutive losses: **13**
+* Average holding time: **00:03:42**
+
+The baseline configuration is rejected as a profitable candidate. Net Profit and Expected Payoff are negative, Profit Factor remains below 1.0, Recovery Factor and Sharpe Ratio are negative, and Maximum Equity Drawdown reaches **52.16%**.
+
+Both BUY and SELL directions produced similar sub-50% win rates, so the baseline does not provide evidence that simply disabling one direction would resolve the strategy weakness.
+
+The current baseline combines pattern detection, neckline breakout confirmation, fixed SL/TP, Break Even, and Trailing Stop. Future experiments should isolate these components through controlled tests rather than changing many variables simultaneously.
+
+The first research priority is to determine whether stricter pattern-quality and breakout-confirmation rules can reduce false Double Top / Double Bottom signals.
+
+No broad parameter optimization should be performed until the core entry logic has been investigated through controlled experiments.
+
+The failed baseline is retained as the reference configuration against which all subsequent EA-055 experiments must be compared.
 
 
 
