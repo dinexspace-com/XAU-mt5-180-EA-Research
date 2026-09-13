@@ -573,7 +573,31 @@ The result does not establish that the broader Triangle Breakout or volatility-c
 
 Future research should focus on convergence-zone quality, breakout confirmation, market-regime filtering, timeframe behavior, trading-session effects, BUY/SELL directional asymmetry, and exit management before broad parameter optimization.
 
+### 📌 EA-057 (Flag Break - M1)
 
+An Impulse → Flag → Breakout EA on XAUUSD M1 designed to test whether a strong directional impulse followed by a compact consolidation and confirmed continuation breakout can provide a standalone short-term trading edge.
+
+The strategy first identifies an impulse candle by comparing its range with the recent average candle range and requiring a minimum candle-body ratio.
+
+After the impulse, the EA evaluates a configurable short consolidation structure as the Flag. The Flag must remain sufficiently small relative to the original impulse and must not exceed the maximum permitted retracement.
+
+BUY signals require a bullish impulse, a valid Flag structure, and a bullish completed breakout candle closing above the Flag High.
+
+SELL signals require a bearish impulse, a valid Flag structure, and a bearish completed breakout candle closing below the Flag Low.
+
+The baseline configuration uses Average Range Period 20, Impulse Multiplier 1.2, Minimum Body Ratio 0.5, Flag Bars 2, Maximum Flag / Impulse Ratio 0.75, Maximum Retracement 0.75, Breakout Buffer 0, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Lock 10), and Trailing Stop enabled (Start 200 / Distance 150 / Step 20).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-04-01 using 100% real ticks and produced **902 trades** with Net Profit **-$161.17**, Profit Factor **0.85**, Expected Payoff **-$0.18**, Maximum Equity Drawdown **19.23%**, and Win Rate **56.43%**.
+
+BUY trades produced a **57.01%** win rate across 542 trades, while SELL trades produced a **55.56%** win rate across 360 trades.
+
+The average profitable trade was **+$1.83**, while the average losing trade was **-$2.78**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+The result does not establish that the broader Flag Breakout concept has no trading edge. It establishes only that the tested EA-057 M1 configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO conditions.
+
+Future research should focus on impulse quality, Flag structure, retracement limits, breakout confirmation, timeframe behavior, trading-session effects, directional asymmetry, volatility filtering, and exit management before broad parameter optimization.
 
 
 
@@ -3450,7 +3474,104 @@ The next authorized research step is:
 
 **EA056-R01 — Multi-Timeframe Evaluation (M5 / M15).**
 
+### EA-057
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-057_Flag_Break/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-057_Flag_Break/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EA057-RQ01: Impulse Strength Evaluation
+* [ ] EA057-RQ02: Minimum Body Ratio Evaluation
+* [ ] EA057-RQ03: Flag Duration / Flag Bars Evaluation
+* [ ] EA057-RQ04: Maximum Flag-to-Impulse Ratio Evaluation
+* [ ] EA057-RQ05: Maximum Retracement Evaluation
+* [ ] EA057-RQ06: Breakout Confirmation / Buffer Evaluation
+* [ ] EA057-RQ07: Multi-Timeframe Evaluation (M1 / M5 / M15)
+* [ ] EA057-RQ08: Trading Session Evaluation
+* [ ] EA057-RQ09: BUY vs SELL Directional Evaluation
+* [ ] EA057-RQ10: Break Even & Trailing Stop Evaluation
+* [ ] Longer Historical Backtest
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Average Range Period 20 / Impulse Multiplier 1.2 / Minimum Body Ratio 0.5 / Flag Bars 2 / Maximum Flag-to-Impulse Ratio 0.75 / Maximum Retracement 0.75 / Breakout Buffer 0 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Lock 10) / Trailing Stop ON (Start 200 / Distance 150 / Step 20).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 902 trades, Net Profit **-$161.17**, Profit Factor **0.85**, Expected Payoff **-$0.18**, Recovery Factor **-0.83**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **19.23%**, Win Rate **56.43%**.
+
+**Directional Results:**
+
+* BUY: 542 trades / **57.01%** won
+* SELL: 360 trades / **55.56%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$1.83**
+* Average losing trade: **-$2.78**
+* Largest profitable trade: **$7.62**
+* Largest losing trade: **-$5.36**
+* Maximum consecutive wins: **9**
+* Maximum consecutive losses: **9**
+* Average holding time: **00:02:45**
+
+The baseline configuration is rejected as a profitable candidate.
+
+Although the EA achieved a **56.43% overall win rate**, the average losing trade (**-$2.78**) was materially larger than the average profitable trade (**+$1.83**). As a result, Profit Factor remained below 1.0 and Expected Payoff remained negative.
+
+The relatively moderate **19.23% Maximum Equity Drawdown** compared with several previous M1 research EAs means the baseline did not experience account destruction during the tested period, but this does not compensate for its negative expectancy.
+
+BUY and SELL win rates were relatively similar, providing no immediate evidence that the baseline weakness is isolated to one direction.
+
+The failed baseline establishes that the tested combination of Impulse detection, two-bar Flag consolidation, 0.75 Flag / Impulse limit, 0.75 retracement allowance, and current exit-management configuration does not demonstrate a viable standalone trading edge on XAUUSD.PRO M1.
+
+The result does **not** establish that the broader Flag Breakout concept has no trading edge.
+
+The first controlled research priority is to improve **setup quality** before modifying reward/risk parameters.
+
+The research sequence for EA-057 is:
+
+    EA057-M1-BASELINE-001
+            ↓
+    Impulse Quality
+            ↓
+    Flag Structure
+            ↓
+    Breakout Confirmation
+            ↓
+    Multi-Timeframe Test
+            ↓
+    Session / Volatility Analysis
+            ↓
+    BUY vs SELL Evaluation
+            ↓
+    Exit Management
+            ↓
+    Out-of-Sample Validation
+
+No broad parameter optimization should be performed until the primary entry components have been isolated through controlled experiments.
+
+Current verdict:
+
+    Strategy Code       : COMPLETE
+    Baseline Backtest   : COMPLETE
+    Technical Execution : PASS
+    Baseline Performance: FAIL
+    Research            : IN PROGRESS
+    Optimization        : BLOCKED
+    Production Ready    : NO
+
+The failed baseline is retained as the reference experiment against which all subsequent EA-057 modifications must be compared.
 
 
 
