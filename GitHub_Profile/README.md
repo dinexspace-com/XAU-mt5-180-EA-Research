@@ -547,6 +547,41 @@ The result does not establish that the broader Double Top / Double Bottom concep
 
 Future research should focus on pattern quality, breakout confirmation, timeframe behavior, volatility filtering, trend/regime filtering, session effects, directional asymmetry, and exit management before broad parameter optimization.
 
+### 📌 EA-056 (Triangle Break - M1)
+
+A Triangle / Convergence Breakout EA on XAUUSD M1 designed to test whether price compression relative to a preceding market range followed by a confirmed closed-candle breakout can provide a standalone short-term directional trading edge.
+
+The strategy defines a recent convergence zone using the Highest High and Lowest Low of the previous 10 completed candles and compares its range against an older 10-bar reference window.
+
+A valid setup requires the recent range to contract to no more than **70%** of the older comparison range while remaining between the configured minimum and maximum zone sizes.
+
+BUY signals require the completed breakout candle to cross and close above the Convergence Zone High plus a 5-point breakout buffer.
+
+SELL signals require the completed breakout candle to cross and close below the Convergence Zone Low minus the breakout buffer.
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Maximum Positions 1, Zone Bars 10, Comparison Bars 10, Convergence Ratio 0.70, Zone Range 30–500 points, Breakout Buffer 5, Break Even enabled (Trigger 150 / Offset 5), and Trailing Stop enabled (Start 200 / Distance 150 / Step 20).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-04-01 using 100% real ticks and produced **932 trades** with Net Profit **-$263.23**, Profit Factor **0.78**, Expected Payoff **-$0.28**, Recovery Factor **-0.93**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **27.78%**, and Win Rate **53.00%**.
+
+BUY trades produced a **51.61%** win rate across 467 trades, while SELL trades produced a **54.41%** win rate across 465 trades.
+
+The average profitable trade was **+$1.88**, while the average losing trade was **-$2.72**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+The result does not establish that the broader Triangle Breakout or volatility-convergence breakout concept has no trading edge. It establishes only that the tested EA-056 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+Future research should focus on convergence-zone quality, breakout confirmation, market-regime filtering, timeframe behavior, trading-session effects, BUY/SELL directional asymmetry, and exit management before broad parameter optimization.
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3298,6 +3333,129 @@ The first research priority is to determine whether stricter pattern-quality and
 No broad parameter optimization should be performed until the core entry logic has been investigated through controlled experiments.
 
 The failed baseline is retained as the reference configuration against which all subsequent EA-055 experiments must be compared.
+
+### EA-056
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-056_Triangle_Break/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-056_Triangle_Break/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EA056-R01: Multi-Timeframe Evaluation (M5 / M15)
+* [ ] EA056-R02: Convergence Ratio Evaluation
+* [ ] EA056-R03: Zone Length / Comparison Window Evaluation
+* [ ] EA056-R04: Breakout Confirmation Quality Evaluation
+* [ ] EA056-R05: Trading Session Evaluation
+* [ ] EA056-R06: BUY vs SELL Directional Evaluation
+* [ ] EA056-R07: Break Even / Trailing Stop Evaluation
+* [ ] EA056-R08: Volatility / Market-Regime Filter Evaluation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Recent Zone 10 bars / Comparison Window 10 bars / Convergence Ratio 0.70 / Zone Size 30–500 points / Breakout Buffer 5 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even ON (Trigger 150 / Offset 5) / Trailing Stop ON (Start 200 / Distance 150 / Step 20).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 932 trades, Net Profit **-$263.23**, Profit Factor **0.78**, Expected Payoff **-$0.28**, Recovery Factor **-0.93**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **27.78%**, Win Rate **53.00%**.
+
+**Directional Results:**
+
+* BUY: 467 trades / **51.61%** won
+* SELL: 465 trades / **54.41%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$1.88**
+* Average losing trade: **-$2.72**
+* Largest profitable trade: **$34.29**
+* Largest losing trade: **-$27.58**
+* Maximum consecutive wins: **9**
+* Maximum consecutive losses: **9**
+* Average holding time: **00:05:48**
+
+The baseline configuration is classified as **FAIL**.
+
+Although the strategy achieved a **53.00% win rate**, the average losing trade (**-$2.72**) was materially larger than the average profitable trade (**+$1.88**).
+
+This produced negative expectancy:
+
+* Profit Factor: **0.78**
+* Expected Payoff: **-$0.28**
+* Net Profit: **-$263.23**
+
+The result indicates that trade frequency is not the primary issue. The strategy generated 932 trades during the test period, but the realized payoff distribution was insufficient to create a profitable edge.
+
+The current baseline uses a quantitative convergence-zone approximation rather than geometric trendline-based triangle detection. The recent 10-bar range must contract to no more than 70% of the preceding comparison range before a breakout setup becomes eligible.
+
+The failed baseline does **not** establish that the broader Triangle Breakout concept has no trading edge.
+
+The first controlled research priority is to determine whether the weakness originates from the **entry structure or exit management** rather than immediately optimizing parameters.
+
+The next experiments will independently evaluate:
+
+1. Higher execution timeframes.
+2. Convergence Ratio sensitivity.
+3. Recent-zone and comparison-window lengths.
+4. Breakout confirmation quality.
+5. Trading-session behavior.
+6. BUY versus SELL performance.
+7. Break Even and Trailing Stop effects.
+8. Volatility / market-regime filtering.
+
+Only one major strategy component should be changed per controlled experiment.
+
+No broad parameter optimization should be performed at this stage.
+
+The research sequence for EA-056 is:
+
+    EA056-M1-BASELINE-001
+            ↓
+    Multi-Timeframe Evaluation
+            ↓
+    Convergence Definition
+            ↓
+    Breakout Confirmation
+            ↓
+    Session / Market-Regime Analysis
+            ↓
+    BUY vs SELL Evaluation
+            ↓
+    Exit Management
+            ↓
+    Out-of-Sample Validation
+
+Current verdict:
+
+    Strategy Code       : COMPLETE
+    Baseline Backtest   : COMPLETE
+    Technical Execution : PASS
+    Baseline Performance: FAIL
+    Research            : IN PROGRESS
+    Optimization        : BLOCKED
+    Production Ready    : NO
+
+The failed baseline is retained as the reference experiment against which all subsequent EA-056 modifications must be compared.
+
+EA-056 is **not rejected as a research concept**.
+
+Only the tested baseline configuration is rejected as a profitable candidate.
+
+The next authorized research step is:
+
+**EA056-R01 — Multi-Timeframe Evaluation (M5 / M15).**
+
+
+
+
+
+
+
 
 
 
