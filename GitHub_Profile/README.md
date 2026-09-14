@@ -625,6 +625,36 @@ The result does not establish that the broader Wedge Breakout concept has no tra
 
 Future research should focus on wedge quality, contraction thresholds, breakout confirmation, multi-timeframe behavior, trading-session effects, volatility / market-regime filtering, BUY/SELL directional asymmetry, and exit management before broad parameter optimization.
 
+### 📌 EA-059 (Bollinger Squeeze - M1)
+
+A Bollinger Bands volatility-compression breakout EA on XAUUSD M1 designed to test whether a narrow-band squeeze followed by a confirmed close outside the Bollinger Bands can provide a standalone short-term directional trading edge.
+
+The strategy measures Bollinger Band width using `(Upper Band - Lower Band) / Point` and identifies a squeeze when the width of the reference candle remains below the configured threshold.
+
+BUY signals require the preceding squeeze condition to be valid and the latest completed candle to close above the Upper Bollinger Band.
+
+SELL signals require the preceding squeeze condition to be valid and the latest completed candle to close below the Lower Bollinger Band.
+
+The baseline configuration uses Bollinger Period 20, Deviation 2.0, Squeeze Width 500 points, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Maximum Positions 1, with Break Even OFF and Trailing Stop OFF.
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-04-01 using 100% real ticks and produced **588 trades** with Net Profit **+$64.47**, Profit Factor **1.05**, Expected Payoff **+$0.11**, Recovery Factor **0.55**, Sharpe Ratio **3.93**, Maximum Equity Drawdown **9.97%**, and Win Rate **33.84%**.
+
+BUY trades produced a **37.19%** win rate across 285 trades, while SELL trades produced a **30.69%** win rate across 303 trades.
+
+The average profitable trade was **+$6.41**, while the average losing trade was **-$3.12**, producing an approximate realized winner-to-loser magnitude of **2.05:1**.
+
+The baseline is classified as **PASS FOR FURTHER RESEARCH**, not as a validated trading strategy.
+
+Although the test produced positive Net Profit, the Profit Factor of **1.05**, Recovery Factor of **0.55**, maximum losing streak of **19 trades**, and deterioration in the later portion of the balance curve indicate that the strategy currently has only a narrow historical edge.
+
+The result is retained as the reference baseline for controlled research into squeeze quality, breakout confirmation, volatility regime, trading-session behavior, timeframe sensitivity, directional asymmetry, and exit management.
+
+
+
+
+
+
+
 
 
 
@@ -3743,7 +3773,161 @@ The next authorized research step is:
 
 **EA058-RQ01 — Wedge Contraction Ratio Evaluation.**
 
+### EA-059
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-059_Bollinger_Squeeze/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-059_Bollinger_Squeeze/`)
+* [x] Baseline Experiment #01 Assessed: **PASS FOR FURTHER RESEARCH**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EA059-RQ01: Squeeze Width Evaluation
+* [ ] EA059-RQ02: Bollinger Period / Deviation Evaluation
+* [ ] EA059-RQ03: Breakout Confirmation Quality Evaluation
+* [ ] EA059-RQ04: Multi-Timeframe Evaluation (M1 / M5 / M15)
+* [ ] EA059-RQ05: Trading Session Evaluation
+* [ ] EA059-RQ06: Volatility / Market-Regime Evaluation
+* [ ] EA059-RQ07: BUY vs SELL Directional Evaluation
+* [ ] EA059-RQ08: Break Even & Trailing Stop Evaluation
+* [ ] Longer Historical Backtest
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS — BASELINE POSITIVE`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Bollinger Period 20 / Deviation 2.0 / Squeeze Width 500 points / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even OFF / Trailing Stop OFF.
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 588 trades, Net Profit **+$64.47**, Gross Profit **$1,276.47**, Gross Loss **-$1,212.00**, Profit Factor **1.05**, Expected Payoff **+$0.11**, Recovery Factor **0.55**, Sharpe Ratio **3.93**, Maximum Balance Drawdown **9.62%**, Maximum Equity Drawdown **9.97%**, Win Rate **33.84%**.
+
+**Directional Results:**
+
+* BUY: 285 trades / **37.19%** won
+* SELL: 303 trades / **30.69%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **+$6.41**
+* Average losing trade: **-$3.12**
+* Largest profitable trade: **+$34.29**
+* Largest losing trade: **-$13.98**
+* Maximum consecutive wins: **5**
+* Maximum consecutive losses: **19**
+* Average holding time: **00:15:36**
+
+The EA-059 baseline finishes with positive historical performance and is therefore retained as a candidate for further controlled research.
+
+The strategy generated **588 trades**, providing a meaningful initial sample for evaluating the Bollinger Squeeze hypothesis under the documented XAUUSD.PRO M1 conditions.
+
+The baseline produced:
+
+* Net Profit: **+$64.47**
+* Return: **+6.447%**
+* Profit Factor: **1.05**
+* Expected Payoff: **+$0.11**
+* Maximum Equity Drawdown: **9.97%**
+* Win Rate: **33.84%**
+
+The strategy's relatively low win rate is compensated by its asymmetric payoff distribution.
+
+The average profitable trade was:
+
+**+$6.41**
+
+while the average losing trade was:
+
+**-$3.12**
+
+producing an approximate average winner-to-loser magnitude of:
+
+**2.05 : 1**
+
+This behavior is consistent with the baseline SL 300 / TP 600 structure.
+
+However, the positive baseline should not be interpreted as proof of robustness.
+
+Profit Factor remains only **1.05**, leaving a narrow margin above break-even, while the maximum losing sequence reached **19 consecutive trades**.
+
+The balance curve also shows that a substantial portion of previously accumulated profit was surrendered during the later section of the test.
+
+Directional performance was asymmetric:
+
+    BUY  → 285 trades / 37.19% won
+    SELL → 303 trades / 30.69% won
+
+BUY signals therefore performed better by win rate during this sample.
+
+However, the current evidence is not sufficient to justify disabling SELL trading.
+
+Directional filtering must be evaluated as a separate controlled experiment.
+
+The benchmark intentionally uses:
+
+    Break Even    : OFF
+    Trailing Stop : OFF
+
+This allows the initial test to isolate the Bollinger Squeeze entry hypothesis together with fixed Stop Loss and Take Profit behavior.
+
+The failed or successful behavior of alternative exit management should therefore be evaluated separately rather than modifying the baseline.
+
+The current research priority is to determine whether the narrow profitability margin can be improved through better **squeeze and breakout quality** without introducing unnecessary complexity.
+
+The research sequence for EA-059 is:
+
+    EA059-M1-BASELINE-001
+            ↓
+    Squeeze Width Evaluation
+            ↓
+    Bollinger Parameter Evaluation
+            ↓
+    Breakout Confirmation Quality
+            ↓
+    Multi-Timeframe Test
+            ↓
+    Session / Volatility Analysis
+            ↓
+    BUY vs SELL Evaluation
+            ↓
+    Exit Management
+            ↓
+    Longer Historical Test
+            ↓
+    Out-of-Sample Validation
+            ↓
+    Forward Testing
+
+Only one major strategy component should be changed per controlled experiment.
+
+No broad parameter optimization should be performed at this stage.
+
+Current verdict:
+
+    Strategy Code       : COMPLETE
+    Baseline Backtest   : COMPLETE
+    Technical Execution : PASS
+    Baseline Performance: PASS FOR FURTHER RESEARCH
+    Research            : IN PROGRESS
+    Optimization        : BLOCKED
+    Out-of-Sample       : NOT STARTED
+    Forward Test        : NOT STARTED
+    Production Ready    : NO
+
+The positive baseline is retained unchanged as the reference experiment against which all subsequent EA-059 modifications must be compared.
+
+EA-059 is **not validated for live trading**.
+
+The next authorized research step is:
+
+**EA059-RQ01 — Squeeze Width Evaluation.**
 
 
 
