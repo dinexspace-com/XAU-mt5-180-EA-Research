@@ -649,7 +649,53 @@ Although the test produced positive Net Profit, the Profit Factor of **1.05**, R
 
 The result is retained as the reference baseline for controlled research into squeeze quality, breakout confirmation, volatility regime, trading-session behavior, timeframe sensitivity, directional asymmetry, and exit management.
 
+### 📌 EA-060 (Keltner Squeeze - M1)
 
+A Keltner Channel volatility-compression breakout EA on XAUUSD M1 designed to test whether contraction in Keltner Channel width followed by a confirmed close outside the channel can provide a standalone short-term directional trading edge.
+
+The strategy constructs the Keltner Channel using an EMA center line and ATR-based upper and lower bands:
+
+`Upper = EMA + ATR × Multiplier`
+
+`Lower = EMA - ATR × Multiplier`
+
+The channel width is defined as:
+
+`Width = Upper - Lower`
+
+A squeeze condition is identified by comparing the current Keltner Channel width with the average historical channel width over the configured lookback period.
+
+The implemented squeeze condition is:
+
+`Current Width <= Average Historical Width × Squeeze Ratio`
+
+BUY signals require the squeeze condition to be valid, the previous reference candle to remain inside the Keltner Channel, and the latest completed candle to close above the Upper Keltner Channel.
+
+SELL signals require the squeeze condition to be valid, the previous reference candle to remain inside the Keltner Channel, and the latest completed candle to close below the Lower Keltner Channel.
+
+The baseline configuration uses Keltner EMA Period 20, ATR Period 20, ATR Multiplier 2.0, Squeeze Lookback 2, Squeeze Ratio 1.5, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 150).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-04-01 using 100% real ticks and produced **3,642 trades** with Net Profit **-$921.69**, Profit Factor **0.81**, Expected Payoff **-$0.25**, Recovery Factor **-0.98**, Sharpe Ratio **-5.00**, Maximum Balance Drawdown **92.45%**, Maximum Equity Drawdown **92.48%**, and Win Rate **47.14%**.
+
+BUY trades produced a **46.95%** win rate across 1,789 trades, while SELL trades produced a **47.33%** win rate across 1,853 trades.
+
+The average profitable trade was **+$2.29**, while the average losing trade was **-$2.52**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+The result does not establish that the broader Keltner Squeeze or volatility-compression breakout concept has no trading edge. It establishes only that the tested EA-060 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+A specific research issue was identified in the baseline squeeze definition. With the implemented condition:
+
+`Current Width <= Average Historical Width × Squeeze Ratio`
+
+and baseline:
+
+`Squeeze Ratio = 1.5`
+
+the current channel width can reach 150% of the historical average and still satisfy the squeeze condition.
+
+The next controlled research step therefore focuses on validating whether the baseline squeeze filter is too permissive before changing other strategy components or performing broad parameter optimization.
 
 
 
@@ -3929,7 +3975,187 @@ The next authorized research step is:
 
 **EA059-RQ01 — Squeeze Width Evaluation.**
 
+### EA-060
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-060_Keltner_Squeeze/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-060_Keltner_Squeeze/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] RQ-01: Squeeze Ratio Evaluation
+* [ ] RQ-02: Squeeze Lookback Evaluation
+* [ ] RQ-03: Breakout Confirmation Quality
+* [ ] RQ-04: Multi-Timeframe Evaluation
+* [ ] RQ-05: Session / Volatility Regime Analysis
+* [ ] RQ-06: BUY vs SELL Directional Evaluation
+* [ ] RQ-07: Exit Management Evaluation
+* [ ] Longer Historical Test
+* [ ] Out-of-Sample Validation
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Keltner EMA Period 20 / ATR Period 20 / ATR Multiplier 2.0 / Squeeze Lookback 2 / Squeeze Ratio 1.5 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 150).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 3,642 trades, Net Profit **-$921.69**, Gross Profit **$3,929.48**, Gross Loss **-$4,851.17**, Profit Factor **0.81**, Expected Payoff **-$0.25**, Recovery Factor **-0.98**, Sharpe Ratio **-5.00**, Maximum Balance Drawdown **92.45%**, Maximum Equity Drawdown **92.48%**, Win Rate **47.14%**.
+
+**Directional Results:**
+
+* BUY: 1,789 trades / **46.95%** won
+* SELL: 1,853 trades / **47.33%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **+$2.29**
+* Average losing trade: **-$2.52**
+* Largest profitable trade: **+$8.80**
+* Largest losing trade: **-$5.62**
+* Maximum consecutive wins: **12**
+* Maximum consecutive losses: **10**
+* Average holding time: **00:02:07**
+
+The EA-060 baseline demonstrates persistent negative historical performance and is therefore rejected as a profitable candidate in its current configuration.
+
+The strategy generated **3,642 trades**, providing a substantial initial sample for evaluating the Keltner Squeeze hypothesis under the documented XAUUSD.PRO M1 conditions.
+
+The baseline produced:
+
+* Net Profit: **-$921.69**
+* Return: **-92.169%**
+* Profit Factor: **0.81**
+* Expected Payoff: **-$0.25**
+* Recovery Factor: **-0.98**
+* Maximum Equity Drawdown: **92.48%**
+* Win Rate: **47.14%**
+
+The realized payoff distribution is unfavorable.
+
+The average profitable trade was:
+
+**+$2.29**
+
+while the average losing trade was:
+
+**-$2.52**
+
+Therefore, the realized average winner is smaller than the average loser.
+
+Combined with a win rate below 50%, this produces negative historical expectancy.
+
+Directional performance was nearly symmetrical:
+
+    BUY  → 1,789 trades / 46.95% won
+    SELL → 1,853 trades / 47.33% won
+
+The difference between BUY and SELL win rates is only:
+
+**0.38 percentage points**
+
+The baseline therefore provides no evidence that simply disabling one trading direction would resolve the strategy weakness.
+
+The average holding time was only:
+
+**00:02:07**
+
+despite the strategy being based on volatility-compression breakout logic.
+
+The EA therefore behaves operationally as a very short-duration M1 trading system under the tested configuration.
+
+This makes breakout quality, short-term market noise, spread, entry timing, Break Even behavior, and Trailing Stop behavior important subjects for later controlled research.
+
+The most important issue identified during baseline analysis is the squeeze definition.
+
+The EA currently evaluates:
+
+`Current Width <= Average Historical Width × Squeeze Ratio`
+
+The baseline uses:
+
+`Squeeze Ratio = 1.5`
+
+Under this condition, the current Keltner Channel width can be as large as 150% of the historical average and still qualify as a squeeze.
+
+This raises the primary research question:
+
+> Is the baseline squeeze filter too permissive to identify genuine volatility contraction?
+
+The first controlled experiment should therefore evaluate stricter Squeeze Ratio values while keeping all other major strategy variables unchanged.
+
+Initial candidate values:
+
+    0.60
+    0.70
+    0.80
+    0.90
+    1.00
+
+The purpose of this experiment is not to search immediately for the most profitable parameter.
+
+The purpose is to determine whether stricter volatility compression materially changes:
+
+    Trade Count
+    Profit Factor
+    Expected Payoff
+    Drawdown
+    Win Rate
+    Average Winner
+    Average Loser
+
+The research sequence for EA-060 is:
+
+    EA060-M1-BASELINE-001
+            ↓
+    Squeeze Ratio Evaluation
+            ↓
+    Squeeze Lookback Evaluation
+            ↓
+    Breakout Confirmation Quality
+            ↓
+    Multi-Timeframe Test
+            ↓
+    Session / Volatility Analysis
+            ↓
+    BUY vs SELL Evaluation
+            ↓
+    Exit Management
+            ↓
+    Longer Historical Test
+            ↓
+    Out-of-Sample Validation
+            ↓
+    Forward Testing
+
+Only one major strategy component should be changed per controlled experiment.
+
+No broad parameter optimization should be performed at this stage.
+
+Current verdict:
+
+    Strategy Code       : COMPLETE
+    Baseline Backtest   : COMPLETE
+    Technical Execution : PASS
+    Baseline Performance: FAIL
+    Research            : IN PROGRESS
+    Optimization        : BLOCKED
+    Out-of-Sample       : NOT STARTED
+    Forward Test        : NOT STARTED
+    Production Ready    : NO
+
+The failed baseline is retained unchanged as the reference experiment against which all subsequent EA-060 modifications must be compared.
+
+EA-060 is **not validated for live trading**.
+
+The next authorized research step is:
+
+**EA060-RQ01 — Squeeze Ratio Evaluation.**
 
 
 
