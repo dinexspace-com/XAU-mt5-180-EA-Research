@@ -599,7 +599,31 @@ The result does not establish that the broader Flag Breakout concept has no trad
 
 Future research should focus on impulse quality, Flag structure, retracement limits, breakout confirmation, timeframe behavior, trading-session effects, directional asymmetry, volatility filtering, and exit management before broad parameter optimization.
 
+### 📌 EA-058 (Wedge Break - M1)
 
+A Contracting Wedge Breakout EA on XAUUSD M1 designed to test whether price compression formed by descending Swing Highs and ascending Swing Lows followed by a confirmed boundary breakout can provide a standalone short-term directional trading edge.
+
+The strategy constructs the wedge using two Pivot Highs and two Pivot Lows. A valid structure requires the newer Pivot High to be lower than the previous Pivot High and the newer Pivot Low to be higher than the previous Pivot Low, creating a descending upper trendline and ascending lower trendline.
+
+The wedge must satisfy the configured contraction requirements before becoming eligible for a breakout signal.
+
+BUY signals require a completed candle to cross and close above the projected upper wedge boundary plus the configured breakout buffer.
+
+SELL signals require a completed candle to cross and close below the projected lower wedge boundary minus the configured breakout buffer.
+
+The baseline configuration uses Wedge Lookback 30, Pivot Strength 2, Minimum Pivot Distance 3, Contraction Ratio 0.10–0.80, Breakout Buffer 5, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Maximum Positions 1, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 150 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-04-01 using 100% real ticks and produced **856 trades** with Net Profit **-$267.40**, Profit Factor **0.77**, Expected Payoff **-$0.31**, Recovery Factor **-0.99**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **26.97%**, and Win Rate **47.90%**.
+
+BUY trades produced a **47.28%** win rate across 423 trades, while SELL trades produced a **48.50%** win rate across 433 trades.
+
+The average profitable trade was **+$2.17**, while the average losing trade was **-$2.60**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+The result does not establish that the broader Wedge Breakout concept has no trading edge. It establishes only that the tested EA-058 M1 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO conditions.
+
+Future research should focus on wedge quality, contraction thresholds, breakout confirmation, multi-timeframe behavior, trading-session effects, volatility / market-regime filtering, BUY/SELL directional asymmetry, and exit management before broad parameter optimization.
 
 
 
@@ -3573,7 +3597,151 @@ Current verdict:
 
 The failed baseline is retained as the reference experiment against which all subsequent EA-057 modifications must be compared.
 
+### EA-058
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-058_Wedge_Break/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-058_Wedge_Break/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EA058-RQ01: Wedge Contraction Ratio Evaluation
+* [ ] EA058-RQ02: Pivot Strength / Pivot Distance Evaluation
+* [ ] EA058-RQ03: Breakout Confirmation / Buffer Evaluation
+* [ ] EA058-RQ04: Multi-Timeframe Evaluation (M1 / M5 / M15)
+* [ ] EA058-RQ05: Trading Session Evaluation
+* [ ] EA058-RQ06: Volatility / Market-Regime Filter Evaluation
+* [ ] EA058-RQ07: BUY vs SELL Directional Evaluation
+* [ ] EA058-RQ08: Break Even & Trailing Stop Evaluation
+* [ ] Longer Historical Backtest
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Optimization Status:** `BLOCKED — Controlled research required before parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Wedge Lookback 30 / Pivot Strength 2 / Minimum Pivot Distance 3 / Minimum Contraction Ratio 0.10 / Maximum Contraction Ratio 0.80 / Breakout Buffer 5 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 150 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 856 trades, Net Profit **-$267.40**, Gross Profit **$890.23**, Gross Loss **-$1,157.63**, Profit Factor **0.77**, Expected Payoff **-$0.31**, Recovery Factor **-0.99**, Sharpe Ratio **-5.00**, Maximum Balance Drawdown **26.85%**, Maximum Equity Drawdown **26.97%**, Win Rate **47.90%**.
+
+**Directional Results:**
+
+* BUY: 423 trades / **47.28%** won
+* SELL: 433 trades / **48.50%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **$2.17**
+* Average losing trade: **-$2.60**
+* Largest profitable trade: **$21.55**
+* Largest losing trade: **-$4.42**
+* Maximum consecutive wins: **6**
+* Maximum consecutive losses: **13**
+* Average holding time: **00:02:58**
+
+The baseline configuration is classified as **FAIL**.
+
+The strategy generated a substantial sample of **856 trades**, confirming that the current implementation is capable of detecting and trading wedge breakout structures with sufficient frequency for baseline evaluation.
+
+However, the historical payoff distribution does not demonstrate positive expectancy.
+
+The strategy produced:
+
+* Net Profit: **-$267.40**
+* Profit Factor: **0.77**
+* Expected Payoff: **-$0.31**
+* Maximum Equity Drawdown: **26.97%**
+
+The overall win rate was **47.90%**, while the average losing trade (**-$2.60**) was larger than the average profitable trade (**+$2.17**).
+
+BUY and SELL performance was relatively similar:
+
+    BUY  → 423 trades / 47.28% won
+    SELL → 433 trades / 48.50% won
+
+The baseline therefore provides no immediate evidence that simply disabling one trade direction would resolve the strategy weakness.
+
+The current implementation also uses active trade management:
+
+    Break Even
+        Trigger = 150 points
+        Offset  = 0
+
+    Trailing Stop
+        Start    = 200 points
+        Distance = 150 points
+        Step     = 10 points
+
+Because these mechanisms modify the realized payoff distribution, their contribution should be isolated through controlled experiments rather than assuming that the entry logic alone caused the negative result.
+
+The failed baseline does **not** establish that the broader Contracting Wedge Breakout concept has no trading edge.
+
+It establishes only that the tested combination of:
+
+    Wedge Lookback = 30
+    Pivot Strength = 2
+    Minimum Pivot Distance = 3
+    Contraction Ratio = 0.10–0.80
+    Breakout Buffer = 5
+    M1 execution
+    Current exit management
+
+did not demonstrate positive expectancy on XAUUSD.PRO during the documented test period.
+
+The first research priority is to investigate **wedge and breakout quality** before modifying broad risk/reward parameters.
+
+The research sequence for EA-058 is:
+
+    EA058-M1-BASELINE-001
+            ↓
+    Wedge Contraction Quality
+            ↓
+    Pivot Structure
+            ↓
+    Breakout Confirmation
+            ↓
+    Multi-Timeframe Test
+            ↓
+    Session / Volatility Analysis
+            ↓
+    BUY vs SELL Evaluation
+            ↓
+    Exit Management
+            ↓
+    Longer Historical Test
+            ↓
+    Out-of-Sample Validation
+
+Only one major strategy component should be changed per controlled experiment.
+
+No broad parameter optimization should be performed at this stage.
+
+Current verdict:
+
+    Strategy Code       : COMPLETE
+    Baseline Backtest   : COMPLETE
+    Technical Execution : PASS
+    Baseline Performance: FAIL
+    Research            : IN PROGRESS
+    Optimization        : BLOCKED
+    Production Ready    : NO
+
+The failed baseline is retained as the reference experiment against which all subsequent EA-058 modifications must be compared.
+
+EA-058 is **not rejected as a research concept**.
+
+Only the tested baseline configuration is rejected as a profitable candidate.
+
+The next authorized research step is:
+
+**EA058-RQ01 — Wedge Contraction Ratio Evaluation.**
 
 
 
