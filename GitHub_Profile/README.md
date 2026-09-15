@@ -697,7 +697,29 @@ the current channel width can reach 150% of the historical average and still sat
 
 The next controlled research step therefore focuses on validating whether the baseline squeeze filter is too permissive before changing other strategy components or performing broad parameter optimization.
 
+### 📌 EA-061 (ATR Expansion Break - M1)
 
+An ATR Expansion Breakout EA on XAUUSD M1 designed to test whether price breakouts accompanied by above-normal volatility expansion can provide a standalone short-term directional trading edge.
+
+The strategy combines a recent price-range breakout with an ATR-based volatility expansion condition.
+
+BUY signals require price to break above the previous breakout range while the signal candle demonstrates sufficient volatility expansion relative to ATR.
+
+SELL signals require price to break below the previous breakout range while the signal candle satisfies the same ATR expansion requirement.
+
+The baseline configuration uses Breakout Lookback 20, ATR Period 14, ATR Multiplier 1.5, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **494 trades** with Net Profit **-$92.25**, Profit Factor **0.85**, Expected Payoff **-$0.19**, Recovery Factor **-0.83**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **93.51%**, and Win Rate **48.58%**.
+
+BUY trades produced a **50.68%** win rate across 221 trades, while SELL trades produced a **46.89%** win rate across 273 trades.
+
+The average profitable trade was **+$2.10**, while the average losing trade was **-$2.35**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+The result does not establish that the broader ATR Expansion Breakout concept has no trading edge. It establishes only that the tested EA-061 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+Future research should focus on timeframe behavior, ATR expansion threshold, breakout lookback, trading-session effects, market-regime filtering, directional asymmetry, and exit management before broad parameter optimization.
 
 
 
@@ -4157,7 +4179,171 @@ The next authorized research step is:
 
 **EA060-RQ01 — Squeeze Ratio Evaluation.**
 
+### EA-061
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-061_ATR_Expansion_Break/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-061_ATR_Expansion_Break/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EA061-RQ01: Timeframe Evaluation (M1 / M5 / M15)
+* [ ] EA061-RQ02: ATR Expansion Multiplier Evaluation
+* [ ] EA061-RQ03: Breakout Lookback Evaluation
+* [ ] EA061-RQ04: Trading Session Evaluation
+* [ ] EA061-RQ05: Market-Regime / Trend Filter Evaluation
+* [ ] EA061-RQ06: BUY vs SELL Directional Evaluation
+* [ ] EA061-RQ07: Exit Management Evaluation
+* [ ] Longer Historical Backtest
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Breakout Lookback 20 / Breakout Buffer 0 / ATR Period 14 / ATR Multiplier 1.5 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Maximum Positions 1 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 100 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $100.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 494 trades, Net Profit **-$92.25**, Gross Profit **$504.43**, Gross Loss **-$596.68**, Profit Factor **0.85**, Expected Payoff **-$0.19**, Recovery Factor **-0.83**, Sharpe Ratio **-5.00**, Maximum Balance Drawdown **93.46%**, Maximum Equity Drawdown **93.51%**, Win Rate **48.58%**.
+
+**Directional Results:**
+
+* BUY: 221 trades / **50.68%** won
+* SELL: 273 trades / **46.89%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **+$2.10**
+* Average losing trade: **-$2.35**
+* Largest profitable trade: **+$11.85**
+* Largest losing trade: **-$5.34**
+* Maximum consecutive wins: **8**
+* Maximum consecutive losses: **7**
+* Average holding time: **00:04:01**
+
+The EA-061 baseline demonstrates negative historical performance and is therefore rejected as a profitable candidate in its current configuration.
+
+The strategy generated **494 trades**, providing an initial sample for evaluating the ATR Expansion Breakout hypothesis under the documented XAUUSD.PRO M1 conditions.
+
+The baseline produced:
+
+* Net Profit: **-$92.25**
+* Return: **-92.25%**
+* Profit Factor: **0.85**
+* Expected Payoff: **-$0.19**
+* Recovery Factor: **-0.83**
+* Maximum Equity Drawdown: **93.51%**
+* Win Rate: **48.58%**
+
+The realized payoff distribution is unfavorable.
+
+The average profitable trade was:
+
+**+$2.10**
+
+while the average losing trade was:
+
+**-$2.35**
+
+Therefore, the realized average winner is smaller than the average loser.
+
+Combined with a win rate below 50%, this produces negative historical expectancy.
+
+Directional performance showed some asymmetry:
+
+    BUY  → 221 trades / 50.68% won
+    SELL → 273 trades / 46.89% won
+
+BUY signals achieved a higher historical win rate than SELL signals during the baseline period.
+
+However, this observation alone is not sufficient to justify disabling SELL trading.
+
+Directional filtering must be evaluated as a separate controlled experiment.
+
+The average holding time was:
+
+**00:04:01**
+
+with:
+
+    Minimum Holding Time : 00:00:02
+    Maximum Holding Time : 02:08:02
+
+The EA therefore behaves operationally as a short-duration M1 trading system under the tested configuration.
+
+This makes breakout quality, volatility threshold, spread, execution conditions, trading session, Break Even behavior, and Trailing Stop behavior important subjects for later controlled research.
+
+The current baseline uses:
+
+    Breakout Lookback : 20
+    ATR Period        : 14
+    ATR Multiplier    : 1.5
+
+The core research hypothesis remains:
+
+> Can price breakouts accompanied by meaningful ATR volatility expansion produce positive directional expectancy on XAUUSD?
+
+The failed baseline does not answer this question for all possible ATR Expansion Breakout configurations.
+
+It establishes only that the documented EA-061 baseline configuration failed to produce acceptable historical performance.
+
+The research sequence for EA-061 is:
+
+    EA061-M1-BASELINE-001
+            ↓
+    Timeframe Evaluation
+            ↓
+    ATR Expansion Multiplier Evaluation
+            ↓
+    Breakout Lookback Evaluation
+            ↓
+    Trading Session Analysis
+            ↓
+    Market-Regime / Trend Filter
+            ↓
+    BUY vs SELL Evaluation
+            ↓
+    Exit Management
+            ↓
+    Longer Historical Test
+            ↓
+    Out-of-Sample Validation
+            ↓
+    Robustness Testing
+            ↓
+    Forward Testing
+
+Only one major strategy component should be changed per controlled experiment.
+
+No broad parameter optimization should be performed at this stage.
+
+Current verdict:
+
+    Strategy Code       : COMPLETE
+    Baseline Backtest   : COMPLETE
+    Technical Execution : PASS
+    Baseline Performance: FAIL
+    Research            : IN PROGRESS
+    Optimization        : BLOCKED
+    Out-of-Sample       : NOT STARTED
+    Forward Test        : NOT STARTED
+    Production Ready    : NO
+
+The failed baseline is retained unchanged as the reference experiment against which all subsequent EA-061 modifications must be compared.
+
+EA-061 is **not validated for live trading**.
+
+The next authorized research step is:
+
+**EA061-RQ01 — Timeframe Evaluation (M1 / M5 / M15).**
 
 
 
