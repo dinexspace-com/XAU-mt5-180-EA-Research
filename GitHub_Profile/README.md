@@ -721,7 +721,29 @@ The result does not establish that the broader ATR Expansion Breakout concept ha
 
 Future research should focus on timeframe behavior, ATR expansion threshold, breakout lookback, trading-session effects, market-regime filtering, directional asymmetry, and exit management before broad parameter optimization.
 
+### 📌 EA-062 (Body Breakout - M1)
 
+A Body Breakout EA on XAUUSD M1 designed to test whether price breakouts accompanied by a strong directional candle body relative to the candle's total range can provide a standalone short-term directional trading edge.
+
+The strategy combines a recent price-range breakout with a minimum candle-body ratio requirement.
+
+BUY signals require price to break above the previous breakout range while the signal candle satisfies the configured minimum bullish body ratio.
+
+SELL signals require price to break below the previous breakout range while the signal candle satisfies the configured minimum bearish body ratio.
+
+The baseline configuration uses Breakout Lookback 20, Breakout Buffer 0, Minimum Body Ratio 0.70, fixed Lot 0.01, SL 300, TP 600, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **577 trades** with Net Profit **-$93.30**, Profit Factor **0.87**, Expected Payoff **-$0.16**, Recovery Factor **-0.83**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **94.41%**, and Win Rate **51.82%**.
+
+BUY trades produced a **53.46%** win rate across 318 trades, while SELL trades produced a **49.81%** win rate across 259 trades.
+
+The average profitable trade was **+$2.00**, while the average losing trade was **-$2.49**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+The result does not establish that the broader Body Breakout concept has no trading edge. It establishes only that the tested EA-062 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+Future research should focus on timeframe behavior, minimum body ratio, breakout lookback, trading-session effects, market-regime filtering, BUY/SELL directional asymmetry, and exit management before broad parameter optimization.
 
 
 
@@ -4344,6 +4366,52 @@ EA-061 is **not validated for live trading**.
 The next authorized research step is:
 
 **EA061-RQ01 — Timeframe Evaluation (M1 / M5 / M15).**
+
+### EA-062
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-062_Body_Breakout/`)
+* [x] Baseline Backtest Completed (`Backtest/EA-062_Body_Breakout/`)
+* [x] Baseline Experiment `EA062-M1-BASELINE-001` Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/`)
+* [x] Research Methodology Updated (`docs/methodology.md`)
+* [ ] EA062-RQ01: Timeframe Evaluation (M1 / M5 / M15)
+* [ ] EA062-RQ02: Minimum Body Ratio Evaluation
+* [ ] EA062-RQ03: Breakout Lookback Evaluation
+* [ ] EA062-RQ04: Trading Session Evaluation
+* [ ] EA062-RQ05: Market Regime Evaluation
+* [ ] EA062-RQ06: BUY vs SELL Directional Evaluation
+* [ ] EA062-RQ07: Exit Management Evaluation
+* [ ] Longer Historical Test
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline Experiment:** `EA062-M1-BASELINE-001`
+
+**Baseline Configuration:** XAUUSD.PRO / M1 / Breakout Lookback 20 / Breakout Buffer 0 / Minimum Body Ratio 0.70 / Lot 0.01 / SL 300 / TP 600 / Break Even 150 / Trailing Start 200.
+
+**Baseline Result:** 577 trades, Net Profit **-$93.30**, Profit Factor **0.87**, Expected Payoff **-$0.16**, Recovery Factor **-0.83**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **94.41%**, Win Rate **51.82%**.
+
+**Baseline Classification:** `FAIL`
+
+The baseline configuration is rejected. EA-062 remains under research because the broader Body Breakout hypothesis has not yet been independently evaluated across timeframe, body-ratio, breakout-lookback, session, market-regime, directional, and exit-management experiments.
+
+Broad parameter optimization remains blocked until controlled research provides sufficient evidence to justify optimization.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
