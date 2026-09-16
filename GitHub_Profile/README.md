@@ -745,6 +745,41 @@ The result does not establish that the broader Body Breakout concept has no trad
 
 Future research should focus on timeframe behavior, minimum body ratio, breakout lookback, trading-session effects, market-regime filtering, BUY/SELL directional asymmetry, and exit management before broad parameter optimization.
 
+### 📌 EA-063 (Close Location Break - M1)
+
+A breakout-confirmation EA on XAUUSD M1 designed to test whether a breakout candle closing near the extreme of its own High-Low range can provide a measurable directional continuation edge.
+
+The strategy combines a recent price-range breakout with close-location confirmation.
+
+BUY signals require price to break above the previous breakout range while the completed breakout candle closes near the upper extreme of its own range.
+
+SELL signals require price to break below the previous breakout range while the completed breakout candle closes near the lower extreme of its own range.
+
+The baseline configuration uses Breakout Lookback 20, Breakout Buffer 0, Close Edge Fraction 0.20, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **269 trades** with Net Profit **-$92.09**, Profit Factor **0.74**, Expected Payoff **-$0.34**, Recovery Factor **-0.88**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **92.97%**, and Win Rate **45.72%**.
+
+BUY trades produced a **48.61%** win rate across 144 trades, while SELL trades produced a **42.40%** win rate across 125 trades.
+
+The average profitable trade was **+$2.13**, while the average losing trade was **-$2.43**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+The failed baseline does not establish that the broader Close Location Break hypothesis has no trading edge. It establishes only that the tested EA-063 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+Further research is required before any deployment or live-trading conclusion.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4399,6 +4434,172 @@ The next authorized research step is:
 The baseline configuration is rejected. EA-062 remains under research because the broader Body Breakout hypothesis has not yet been independently evaluated across timeframe, body-ratio, breakout-lookback, session, market-regime, directional, and exit-management experiments.
 
 Broad parameter optimization remains blocked until controlled research provides sufficient evidence to justify optimization.
+
+### EA-063
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-063_Close_Location_Break/`)
+* [x] Baseline Backtest Completed (`Backtest/EA-063_Close_Location_Break/`)
+* [x] Baseline Experiment `EA063-M1-BASELINE-001` Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Updated (`docs/methodology.md`)
+* [ ] EA063-RQ01: Breakout Lookback Evaluation
+* [ ] EA063-RQ02: Close Edge Fraction Evaluation
+* [ ] EA063-RQ03: Breakout Buffer Evaluation
+* [ ] EA063-RQ04: Timeframe Evaluation
+* [ ] EA063-RQ05: Trading Session Evaluation
+* [ ] EA063-RQ06: BUY vs SELL Directional Evaluation
+* [ ] EA063-RQ07: Exit Management Evaluation
+* [ ] Parameter Optimization
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Baseline Experiment:** `EA063-M1-BASELINE-001`
+
+**Baseline Configuration:** XAUUSD.PRO / M1 / Breakout Lookback 20 / Breakout Buffer 0 / Close Edge Fraction 0.20 / Lot 0.01 / SL 300 / TP 600 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 100 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $100.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 269 trades, Net Profit **-$92.09**, Gross Profit **$262.21**, Gross Loss **-$354.30**, Profit Factor **0.74**, Expected Payoff **-$0.34**, Recovery Factor **-0.88**, Sharpe Ratio **-5.00**, Maximum Balance Drawdown **92.97%**, Maximum Equity Drawdown **92.97%**, and Win Rate **45.72%**.
+
+**Directional Results:**
+
+* BUY: 144 trades / **48.61%** won
+* SELL: 125 trades / **42.40%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **+$2.13**
+* Average losing trade: **-$2.43**
+* Largest profitable trade: **+$6.09**
+* Largest losing trade: **-$3.26**
+* Maximum consecutive wins: **6**
+* Maximum consecutive losses: **8**
+* Average holding time: **00:04:10**
+
+The EA-063 baseline demonstrates negative historical performance and is therefore rejected as a profitable candidate in its current configuration.
+
+The strategy generated **269 trades**, providing an initial sample for evaluating the Close Location Break hypothesis under the documented XAUUSD.PRO M1 conditions.
+
+The baseline produced:
+
+* Net Profit: **-$92.09**
+* Return: **-92.09%**
+* Profit Factor: **0.74**
+* Expected Payoff: **-$0.34**
+* Recovery Factor: **-0.88**
+* Maximum Equity Drawdown: **92.97%**
+* Win Rate: **45.72%**
+
+The realized payoff distribution is unfavorable.
+
+The average profitable trade was:
+
+**+$2.13**
+
+while the average losing trade was:
+
+**-$2.43**
+
+Therefore, the realized average winner is smaller than the average loser.
+
+Combined with a win rate below 50%, this produces negative historical expectancy.
+
+Directional performance showed some asymmetry:
+
+    BUY  → 144 trades / 48.61% won
+    SELL → 125 trades / 42.40% won
+
+BUY signals achieved a higher historical win rate than SELL signals during the baseline period.
+
+However, this observation alone is not sufficient to justify disabling SELL trading.
+
+Directional filtering must be evaluated as a separate controlled experiment.
+
+The average holding time was:
+
+**00:04:10**
+
+with:
+
+    Minimum Holding Time : 00:00:04
+    Maximum Holding Time : 02:03:19
+
+The EA therefore behaves operationally as a short-duration M1 breakout system under the tested configuration.
+
+The core research hypothesis remains:
+
+> Can a breakout candle that closes near the corresponding extreme of its own range provide useful confirmation of directional breakout continuation on XAUUSD?
+
+The failed baseline does not answer this question for all possible Close Location Break configurations.
+
+It establishes only that the documented EA-063 baseline configuration failed to produce acceptable historical performance.
+
+The research sequence for EA-063 is:
+
+    EA063-M1-BASELINE-001
+            ↓
+    Breakout Lookback Evaluation
+            ↓
+    Close Edge Fraction Evaluation
+            ↓
+    Breakout Buffer Evaluation
+            ↓
+    Timeframe Evaluation
+            ↓
+    Trading Session Evaluation
+            ↓
+    BUY vs SELL Evaluation
+            ↓
+    Exit Management
+            ↓
+    Parameter Optimization
+            ↓
+    Out-of-Sample Validation
+            ↓
+    Robustness Testing
+            ↓
+    Forward Testing
+
+Only one major strategy component should be changed per controlled experiment.
+
+Broad parameter optimization should only begin after the primary structural parameters have been investigated sufficiently to define a justified search space.
+
+Current verdict:
+
+    Strategy Code       : COMPLETE
+    Baseline Backtest   : COMPLETE
+    Technical Execution : PASS
+    Baseline Performance: FAIL
+    Research            : IN PROGRESS
+    Optimization        : PENDING
+    Out-of-Sample       : NOT STARTED
+    Forward Test        : NOT STARTED
+    Production Ready    : NO
+
+The failed baseline is retained unchanged as the reference experiment against which all subsequent EA-063 modifications must be compared.
+
+EA-063 is **not validated for live trading**.
+
+The next research stage is controlled evaluation of the primary Close Location Break parameters.
+
+
+
+
+
+
+
+
+
+
 
 
 
