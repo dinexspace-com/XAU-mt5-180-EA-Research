@@ -769,7 +769,29 @@ The failed baseline does not establish that the broader Close Location Break hyp
 
 Further research is required before any deployment or live-trading conclusion.
 
+### 📌 EA-064 (Two-Candle Break - M1)
 
+A two-candle breakout-confirmation EA on XAUUSD M1 designed to test whether requiring two consecutive completed candles to close beyond the same historical breakout boundary can provide a measurable directional continuation edge.
+
+The strategy constructs a historical breakout range using the Highest High and Lowest Low of the previous 20 completed candles, excluding the two confirmation candles from the reference range.
+
+BUY signals require two consecutive completed candles to close above the same historical Upper boundary plus the configured Breakout Buffer.
+
+SELL signals require two consecutive completed candles to close below the same historical Lower boundary minus the configured Breakout Buffer.
+
+The baseline configuration uses Breakout Lookback 20, Breakout Buffer 0, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **543 trades** with Net Profit **-$91.91**, Profit Factor **0.86**, Expected Payoff **-$0.17**, Recovery Factor **-0.94**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **92.34%**, and Win Rate **50.83%**.
+
+BUY trades produced a **50.33%** win rate across 300 trades, while SELL trades produced a **51.44%** win rate across 243 trades.
+
+The average profitable trade was **+$2.03**, while the average losing trade was **-$2.44**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+The failed baseline does not establish that the broader Two-Candle Break hypothesis has no trading edge. It establishes only that the tested EA-064 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+Future research should focus on breakout lookback, breakout buffer, timeframe behavior, trading-session effects, BUY/SELL directional asymmetry, and exit management before broad parameter optimization.
 
 
 
@@ -4591,7 +4613,22 @@ EA-063 is **not validated for live trading**.
 
 The next research stage is controlled evaluation of the primary Close Location Break parameters.
 
+### EA-064
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-064_Two-Candle_Break/`)
+* [x] Baseline Backtest Completed (`Backtest/EA-064_Two-Candle_Break/`)
+* [x] Baseline Research Documentation Completed
+* [x] Baseline Classified as FAIL and Retained as Research Reference
+* [ ] Research Question 01: Breakout Lookback
+* [ ] Research Question 02: Breakout Buffer
+* [ ] Research Question 03: Timeframe Comparison
+* [ ] Research Question 04: Trading Session
+* [ ] Research Question 05: BUY vs SELL Directional Analysis
+* [ ] Research Question 06: Exit Management
+* [ ] Parameter Optimization
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
 
 
 
