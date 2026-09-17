@@ -793,7 +793,33 @@ The failed baseline does not establish that the broader Two-Candle Break hypothe
 
 Future research should focus on breakout lookback, breakout buffer, timeframe behavior, trading-session effects, BUY/SELL directional asymmetry, and exit management before broad parameter optimization.
 
+### 📌 EA-065 (Retest Breakout - M1)
 
+A breakout-and-retest EA on XAUUSD M1 designed to test whether waiting for price to return to a previously broken range boundary can improve entry quality compared with entering immediately on the initial breakout.
+
+The strategy defines a historical price range using the Highest High and Lowest Low of the previous completed candles.
+
+BUY setups begin after a completed candle closes above the historical Upper Range boundary. Instead of entering immediately, the EA stores the broken level and waits for price to retest that level before requiring bullish continuation confirmation.
+
+SELL setups apply the inverse logic after a completed candle closes below the historical Lower Range boundary.
+
+A breakout setup is invalidated if price closes back inside the previous range or if the retest does not occur within the configured maximum number of bars.
+
+The baseline configuration uses Breakout Lookback 20, Breakout Buffer 0, Retest Tolerance 20 points, Retest Maximum Bars 10, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **459 trades** with Net Profit **-$94.61**, Profit Factor **0.84**, Expected Payoff **-$0.21**, Recovery Factor **-0.85**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **95.36%**, and Win Rate **51.42%**.
+
+BUY trades produced a **52.90%** win rate across 259 trades, while SELL trades produced a **49.50%** win rate across 200 trades.
+
+The average profitable trade was **+$2.03**, while the average losing trade was **-$2.58**.
+
+The baseline is classified as **FAIL** and retained unchanged as the reference experiment for future controlled research.
+
+Although the strategy achieved a win rate above 50%, the realized average loss remained larger than the realized average winner. The nominal SL 300 / TP 600 relationship therefore did not translate into an equivalent realized reward/risk profile under the active Break Even and Trailing Stop configuration.
+
+The failed baseline does **not** establish that the broader Retest Breakout concept has no trading edge. It establishes only that the tested EA-065 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+Future research will focus on breakout range length, breakout buffer, retest tolerance, retest timing, timeframe behavior, trading-session effects, directional behavior, and exit management.
 
 
 
@@ -4630,7 +4656,72 @@ The next research stage is controlled evaluation of the primary Close Location B
 * [ ] Robustness Testing
 * [ ] Forward Testing
 
+### EA-065
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-065_Retest_Breakout/`)
+* [x] Baseline Backtest Completed (`Backtest/EA-065_Retest_Breakout/`)
+* [x] Baseline Experiment Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Updated (`docs/methodology.md`)
+* [ ] EA065-RQ01: Breakout Lookback Evaluation
+* [ ] EA065-RQ02: Breakout Buffer Evaluation
+* [ ] EA065-RQ03: Retest Tolerance Evaluation
+* [ ] EA065-RQ04: Retest Maximum Bars Evaluation
+* [ ] EA065-RQ05: Timeframe Evaluation
+* [ ] EA065-RQ06: Trading Session Evaluation
+* [ ] EA065-RQ07: BUY vs SELL Directional Evaluation
+* [ ] EA065-RQ08: Break Even & Trailing Stop Evaluation
+* [ ] Controlled Parameter Optimization
+* [ ] Candidate Selection
+* [ ] Out-of-Sample Validation
+* [ ] Month-by-Month Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Breakout Lookback 20 / Breakout Buffer 0 / Retest Tolerance 20 / Retest Maximum Bars 10 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 100 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $100.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 459 trades, Net Profit **-$94.61**, Profit Factor **0.84**, Expected Payoff **-$0.21**, Recovery Factor **-0.85**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **95.36%**, Win Rate **51.42%**.
+
+**Directional Results:**
+
+* BUY: 259 trades / **52.90%** won
+* SELL: 200 trades / **49.50%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **+$2.03**
+* Average losing trade: **-$2.58**
+* Largest profitable trade: **+$7.36**
+* Largest losing trade: **-$5.35**
+* Maximum consecutive wins: **7**
+* Maximum consecutive losses: **8**
+* Average holding time: **00:04:30**
+
+The baseline configuration is rejected as a deployable candidate.
+
+Despite a **51.42%** overall win rate, the system produced negative expectancy because the average losing trade (**-$2.58**) exceeded the average profitable trade (**+$2.03**).
+
+The baseline also experienced **95.36% Maximum Equity Drawdown**, indicating that the tested configuration exposed nearly the entire initial account capital during the test period.
+
+The result establishes that the current combination of breakout detection, retest confirmation, Break Even, Trailing Stop, and fixed SL/TP does not demonstrate a viable edge under the baseline conditions.
+
+EA-065 remains under research because the failed baseline does not prove that the underlying Retest Breakout hypothesis is invalid.
+
+The baseline is retained unchanged as the reference experiment against which all subsequent EA-065 configurations must be compared.
+
+EA-065 is **not validated for live trading**.
+
+The next research stage is controlled evaluation of the primary Retest Breakout parameters before out-of-sample validation.
 
 
 
