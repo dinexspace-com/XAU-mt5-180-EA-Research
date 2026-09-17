@@ -821,7 +821,35 @@ The failed baseline does **not** establish that the broader Retest Breakout conc
 
 Future research will focus on breakout range length, breakout buffer, retest tolerance, retest timing, timeframe behavior, trading-session effects, directional behavior, and exit management.
 
+### 📌 EA-066 (Failed Retest Break - M1)
 
+A breakout-retest-continuation EA on XAUUSD M1 designed to test whether requiring an additional continuation break after a successful retest can improve entry quality compared with entering immediately after the retest.
+
+The strategy first defines a historical price range using the Highest High and Lowest Low of the previous completed candles.
+
+BUY setups begin when a completed candle closes above the historical Upper Range boundary. The EA stores both the broken range level and the High of the original breakout candle, then waits for price to return toward the broken level.
+
+A valid bullish retest requires price to revisit the breakout area, remain above the broken level at close, and produce a bullish rejection candle. The EA still does not enter at this stage.
+
+After the retest, a later completed candle must close above the High of the original breakout candle before a BUY position is opened.
+
+SELL setups apply the inverse sequence below the historical Lower Range boundary.
+
+The baseline configuration uses Breakout Lookback 20, Breakout Buffer 0, Retest Tolerance 20 points, Retest Maximum Bars 10, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **382 trades** with Net Profit **-$92.01**, Profit Factor **0.82**, Expected Payoff **-$0.24**, Recovery Factor **-1.00**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **92.01%**, and Win Rate **47.38%**.
+
+BUY trades produced a **51.50%** win rate across 233 trades, while SELL trades produced a **40.94%** win rate across 149 trades.
+
+The average profitable trade was **+$2.30**, while the average losing trade was **-$2.53**.
+
+The baseline is classified as **FAIL** and retained unchanged as the reference experiment for future controlled research.
+
+Compared with the simpler EA-065 Retest Breakout baseline, EA-066 reduced trade frequency by requiring an additional post-retest continuation break. However, the extra confirmation did not improve Win Rate, Profit Factor, or Expected Payoff under the tested conditions.
+
+The failed baseline does **not** establish that the broader Failed Retest / breakout-retest-continuation concept has no trading edge. It establishes only that the tested EA-066 configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+Future research will first determine whether requiring the post-retest break of the original breakout-candle extreme provides useful confirmation or simply delays entry. Directional asymmetry, timeframe behavior, breakout parameters, retest structure, trading-session effects, and exit management will then be evaluated through controlled experiments.
 
 
 
@@ -4723,7 +4751,91 @@ EA-065 is **not validated for live trading**.
 
 The next research stage is controlled evaluation of the primary Retest Breakout parameters before out-of-sample validation.
 
+### EA-066
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-066_Failed_Retest_Break/`)
+* [x] Baseline Backtest Completed (`Backtest/EA-066_Failed_Retest_Break/`)
+* [x] Baseline Experiment Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Updated (`docs/methodology.md`)
+* [ ] EA066-RQ01: Post-Retest Continuation Break Requirement
+* [ ] EA066-RQ02: BUY vs SELL Directional Evaluation
+* [ ] EA066-RQ03: Timeframe Evaluation (M1 / M5 / M15)
+* [ ] EA066-RQ04: Breakout Lookback Evaluation
+* [ ] EA066-RQ05: Breakout Buffer Evaluation
+* [ ] EA066-RQ06: Retest Tolerance Evaluation
+* [ ] EA066-RQ07: Retest Maximum Bars Evaluation
+* [ ] EA066-RQ08: Trading Session Evaluation
+* [ ] EA066-RQ09: Break Even Evaluation
+* [ ] EA066-RQ10: Trailing Stop Evaluation
+* [ ] Controlled Parameter Optimization
+* [ ] Candidate Selection
+* [ ] Out-of-Sample Validation
+* [ ] Month-by-Month Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Breakout Lookback 20 / Breakout Buffer 0 / Retest Tolerance 20 / Retest Maximum Bars 10 / post-retest break of original breakout-candle extreme required / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 100 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $100.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 382 trades, Net Profit **-$92.01**, Profit Factor **0.82**, Expected Payoff **-$0.24**, Recovery Factor **-1.00**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **92.01%**, Win Rate **47.38%**.
+
+**Directional Results:**
+
+* BUY: 233 trades / **51.50%** won
+* SELL: 149 trades / **40.94%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **+$2.30**
+* Average losing trade: **-$2.53**
+* Largest profitable trade: **+$7.01**
+* Largest losing trade: **-$5.34**
+* Maximum consecutive wins: **9**
+* Maximum consecutive losses: **7**
+* Average holding time: **00:03:54**
+
+The baseline configuration is rejected as a deployable candidate.
+
+The additional post-retest continuation requirement reduced the number of entries but did not produce positive expectancy.
+
+The overall Win Rate remained **47.38%**, while the realized average profitable trade (**+$2.30**) remained smaller than the average losing trade (**-$2.53**).
+
+A significant directional difference was observed:
+
+```text
+BUY Win Rate  = 51.50%
+SELL Win Rate = 40.94%
+```
+
+This asymmetry is retained as a research hypothesis and does not yet justify permanently disabling SELL trading.
+
+Compared with EA-065, EA-066 generated fewer trades and slightly lower drawdown, but also produced a lower Win Rate, lower Profit Factor, and more negative Expected Payoff.
+
+The current evidence therefore does not show that requiring a break of the original breakout-candle extreme after the retest improves the underlying strategy edge.
+
+EA-066 remains under research.
+
+Broad parameter optimization is blocked until controlled research determines whether the additional continuation condition itself provides measurable value.
+
+The baseline is retained unchanged as the reference experiment against which all subsequent EA-066 configurations must be compared.
+
+EA-066 is **not validated for live trading**.
+
+The next authorized research stage is:
+
+**EA066-RQ01 — Post-Retest Continuation Break Requirement Evaluation.**
 
 
 
