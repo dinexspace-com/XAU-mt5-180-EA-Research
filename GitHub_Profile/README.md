@@ -873,7 +873,29 @@ Future research will first determine whether the EMA50 directional filter provid
 
 Directional asymmetry, timeframe behavior, breakout lookback, EMA period, breakout buffer, trading-session effects, and exit management will then be evaluated through controlled experiments.
 
+### 📌 EA-068 (Breakout + RSI Filter - M1)
 
+A momentum-filtered breakout EA on XAUUSD M1 designed to test whether combining a recent price-range breakout with RSI directional confirmation can improve breakout entry quality.
+
+The strategy defines a historical breakout range using the Highest High and Lowest Low of the previous 20 completed candles.
+
+BUY signals require price to break above the historical Upper Range while RSI(14) is above 55.
+
+SELL signals require price to break below the historical Lower Range while RSI(14) is below 45.
+
+The baseline configuration uses Breakout Lookback 20, Breakout Buffer 0, RSI Period 14, BUY RSI Level 55, SELL RSI Level 45, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **377 trades** with Net Profit **-$93.30**, Profit Factor **0.79**, Expected Payoff **-$0.25**, Recovery Factor **-0.89**, Maximum Equity Drawdown **94.01%**, and Win Rate **46.95%**.
+
+BUY trades produced a **49.22%** win rate across 193 trades, while SELL trades produced a **44.57%** win rate across 184 trades.
+
+The baseline is classified as **FAIL** and retained unchanged as the reference experiment for future controlled research.
+
+The result does not establish that breakout strategies or RSI momentum filtering have no trading edge. It establishes only that the tested EA-068 Breakout + RSI Filter baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+Future research will first determine whether the RSI directional filter provides measurable improvement over the corresponding breakout logic without the RSI filter.
+
+Directional asymmetry, timeframe behavior, breakout lookback, RSI period, RSI thresholds, breakout buffer, trading-session effects, and exit management will then be evaluated through controlled experiments.
 
 
 
@@ -4932,7 +4954,109 @@ The next authorized research stage is:
 
 **EA067-RQ01 — EMA Filter Contribution Evaluation.**
 
+### EA-068
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-068_Breakout_RSI_Filter/`)
+* [x] Baseline Backtest Completed (`Backtest/EA-068_Breakout_RSI_Filter/`)
+* [x] Baseline Experiment Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Updated (`docs/methodology.md`)
+* [ ] EA068-RQ01: RSI Filter Contribution Evaluation
+* [ ] EA068-RQ02: BUY vs SELL Directional Evaluation
+* [ ] EA068-RQ03: Timeframe Evaluation (M1 / M5 / M15)
+* [ ] EA068-RQ04: Breakout Lookback Evaluation
+* [ ] EA068-RQ05: RSI Period Evaluation
+* [ ] EA068-RQ06: RSI Threshold Evaluation
+* [ ] EA068-RQ07: Breakout Buffer Evaluation
+* [ ] EA068-RQ08: Trading Session Evaluation
+* [ ] EA068-RQ09: Exit Management Evaluation
+* [ ] Controlled Parameter Optimization
+* [ ] Candidate Selection
+* [ ] Out-of-Sample Validation
+* [ ] Month-by-Month Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Breakout Lookback 20 / Breakout Buffer 0 / RSI Period 14 / RSI BUY Level 55 / RSI SELL Level 45 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 100 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $100.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 377 trades, Net Profit **-$93.30**, Profit Factor **0.79**, Expected Payoff **-$0.25**, Recovery Factor **-0.89**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **94.01%**, Win Rate **46.95%**.
+
+**Directional Results:**
+
+* BUY: 193 trades / **49.22%** won
+* SELL: 184 trades / **44.57%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **+$2.02**
+* Average losing trade: **-$2.26**
+* Largest profitable trade: **+$6.12**
+* Largest losing trade: **-$3.35**
+* Maximum consecutive wins: **9**
+* Maximum consecutive losses: **8**
+* Average holding time: **00:03:52**
+
+The baseline configuration is rejected as a deployable candidate.
+
+The RSI(14) momentum filter using BUY > 55 and SELL < 45 did not produce positive expectancy when combined with the tested 20-bar breakout configuration under the documented XAUUSD.PRO M1 conditions.
+
+The strategy finished with a **46.95% Win Rate**, **Profit Factor 0.79**, and **Expected Payoff -$0.25**, while Maximum Equity Drawdown reached **94.01%** of the initial account.
+
+A directional difference was observed:
+
+```text
+BUY Win Rate  = 49.22%
+SELL Win Rate = 44.57%
+```
+
+This asymmetry is retained as a research hypothesis.
+
+It does not establish that BUY-only trading is profitable or justify permanently disabling SELL trading without controlled directional testing.
+
+The current evidence therefore does not demonstrate that the tested combination of:
+
+```text
+20-Bar Breakout
+        +
+RSI(14)
+        +
+BUY > 55
+SELL < 45
+        +
+Break Even
+        +
+Trailing Stop
+```
+
+provides a viable trading edge under the baseline conditions.
+
+This result does **not** establish that RSI filtering or breakout strategies have no trading value.
+
+It establishes only that the specific EA-068 baseline configuration tested here failed to demonstrate positive expectancy.
+
+The failed baseline is retained unchanged as the reference experiment against which subsequent EA-068 configurations must be compared.
+
+EA-068 remains under research.
+
+Broad parameter optimization is blocked until controlled research determines whether the RSI filter itself provides measurable improvement over the corresponding breakout logic without the filter.
+
+EA-068 is **not validated for live trading**.
+
+The next authorized research stage is:
+
+**EA068-RQ01 — RSI Filter Contribution Evaluation.**
 
 
 
