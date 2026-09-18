@@ -851,7 +851,27 @@ The failed baseline does **not** establish that the broader Failed Retest / brea
 
 Future research will first determine whether requiring the post-retest break of the original breakout-candle extreme provides useful confirmation or simply delays entry. Directional asymmetry, timeframe behavior, breakout parameters, retest structure, trading-session effects, and exit management will then be evaluated through controlled experiments.
 
+### 📌 EA-067 (Breakout + EMA Filter - M1)
 
+A trend-filtered breakout EA on XAUUSD M1 designed to test whether combining a recent price-range breakout with an EMA directional filter can improve breakout entry quality.
+
+The strategy defines a historical breakout range using the Highest High and Lowest Low of the previous 20 completed candles.
+
+BUY signals require price to break above the historical Upper Range while satisfying the EMA trend filter.
+
+SELL signals require price to break below the historical Lower Range while satisfying the inverse EMA trend condition.
+
+The baseline configuration uses Breakout Lookback 20, Breakout Buffer 0, EMA Period 50, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Maximum Positions 1, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **332 trades** with Net Profit **-$93.77**, Profit Factor **0.77**, Maximum Equity Drawdown **94.43%**, and Win Rate **46.39%**.
+
+The baseline is classified as **FAIL** and retained unchanged as the reference experiment for future controlled research.
+
+The result does not establish that breakout strategies or EMA trend filtering have no trading edge. It establishes only that the tested EA-067 Breakout + EMA Filter baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+Future research will first determine whether the EMA50 directional filter provides measurable improvement over the corresponding breakout logic without the EMA filter.
+
+Directional asymmetry, timeframe behavior, breakout lookback, EMA period, breakout buffer, trading-session effects, and exit management will then be evaluated through controlled experiments.
 
 
 
@@ -4837,7 +4857,80 @@ The next authorized research stage is:
 
 **EA066-RQ01 — Post-Retest Continuation Break Requirement Evaluation.**
 
+### EA-067
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-067_Breakout_EMA_Filter/`)
+* [x] Baseline Backtest Completed (`Backtest/EA-067_Breakout_EMA_Filter/`)
+* [x] Baseline Experiment Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Updated (`docs/methodology.md`)
+* [ ] EA067-RQ01: EMA Filter Contribution Evaluation
+* [ ] EA067-RQ02: BUY vs SELL Directional Evaluation
+* [ ] EA067-RQ03: Timeframe Evaluation (M1 / M5 / M15)
+* [ ] EA067-RQ04: Breakout Lookback Evaluation
+* [ ] EA067-RQ05: EMA Period Evaluation
+* [ ] EA067-RQ06: Breakout Buffer Evaluation
+* [ ] EA067-RQ07: Trading Session Evaluation
+* [ ] EA067-RQ08: Break Even Evaluation
+* [ ] EA067-RQ09: Trailing Stop Evaluation
+* [ ] Controlled Parameter Optimization
+* [ ] Candidate Selection
+* [ ] Out-of-Sample Validation
+* [ ] Month-by-Month Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Breakout Lookback 20 / Breakout Buffer 0 / EMA Period 50 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 100 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $100.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 332 trades, Net Profit **-$93.77**, Profit Factor **0.77**, Maximum Equity Drawdown **94.43%**, Win Rate **46.39%**.
+
+The baseline configuration is rejected as a deployable candidate.
+
+The EMA50 trend filter did not produce positive expectancy when combined with the tested 20-bar breakout configuration under the documented XAUUSD.PRO M1 conditions.
+
+The strategy finished with a **46.39% Win Rate** and **Profit Factor 0.77**, while Maximum Equity Drawdown reached **94.43%** of the initial account.
+
+The current evidence therefore does not demonstrate that the tested combination of:
+
+```text
+20-Bar Breakout
+        +
+EMA50 Trend Filter
+        +
+Break Even
+        +
+Trailing Stop
+```
+
+provides a viable trading edge under the baseline conditions.
+
+This result does **not** establish that breakout strategies or EMA trend filtering have no trading value.
+
+It establishes only that the specific EA-067 baseline configuration tested here failed to demonstrate positive expectancy.
+
+The failed baseline is retained unchanged as the reference experiment against which subsequent EA-067 configurations must be compared.
+
+EA-067 remains under research.
+
+Broad parameter optimization is blocked until controlled research determines whether the EMA filter itself provides measurable improvement over the corresponding breakout logic without the filter.
+
+EA-067 is **not validated for live trading**.
+
+The next authorized research stage is:
+
+**EA067-RQ01 — EMA Filter Contribution Evaluation.**
 
 
 
