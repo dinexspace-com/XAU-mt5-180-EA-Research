@@ -943,7 +943,29 @@ The failed baseline does not establish that the broader Breakout + Volume Filter
 
 The next controlled research step is to evaluate whether requiring materially stronger relative tick volume improves breakout quality before broad parameter optimization.
 
+### 📌 EA-071 (Breakout + ATR Filter - M1)
 
+A volatility-confirmed breakout EA on XAUUSD M1 designed to test whether combining a 20-bar price breakout with above-average ATR volatility confirmation can improve breakout entry quality.
+
+The strategy defines a historical breakout range using the Highest High and Lowest Low of the previous 20 completed candles.
+
+BUY signals require the previous completed candle to close above the historical Upper Range while ATR(14) is greater than the average ATR of the previous 20 bars.
+
+SELL signals require the previous completed candle to close below the historical Lower Range while ATR(14) is greater than the average ATR of the previous 20 bars.
+
+The baseline configuration uses Breakout Lookback 20, Breakout Buffer 0, ATR Period 14, ATR Mean Period 20, Relative ATR Threshold > 1.00, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **3,669 trades** with Net Profit **-$992.72**, Gross Profit **$4,006.58**, Gross Loss **-$4,999.30**, Profit Factor **0.80**, Expected Payoff **-$0.27**, Recovery Factor **-0.99**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **99.28%**, and Win Rate **46.80%**.
+
+BUY trades produced a **49.53%** win rate across 1,597 trades, while SELL trades produced a **44.69%** win rate across 2,072 trades.
+
+The average profitable trade was **+$2.33**, while the average losing trade was **-$2.56**.
+
+The baseline is classified as **FAIL** and retained unchanged as the reference experiment for future controlled research.
+
+The failed baseline does not establish that the broader Breakout + ATR Filter hypothesis has no trading edge. It establishes only that the tested EA-071 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+The next controlled research step is to evaluate whether requiring materially stronger relative ATR expansion improves breakout quality before broad parameter optimization.
 
 
 
@@ -5369,7 +5391,206 @@ The next authorized research stage is:
 
 **EA070-RQ01 — Relative Volume Strength Evaluation.**
 
+### EA-071
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-071_Breakout_ATR_Filter/`)
+* [x] Baseline Backtest Completed (`Backtest/EA-071_Breakout_ATR_Filter/`)
+* [x] Baseline Experiment Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Updated (`docs/methodology.md`)
+* [ ] EA071-RQ01: ATR Confirmation Strength Evaluation
+* [ ] EA071-RQ02: BUY vs SELL Directional Evaluation
+* [ ] EA071-RQ03: ATR Mean Period Evaluation
+* [ ] EA071-RQ04: ATR Period Evaluation
+* [ ] EA071-RQ05: Breakout Lookback Evaluation
+* [ ] EA071-RQ06: Timeframe Evaluation (M1 / M5 / M15)
+* [ ] EA071-RQ07: Trading Session Evaluation
+* [ ] EA071-RQ08: Exit Management Evaluation
+* [ ] Controlled Parameter Optimization
+* [ ] Candidate Selection
+* [ ] Out-of-Sample Validation
+* [ ] Month-by-Month Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Breakout Lookback 20 / Breakout Buffer 0 / ATR Period 14 / ATR Mean Period 20 / Relative ATR Threshold > 1.00 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 100 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 3,669 trades, Net Profit **-$992.72**, Gross Profit **$4,006.58**, Gross Loss **-$4,999.30**, Profit Factor **0.80**, Expected Payoff **-$0.27**, Recovery Factor **-0.99**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **99.28%**, Win Rate **46.80%**.
+
+**Directional Results:**
+
+* BUY: 1,597 trades / **49.53%** won
+* SELL: 2,072 trades / **44.69%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **+$2.33**
+* Average losing trade: **-$2.56**
+* Largest profitable trade: **+$29.45**
+* Largest losing trade: **-$7.23**
+* Maximum consecutive wins: **11**
+* Maximum consecutive losses: **12**
+* Minimum holding time: **00:00:01**
+* Average holding time: **00:01:54**
+* Maximum holding time: **02:07:01**
+
+**MFE / MAE Results:**
+
+* Correlation (Profit, MFE): **0.96**
+* Correlation (Profit, MAE): **0.73**
+* Correlation (MFE, MAE): **0.6057**
+
+The baseline configuration is rejected as a deployable candidate.
+
+The tested ATR volatility-confirmation rule did not produce positive expectancy when combined with the 20-bar breakout configuration under the documented XAUUSD.PRO M1 conditions.
+
+The baseline ATR rule was:
+
+```text
+ATR(14)[1]
+>
+Average ATR(14) of Previous 20 Bars
+```
+
+Conceptually:
+
+```text
+20-Bar Breakout
+        +
+Relative ATR > 1.00
+```
+
+where:
+
+```text
+Relative ATR =
+Current ATR
+───────────
+Average ATR
+```
+
+The strategy finished with a **46.80% Win Rate**, **Profit Factor 0.80**, and **Expected Payoff -$0.27**, while Maximum Equity Drawdown reached **99.28%** of the initial account.
+
+The realized payoff structure was unfavorable:
+
+```text
+Average Winner = +$2.33
+Average Loser  = -$2.56
+
+Win Rate       = 46.80%
+Loss Rate      = 53.20%
+```
+
+A directional difference was observed:
+
+```text
+BUY Win Rate  = 49.53%
+SELL Win Rate = 44.69%
+```
+
+This asymmetry is retained as a research hypothesis.
+
+It does not establish that BUY-only trading is profitable or justify permanently disabling SELL trading without controlled directional testing.
+
+The current evidence does not demonstrate that the tested combination of:
+
+```text
+20-Bar Breakout
+        +
+ATR(14)[1]
+>
+Previous 20-Bar Average ATR
+        +
+Break Even
+        +
+Trailing Stop
+```
+
+provides a viable trading edge under the baseline conditions.
+
+This result does **not** establish that ATR volatility filtering or breakout strategies have no trading value.
+
+It establishes only that the specific EA-071 baseline configuration tested here failed to demonstrate positive expectancy.
+
+The failed baseline is retained unchanged as the reference experiment against which subsequent EA-071 configurations must be compared.
+
+A specific research issue remains unresolved in the baseline ATR condition.
+
+The rule:
+
+```text
+Current ATR > Average ATR
+```
+
+allows even a very small increase above average volatility to qualify as confirmation.
+
+For example:
+
+```text
+Average ATR  = 5.00
+Current ATR  = 5.01
+Relative ATR = 1.002
+```
+
+would satisfy the baseline filter.
+
+The baseline also generated **3,669 trades**, indicating that the `Relative ATR > 1.00` condition may be too permissive to function as a selective volatility-expansion filter.
+
+This is retained as a research hypothesis rather than treated as a conclusion.
+
+The next controlled research stage therefore investigates whether requiring materially stronger relative ATR expansion can improve breakout quality.
+
+The experimental condition will be:
+
+```text
+Current ATR
+>
+Average ATR × ATRMultiplier
+```
+
+Baseline:
+
+```text
+ATRMultiplier = 1.00
+```
+
+Initial controlled research candidates:
+
+```text
+EA071-BL01    ATRMultiplier = 1.00
+EA071-RQ01-A  ATRMultiplier = 1.10
+EA071-RQ01-B  ATRMultiplier = 1.20
+EA071-RQ01-C  ATRMultiplier = 1.30
+EA071-RQ01-D  ATRMultiplier = 1.50
+```
+
+These values are research candidates only and are not validated parameters.
+
+During EA071-RQ01, the ATR multiplier is the primary variable to change.
+
+The remaining baseline variables should remain fixed so that the effect of stronger ATR confirmation can be evaluated independently.
+
+EA-071 remains under research.
+
+Broad parameter optimization is blocked until controlled research determines whether stronger relative-ATR confirmation provides measurable and reasonably stable improvement over the baseline `Relative ATR > 1.00` condition.
+
+EA-071 is **not validated for live trading**.
+
+The next authorized research stage is:
+
+**EA071-RQ01 — ATR Confirmation Strength Evaluation.**
 
 
 
