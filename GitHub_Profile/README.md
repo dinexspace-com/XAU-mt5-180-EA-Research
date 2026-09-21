@@ -919,7 +919,29 @@ The failed baseline does not establish that the broader Breakout + ADX hypothesi
 
 The next controlled research step is to evaluate whether adding ADX directional confirmation using **+DI / -DI** improves entry quality before broad parameter optimization.
 
+### 📌 EA-070 (Breakout + Volume Filter - M1)
 
+A volume-confirmed breakout EA on XAUUSD M1 designed to test whether combining a 20-bar price breakout with above-average tick-volume confirmation can improve breakout entry quality.
+
+The strategy defines a historical breakout range using the Highest High and Lowest Low of the previous 20 completed candles.
+
+BUY signals require the previous completed candle to close above the historical Upper Range while its tick volume is greater than the average tick volume of the previous 20 bars.
+
+SELL signals require the previous completed candle to close below the historical Lower Range while its tick volume is greater than the average tick volume of the previous 20 bars.
+
+The baseline configuration uses Breakout Lookback 20, Breakout Buffer 0, Volume Lookback 20, Relative Volume Threshold > 1.00, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **386 trades** with Net Profit **-$93.30**, Profit Factor **0.80**, Expected Payoff **-$0.24**, Recovery Factor **-0.94**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **93.71%**, and Win Rate **48.45%**.
+
+BUY trades produced a **50.27%** win rate across 185 trades, while SELL trades produced a **46.77%** win rate across 201 trades.
+
+The average profitable trade was **+$1.95**, while the average losing trade was **-$2.30**.
+
+The baseline is classified as **FAIL** and retained unchanged as the reference experiment for future controlled research.
+
+The failed baseline does not establish that the broader Breakout + Volume Filter hypothesis has no trading edge. It establishes only that the tested EA-070 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+The next controlled research step is to evaluate whether requiring materially stronger relative tick volume improves breakout quality before broad parameter optimization.
 
 
 
@@ -5143,6 +5165,215 @@ A directional difference was observed:
 ```text
 BUY Win Rate  = 47.11%
 SELL Win Rate = 36.56%
+```
+
+This asymmetry is retained as a research hypothesis.
+
+It does not establish that BUY-only trading is profitable or justify permanently disabling SELL trading without controlled directional testing.
+
+The baseline ADX filter measures trend strength but does not use the directional information available from +DI and -DI.
+
+The current evidence therefore does not demonstrate that the tested combination of:
+
+```text
+20-Bar Breakout
+        +
+ADX(14) > 25
+        +
+Break Even
+        +
+Trailing Stop
+```
+
+provides a viable trading edge under the baseline conditions.
+
+This result does **not** establish that ADX filtering or breakout strategies have no trading value.
+
+It establishes only that the specific EA-069 baseline configuration tested here failed to demonstrate positive expectancy.
+
+The failed baseline is retained unchanged as the reference experiment against which subsequent EA-069 configurations must be compared.
+
+EA-069 remains under research.
+
+Broad parameter optimization is blocked until controlled research determines whether directional ADX confirmation using **+DI / -DI** provides measurable improvement over the baseline ADX-strength filter.
+
+EA-069 is **not validated for live trading**.
+
+The next authorized research stage is:
+
+**EA069-RQ01 — ADX Directional Confirmation Evaluation (+DI / -DI).**
+
+### EA-070
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-070_Breakout_Volume_Filter/`)
+* [x] Baseline Backtest Completed (`Backtest/EA-070_Breakout_Volume_Filter/`)
+* [x] Baseline Experiment Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Updated (`docs/methodology.md`)
+* [ ] EA070-RQ01: Relative Volume Strength Evaluation
+* [ ] EA070-RQ02: BUY vs SELL Directional Evaluation
+* [ ] EA070-RQ03: Volume Lookback Evaluation
+* [ ] EA070-RQ04: Breakout Lookback Evaluation
+* [ ] EA070-RQ05: Volume / Breakout Interaction Evaluation
+* [ ] EA070-RQ06: Timeframe Evaluation (M1 / M5 / M15)
+* [ ] EA070-RQ07: Trading Session Evaluation
+* [ ] EA070-RQ08: Breakout Buffer Evaluation
+* [ ] EA070-RQ09: Exit Management Evaluation
+* [ ] Controlled Parameter Optimization
+* [ ] Candidate Selection
+* [ ] Out-of-Sample Validation
+* [ ] Month-by-Month Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Breakout Lookback 20 / Breakout Buffer 0 / Volume Lookback 20 / Relative Volume Threshold > 1.00 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 100 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $100.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 386 trades, Net Profit **-$93.30**, Profit Factor **0.80**, Expected Payoff **-$0.24**, Recovery Factor **-0.94**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **93.71%**, Win Rate **48.45%**.
+
+**Directional Results:**
+
+* BUY: 185 trades / **50.27%** won
+* SELL: 201 trades / **46.77%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **+$1.95**
+* Average losing trade: **-$2.30**
+* Minimum holding time: **00:00:05**
+* Average holding time: **00:03:46**
+* Maximum holding time: **02:03:19**
+
+**MFE / MAE Results:**
+
+* Correlation (Profit, MFE): **0.95**
+* Correlation (Profit, MAE): **0.72**
+* Correlation (MFE, MAE): **0.6031**
+
+The baseline configuration is rejected as a deployable candidate.
+
+The tested tick-volume confirmation rule did not produce positive expectancy when combined with the 20-bar breakout configuration under the documented XAUUSD.PRO M1 conditions.
+
+The baseline volume rule was:
+
+```text
+Breakout Candle Tick Volume
+>
+Average Tick Volume of Previous 20 Bars
+```
+
+Conceptually:
+
+```text
+20-Bar Breakout
+        +
+Relative Tick Volume > 1.00
+```
+
+The strategy finished with a **48.45% Win Rate**, **Profit Factor 0.80**, and **Expected Payoff -$0.24**, while Maximum Equity Drawdown reached **93.71%** of the initial account.
+
+The realized payoff structure was also unfavorable:
+
+```text
+Average Winner = +$1.95
+Average Loser  = -$2.30
+
+Win Rate       = 48.45%
+Loss Rate      = 51.55%
+```
+
+A directional difference was observed:
+
+```text
+BUY Win Rate  = 50.27%
+SELL Win Rate = 46.77%
+```
+
+This asymmetry is retained as a research hypothesis.
+
+It does not establish that BUY-only trading is profitable or justify permanently disabling SELL trading without controlled directional testing.
+
+The current evidence does not demonstrate that the tested combination of:
+
+```text
+20-Bar Breakout
+        +
+Breakout Tick Volume
+>
+Previous 20-Bar Average Tick Volume
+        +
+Break Even
+        +
+Trailing Stop
+```
+
+provides a viable trading edge under the baseline conditions.
+
+This result does **not** establish that tick-volume confirmation or breakout strategies have no trading value.
+
+It establishes only that the specific EA-070 baseline configuration tested here failed to demonstrate positive expectancy.
+
+The failed baseline is retained unchanged as the reference experiment against which subsequent EA-070 configurations must be compared.
+
+A specific research issue remains unresolved in the baseline volume condition.
+
+The rule:
+
+```text
+Breakout Volume > Average Volume
+```
+
+allows even a very small increase above average volume to qualify as confirmation.
+
+For example:
+
+```text
+Average Volume  = 100
+Breakout Volume = 101
+Relative Volume = 1.01
+```
+
+would satisfy the baseline filter.
+
+The next controlled research stage therefore investigates whether requiring materially stronger relative tick volume can improve breakout quality.
+
+Potential experimental thresholds may include:
+
+```text
+Relative Volume > 1.10
+Relative Volume > 1.20
+Relative Volume > 1.30
+Relative Volume > 1.50
+```
+
+These values are research candidates only and are not validated parameters.
+
+EA-070 remains under research.
+
+Broad parameter optimization is blocked until controlled research determines whether stronger relative-volume confirmation provides measurable improvement over the baseline `Relative Volume > 1.00` condition.
+
+EA-070 is **not validated for live trading**.
+
+The next authorized research stage is:
+
+**EA070-RQ01 — Relative Volume Strength Evaluation.**
+
+
+
+
+
+
 
 
 
