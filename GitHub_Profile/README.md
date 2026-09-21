@@ -897,7 +897,27 @@ Future research will first determine whether the RSI directional filter provides
 
 Directional asymmetry, timeframe behavior, breakout lookback, RSI period, RSI thresholds, breakout buffer, trading-session effects, and exit management will then be evaluated through controlled experiments.
 
+### 📌 EA-069 (Breakout ADX Filter - M1)
 
+A breakout trend-filter EA on XAUUSD M1 designed to test whether combining a 20-bar price breakout with ADX trend-strength confirmation can provide a measurable directional trading edge.
+
+BUY signals require the previous completed candle to close above the Highest High of the preceding breakout range, while SELL signals require the candle to close below the Lowest Low of the range.
+
+Both directions require ADX(14) to exceed the baseline threshold of 25 before an entry is permitted.
+
+The baseline configuration uses Breakout Lookback 20, Breakout Buffer 0, ADX Period 14, ADX Threshold 25, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **214 trades** with Net Profit **-$94.14**, Profit Factor **0.68**, Expected Payoff **-$0.44**, Recovery Factor **-1.00**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **94.14%**, and Win Rate **42.52%**.
+
+BUY trades produced a **47.11%** win rate across 121 trades, while SELL trades produced a **36.56%** win rate across 93 trades.
+
+The average profitable trade was **+$2.20**, while the average losing trade was **-$2.39**.
+
+The baseline is classified as **FAIL** and retained unchanged as the reference experiment for future controlled research.
+
+The failed baseline does not establish that the broader Breakout + ADX hypothesis has no trading edge. It establishes only that the tested EA-069 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+The next controlled research step is to evaluate whether adding ADX directional confirmation using **+DI / -DI** improves entry quality before broad parameter optimization.
 
 
 
@@ -5058,7 +5078,71 @@ The next authorized research stage is:
 
 **EA068-RQ01 — RSI Filter Contribution Evaluation.**
 
+### EA-069
 
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-069_Breakout_ADX_Filter/`)
+* [x] Baseline Backtest Completed (`Backtest/EA-069_Breakout_ADX_Filter/`)
+* [x] Baseline Experiment Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Updated (`docs/methodology.md`)
+* [ ] EA069-RQ01: ADX Directional Confirmation Evaluation (+DI / -DI)
+* [ ] EA069-RQ02: Rising ADX Evaluation
+* [ ] EA069-RQ03: BUY vs SELL Directional Evaluation
+* [ ] EA069-RQ04: Timeframe Evaluation (M1 / M5 / M15)
+* [ ] EA069-RQ05: Breakout Lookback Evaluation
+* [ ] EA069-RQ06: ADX Threshold Evaluation
+* [ ] EA069-RQ07: Breakout Buffer Evaluation
+* [ ] EA069-RQ08: Trading Session Evaluation
+* [ ] EA069-RQ09: Exit Management Evaluation
+* [ ] Controlled Parameter Optimization
+* [ ] Candidate Selection
+* [ ] Out-of-Sample Validation
+* [ ] Month-by-Month Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Breakout Lookback 20 / Breakout Buffer 0 / ADX Period 14 / ADX Threshold 25 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 100 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $100.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 214 trades, Net Profit **-$94.14**, Profit Factor **0.68**, Expected Payoff **-$0.44**, Recovery Factor **-1.00**, Sharpe Ratio **-5.00**, Maximum Equity Drawdown **94.14%**, Win Rate **42.52%**.
+
+**Directional Results:**
+
+* BUY: 121 trades / **47.11%** won
+* SELL: 93 trades / **36.56%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **+$2.20**
+* Average losing trade: **-$2.39**
+* Largest profitable trade: **+$6.09**
+* Largest losing trade: **-$3.35**
+* Maximum consecutive wins: **6**
+* Maximum consecutive losses: **7**
+* Average holding time: **00:03:42**
+
+The baseline configuration is rejected as a deployable candidate.
+
+The ADX(14) trend-strength filter using an ADX threshold of 25 did not produce positive expectancy when combined with the tested 20-bar breakout configuration under the documented XAUUSD.PRO M1 conditions.
+
+The strategy finished with a **42.52% Win Rate**, **Profit Factor 0.68**, and **Expected Payoff -$0.44**, while Maximum Equity Drawdown reached **94.14%** of the initial account.
+
+A directional difference was observed:
+
+```text
+BUY Win Rate  = 47.11%
+SELL Win Rate = 36.56%
 
 
 
