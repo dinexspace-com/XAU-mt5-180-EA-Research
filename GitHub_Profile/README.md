@@ -1003,7 +1003,43 @@ The next controlled research step will evaluate whether limiting the strategy to
 
 Future research will focus on first-breakout behavior, BUY/SELL directional asymmetry, breakout timing, Asian Range size, breakout displacement, volatility regime, retest confirmation, timeframe behavior, and exit management before broad parameter optimization.
 
+### 📌 EA-073 (London Range Break - M1)
 
+A London-session range breakout EA on XAUUSD M1 designed to test whether price expansion beyond a predefined London-session range can provide a measurable short-term directional trading edge.
+
+The strategy builds a daily London Range during the configured broker/server-time window:
+
+`08:00 → 09:00`
+
+The **London Range High** is defined as the highest price recorded during the range-building window, while the **London Range Low** is defined as the lowest price recorded during the same period.
+
+After the London Range is complete, the EA monitors completed M1 candles for confirmed breakouts beyond the established range boundaries.
+
+BUY signals are generated when price crosses and closes above the London Range High plus the configured Breakout Buffer.
+
+SELL signals are generated when price crosses and closes below the London Range Low minus the configured Breakout Buffer.
+
+New breakout entries are permitted only during the configured post-range trading window:
+
+`09:00 → 13:00`
+
+All session hours are interpreted using **broker/server time** and must not automatically be interpreted as London local time.
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Breakout Lookback 20, Breakout Buffer 0, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **276 trades** with Net Profit **-$143.88**, Gross Profit **+$265.62**, Gross Loss **-$409.50**, Profit Factor **0.65**, Expected Payoff **-$0.52**, Recovery Factor **-0.90**, Sharpe Ratio **-5.00**, Maximum Balance Drawdown **15.71%**, Maximum Equity Drawdown **15.93%**, and Win Rate **43.12%**.
+
+SELL trades produced a **47.37%** win rate across 152 trades, while BUY trades produced a **37.90%** win rate across 124 trades.
+
+The average profitable trade was **+$2.23**, while the average losing trade was **-$2.61**.
+
+The baseline is classified as **FAIL** and retained unchanged as the reference experiment for future controlled research.
+
+The failed baseline does **not** establish that the broader London Range Break concept has no trading edge. It establishes only that the tested EA-073 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+The next controlled research step will evaluate whether limiting the strategy to the **first valid breakout of each trading day** improves strategy behavior compared with allowing repeated breakout attempts.
+
+Future research will focus on first-breakout behavior, BUY/SELL directional asymmetry, breakout timing, London Range size, breakout displacement, retest confirmation, volatility regime, Break Even behavior, Trailing Stop behavior, exit architecture, timeframe behavior, and broker/server-time mapping before broad parameter optimization.
 
 
 
@@ -5668,6 +5704,75 @@ The next authorized research stage is:
 **Live Trading Status:** NOT VALIDATED
 
 **Next Research Stage:** EA072-RQ01 — First Breakout Only Evaluation
+
+### EA-073 Research Status
+
+- [x] Strategy implementation completed
+- [x] Source code documented
+- [x] Baseline backtest completed
+- [x] Baseline result analyzed
+- [x] Research documentation completed
+- [x] Research methodology documented
+- [ ] EA073-RQ01: First Breakout Only evaluation
+- [ ] EA073-RQ02: BUY vs SELL directional evaluation
+- [ ] EA073-RQ03: Breakout-time evaluation
+- [ ] EA073-RQ04: London Range-size evaluation
+- [ ] EA073-RQ05: Breakout Buffer evaluation
+- [ ] EA073-RQ06: Breakout-strength evaluation
+- [ ] EA073-RQ07: Retest-confirmation evaluation
+- [ ] EA073-RQ08: Volatility-regime evaluation
+- [ ] EA073-RQ09: Break Even evaluation
+- [ ] EA073-RQ10: Trailing Stop evaluation
+- [ ] EA073-RQ11: Exit-architecture evaluation
+- [ ] EA073-RQ12: Timeframe evaluation
+- [ ] EA073-RQ13: Server-time mapping evaluation
+- [ ] Controlled optimization
+- [ ] Out-of-sample validation
+- [ ] Walk-forward validation
+- [ ] Robustness testing
+- [ ] Forward testing
+
+**Current Stage:** Controlled Strategy Research
+
+**Baseline Status:** FAIL
+
+**Live Trading Status:** NOT VALIDATED
+
+**Optimization Status:** BLOCKED — Controlled structural research required before broad parameter optimization
+
+**Baseline #01:** XAUUSD.PRO / M1 / London Range 08:00–09:00 / Trade End 13:00 / Breakout Lookback 20 / Breakout Buffer 0 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 100 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 276 trades, Net Profit **-$143.88**, Gross Profit **+$265.62**, Gross Loss **-$409.50**, Profit Factor **0.65**, Expected Payoff **-$0.52**, Recovery Factor **-0.90**, Sharpe Ratio **-5.00**, Maximum Balance Drawdown **15.71%**, Maximum Equity Drawdown **15.93%**, Win Rate **43.12%**.
+
+**Directional Result:** SELL 152 trades / **47.37%** won; BUY 124 trades / **37.90%** won.
+
+**Average Winner / Loser:** **+$2.23 / -$2.61**
+
+**Current Research Status:** `IN PROGRESS`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Next Research Stage:** `EA073-RQ01 — First Breakout Only Evaluation`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
