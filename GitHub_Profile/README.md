@@ -967,6 +967,52 @@ The failed baseline does not establish that the broader Breakout + ATR Filter hy
 
 The next controlled research step is to evaluate whether requiring materially stronger relative ATR expansion improves breakout quality before broad parameter optimization.
 
+### 📌 EA-072 (Asian Range Break - M1)
+
+An Asian-session range breakout EA on XAUUSD M1 designed to test whether price expansion beyond the High or Low established during the Asian trading range can provide a measurable short-term directional trading edge.
+
+The strategy builds a daily Asian Range between the configured server-time hours:
+
+`00:00 → 08:00`
+
+The **Asian High** is defined as the Highest High recorded during the range-building window, while the **Asian Low** is defined as the Lowest Low.
+
+After the Asian Range is complete, the EA monitors completed M1 candles for confirmed breakouts.
+
+BUY signals are generated when price crosses and closes above the Asian High plus the configured Breakout Buffer.
+
+SELL signals are generated when price crosses and closes below the Asian Low minus the configured Breakout Buffer.
+
+New breakout entries are permitted only during the configured post-range trading window:
+
+`08:00 → 16:00`
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Breakout Lookback 20, Breakout Buffer 0, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **265 trades** with Net Profit **-$50.08**, Profit Factor **0.86**, Expected Payoff **-$0.19**, Recovery Factor **-0.50**, Sharpe Ratio **-5.00**, Maximum Balance Drawdown **9.68%**, Maximum Equity Drawdown **9.92%**, and Win Rate **47.55%**.
+
+BUY trades produced a **49.35%** win rate across 154 trades, while SELL trades produced a **45.05%** win rate across 111 trades.
+
+The average profitable trade was **+$2.35**, while the average losing trade was **-$2.49**.
+
+The baseline is classified as **FAIL** and retained unchanged as the reference experiment for future controlled research.
+
+The failed baseline does **not** establish that the broader Asian Range Break concept has no trading edge. It establishes only that the tested EA-072 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+The next controlled research step will evaluate whether limiting the strategy to the **first breakout attempt of each trading day** improves entry quality compared with allowing repeated breakout attempts after previous positions have closed.
+
+Future research will focus on first-breakout behavior, BUY/SELL directional asymmetry, breakout timing, Asian Range size, breakout displacement, volatility regime, retest confirmation, timeframe behavior, and exit management before broad parameter optimization.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5592,7 +5638,36 @@ The next authorized research stage is:
 
 **EA071-RQ01 — ATR Confirmation Strength Evaluation.**
 
+### EA-072 Research Status
 
+- [x] Strategy implementation completed
+- [x] Source code documented
+- [x] Baseline backtest completed
+- [x] Baseline result analyzed
+- [x] Research documentation completed
+- [x] Research methodology documented
+- [ ] First Breakout Only evaluation
+- [ ] BUY vs SELL evaluation
+- [ ] Breakout-time evaluation
+- [ ] Asian Range-size evaluation
+- [ ] Breakout-displacement evaluation
+- [ ] Volatility-regime evaluation
+- [ ] Retest-confirmation evaluation
+- [ ] Exit-management evaluation
+- [ ] Timeframe evaluation
+- [ ] Controlled optimization
+- [ ] Out-of-sample validation
+- [ ] Walk-forward validation
+- [ ] Robustness testing
+- [ ] Forward testing
+
+**Current Stage:** Controlled Strategy Research
+
+**Baseline Status:** FAIL
+
+**Live Trading Status:** NOT VALIDATED
+
+**Next Research Stage:** EA072-RQ01 — First Breakout Only Evaluation
 
 
 
