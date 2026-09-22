@@ -1041,6 +1041,57 @@ The next controlled research step will evaluate whether limiting the strategy to
 
 Future research will focus on first-breakout behavior, BUY/SELL directional asymmetry, breakout timing, London Range size, breakout displacement, retest confirmation, volatility regime, Break Even behavior, Trailing Stop behavior, exit architecture, timeframe behavior, and broker/server-time mapping before broad parameter optimization.
 
+### 📌 EA-074 (New York Range Break - M1)
+
+A New York-session range breakout EA on XAUUSD M1 designed to test whether price expansion beyond a predefined New York-session range can provide a measurable short-term directional trading edge.
+
+The strategy builds a daily New York Range during the configured broker/server-time window:
+
+`13:00 → 14:00`
+
+The **New York Range High** is defined as the highest price recorded during the range-building window, while the **New York Range Low** is defined as the lowest price recorded during the same period.
+
+After the New York Range is complete, the EA monitors completed M1 candles for confirmed breakouts beyond the established range boundaries.
+
+BUY signals are generated when price crosses and closes above the New York Range High plus the configured Breakout Buffer.
+
+SELL signals are generated when price crosses and closes below the New York Range Low minus the configured Breakout Buffer.
+
+New breakout entries are permitted only during the configured post-range trading window:
+
+`14:00 → 20:00`
+
+All session hours are interpreted using **broker/server time** and must not automatically be interpreted as New York local time.
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Breakout Lookback 20, Breakout Buffer 0, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **436 trades** with Net Profit **-$7.69**, Gross Profit **+$521.09**, Gross Loss **-$528.78**, Profit Factor **0.99**, Expected Payoff **-$0.02**, Recovery Factor **-0.08**, Sharpe Ratio **-2.72**, Maximum Balance Drawdown **9.27%**, Maximum Equity Drawdown **9.37%**, and Win Rate **49.77%**.
+
+SELL trades produced a **52.13%** win rate across 188 trades, while BUY trades produced a **47.98%** win rate across 248 trades.
+
+The average profitable trade was **+$2.40**, while the average losing trade was **-$2.41**.
+
+The baseline is classified as **FAIL** and retained unchanged as the reference experiment for future controlled research.
+
+Although the baseline finished close to break-even, Net Profit and Expected Payoff remain negative and Profit Factor remains below 1.00. The result therefore does not establish positive expectancy.
+
+The failed baseline does **not** establish that the broader New York Range Break concept has no trading edge. It establishes only that the tested EA-074 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+The next controlled research step will evaluate whether limiting the strategy to the **first valid breakout of each trading day** improves strategy behavior compared with allowing repeated breakout attempts.
+
+Future research will focus on first-breakout behavior, BUY/SELL directional asymmetry, breakout timing, New York Range size, breakout strength and buffer, volatility regime, Break Even behavior, Trailing Stop behavior, broker/server-time mapping, exit architecture, and execution sensitivity before broad parameter optimization.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5760,7 +5811,59 @@ The next authorized research stage is:
 
 **Next Research Stage:** `EA073-RQ01 — First Breakout Only Evaluation`
 
+### EA-074 Research Status
 
+- [x] Strategy implementation completed
+- [x] Source code documented
+- [x] Baseline backtest completed
+- [x] Baseline result analyzed
+- [x] Research documentation completed
+- [x] Research methodology documented
+- [ ] EA074-RQ01: First Breakout Only evaluation
+- [ ] EA074-RQ02: BUY vs SELL directional evaluation
+- [ ] EA074-RQ03: Breakout-time evaluation
+- [ ] EA074-RQ04: New York Range-size evaluation
+- [ ] EA074-RQ05: Breakout-strength / Buffer evaluation
+- [ ] EA074-RQ06: Volatility-regime evaluation
+- [ ] EA074-RQ07: Break Even evaluation
+- [ ] EA074-RQ08: Trailing Stop evaluation
+- [ ] EA074-RQ09: Server-time mapping evaluation
+- [ ] EA074-RQ10: Exit-architecture evaluation
+- [ ] Controlled optimization
+- [ ] Out-of-sample validation
+- [ ] Walk-forward validation
+- [ ] Execution / broker robustness testing
+- [ ] Forward testing
+
+**Current Stage:** Controlled Strategy Research
+
+**Baseline Status:** FAIL
+
+**Live Trading Status:** NOT VALIDATED
+
+**Optimization Status:** BLOCKED — Controlled structural research required before broad parameter optimization
+
+**Baseline #01:** XAUUSD.PRO / M1 / New York Range 13:00–14:00 server time / Trade End 20:00 / Breakout Lookback 20 / Breakout Buffer 0 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 100 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 436 trades, Net Profit **-$7.69**, Gross Profit **+$521.09**, Gross Loss **-$528.78**, Profit Factor **0.99**, Expected Payoff **-$0.02**, Recovery Factor **-0.08**, Sharpe Ratio **-2.72**, Maximum Balance Drawdown **9.27%**, Maximum Equity Drawdown **9.37%**, Win Rate **49.77%**.
+
+**Directional Result:** SELL 188 trades / **52.13%** won; BUY 248 trades / **47.98%** won.
+
+**Average Winner / Loser:** **+$2.40 / -$2.41**
+
+**Holding Time:** Minimum **00:00:01** / Average **00:01:25** / Maximum **00:23:28**
+
+**MFE / MAE Correlation:** Profit↔MFE **0.96** / Profit↔MAE **0.73** / MFE↔MAE **0.6284**
+
+**Server-Time Status:** NOT VALIDATED — the configured `13:00–14:00` range uses broker/server time and must not yet be assumed to represent a fixed New York local-time session.
+
+**Next Research Stage:** EA074-RQ01 — First Breakout Only Evaluation
 
 
 
