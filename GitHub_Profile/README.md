@@ -1089,7 +1089,21 @@ The baseline configuration uses fixed SL 300, TP 600, Spread <= 30, with Break E
 
 **Current Status:** Research in progress. The initial configuration is unprofitable and requires further validation.
 
+### 📌 EA-076 (Round Number Break - M1)
 
+A round-number breakout EA on XAUUSD M1 designed to test whether completed-candle breakouts of predefined psychological price levels can provide a standalone short-term directional trading edge.
+
+The strategy identifies round-number boundaries at configurable price intervals and generates BUY or SELL signals when a completed candle closes beyond the corresponding boundary, subject to the configured breakout buffer.
+
+The baseline configuration uses Round Number Step 10.0, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **10,326 trades** with Net Profit **-$994.48**, Profit Factor **0.93**, Maximum Equity Drawdown **99.47%**, and Win Rate **49.01%**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+The result establishes only that the tested EA-076 configuration did not demonstrate positive expectancy under the documented historical conditions. It does not establish that the broader Round Number Breakout concept has no trading edge.
+
+**Current Status:** Research in progress. The baseline configuration is not approved for live trading.
 
 
 
@@ -5899,7 +5913,32 @@ The next authorized research stage is:
 
 The baseline configuration is rejected due to negative profitability. EA-075 remains under research pending further controlled experiments, out-of-sample validation, and forward testing.
 
+### EA-076
 
+* [x] Strategy Source Code Available (`EAs/EA-076_Round_Number_Break/`)
+* [x] Baseline Backtest Completed (`Backtest/EA-076_Round_Number_Break/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [ ] Experiment 01: Round-Number Interval & Breakout Buffer Evaluation
+* [ ] Experiment 02: Breakout Confirmation & Trading Session Filters
+* [ ] Experiment 03: Entry Frequency & Re-entry Restrictions
+* [ ] Experiment 04: Break Even, Trailing Stop & Risk-Reward Evaluation
+* [ ] Out-of-Sample Validation & Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** XAUUSD.PRO / M1 / January 2 – March 31, 2026 / Initial Deposit $1,000 / Lot 0.01 / Round Number Step 10.0 / SL 300 / TP 600 / Maximum Spread 30 / Break Even ON / Trailing Stop ON.
+
+**Baseline #01 Result:** 10,326 trades, Net Profit **-$994.48**, Profit Factor **0.93**, Win Rate **49.01%**, Maximum Equity Drawdown **99.47%**, and Sharpe Ratio **-5.00**.
+
+**Average Winner / Loser:** **+$2.45 / -$2.54**
+
+**Holding Time:** Minimum **00:00:01** / Average **00:01:13** / Maximum **03:33:14**
+
+**Implementation Note:** `InpBreakoutLookback` is retained in the source code but is not used by the active round-number signal calculation.
+
+**Next Research Stage:** Controlled evaluation of round-number intervals, breakout confirmation, entry frequency, trading-session filters, and exit management.
+
+The baseline configuration is rejected due to negative profitability and near-total account drawdown. EA-076 remains under research pending further controlled experiments, out-of-sample validation, and forward testing.
 
 
 
