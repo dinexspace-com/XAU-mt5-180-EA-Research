@@ -1081,6 +1081,22 @@ The next controlled research step will evaluate whether limiting the strategy to
 
 Future research will focus on first-breakout behavior, BUY/SELL directional asymmetry, breakout timing, New York Range size, breakout strength and buffer, volatility regime, Break Even behavior, Trailing Stop behavior, broker/server-time mapping, exit architecture, and execution sensitivity before broad parameter optimization.
 
+### 📌 EA-075 (Session Transition Break - M1)
+
+An intraday session-breakout EA for XAUUSD M1, designed to capture price movements following the transition from a predefined trading range into the next trading session. The strategy identifies the session high and low between 00:00 and 08:00 broker server time, then trades confirmed breakouts during the 08:00–10:00 entry window.
+
+The baseline configuration uses fixed SL 300, TP 600, Spread <= 30, with Break Even and Trailing Stop enabled. The initial backtest recorded 54 trades, a net loss of $9.67, Profit Factor 0.86, and maximum equity drawdown of 4.04%.
+
+**Current Status:** Research in progress. The initial configuration is unprofitable and requires further validation.
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5864,6 +5880,29 @@ The next authorized research stage is:
 **Server-Time Status:** NOT VALIDATED — the configured `13:00–14:00` range uses broker/server time and must not yet be assumed to represent a fixed New York local-time session.
 
 **Next Research Stage:** EA074-RQ01 — First Breakout Only Evaluation
+
+### EA-075
+
+* [x] Strategy Source Code Available (`EAs/EA-075_Session_Transition_Break/`)
+* [x] Baseline Backtest Completed (`Backtest/EA-075_Session_Transition_Break/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [ ] Experiment 01: Breakout Confirmation & Buffer Optimization
+* [ ] Experiment 02: Session Window & Entry Frequency Evaluation
+* [ ] Experiment 03: Break Even, Trailing Stop & Risk-Reward Optimization
+* [ ] Out-of-Sample Validation & Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** XAUUSD.PRO / M1 / January 2 – March 31, 2026 / Initial Deposit $1,000 / Lot 0.01 / Range 00:00–08:00 / Trading Window 08:00–10:00 / SL 300 / TP 600 / Break Even ON / Trailing Stop ON.
+
+**Baseline #01 Result:** 54 trades, Net Profit **-$9.67**, Profit Factor **0.86**, Win Rate **40.74%**, Maximum Equity Drawdown **4.04%**, and Sharpe Ratio **-5.00**.
+
+The baseline configuration is rejected due to negative profitability. EA-075 remains under research pending further controlled experiments, out-of-sample validation, and forward testing.
+
+
+
+
+
 
 
 
