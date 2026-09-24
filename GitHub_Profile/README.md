@@ -1137,6 +1137,35 @@ The baseline is classified as **FAIL** because net profit is negative and Profit
 The strategy remains under research. Future experiments will investigate trading-session filters, Break Even and Trailing Stop behavior, and re-entry restrictions.
 
 
+### 📌 EA-078 (Previous Week High/Low — M1)
+
+An experimental XAUUSD breakout Expert Advisor based on the previous completed week's high and low.
+
+The EA generates BUY signals when a completed M1 candle crosses and closes above the previous week's high, and SELL signals when a completed M1 candle crosses and closes below the previous week's low.
+
+The baseline uses fixed Lot 0.01, SL 300, TP 600, Break Even and Trailing Stop.
+
+**Baseline Backtest Results**
+
+| Metric | Result |
+|---|---:|
+| Symbol | XAUUSD.PRO |
+| Test Period | Jan 2 – Mar 31, 2026 |
+| Initial Deposit | $1,000 |
+| Modeling Quality | 100% real ticks |
+| Total Trades | 263 |
+| Net Profit | -$22.97 |
+| Profit Factor | 0.93 |
+| Win Rate | 50.57% |
+| Maximum Equity Drawdown | 5.05% |
+| Average Winning Trade | $2.27 |
+| Average Losing Trade | -$2.50 |
+
+**Research Status:** BASELINE FAIL — Further optimization and validation required.
+
+The baseline meets the minimum trade-count and maximum drawdown requirements but fails the positive-profit criterion.
+
+[Source Code](../EAs/EA-078_Previous_Week_High_Low/EA-078_Previous_Week_High_Low.mq5) | [EA Documentation](../EAs/EA-078_Previous_Week_High_Low/README.md) | [Backtest](../Backtest/EA-078_Previous_Week_High_Low/README.md)
 
 
 
@@ -5987,6 +6016,42 @@ The baseline configuration is rejected due to negative profitability and near-to
 **Current research status:** \`IN PROGRESS\` — the baseline does not satisfy the positive-profit requirement. Source/report publication and independent validation remain unconfirmed.
 
 
+### EA-078 — Previous Week High/Low
+
+**Status:** Research in Progress
+
+**Strategy:** Previous-week high/low breakout with M1 candle-close confirmation.
+
+**Baseline:** XAUUSD.PRO / Jan–Mar 2026 / 100% real ticks / $1,000 initial deposit.
+
+| Research Criterion | Result | Status |
+|---|---:|---|
+| Total Trades > 200 | 263 | PASS |
+| Net Profit > $0 | -$22.97 | FAIL |
+| Maximum Equity DD < 20% | 5.05% | PASS |
+| Independent Validation | Pending | PENDING |
+
+**Key Research Findings**
+
+- The baseline achieved a 50.57% win rate but generated a net loss.
+- Average winning trades ($2.27) were smaller than average losing trades ($2.50).
+- BUY trades achieved a 54.84% win rate, compared with 46.76% for SELL trades.
+- Maximum equity drawdown remained at 5.05%.
+- Average holding time was 1 minute 13 seconds.
+
+**Next Research Experiments**
+
+- [ ] H1 — Isolate Break Even and Trailing Stop effects.
+- [ ] H2 — Investigate BUY-only and SELL-only performance.
+- [ ] H3 — Investigate re-entry restrictions around weekly breakout levels.
+- [ ] Validate promising configurations using independent data.
+- [ ] Complete human review of research results.
+
+**Conclusion**
+
+The initial configuration did not demonstrate positive profitability. EA-078 remains an experimental strategy, and no optimized configuration has yet been independently validated.
+
+[Research Documentation](../Research/README.md) | [Testing Methodology](../docs/methodology.md)
 
 
 
