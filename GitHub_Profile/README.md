@@ -1106,6 +1106,35 @@ The result establishes only that the tested EA-076 configuration did not demonst
 **Current Status:** Research in progress. The baseline configuration is not approved for live trading.
 
 
+### 📌 EA-077 (Previous Day High/Low - M1)
+
+A previous-day High/Low breakout EA on XAUUSD designed to test whether confirmed candle closes beyond the previous trading day's High or Low can provide a short-term directional trading edge.
+
+BUY signals require a completed candle to cross and close above the previous day's High plus the configured breakout buffer.
+
+SELL signals require a completed candle to cross and close below the previous day's Low minus the configured breakout buffer.
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO using M1 signals from January 2 to March 31, 2026, with 100% real ticks.
+
+**Baseline Results:**
+
+| Metric | Result |
+|---|---:|
+| Initial Deposit | $1,000 |
+| Total Trades | 455 |
+| Net Profit | -$98.75 |
+| Profit Factor | 0.84 |
+| Win Rate | 45.05% |
+| Maximum Equity Drawdown | 11.18% |
+| Average Winning Trade | +$2.45 |
+| Average Losing Trade | -$2.40 |
+| Maximum Consecutive Losses | 13 |
+
+The baseline is classified as **FAIL** because net profit is negative and Profit Factor is below 1.00.
+
+The strategy remains under research. Future experiments will investigate trading-session filters, Break Even and Trailing Stop behavior, and re-entry restrictions.
 
 
 
@@ -5941,6 +5970,21 @@ The baseline configuration is rejected due to negative profitability. EA-075 rem
 The baseline configuration is rejected due to negative profitability and near-total account drawdown. EA-076 remains under research pending further controlled experiments, out-of-sample validation, and forward testing.
 
 
+### EA-077
+
+- [ ] Source code and README committed to GitHub (pending repository verification).
+- [ ] Original MT5 HTML report and charts committed (pending repository verification).
+- [x] Baseline report reviewed: **FAIL** on profitability criterion.
+- [ ] Experiment 01: Trading-session filter.
+- [ ] Experiment 02: Break Even / Trailing Stop ablation.
+- [ ] Experiment 03: Re-entry control.
+- [ ] Out-of-sample validation and forward testing.
+
+**Baseline:** XAUUSD.PRO / M1 signal / M15 tester chart / January 2–March 31, 2026 / Initial Deposit $1,000 / Lot 0.01 / SL 300 / TP 600 / Break Even ON / Trailing Stop ON.
+
+**Baseline result:** 455 trades, Net Profit **-$98.75**, Profit Factor **0.84**, Win Rate **45.05%**, Maximum Equity Drawdown **11.18%**.
+
+**Current research status:** \`IN PROGRESS\` — the baseline does not satisfy the positive-profit requirement. Source/report publication and independent validation remain unconfirmed.
 
 
 
