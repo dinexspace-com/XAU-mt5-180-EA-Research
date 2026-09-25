@@ -1168,6 +1168,32 @@ The baseline meets the minimum trade-count and maximum drawdown requirements but
 [Source Code](../EAs/EA-078_Previous_Week_High_Low/EA-078_Previous_Week_High_Low.mq5) | [EA Documentation](../EAs/EA-078_Previous_Week_High_Low/README.md) | [Backtest](../Backtest/EA-078_Previous_Week_High_Low/README.md)
 
 
+### 📌 EA-079 (Daily Open Break - M1)
+
+A daily-opening-price crossover EA on XAUUSD M1 designed to investigate whether confirmed candle closes across the current D1 opening price can provide a short-term directional trading edge.
+
+BUY signals require the previous closed candle to be at or below the daily opening price and the latest closed candle to close above it. SELL signals use the inverse conditions.
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **940 trades**, Net Profit **-$282.20**, Profit Factor **0.78**, Maximum Equity Drawdown **31.05%**, and Win Rate **46.06%**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for further research.
+
+The current implementation uses daily-opening-price crossover signals. Although a breakout lookback parameter is available, it is not used by the active entry logic.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6052,6 +6078,56 @@ The baseline configuration is rejected due to negative profitability and near-to
 The initial configuration did not demonstrate positive profitability. EA-078 remains an experimental strategy, and no optimized configuration has yet been independently validated.
 
 [Research Documentation](../Research/README.md) | [Testing Methodology](../docs/methodology.md)
+
+
+### EA-079 — Daily Open Break
+
+**Status:** Research in Progress
+
+**Strategy:** Daily-opening-price crossover with M1 closed-candle confirmation.
+
+**Baseline:** XAUUSD.PRO / January 2–March 31, 2026 / 100% real ticks / $1,000 initial deposit / Lot 0.01 / SL 300 / TP 600 / Break Even ON / Trailing Stop ON.
+
+| Research Criterion | Result | Status |
+|---|---:|---|
+| Total Trades > 200 | 940 | PASS |
+| Net Profit > $0 | -$282.20 | FAIL |
+| Maximum Equity DD < 20% | 31.05% | FAIL |
+| Independent Validation | Pending | PENDING |
+
+**Key Research Findings**
+
+- The baseline achieved a 46.06% win rate but generated a net loss of $282.20.
+- Average winning trades ($2.30) were smaller than average losing trades ($2.52).
+- SELL trades achieved a 48.59% win rate, compared with 43.63% for BUY trades.
+- Profit Factor was 0.78, with Maximum Equity Drawdown of 31.05%.
+- Average holding time was 1 minute 47 seconds.
+- The active strategy uses daily-opening-price crossover signals rather than a rolling high-low breakout.
+
+**Next Research Experiments**
+
+- [ ] H1 — Isolate Break Even and Trailing Stop effects.
+- [ ] H2 — Investigate BUY-only and SELL-only performance.
+- [ ] H3 — Investigate trading-session restrictions.
+- [ ] H4 — Investigate breakout confirmation and re-entry restrictions.
+- [ ] Validate promising configurations using independent data.
+- [ ] Complete human review of research results.
+
+**Conclusion**
+
+The initial configuration did not demonstrate positive profitability and exceeded the 20% maximum equity drawdown research threshold. EA-079 remains an experimental strategy. No optimized configuration has yet been independently validated.
+
+[Research Documentation](../Research/README.md) | [Testing Methodology](../docs/methodology.md)
+
+
+
+
+
+
+
+
+
+
 
 
 
