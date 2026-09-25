@@ -1183,6 +1183,22 @@ The baseline is classified as **FAIL** and retained as the reference experiment 
 The current implementation uses daily-opening-price crossover signals. Although a breakout lookback parameter is available, it is not used by the active entry logic.
 
 
+### 📌 EA-080 — Impulse Candle Break
+
+**XAUUSD M1 | Momentum / Breakout | Research in Progress**
+
+An ATR-based impulse candle breakout strategy that identifies strong directional candles and enters after a subsequent candle closes beyond the impulse high or low.
+
+The baseline uses ATR(14), an impulse multiplier of 1.5, a minimum body ratio of 70%, fixed SL/TP and automated Break Even and Trailing Stop management.
+
+**Baseline Backtest:** January–March 2026, 100% real ticks, 3,206 trades.
+
+**Result:** FAIL — Net Profit -$774.76, Profit Factor 0.82, Maximum Equity Drawdown 79.02%.
+
+[Source Code](../EAs/EA-080_Impulse_Candle_Break/) |
+[Backtest](../Backtest/EA-080_Impulse_Candle_Break/) |
+[Research](../Research/EA-080_Impulse_Candle_Break/)
+
 
 
 
@@ -6119,6 +6135,37 @@ The initial configuration did not demonstrate positive profitability and exceede
 
 [Research Documentation](../Research/README.md) | [Testing Methodology](../docs/methodology.md)
 
+
+### EA-080 — Impulse Candle Break
+
+**Status:** Research in Progress
+
+| Criterion | Result | Status |
+|---|---:|---|
+| Total Trades > 200 | 3,206 | PASS |
+| Net Profit > $0 | -$774.76 | FAIL |
+| Maximum Equity DD < 20% | 79.02% | FAIL |
+| Independent Validation | Pending | PENDING |
+
+**Research Findings**
+
+- Baseline win rate: 47.47%.
+- Average winning trade: $2.30.
+- Average losing trade: $2.54.
+- BUY win rate: 48.59%.
+- SELL win rate: 46.36%.
+- Average holding time: 2 minutes 17 seconds.
+
+**Next Research Tasks**
+
+- [ ] Isolate Break Even and Trailing Stop effects.
+- [ ] Compare directional performance.
+- [ ] Analyze trading-session restrictions.
+- [ ] Test alternative impulse qualifications.
+- [ ] Complete independent validation.
+- [ ] Obtain human review and approval.
+
+**Conclusion:** The baseline failed. EA-080 remains experimental and is not approved for live trading.
 
 
 
