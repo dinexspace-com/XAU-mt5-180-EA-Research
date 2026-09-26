@@ -1200,6 +1200,153 @@ The baseline uses ATR(14), an impulse multiplier of 1.5, a minimum body ratio of
 [Research](../Research/EA-080_Impulse_Candle_Break/)
 
 
+### 📌 EA-081 — Research Project
+
+**XAUUSD | Automated Trading | Research**
+
+An experimental Expert Advisor developed for systematic
+strategy testing on MetaTrader 5.
+
+The original trading rules, baseline parameters and
+verified backtest results must be imported from the
+EA-081 project documentation.
+
+**Status:** Research — Awaiting verified project data.
+
+[Source Code](../EAs/EA-081/) |
+[Backtest](../Backtest/EA-081/) |
+[Research](../Research/EA-081/)
+
+---
+
+### 📌 EA-082 — Research Project
+
+**XAUUSD | Automated Trading | Research**
+
+An experimental Expert Advisor developed to investigate
+rule-based trading signals and risk management on
+MetaTrader 5.
+
+The original trading rules, baseline parameters and
+verified backtest results must be imported from the
+EA-082 project documentation.
+
+**Status:** Research — Awaiting verified project data.
+
+[Source Code](../EAs/EA-082/) |
+[Backtest](../Backtest/EA-082/) |
+[Research](../Research/EA-082/)
+
+---
+
+### 📌 EA-083 — Bollinger Mid Reversion
+
+**XAUUSD M1 | Mean Reversion | Research in Progress**
+
+A Bollinger Bands mean-reversion EA designed to capture
+price rejection at the outer bands and a subsequent
+return toward the middle band.
+
+BUY signals require bullish rejection of the lower band.
+SELL signals require bearish rejection of the upper band.
+
+The baseline uses Bollinger Bands (20, 2.0), fixed Lot
+0.01, SL 300, TP 600, Maximum Spread 30, Break Even
+and Trailing Stop.
+
+**Baseline Backtest:** January–March 2026,
+100% real ticks, 4,484 trades.
+
+**Result:** FAIL — Net Profit -$991.84,
+Profit Factor 0.81, Maximum Equity Drawdown 99.20%.
+
+The baseline is retained for controlled research.
+It is not approved for live trading.
+
+[Source Code](../EAs/EA-083_Bollinger_Mid_Reversion/) |
+[Backtest](../Backtest/EA-083_Bollinger_Mid_Reversion/) |
+[Research](../Research/EA-083_Bollinger_Mid_Reversion/)
+
+
+### 📌 EA-081 (Micro Consolidation Break - M1)
+
+A micro-consolidation breakout EA on XAUUSD M1 designed to test whether price breakouts from narrow, ATR-filtered consolidation zones can provide a standalone short-term directional trading edge.
+
+The strategy identifies a consolidation zone using four completed candles. Each candle must have a range no greater than ATR(14) × 0.6, while the entire consolidation zone must remain within ATR(14) × 1.2.
+
+BUY signals require the completed breakout candle to close above the Consolidation Zone High, while SELL signals require the completed breakout candle to close below the Consolidation Zone Low.
+
+The baseline configuration uses 4 Consolidation Bars, ATR Period 14, Small Candle ATR Multiplier 0.6, Zone ATR Multiplier 1.2, Breakout Buffer 0, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **246 trades**, Net Profit **+$11.23**, Profit Factor **1.04**, Expected Payoff **+$0.05**, Recovery Factor **0.29**, Maximum Equity Drawdown **3.71%**, Sharpe Ratio **5.29**, and Win Rate **50.41%**.
+
+BUY trades produced a **49.59%** win rate across 121 trades, while SELL trades produced a **51.20%** win rate across 125 trades.
+
+The average profitable trade was **+$2.52**, while the average losing trade was **-$2.47**.
+
+The baseline produced a small positive historical result but remained close to break-even. The Profit Factor of 1.04 and Recovery Factor of 0.29 indicate limited retained profit relative to the observed gross trading activity and drawdown.
+
+The baseline is retained for further research rather than considered a validated trading strategy.
+
+Future research will focus on consolidation-zone quality, breakout confirmation, ATR thresholds, trading-session effects, volatility filtering, BUY/SELL directional performance, Break Even, Trailing Stop, and out-of-sample validation.
+
+---
+
+### 📌 EA-082 (Bollinger Re-entry - M1)
+
+A Bollinger Bands mean-reversion EA on XAUUSD M1 designed to test whether price returning inside the Bollinger Bands after moving beyond an outer band can provide a standalone short-term reversal trading edge.
+
+The strategy identifies potential reversal opportunities when a completed candle closes back inside the Bollinger Bands after the preceding candle closed outside a band or the signal candle crossed beyond it.
+
+BUY signals require the completed signal candle to close inside the Bollinger Bands after price has moved below the Lower Band.
+
+SELL signals require the completed signal candle to close inside the Bollinger Bands after price has moved above the Upper Band.
+
+Ambiguous signals satisfying both BUY and SELL conditions are ignored.
+
+The baseline configuration uses Bollinger Bands Period 20, Deviation 2.0, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **6,504 trades**, Net Profit **-$994.17**, Profit Factor **0.88**, Expected Payoff **-$0.15**, Recovery Factor **-0.98**, Maximum Equity Drawdown **99.43%**, Sharpe Ratio **-5.00**, and Win Rate **49.78%**.
+
+BUY trades produced a **49.50%** win rate across 3,527 trades, while SELL trades produced a **50.12%** win rate across 2,977 trades.
+
+The average profitable trade was **+$2.23**, while the average losing trade was **-$2.51**.
+
+The baseline is classified as **FAIL** and retained unchanged as a reference for controlled research.
+
+The tested configuration generated excessive trading activity, negative expectancy, and near-total account drawdown. The result does not establish that the broader Bollinger Re-entry concept has no trading edge; it establishes that this specific M1 implementation did not demonstrate positive expectancy under the documented baseline conditions.
+
+Future research will focus on signal quality, trading frequency, market-regime filtering, trading-session effects, extreme-loss analysis, Break Even, Trailing Stop, and execution robustness.
+
+---
+
+### 📌 EA-083 (Bollinger Mid Reversion - M1)
+
+A Bollinger Bands mean-reversion EA on XAUUSD M1 designed to test whether price rejection at an outer Bollinger Band followed by a return toward the Middle Band can provide a standalone short-term trading edge.
+
+The strategy combines outer-band rejection with directional candle confirmation and dynamic position exits at the Bollinger Middle Band.
+
+BUY signals require a completed bullish candle to touch or cross the Lower Band, close back above it, and remain below the Middle Band.
+
+SELL signals require a completed bearish candle to touch or cross the Upper Band, close back below it, and remain above the Middle Band.
+
+BUY positions are closed when Bid reaches or exceeds the Middle Band. SELL positions are closed when Ask reaches or falls below the Middle Band.
+
+The baseline configuration uses Bollinger Bands Period 20, Deviation 2.0, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **4,484 trades**, Net Profit **-$991.84**, Profit Factor **0.81**, Expected Payoff **-$0.22**, Recovery Factor **-0.98**, Maximum Equity Drawdown **99.20%**, Sharpe Ratio **-5.00**, and Win Rate **53.93%**.
+
+BUY trades produced a **53.40%** win rate across 2,474 trades, while SELL trades produced a **54.58%** win rate across 2,010 trades.
+
+The average profitable trade was **+$1.80**, while the average losing trade was **-$2.59**.
+
+The baseline is classified as **FAIL** and retained unchanged as a reference for controlled research.
+
+Although the strategy achieved a win rate above 50%, its average winning trade was substantially smaller than its average losing trade. The balance curve declined persistently, resulting in near-total account drawdown.
+
+The result does not establish that the broader Bollinger Mid Reversion concept has no trading edge; it establishes that this particular configuration failed to demonstrate positive expectancy.
+
+Future research will focus on Middle Band exit behavior, position-management interactions, trading frequency, extreme-loss analysis, market-regime filtering, volatility conditions, and independent validation.
 
 
 
@@ -6166,6 +6313,297 @@ The initial configuration did not demonstrate positive profitability and exceede
 - [ ] Obtain human review and approval.
 
 **Conclusion:** The baseline failed. EA-080 remains experimental and is not approved for live trading.
+
+
+## EA-081 — Research Project
+
+**Status:** Pending verified baseline documentation.
+
+The project is reserved for its original strategy
+description, baseline backtest and research findings.
+
+### Research Validation
+
+- [ ] Verify original EA source and trading rules.
+- [ ] Import the original MT5 backtest report.
+- [ ] Record baseline performance metrics.
+- [ ] Identify research hypotheses.
+- [ ] Complete independent validation.
+- [ ] Obtain human review and approval.
+
+**Conclusion:** Insufficient verified project data
+to publish a baseline assessment.
+
+---
+
+## EA-082 — Research Project
+
+**Status:** Pending verified baseline documentation.
+
+The project is reserved for its original strategy
+description, baseline backtest and research findings.
+
+### Research Validation
+
+- [ ] Verify original EA source and trading rules.
+- [ ] Import the original MT5 backtest report.
+- [ ] Record baseline performance metrics.
+- [ ] Identify research hypotheses.
+- [ ] Complete independent validation.
+- [ ] Obtain human review and approval.
+
+**Conclusion:** Insufficient verified project data
+to publish a baseline assessment.
+
+---
+
+## EA-083 — Bollinger Mid Reversion
+
+**Status:** Research in Progress
+
+**Strategy:** Bollinger Bands mean reversion using
+outer-band rejection and middle-band exits.
+
+**Baseline:** XAUUSD.PRO / M1 /
+January 2–March 31, 2026 /
+100% real ticks / $1,000 initial deposit /
+Lot 0.01 / SL 300 / TP 600 /
+Break Even ON / Trailing Stop ON.
+
+### Research Validation
+
+| Research Criterion | Result | Status |
+|---|---:|---|
+| Total Trades > 200 | 4,484 | PASS |
+| Net Profit > $0 | -$991.84 | FAIL |
+| Maximum Equity DD < 20% | 99.20% | FAIL |
+| Independent Validation | Pending | PENDING |
+
+### Key Research Findings
+
+- The baseline achieved a 53.93% win rate but
+  generated a net loss of $991.84.
+- Average winning trades ($1.80) were smaller
+  than average losing trades ($2.59).
+- Profit Factor was 0.81.
+- Maximum Equity Drawdown reached 99.20%.
+- The largest losing trade was $35.62.
+- Average holding time was 2 minutes 3 seconds.
+- The balance curve declined throughout the test.
+
+### Next Research Experiments
+
+- [ ] H1 — Audit extreme losses and execution.
+- [ ] H2 — Isolate middle-band exit effects.
+- [ ] H3 — Isolate Break Even and Trailing Stop.
+- [ ] H4 — Investigate trend and volatility filters.
+- [ ] H5 — Investigate trading-session restrictions.
+- [ ] Validate promising configurations
+      using independent data.
+- [ ] Complete human review of research results.
+
+### Conclusion
+
+The initial configuration did not demonstrate
+positive profitability and experienced severe
+capital loss.
+
+EA-083 remains an experimental strategy.
+No optimized configuration has been independently
+validated or approved for live trading.
+
+[Research Documentation](../Research/EA-083_Bollinger_Mid_Reversion/) |
+[Backtest](../Backtest/EA-083_Bollinger_Mid_Reversion/)
+
+
+### EA-081 — Micro Consolidation Break
+
+**Status:** Research in Progress
+
+**Strategy:** ATR-filtered micro-consolidation breakout with completed-candle confirmation.
+
+**Baseline:** XAUUSD.PRO / M1 / January 2–March 31, 2026 / 100% real ticks / $1,000 initial deposit / Lot 0.01 / SL 300 / TP 600 / Break Even ON / Trailing Stop ON.
+
+| Research Criterion | Result | Status |
+|---|---:|---|
+| Total Trades > 200 | 246 | PASS |
+| Net Profit > $0 | +$11.23 | PASS |
+| Maximum Equity DD < 20% | 3.71% | PASS |
+| Independent Validation | Pending | PENDING |
+
+**Key Research Findings**
+
+- The baseline generated 246 trades with a 50.41% win rate.
+- Net Profit was +$11.23 with a Profit Factor of 1.04.
+- Maximum Equity Drawdown remained at 3.71%.
+- Average winning trade: +$2.52.
+- Average losing trade: -$2.47.
+- BUY win rate: 49.59% across 121 trades.
+- SELL win rate: 51.20% across 125 trades.
+- Expected Payoff was +$0.05 per trade.
+- Recovery Factor was 0.29.
+- Average holding time was 2 minutes 52 seconds.
+- The balance curve reached a peak before declining during the later portion of the test.
+- The positive historical result was marginal and requires further robustness testing.
+
+**Next Research Experiments**
+
+- [ ] H1 — Isolate Break Even and Trailing Stop effects.
+- [ ] H2 — Evaluate consolidation-zone size and ATR thresholds.
+- [ ] H3 — Investigate breakout confirmation and buffer sensitivity.
+- [ ] H4 — Investigate trading-session and volatility-regime effects.
+- [ ] H5 — Compare BUY-only and SELL-only performance.
+- [ ] H6 — Test alternative position-management configurations.
+- [ ] Reproduce the baseline using the archived source and settings.
+- [ ] Validate promising configurations using independent historical data.
+- [ ] Complete forward testing.
+- [ ] Obtain human review and approval.
+
+**Conclusion**
+
+The initial configuration generated a small positive net profit and remained within the preliminary drawdown threshold.
+
+However, Profit Factor 1.04 and Recovery Factor 0.29 indicate limited historical profitability.
+
+EA-081 remains an experimental strategy. The positive baseline is retained for further research, and no optimized configuration has been independently validated for live trading.
+
+[Research Documentation](../Research/EA-081_Micro_Consolidation_Break/) | [Backtest](../Backtest/EA-081_Micro_Consolidation_Break/) | [Testing Methodology](../docs/methodology.md)
+
+---
+
+### EA-082 — Bollinger Re-entry
+
+**Status:** Research in Progress
+
+**Strategy:** Bollinger Bands outer-band re-entry with completed-candle confirmation.
+
+**Baseline:** XAUUSD.PRO / M1 / January 2–March 31, 2026 / 100% real ticks / $1,000 initial deposit / Lot 0.01 / Bollinger Bands 20/2.0 / SL 300 / TP 600 / Break Even ON / Trailing Stop ON.
+
+| Research Criterion | Result | Status |
+|---|---:|---|
+| Total Trades > 200 | 6,504 | PASS |
+| Net Profit > $0 | -$994.17 | FAIL |
+| Maximum Equity DD < 20% | 99.43% | FAIL |
+| Independent Validation | Pending | PENDING |
+
+**Key Research Findings**
+
+- The baseline generated 6,504 trades with a 49.78% win rate.
+- Net Profit was -$994.17.
+- Profit Factor was 0.88.
+- Maximum Equity Drawdown reached 99.43%.
+- Average winning trade: +$2.23.
+- Average losing trade: -$2.51.
+- BUY win rate: 49.50% across 3,527 trades.
+- SELL win rate: 50.12% across 2,977 trades.
+- Expected Payoff was -$0.15 per trade.
+- The largest losing trade was -$33.31.
+- The maximum consecutive losing streak reached 16 trades.
+- Average holding time was 2 minutes 24 seconds.
+- The balance curve declined persistently during the test period.
+- The combination of high trading frequency, smaller average winners and larger average losers warrants controlled investigation.
+- The exact causes of extreme losses have not yet been independently established.
+
+**Next Research Experiments**
+
+- [ ] H1 — Audit extreme losses and execution records.
+- [ ] H2 — Isolate Break Even and Trailing Stop effects.
+- [ ] H3 — Investigate trend and volatility-regime filters.
+- [ ] H4 — Investigate trading-session restrictions.
+- [ ] H5 — Evaluate entry frequency and re-entry limitations.
+- [ ] H6 — Compare BUY-only and SELL-only performance.
+- [ ] H7 — Evaluate Bollinger Period and Deviation sensitivity.
+- [ ] Reproduce the baseline using the archived source and settings.
+- [ ] Validate improved configurations using independent historical data.
+- [ ] Complete execution robustness and forward testing.
+- [ ] Obtain human review and approval.
+
+**Conclusion**
+
+The initial configuration failed to demonstrate positive profitability and experienced near-total account drawdown.
+
+Despite generating a large number of trades, the baseline exhibited negative expectancy and a Profit Factor below 1.00.
+
+EA-082 remains an experimental strategy. The original source code and test results are preserved as a failed research baseline.
+
+No optimized configuration has yet been independently validated, and the EA is not approved for live trading.
+
+[Research Documentation](../Research/EA-082_Bollinger_Re-entry/) | [Backtest](../Backtest/EA-082_Bollinger_Re-entry/) | [Testing Methodology](../docs/methodology.md)
+
+---
+
+### EA-083 — Bollinger Mid Reversion
+
+**Status:** Research in Progress
+
+**Strategy:** Bollinger Bands outer-band rejection with bullish/bearish candle confirmation and dynamic Middle Band exits.
+
+**Baseline:** XAUUSD.PRO / M1 / January 2–March 31, 2026 / 100% real ticks / $1,000 initial deposit / Lot 0.01 / Bollinger Bands 20/2.0 / SL 300 / TP 600 / Break Even ON / Trailing Stop ON / Middle Band Exit.
+
+| Research Criterion | Result | Status |
+|---|---:|---|
+| Total Trades > 200 | 4,484 | PASS |
+| Net Profit > $0 | -$991.84 | FAIL |
+| Maximum Equity DD < 20% | 99.20% | FAIL |
+| Independent Validation | Pending | PENDING |
+
+**Key Research Findings**
+
+- The baseline generated 4,484 trades with a 53.93% win rate.
+- Net Profit was -$991.84.
+- Profit Factor was 0.81.
+- Maximum Equity Drawdown reached 99.20%.
+- Average winning trade: +$1.80.
+- Average losing trade: -$2.59.
+- BUY win rate: 53.40% across 2,474 trades.
+- SELL win rate: 54.58% across 2,010 trades.
+- Expected Payoff was -$0.22 per trade.
+- The largest losing trade was -$35.62.
+- The maximum consecutive losing streak reached 13 trades.
+- Average holding time was 2 minutes 3 seconds.
+- The balance curve declined persistently throughout the tested period.
+- Although the win rate exceeded 50%, the realized average winning trade was substantially smaller than the average losing trade.
+- The dynamic Middle Band exit is a significant component requiring isolated testing.
+- The relative contributions of entry quality, exit management and trading costs have not yet been independently established.
+
+**Next Research Experiments**
+
+- [ ] H1 — Audit extreme losses and execution records.
+- [ ] H2 — Isolate the dynamic Middle Band exit.
+- [ ] H3 — Isolate Break Even and Trailing Stop effects.
+- [ ] H4 — Evaluate alternative exit-management configurations.
+- [ ] H5 — Investigate trend and volatility-regime filters.
+- [ ] H6 — Investigate trading-session restrictions.
+- [ ] H7 — Compare BUY-only and SELL-only performance.
+- [ ] H8 — Evaluate Bollinger Period and Deviation sensitivity.
+- [ ] Reproduce the baseline using the archived source and settings.
+- [ ] Validate improved configurations using independent historical data.
+- [ ] Complete execution robustness and forward testing.
+- [ ] Obtain human review and approval.
+
+**Conclusion**
+
+The initial configuration failed to demonstrate positive profitability and experienced near-total account drawdown.
+
+Although the baseline achieved a win rate above 50%, the average winning trade was insufficient to compensate for the larger average loss.
+
+The combination of dynamic Middle Band exits, Break Even and Trailing Stop requires further controlled investigation.
+
+EA-083 remains an experimental strategy. The original source code and test results are preserved as a failed research baseline.
+
+No optimized configuration has yet been independently validated, and the EA is not approved for live trading.
+
+[Research Documentation](../Research/EA-083_Bollinger_Mid_Reversion/) | [Backtest](../Backtest/EA-083_Bollinger_Mid_Reversion/) | [Testing Methodology](../docs/methodology.md)
+
+
+
+
+
+
+
+
+
+
 
 
 
