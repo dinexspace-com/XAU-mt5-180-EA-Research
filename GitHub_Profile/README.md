@@ -1348,7 +1348,13 @@ The result does not establish that the broader Bollinger Mid Reversion concept h
 
 Future research will focus on Middle Band exit behavior, position-management interactions, trading frequency, extreme-loss analysis, market-regime filtering, volatility conditions, and independent validation.
 
+### 📌 EA-084 (RSI 20/80 - M15)
 
+An RSI-based XAUUSD M15 strategy using RSI 14 with oversold/overbought thresholds at 20/80.
+
+The baseline configuration uses RSI Period 14, RSI Lower 20, RSI Upper 80, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The initial baseline test produced a slightly negative result and is retained as an experimental research configuration for further validation.
 
 
 
@@ -6595,7 +6601,80 @@ No optimized configuration has yet been independently validated, and the EA is n
 
 [Research Documentation](../Research/EA-083_Bollinger_Mid_Reversion/) | [Backtest](../Backtest/EA-083_Bollinger_Mid_Reversion/) | [Testing Methodology](../docs/methodology.md)
 
+---
 
+### EA-084 — RSI 20/80
+
+**Status:** Research in Progress
+
+**Strategy:** RSI-based XAUUSD M15 strategy using RSI 14 with lower and upper thresholds at 20/80.
+
+**Baseline:** XAUUSD.PRO / M15 / January 2–March 31, 2026 / 100% real ticks / $1,000 initial deposit / Lot 0.01 / RSI 14 / RSI Lower 20 / RSI Upper 80 / SL 300 / TP 600 / Maximum Spread 30 / Break Even ON / Trailing Stop ON.
+
+| Research Criterion | Result | Status |
+|---|---:|---|
+| Total Trades > 200 | 279 | PASS |
+| Net Profit > $0 | -$13.62 | FAIL |
+| Maximum Equity DD < 20% | 5.90% | PASS |
+| Independent Validation | Pending | PENDING |
+
+### Key Research Findings
+
+- The baseline generated 279 trades with a 49.46% win rate.
+- Net Profit was **-$13.62**.
+- Profit Factor was **0.96**.
+- Expected Payoff was **-$0.05** per trade.
+- Maximum Equity Drawdown reached **5.90%**.
+- Absolute Equity Drawdown was **$23.51**.
+- Gross Profit was **$295.09**.
+- Gross Loss was **-$308.71**.
+- There were 138 profit trades and 141 loss trades.
+- BUY trades achieved a 52.17% win rate across 138 trades.
+- SELL trades achieved a 46.81% win rate across 141 trades.
+- Average winning trade was **+$2.14**.
+- Average losing trade was **-$2.19**.
+- The largest winning trade was **+$6.43**.
+- The largest losing trade was **-$3.99**.
+- Maximum consecutive wins were 6 trades.
+- Maximum consecutive losses were 10 trades.
+- Average consecutive wins were 2 trades.
+- Average consecutive losses were 2 trades.
+- Average position holding time was approximately **1 minute 26 seconds**.
+- The test used **5,688 bars** and **39,639,179 ticks** with 100% real-tick history quality.
+- The baseline remained within the preliminary drawdown threshold but did not produce positive net profitability.
+
+### Next Research Experiments
+
+- [ ] H1 — Isolate Break Even effects.
+- [ ] H2 — Isolate Trailing Stop effects.
+- [ ] H3 — Evaluate RSI threshold sensitivity around 20/80.
+- [ ] H4 — Test alternative RSI periods.
+- [ ] H5 — Compare BUY-only and SELL-only performance.
+- [ ] H6 — Investigate M15 trading-session effects.
+- [ ] H7 — Evaluate spread and execution sensitivity.
+- [ ] H8 — Compare fixed SL/TP configurations with alternative exit management.
+- [ ] Reproduce the baseline using the archived source and settings.
+- [ ] Validate promising configurations using independent historical data.
+- [ ] Complete forward testing.
+- [ ] Obtain human review and approval.
+
+### Conclusion
+
+The initial EA-084 configuration did not demonstrate positive profitability during the tested period.
+
+The baseline produced a Net Profit of **-$13.62** with a Profit Factor of **0.96**, while Maximum Equity Drawdown remained relatively limited at **5.90%**.
+
+The result is therefore retained as an experimental research baseline rather than a validated trading strategy.
+
+Further controlled research should focus on RSI threshold sensitivity, exit management, directional performance, execution conditions, and independent validation.
+
+EA-084 remains an experimental strategy. No optimized configuration has been independently validated or approved for live trading.
+
+[Research Documentation](../Research/EA-084_RSI_20_80/) |
+[Backtest](../Backtest/EA-084_RSI_20_80/) |
+[Testing Methodology](../docs/methodology.md)
+
+---
 
 
 
