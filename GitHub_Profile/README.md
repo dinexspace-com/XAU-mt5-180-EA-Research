@@ -1356,7 +1356,19 @@ The baseline configuration uses RSI Period 14, RSI Lower 20, RSI Upper 80, fixed
 
 The initial baseline test produced a slightly negative result and is retained as an experimental research configuration for further validation.
 
+📌 EA-085 (RSI 30/70 - M1)
 
+An RSI-based XAUUSD M1 strategy using RSI 14 with lower and upper thresholds at 30/70.
+
+BUY signals require RSI to move upward after entering the lower RSI region, while SELL signals require RSI to move downward after entering the upper RSI region. Entries are evaluated on closed M1 bars.
+
+The baseline configuration uses RSI Period 14, RSI Lower 30, RSI Upper 70, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced 2,502 trades, Net Profit -$11.06, Profit Factor 1.00, Maximum Equity Drawdown 15.57%, and Win Rate 51.76%.
+
+The baseline is retained as an experimental research configuration for further controlled validation.
+
+Source Code | Backtest | Research
 
 
 
@@ -6674,7 +6686,32 @@ EA-084 remains an experimental strategy. No optimized configuration has been ind
 [Backtest](../Backtest/EA-084_RSI_20_80/) |
 [Testing Methodology](../docs/methodology.md)
 
----
+### EA-085
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-085_RSI_30_70/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-085_RSI_30_70/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/EA-085_RSI_30_70/`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] H1: Isolate Break Even effects
+* [ ] H2: Isolate Trailing Stop effects
+* [ ] H3: Evaluate RSI threshold sensitivity around 30/70
+* [ ] H4: Test alternative RSI periods
+* [ ] H5: Compare BUY-only and SELL-only performance
+* [ ] H6: Investigate M1 trading-session effects
+* [ ] H7: Evaluate spread and execution sensitivity
+* [ ] H8: Compare fixed SL/TP configurations with alternative exit management
+* [ ] Independent historical validation
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** XAUUSD.PRO / M1 / January 2–March 31, 2026 / Initial Deposit $1,000 / Lot 0.01 / RSI 14 / RSI Lower 30 / RSI Upper 70 / SL 300 / TP 600 / Maximum Spread 30 / Break Even ON / Trailing Stop ON.
+
+**Baseline #01 Result:** 2,502 trades, Net Profit **-$11.06**, Profit Factor **1.00**, Maximum Equity Drawdown **15.57%**, Win Rate **51.76%**.
+
+The baseline does not satisfy the positive-profit criterion. EA-085 remains under controlled research and is not validated for live trading.
+
 
 
 
