@@ -1370,6 +1370,29 @@ The baseline is retained as an experimental research configuration for further c
 
 Source Code | Backtest | Research
 
+### 📌 EA-086 (RSI 40/60 - M1)
+
+An RSI-based XAUUSD M1 strategy using RSI 14 with lower and upper thresholds at 40/60.
+
+BUY signals require RSI(14) to be below the lower threshold and then turn upward on completed M1 bars. SELL signals require RSI(14) to be above the upper threshold and then turn downward. The implementation uses a local RSI reversal condition around the configured threshold rather than a simple direct threshold crossover.
+
+The baseline configuration uses RSI Period 14, RSI Lower 40, RSI Upper 60, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **6,575 trades**, Net Profit **-$995.01**, Profit Factor **0.88**, Expected Payoff **-$0.15**, Maximum Equity Drawdown **99.51%**, and Win Rate **49.64%**.
+
+BUY trades produced a **50.26%** win rate across 3,044 trades, while SELL trades produced a **49.11%** win rate across 3,531 trades.
+
+The average profitable trade was **+$2.22**, while the average losing trade was **-$2.49**.
+
+The baseline is classified as **FAIL** and retained unchanged as the reference experiment for future controlled research.
+
+The result establishes that the tested EA-086 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions. It does not establish that RSI-based mean-reversion or reversal strategies have no trading value under other configurations or market conditions.
+
+Future research will focus on RSI threshold sensitivity, RSI period, exit-management contribution, directional behavior, timeframe behavior, spread/execution sensitivity, and fixed SL/TP relationships before any broad parameter optimization.
+
+**Implementation Note:** `InpBreakoutBuffer` is present as an input parameter but is not used by the active RSI entry logic.
+
+[Source Code](../EAs/EA-086_RSI_40_60/) | [Backtest](../Backtest/EA-086_RSI_40_60/) | [Research](../Research/EA-086_RSI_40_60/)
 
 
 
@@ -6712,6 +6735,157 @@ EA-084 remains an experimental strategy. No optimized configuration has been ind
 
 The baseline does not satisfy the positive-profit criterion. EA-085 remains under controlled research and is not validated for live trading.
 
+### EA-086
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-086_RSI_40_60/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-086_RSI_40_60/`)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/README.md`)
+* [x] Research Methodology Documented (`docs/methodology.md`)
+* [ ] EA086-RQ01: Isolate Break Even effects
+* [ ] EA086-RQ02: Isolate Trailing Stop effects
+* [ ] EA086-RQ03: Evaluate RSI threshold sensitivity around 40/60
+* [ ] EA086-RQ04: Test alternative RSI periods
+* [ ] EA086-RQ05: Compare BUY-only and SELL-only performance
+* [ ] EA086-RQ06: Evaluate timeframe behavior (M1 / M5 / M15)
+* [ ] EA086-RQ07: Evaluate spread and execution sensitivity
+* [ ] EA086-RQ08: Compare fixed SL/TP configurations with alternative exit management
+* [ ] EA086-RQ09: Evaluate the contribution of the RSI reversal condition versus direct threshold crossover
+* [ ] Controlled Parameter Optimization
+* [ ] Candidate Selection
+* [ ] Out-of-Sample Validation
+* [ ] Month-by-Month Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / RSI Period 14 / RSI Lower 40 / RSI Upper 60 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 100 / Step 10).
+
+**Test Period:** 2026-01-02 → 2026-03-31 using 100% real ticks.
+
+**Initial Deposit:** $1,000.00
+
+**Leverage:** 1:500
+
+**Baseline #01 Result:** 6,575 trades, Net Profit **-$995.01**, Gross Profit **+$7,251.24**, Gross Loss **-$8,246.25**, Profit Factor **0.88**, Expected Payoff **-$0.15**, Recovery Factor **-0.99**, Sharpe Ratio **-5.00**, Maximum Balance Drawdown **99.51%**, Maximum Equity Drawdown **99.51%**, Win Rate **49.64%**.
+
+**Directional Results:**
+
+* BUY: 3,044 trades / **50.26%** won
+* SELL: 3,531 trades / **49.11%** won
+
+**Average Trade Results:**
+
+* Average profitable trade: **+$2.22**
+* Average losing trade: **-$2.49**
+* Largest profitable trade: **+$7.95**
+* Largest losing trade: **-$38.89**
+* Maximum consecutive wins: **11**
+* Maximum consecutive losses: **16**
+* Average holding time: **00:02:21**
+* Maximum holding time: **03:36:03**
+
+The baseline configuration is retained as the reference experiment for controlled research.
+
+The baseline produced negative Net Profit and Expected Payoff, while Profit Factor remained below 1.00. Maximum Equity Drawdown reached **99.51%** of the initial deposit during the documented test period.
+
+The BUY and SELL directions produced relatively similar win rates:
+
+```text
+BUY  = 50.26%
+SELL = 49.11%
+```
+
+This directional difference is retained as an observation for future controlled testing. It is not sufficient to justify removing either direction from the strategy.
+
+The realized average winning trade (**+$2.22**) was smaller than the average losing trade (**-$2.49**). This unfavorable payoff relationship, combined with the reported win rate, resulted in negative historical expectancy.
+
+The EA generated **6,575 trades** during the approximately three-month XAUUSD.PRO M1 test. The average holding time was **2 minutes 21 seconds**, while the maximum recorded holding time was **3 hours 36 minutes 03 seconds**.
+
+The current implementation evaluates RSI on completed M1 bars and uses a local reversal condition:
+
+```text
+BUY:
+RSI[2] < 40
++
+RSI[1] > RSI[2]
++
+RSI[2] <= RSI[3]
+
+SELL:
+RSI[2] > 60
++
+RSI[1] < RSI[2]
++
+RSI[2] >= RSI[3]
+```
+
+Therefore, the EA should be treated as an **RSI threshold-reversal strategy**, not simply as a standard RSI 40/60 crossover system.
+
+The baseline result does not establish that the broader RSI reversal concept has no trading edge. It establishes only that the documented EA-086 configuration did not demonstrate positive expectancy under the tested XAUUSD.PRO M1 conditions.
+
+The first controlled research stage should isolate the contribution of the RSI threshold/reversal mechanism before broad parameter optimization.
+
+The planned research sequence for EA-086 is:
+
+```text
+EA086-M1-BASELINE-001
+        ↓
+Break Even Ablation
+        ↓
+Trailing Stop Ablation
+        ↓
+RSI Threshold Evaluation
+        ↓
+RSI Period Evaluation
+        ↓
+BUY vs SELL Evaluation
+        ↓
+Timeframe Evaluation
+        ↓
+Spread / Execution Sensitivity
+        ↓
+SL / TP & Exit Management
+        ↓
+Controlled Parameter Optimization
+        ↓
+Out-of-Sample Validation
+        ↓
+Robustness Testing
+        ↓
+Forward Testing
+```
+
+Only one major strategy component should be changed per controlled experiment.
+
+Broad parameter optimization should remain blocked until the contribution of the primary RSI entry and position-management components has been investigated through controlled experiments.
+
+**Current Stage:** Controlled Strategy Research
+
+**Baseline Status:** FAIL
+
+**Live Trading Status:** NOT VALIDATED
+
+**Research Status:** IN PROGRESS
+
+**Optimization Status:** BLOCKED
+
+**Out-of-Sample Validation:** NOT STARTED
+
+**Forward Testing:** NOT STARTED
+
+EA-086 is **not validated for live trading**.
+
+The failed baseline is retained unchanged as the reference experiment against which all subsequent EA-086 configurations must be compared.
+
+**Next Research Stage:** `EA086-RQ01 — Break Even Contribution Evaluation`
+
+[Research Documentation](../Research/EA-086_RSI_40_60/) | [Backtest](../Backtest/EA-086_RSI_40_60/) | [Testing Methodology](../docs/methodology.md)
 
 
 
