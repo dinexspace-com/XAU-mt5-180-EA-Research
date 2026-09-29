@@ -1394,6 +1394,43 @@ Future research will focus on RSI threshold sensitivity, RSI period, exit-manage
 
 [Source Code](../EAs/EA-086_RSI_40_60/) | [Backtest](../Backtest/EA-086_RSI_40_60/) | [Research](../Research/EA-086_RSI_40_60/)
 
+### 📌 EA-087 (Z-Score Mean Reversion - M1)
+
+A Z-Score mean-reversion Expert Advisor on XAUUSD M1 designed to investigate whether statistically extreme price deviations can provide short-term mean-reversion entry opportunities.
+
+The baseline configuration uses Z-Score Period 20, Z-Score Threshold 2.0, fixed Lot 0.01, SL 300, TP 600, with the strategy evaluated on XAUUSD.PRO M1 using 100% real ticks.
+
+**Baseline Backtest:** January–March 2026, 5,136 trades.
+
+**Result:** FAIL — Net Profit -$634.42, Profit Factor 0.90, Maximum Equity Drawdown 75.22%.
+
+[Source Code](../EAs/EA-087_Z-Score_2/) |
+[Backtest](../Backtest/EA-087_Z-Score_2/) |
+[Research](../Research/EA-087_Z-Score_2/)
+
+### 📌 EA-088 (Z-Score 2.5 Mean Reversion - M1)
+
+A Z-Score mean-reversion Expert Advisor on XAUUSD M1 using threshold-crossing signals combined with bullish/bearish candle confirmation.
+
+The baseline configuration uses Z-Score Period 20, Z-Score Threshold 2.5, fixed Lot 0.01, SL 300, TP 600, Break Even and Trailing Stop management.
+
+**Baseline Backtest:** January–March 2026, 100% real ticks, 1,484 trades.
+
+**Result:** FAIL — Net Profit -$123.57, Profit Factor 0.93, Maximum Equity Drawdown 18.79%.
+
+[Source Code](../EAs/EA-088_Z-Score_2_5/) |
+[Backtest](../Backtest/EA-088_Z-Score_2_5/) |
+[Research](../Research/EA-088_Z-Score_2_5/)
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6887,6 +6924,39 @@ The failed baseline is retained unchanged as the reference experiment against wh
 
 [Research Documentation](../Research/EA-086_RSI_40_60/) | [Backtest](../Backtest/EA-086_RSI_40_60/) | [Testing Methodology](../docs/methodology.md)
 
+### EA-087
+
+* [x] Baseline Backtest Completed
+* [x] Research & Experiment Framework Setup
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [ ] Experiment 01: Z-Score Period Optimization
+* [ ] Experiment 02: Z-Score Threshold Optimization
+* [ ] Experiment 03: Exit Management Optimization
+* [ ] Out-of-Sample Validation
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Z-Score Period 20 / Threshold 2.0 / Lot 0.01 / SL 300 / TP 600.
+
+**Baseline #01 Result:** 5,136 trades, Net Profit **-$634.42**, Profit Factor **0.90**, Maximum Equity Drawdown **75.22%**.
+
+### EA-088
+
+* [x] Baseline Backtest Completed
+* [x] Research & Experiment Framework Setup
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [ ] Experiment 01: Z-Score Period Optimization
+* [ ] Experiment 02: Z-Score Threshold Optimization
+* [ ] Experiment 03: Break Even & Trailing Stop Optimization
+* [ ] Out-of-Sample Validation
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Z-Score Period 20 / Threshold 2.5 / Lot 0.01 / SL 300 / TP 600 / Break Even ON / Trailing Stop ON.
+
+**Baseline #01 Result:** 1,484 trades, Net Profit **-$123.57**, Profit Factor **0.93**, Maximum Equity Drawdown **18.79%**.
 
 
 
