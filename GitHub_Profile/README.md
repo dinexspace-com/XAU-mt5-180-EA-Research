@@ -1422,6 +1422,48 @@ The baseline configuration uses Z-Score Period 20, Z-Score Threshold 2.5, fixed 
 [Backtest](../Backtest/EA-088_Z-Score_2_5/) |
 [Research](../Research/EA-088_Z-Score_2_5/)
 
+### 📌 EA-089 (EMA20 Distance - M1)
+
+An ATR-normalized EMA-distance trend-following EA on XAUUSD M1 designed to test whether a minimum separation between price and EMA20, measured relative to ATR volatility, can provide a standalone directional trading edge.
+
+BUY signals are generated when price is sufficiently below EMA20 by at least `ATR(14) × 1.5`, followed by bullish candle confirmation and recovery toward the EMA.
+
+SELL signals apply the inverse logic when price is sufficiently above EMA20 by at least `ATR(14) × 1.5`, followed by bearish candle confirmation and movement back toward the EMA.
+
+The baseline configuration uses EMA20, ATR Period 14, Distance ATR 1.5, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced 7,313 trades with Net Profit **-$597.97**, Profit Factor **0.93**, Expected Payoff **-$0.08**, Maximum Equity Drawdown **80.66%**, and Win Rate **50.69%**.
+
+Short trades produced a **51.32%** win rate across 3,759 trades, while Long trades produced a **50.03%** win rate across 3,554 trades.
+
+The baseline is classified as **FAIL** and retained as a research reference.
+
+The failed baseline does not establish that the broader EMA-distance concept has no trading edge. It establishes only that the tested EMA20 Distance configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+### 📌 EA-090 (EMA50 Distance - M1)
+
+An ATR-normalized EMA-distance trend-following EA on XAUUSD M1 designed to test whether a larger separation between price and EMA50, measured relative to ATR volatility, can provide a standalone directional trading edge.
+
+BUY signals are generated when price is sufficiently below EMA50 by at least `ATR(14) × 1.5`, followed by bearish-to-bullish candle confirmation and recovery toward the EMA.
+
+SELL signals apply the inverse logic when price is sufficiently above EMA50 by at least `ATR(14) × 1.5`, followed by bullish-to-bearish candle confirmation and movement back toward the EMA.
+
+The baseline configuration uses EMA50, ATR Period 14, Distance ATR 1.5, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced 7,170 trades with Net Profit **-$992.55**, Profit Factor **0.89**, Expected Payoff **-$0.14**, Maximum Equity Drawdown **99.26%**, and Win Rate **49.58%**.
+
+Short trades produced a **49.12%** win rate across 3,970 trades, while Long trades produced a **50.16%** win rate across 3,200 trades.
+
+The baseline is classified as **FAIL** and retained as a research reference.
+
+The failed baseline does not establish that the broader EMA-distance concept has no trading edge. It establishes only that the tested EMA50 Distance configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+
+
+
+
+
+
 
 
 
@@ -6958,6 +7000,41 @@ The failed baseline is retained unchanged as the reference experiment against wh
 
 **Baseline #01 Result:** 1,484 trades, Net Profit **-$123.57**, Profit Factor **0.93**, Maximum Equity Drawdown **18.79%**.
 
+### EA-089
+
+* [x] Baseline Backtest Completed
+* [x] Research & Experiment Framework Setup
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [ ] Experiment 01: EMA Period Optimization
+* [ ] Experiment 02: Distance ATR Threshold Optimization
+* [ ] Experiment 03: Break Even & Trailing Stop Optimization
+* [ ] Out-of-Sample Validation
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** XAUUSD.PRO / M1 / EMA20 / ATR Period 14 / Distance 1.5 ATR / Lot 0.01 / SL 300 / TP 600 / Break Even ON / Trailing Stop ON.
+
+**Baseline #01 Result:** 7,313 trades, Net Profit **-$597.97**, Profit Factor **0.93**, Maximum Equity Drawdown **80.66%**.
+
+---
+
+### EA-090
+
+* [x] Baseline Backtest Completed
+* [x] Research & Experiment Framework Setup
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [ ] Experiment 01: EMA Period Optimization
+* [ ] Experiment 02: Distance ATR Threshold Optimization
+* [ ] Experiment 03: Break Even & Trailing Stop Optimization
+* [ ] Out-of-Sample Validation
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** XAUUSD.PRO / M1 / EMA50 / ATR Period 14 / Distance 1.5 ATR / Lot 0.01 / SL 300 / TP 600 / Break Even ON / Trailing Stop ON.
+
+**Baseline #01 Result:** 7,170 trades, Net Profit **-$992.55**, Profit Factor **0.89**, Maximum Equity Drawdown **99.26%**.
 
 
 
