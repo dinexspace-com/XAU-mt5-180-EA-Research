@@ -1458,6 +1458,65 @@ The baseline is classified as **FAIL** and retained as a research reference.
 
 The failed baseline does not establish that the broader EMA-distance concept has no trading edge. It establishes only that the tested EMA50 Distance configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
 
+### 📌 EA-091 (VWAP Deviation - M1)
+
+A VWAP deviation-based mean-reversion EA on XAUUSD M1 designed to test whether price displacement from the intraday VWAP, normalized by ATR volatility, can provide a standalone short-term trading edge.
+
+The strategy uses intraday VWAP with a minimum history requirement and compares the distance between price and VWAP against `ATR(14) × VWAP Deviation`.
+
+BUY signals are generated when price becomes sufficiently below VWAP according to the configured ATR-based deviation threshold, followed by bullish recovery confirmation toward VWAP.
+
+SELL signals apply the inverse logic when price becomes sufficiently above VWAP, followed by bearish recovery confirmation toward VWAP.
+
+The baseline configuration uses VWAP minimum bars 20, ATR Period 14, VWAP Deviation ATR 1.0, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **10,893 trades** with Net Profit **-$993.41**, Profit Factor **0.93**, Expected Payoff **-$0.09**, Maximum Equity Drawdown **99.35%**, and Win Rate **50.50%**.
+
+Short trades produced a **50.26%** win rate across 6,415 trades, while Long trades produced a **50.85%** win rate across 4,478 trades.
+
+The average profitable trade was **+$2.25**, while the average losing trade was **-$2.48**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+The result does not establish that the broader VWAP deviation concept has no trading edge. It establishes only that the tested EA-091 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+**Current Status:** Research in progress. The baseline is not validated for live trading.
+
+### 📌 EA-092 (VWAP Bands - M1)
+
+A VWAP Bands mean-reversion EA on XAUUSD M1 designed to test whether price rejection from statistically derived VWAP deviation bands can provide a standalone short-term trading edge.
+
+The strategy calculates an intraday VWAP using typical price `(High + Low + Close) / 3` weighted by tick volume, together with a population weighted standard deviation to construct dynamic upper and lower VWAP bands.
+
+BUY signals are generated when price moves below the lower VWAP deviation band and then recovers back above the band with bullish confirmation.
+
+SELL signals apply the inverse logic when price moves above the upper VWAP deviation band and then returns below the band with bearish confirmation.
+
+Positions are managed with a VWAP-based exit: BUY positions are closed when price reaches VWAP, while SELL positions are closed when price returns to VWAP.
+
+The baseline configuration uses VWAP minimum bars 20, VWAP Band Multiplier 2.0, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Distance 100 / Step 10).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks and produced **927 trades** with Net Profit **-$172.04**, Profit Factor **0.85**, Expected Payoff **-$0.19**, Maximum Equity Drawdown **22.67%**, and Win Rate **51.13%**.
+
+The average profitable trade was **+$2.14**, while the average losing trade was **-$2.61**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+The result does not establish that the broader VWAP Bands concept has no trading edge. It establishes only that the tested EA-092 baseline configuration did not demonstrate positive expectancy under the documented XAUUSD.PRO M1 conditions.
+
+The baseline is retained for controlled research into VWAP band width, deviation sensitivity, VWAP exit behavior, SL/TP interaction, Break Even, Trailing Stop, and entry frequency.
+
+**Current Status:** Research in progress. The baseline is not validated for live trading.
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7035,6 +7094,47 @@ The failed baseline is retained unchanged as the reference experiment against wh
 **Baseline #01:** XAUUSD.PRO / M1 / EMA50 / ATR Period 14 / Distance 1.5 ATR / Lot 0.01 / SL 300 / TP 600 / Break Even ON / Trailing Stop ON.
 
 **Baseline #01 Result:** 7,170 trades, Net Profit **-$992.55**, Profit Factor **0.89**, Maximum Equity Drawdown **99.26%**.
+
+### EA-091
+
+* [x] Baseline Backtest Completed
+* [x] Research & Experiment Framework Setup
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [ ] Experiment 01: VWAP Deviation Threshold Evaluation
+* [ ] Experiment 02: ATR Normalization Evaluation
+* [ ] Experiment 03: BUY vs SELL Directional Evaluation
+* [ ] Experiment 04: Break Even & Trailing Stop Evaluation
+* [ ] Out-of-Sample Validation
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** XAUUSD.PRO / M1 / VWAP Minimum Bars 20 / ATR Period 14 / VWAP Deviation 1.0 ATR / Lot 0.01 / SL 300 / TP 600 / Maximum Spread 30 / Break Even ON / Trailing Stop ON.
+
+**Baseline #01 Result:** 10,893 trades, Net Profit **-$993.41**, Profit Factor **0.93**, Maximum Equity Drawdown **99.35%**.
+
+### EA-092
+
+* [x] Baseline Backtest Completed
+* [x] Research & Experiment Framework Setup
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [ ] Experiment 01: VWAP Band Multiplier Evaluation
+* [ ] Experiment 02: VWAP Exit Behavior Evaluation
+* [ ] Experiment 03: BUY vs SELL Directional Evaluation
+* [ ] Experiment 04: Break Even & Trailing Stop Evaluation
+* [ ] Out-of-Sample Validation
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** XAUUSD.PRO / M1 / VWAP Minimum Bars 20 / VWAP Band Multiplier 2.0 / Lot 0.01 / SL 300 / TP 600 / Maximum Spread 30 / Break Even ON / Trailing Stop ON.
+
+**Baseline #01 Result:** 927 trades, Net Profit **-$172.04**, Profit Factor **0.85**, Maximum Equity Drawdown **22.67%**.
+
+
+
+
+
 
 
 
