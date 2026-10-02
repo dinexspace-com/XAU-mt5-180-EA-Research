@@ -1508,6 +1508,37 @@ The baseline is retained for controlled research into VWAP band width, deviation
 
 **Current Status:** Research in progress. The baseline is not validated for live trading.
 
+## 🚀 Active Projects
+
+### 📌 EA-093 (Keltner Reversion - M1)
+
+A Keltner-style mean-reversion EA on XAUUSD M1 using EMA20 with ATR14-based deviation bands to identify extended price conditions and potential reversions toward the mean.
+
+The baseline configuration was tested on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks.
+
+**Baseline Result:** 6,886 trades, Net Profit **-$741.62**, Profit Factor **0.91**, Win Rate **50.17%**, and Maximum Balance Drawdown **86.40%**.
+
+The baseline is retained as a research reference. The strategy is **not validated for live trading**.
+
+### 📌 EA-094 (ATR Stretch 1.5 - M1)
+
+An ATR-based mean-reversion EA on XAUUSD M1 designed to identify price extensions beyond **1.5 × ATR(14)** from EMA20 and enter after a directional reversal candle confirms the return toward the mean.
+
+The baseline configuration uses EMA20, ATR14, ATR Multiplier 1.5, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled at 150 points, and Trailing Stop enabled from 200 points.
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 using 100% real ticks.
+
+**Baseline Result:** 8,479 trades, Net Profit **-$709.62**, Profit Factor **0.93**, Win Rate **50.76%**, and Maximum Equity Drawdown **94.44%**.
+
+The baseline is retained as a research reference. The strategy is **not validated for live trading**.
+
+
+
+
+
+
+
+
 
 
 
@@ -7131,6 +7162,58 @@ The failed baseline is retained unchanged as the reference experiment against wh
 
 **Baseline #01 Result:** 927 trades, Net Profit **-$172.04**, Profit Factor **0.85**, Maximum Equity Drawdown **22.67%**.
 
+## 📈 Current Projects Status
+
+### EA-093
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Parameter Evaluation
+* [ ] Entry Quality Evaluation
+* [ ] Exit Management Evaluation
+* [ ] Multi-Timeframe Evaluation
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Keltner-style Mean Reversion / EMA20 / ATR14 / Lot 0.01 / SL 300 / TP 600.
+
+**Baseline #01 Result:** 6,886 trades, Net Profit **-$741.62**, Profit Factor **0.91**, Win Rate **50.17%**, Maximum Balance Drawdown **86.40%**.
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+---
+
+### EA-094
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] EMA Period Evaluation
+* [ ] ATR Multiplier Evaluation
+* [ ] Entry Confirmation Evaluation
+* [ ] Break Even & Trailing Stop Evaluation
+* [ ] Multi-Timeframe Evaluation
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** XAUUSD.PRO / M1 / EMA20 / ATR14 / ATR Multiplier 1.5 / Lot 0.01 / SL 300 / TP 600 / Break Even ON / Trailing Stop ON.
+
+**Baseline #01 Result:** 8,479 trades, Net Profit **-$709.62**, Profit Factor **0.93**, Win Rate **50.76%**, Maximum Equity Drawdown **94.44%**.
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
 
 
 
