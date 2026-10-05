@@ -1,0 +1,170 @@
+# EA-095_ATR_Stretch_2_0
+
+## 1. Overview
+
+**EA Name:** EA-095_ATR_Stretch_2_0
+**Platform:** MetaTrader 5
+**Language:** MQL5
+**Market:** XAUUSD
+**Strategy Timeframe:** M1
+**Strategy Type:** ATR Stretch / EMA Pullback
+**Version:** 1.00
+
+EA-095_ATR_Stretch_2_0 is a short-term XAUUSD strategy that combines an ATR-based price extension condition with an EMA pullback/re-entry confirmation.
+
+The strategy attempts to identify situations where price has moved significantly away from the EMA and then produces a directional recovery candle.
+
+---
+
+## 2. Indicators
+
+### EMA
+
+* EMA Period: `20`
+* Applied Price: Close
+
+### ATR
+
+* ATR Period: `14`
+* ATR Multiplier: `2.0`
+
+The ATR is used to define an extended-price condition relative to the EMA.
+
+---
+
+## 3. Entry Logic
+
+### BUY
+
+A BUY signal is generated when all of the following conditions are satisfied:
+
+1. The previous reference candle closes below:
+
+   `EMA - ATR × ATR Multiplier`
+
+2. The most recently closed candle is bullish:
+
+   `Close > Open`
+
+3. The most recently closed candle closes above the previous candle's close:
+
+   `Close[1] > Close[2]`
+
+4. The most recently closed candle remains below the current EMA:
+
+   `Close[1] < EMA[1]`
+
+If all conditions are satisfied, the EA attempts to open a BUY position.
+
+### SELL
+
+A SELL signal is generated when all of the following conditions are satisfied:
+
+1. The previous reference candle closes above:
+
+   `EMA + ATR × ATR Multiplier`
+
+2. The most recently closed candle is bearish:
+
+   `Close < Open`
+
+3. The most recently closed candle closes below the previous candle's close:
+
+   `Close[1] < Close[2]`
+
+4. The most recently closed candle remains above the current EMA:
+
+   `Close[1] > EMA[1]`
+
+If all conditions are satisfied, the EA attempts to open a SELL position.
+
+---
+
+## 4. Trade Execution
+
+The EA uses market orders.
+
+Default execution parameters:
+
+| Parameter      |    Default |
+| -------------- | ---------: |
+| Lot Size       |       0.01 |
+| Stop Loss      | 300 points |
+| Take Profit    | 600 points |
+| Maximum Spread |  30 points |
+| Slippage       |  10 points |
+| Magic Number   |     123095 |
+| Timeframe      |         M1 |
+
+The EA checks broker trading permissions, symbol trading mode, spread, margin availability, stop-distance requirements, lot-size validity, and order-mode support before opening a trade.
+
+---
+
+## 5. Position Management
+
+### Break Even
+
+Break Even is enabled by default.
+
+| Parameter |    Default |
+| --------- | ---------: |
+| Enabled   |       true |
+| Trigger   | 150 points |
+| Offset    |   0 points |
+
+When floating profit reaches the configured trigger, the EA attempts to move the Stop Loss to the entry price plus/minus the configured offset.
+
+### Trailing Stop
+
+Trailing Stop is enabled by default.
+
+| Parameter |    Default |
+| --------- | ---------: |
+| Enabled   |       true |
+| Start     | 200 points |
+| Distance  | 100 points |
+| Step      |  10 points |
+
+Trailing Stop is managed tick-by-tick and respects the broker's stop and freeze levels.
+
+---
+
+## 6. Position Restrictions
+
+The EA attempts to maintain at most one relevant position/order.
+
+The entry logic also prevents a new trade when:
+
+* A position with the EA's Magic Number already exists.
+* A pending order with the EA's Magic Number already exists.
+* On a netting account, another position already exists for the same symbol.
+
+---
+
+## 7. Bar Processing
+
+The strategy evaluates entry conditions when a new bar appears on the configured timeframe.
+
+The EA starts from the next candle after initialization and does not immediately enter from an old signal present when the EA is attached.
+
+Position management continues on every tick.
+
+---
+
+## 8. Current Status
+
+The EA code is technically structured as a baseline research version.
+
+The current baseline backtest is **not profitable** and should not be considered production-ready.
+
+Further research should be performed through controlled experiments rather than unrestricted parameter optimization.
+
+---
+
+## 9. Research Identifier
+
+Suggested baseline experiment:
+
+`EA095-M1-BASELINE-001`
+
+This identifier should be used consistently when recording future tests against the current version.
