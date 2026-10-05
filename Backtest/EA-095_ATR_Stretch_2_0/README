@@ -1,0 +1,139 @@
+# EA-095_ATR_Stretch_2_0 — Baseline Backtest
+
+## Experiment ID
+
+`EA095-M1-BASELINE-001`
+
+## 1. Test Configuration
+
+| Parameter       | Value                   |
+| --------------- | ----------------------- |
+| Expert Advisor  | EA-095_ATR_Stretch_2_0  |
+| Symbol          | XAUUSD.PRO              |
+| Timeframe       | M1                      |
+| Test Period     | 2026.01.02 – 2026.03.31 |
+| Initial Deposit | $1,000                  |
+| Currency        | USD                     |
+| Leverage        | 1:500                   |
+| History Quality | 100% real ticks         |
+| Bars            | 85,161                  |
+| Ticks           | 39,639,179              |
+| Symbols         | 1                       |
+
+---
+
+## 2. EA Parameters
+
+| Parameter          |      Value |
+| ------------------ | ---------: |
+| Lot Size           |       0.01 |
+| Stop Loss          | 300 points |
+| Take Profit        | 600 points |
+| Magic Number       |     123095 |
+| Slippage           |         10 |
+| Maximum Spread     |  30 points |
+| Timeframe          |         M1 |
+| Break Even         |    Enabled |
+| Break Even Trigger | 150 points |
+| Break Even Offset  |          0 |
+| Trailing Stop      |    Enabled |
+| Trailing Start     | 200 points |
+| Trailing Distance  | 100 points |
+| Trailing Step      |  10 points |
+| EMA Period         |         20 |
+| ATR Period         |         14 |
+| ATR Multiplier     |        2.0 |
+
+---
+
+## 3. Performance Results
+
+| Metric                |          Result |
+| --------------------- | --------------: |
+| Initial Deposit       |       $1,000.00 |
+| Total Net Profit      |    **-$330.84** |
+| Approx. Final Balance |     **$669.16** |
+| Gross Profit          |       $5,730.53 |
+| Gross Loss            |      -$6,061.37 |
+| Profit Factor         |        **0.95** |
+| Expected Payoff       |      **-$0.07** |
+| Recovery Factor       |       **-0.67** |
+| Sharpe Ratio          |       **-5.00** |
+| AHPR                  | 0.9999 (-0.01%) |
+| GHPR                  | 0.9999 (-0.01%) |
+| LR Correlation        |           -0.76 |
+
+---
+
+## 4. Drawdown
+
+| Metric                    |           Result |
+| ------------------------- | ---------------: |
+| Balance Drawdown Absolute |          $479.69 |
+| Equity Drawdown Absolute  |          $479.96 |
+| Balance Drawdown Maximal  | $489.36 (48.47%) |
+| Equity Drawdown Maximal   | $491.14 (48.57%) |
+| Balance Drawdown Relative |           48.47% |
+| Equity Drawdown Relative  |           48.57% |
+
+---
+
+## 5. Trade Statistics
+
+| Metric               |             Result |
+| -------------------- | -----------------: |
+| Total Trades         |              4,971 |
+| Total Deals          |              9,942 |
+| Profit Trades        |     2,518 (50.65%) |
+| Loss Trades          |     2,453 (49.35%) |
+| Short Trades         | 2,511 (51.29% won) |
+| Long Trades          | 2,460 (50.00% won) |
+| Largest Profit Trade |              $7.97 |
+| Largest Loss Trade   |            -$18.35 |
+| Average Profit Trade |              $2.28 |
+| Average Loss Trade   |             -$2.47 |
+
+---
+
+## 6. Consecutive Results
+
+| Metric                     |              Result |
+| -------------------------- | ------------------: |
+| Maximum Consecutive Wins   |                  12 |
+| Maximum Consecutive Losses |                  12 |
+| Maximum Consecutive Profit |   $26.92 (5 trades) |
+| Maximum Consecutive Loss   | -$32.95 (12 trades) |
+| Average Consecutive Wins   |                   2 |
+| Average Consecutive Losses |                   2 |
+
+---
+
+## 7. Holding Time
+
+| Metric               |  Result |
+| -------------------- | ------: |
+| Minimum Holding Time | 0:00:01 |
+| Maximum Holding Time | 3:36:03 |
+| Average Holding Time | 0:01:57 |
+
+---
+
+## 8. Baseline Assessment
+
+**Classification: FAIL**
+
+The baseline configuration produced a negative net profit and a Profit Factor below 1.00.
+
+The strategy generated a high number of trades during the test period, but the resulting expectancy remained negative.
+
+The maximum equity drawdown reached 48.57%, which is high relative to the initial $1,000 account.
+
+Therefore, this baseline should be retained as the reference experiment but should not be treated as validated for live trading.
+
+---
+
+## 9. Research Rule
+
+`EA095-M1-BASELINE-001` must remain unchanged as the reference baseline.
+
+Future experiments should modify one major strategy component at a time and compare the result directly against this baseline.
