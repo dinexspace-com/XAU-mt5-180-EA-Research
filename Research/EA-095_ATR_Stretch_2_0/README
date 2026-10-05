@@ -1,0 +1,196 @@
+# Research — EA-095_ATR_Stretch_2_0
+
+## 1. Research Objective
+
+The objective of EA-095_ATR_Stretch_2_0 research is to determine whether an ATR-defined price stretch away from EMA20, followed by a directional recovery candle, can provide a repeatable trading edge on XAUUSD.
+
+The research is focused on identifying whether the underlying entry hypothesis has sufficient robustness before any production deployment or broad optimization.
+
+---
+
+## 2. Strategy Hypothesis
+
+The strategy is based on the following concept:
+
+> When price moves significantly away from EMA20 by a distance of at least ATR(14) × 2.0, a subsequent directional candle that moves back toward the EMA may provide a tradable mean-reversion signal.
+
+### BUY hypothesis
+
+Price first stretches below:
+
+`EMA20 - ATR(14) × 2.0`
+
+A subsequent bullish candle then:
+
+* closes above its open;
+* closes above the previous candle's close;
+* remains below EMA20.
+
+This creates a BUY signal.
+
+### SELL hypothesis
+
+Price first stretches above:
+
+`EMA20 + ATR(14) × 2.0`
+
+A subsequent bearish candle then:
+
+* closes below its open;
+* closes below the previous candle's close;
+* remains above EMA20.
+
+This creates a SELL signal.
+
+---
+
+## 3. Baseline Experiment
+
+### Experiment
+
+`EA095-M1-BASELINE-001`
+
+### Configuration
+
+* Symbol: XAUUSD.PRO
+* Timeframe: M1
+* EMA: 20
+* ATR: 14
+* ATR Multiplier: 2.0
+* Lot: 0.01
+* SL: 300 points
+* TP: 600 points
+* Break Even: 150 points
+* Trailing Start: 200 points
+* Trailing Distance: 100 points
+* Maximum Spread: 30 points
+
+### Test Period
+
+2026.01.02 – 2026.03.31
+
+---
+
+## 4. Baseline Result
+
+The baseline produced:
+
+* Net Profit: **-$330.84**
+* Profit Factor: **0.95**
+* Expected Payoff: **-$0.07**
+* Maximum Equity Drawdown: **48.57%**
+* Total Trades: **4,971**
+* Profit Trades: **50.65%**
+* Loss Trades: **49.35%**
+
+### Baseline Classification
+
+**FAIL**
+
+The baseline does not currently demonstrate positive expectancy.
+
+The result should therefore be treated as evidence against the current baseline configuration, not as evidence that the broader ATR Stretch hypothesis has been completely disproven.
+
+---
+
+## 5. Research Status
+
+| Research Item                 | Status      |
+| ----------------------------- | ----------- |
+| EA Code                       | COMPLETE    |
+| Baseline Backtest             | COMPLETE    |
+| Baseline Assessment           | COMPLETE    |
+| Baseline Classification       | FAIL        |
+| Controlled Research           | NOT STARTED |
+| Timeframe Evaluation          | NOT STARTED |
+| ATR Multiplier Evaluation     | NOT STARTED |
+| Entry Confirmation Evaluation | NOT STARTED |
+| Session Evaluation            | NOT STARTED |
+| BUY vs SELL Evaluation        | NOT STARTED |
+| Exit Management Evaluation    | NOT STARTED |
+| Longer Historical Test        | NOT STARTED |
+| Out-of-Sample Validation      | NOT STARTED |
+| Robustness Testing            | NOT STARTED |
+| Forward Testing               | NOT STARTED |
+| Production Ready              | NO          |
+
+---
+
+## 6. Research Sequence
+
+The research should proceed in controlled stages:
+
+```text
+EA095-M1-BASELINE-001
+        ↓
+Timeframe Evaluation
+        ↓
+ATR Multiplier Evaluation
+        ↓
+Entry Confirmation Evaluation
+        ↓
+Trading Session Evaluation
+        ↓
+BUY vs SELL Evaluation
+        ↓
+Exit Management Evaluation
+        ↓
+Longer Historical Test
+        ↓
+Out-of-Sample Validation
+        ↓
+Robustness Testing
+        ↓
+Forward Testing
+```
+
+Only one major strategy component should be changed in each controlled experiment.
+
+---
+
+## 7. Research Rules
+
+### Rule 1 — Preserve the baseline
+
+The baseline EA must remain unchanged.
+
+### Rule 2 — One major variable at a time
+
+Each experiment should isolate one strategy component.
+
+### Rule 3 — No broad optimization at the beginning
+
+Do not optimize multiple parameters simultaneously before understanding which component affects performance.
+
+### Rule 4 — Compare against baseline
+
+Every experiment must be compared with:
+
+`EA095-M1-BASELINE-001`
+
+### Rule 5 — Separate discovery from validation
+
+A result found on the same historical data used for research should not automatically be considered validated.
+
+### Rule 6 — No live deployment from baseline
+
+The current baseline is not production-ready.
+
+---
+
+## 8. Current Research Conclusion
+
+EA-095_ATR_Stretch_2_0 baseline does not currently show a profitable trading edge under the tested configuration.
+
+The baseline remains useful as a controlled reference point.
+
+The next research objective should be to determine whether the weakness comes from:
+
+1. the M1 timeframe;
+2. the ATR stretch threshold;
+3. the entry confirmation;
+4. trading-session effects;
+5. directional asymmetry between BUY and SELL;
+6. or the exit-management model.
+
+No conclusion should be drawn about the entire strategy family until these components have been tested independently.
