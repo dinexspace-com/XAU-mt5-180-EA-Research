@@ -1532,8 +1532,62 @@ The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-03-31 u
 
 The baseline is retained as a research reference. The strategy is **not validated for live trading**.
 
+### 📌 EA-095 (ATR Stretch 2.0 - M1)
 
+EA-095 is an ATR-based mean-reversion strategy for XAUUSD M1.
 
+The strategy identifies price extension beyond the EMA20 by 2.0 × ATR(14), then uses a recovery candle as the entry confirmation.
+
+**Baseline #01 Result:**
+
+* Trades: 4,971
+* Net Profit: **-$330.84**
+* Profit Factor: **0.95**
+* Max Equity Drawdown: **48.57%**
+* Classification: **FAIL**
+
+The baseline result is not suitable for live trading and requires controlled research before further optimization.
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+### 📌 EA-096 (Intraday Range Extension - M1)
+
+EA-096 is an intraday range-extension reversal strategy for XAUUSD M1.
+
+The strategy identifies price extension beyond the intraday range by 1.0 × ATR(14), followed by bullish or bearish recovery confirmation.
+
+**Baseline #01 Result:**
+
+* Trades: 86
+* Net Profit: **+$30.80**
+* Profit Factor: **1.37**
+* Max Equity Drawdown: **1.44%**
+* Recovery Factor: **2.11**
+* Sharpe Ratio: **49.56**
+* Classification: **PASS FOR FURTHER RESEARCH**
+
+The baseline result is positive, but the sample size is still too small for live-trading validation.
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+### 📌 EA-097 (Four Candle Reversal - M1)
+
+EA-097 is a four-candle reversal strategy for XAUUSD M1.
+
+The strategy detects four consecutive directional candles followed by a confirmation candle. BUY and SELL entries are determined by the reversal direction and confirmation close.
+
+**Baseline #01 Result:**
+
+* Trades: 4,642
+* Net Profit: **-$487.18**
+* Profit Factor: **0.91**
+* Win Rate: **50.58%**
+* Max Equity Drawdown: **61.57%**
+* Classification: **FAIL**
+
+The baseline result is not suitable for live trading and requires controlled research before further optimization.
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
 
 
 
@@ -7214,6 +7268,101 @@ The failed baseline is retained unchanged as the reference experiment against wh
 **Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
 
 **Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+### EA-095
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] ATR Multiplier Evaluation
+* [ ] EMA Period Evaluation
+* [ ] Recovery Candle / Entry Confirmation
+* [ ] BUY vs SELL Analysis
+* [ ] Session Analysis
+* [ ] Break-Even / Trailing Analysis
+* [ ] MTF Confirmation
+* [ ] Out-of-Sample Testing
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA095-M1-BASELINE-001`
+
+**Baseline #01 Result:** `FAIL — Net Profit -$330.84 | PF 0.95 | Max Equity DD 48.57%`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+### EA-096
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **PASS FOR FURTHER RESEARCH**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Historical Sample Evaluation
+* [ ] Extension ATR Evaluation
+* [ ] Minimum Range Bars Evaluation
+* [ ] Entry Confirmation Evaluation
+* [ ] Exit Management Evaluation
+* [ ] BUY vs SELL Analysis
+* [ ] Session Analysis
+* [ ] Break-Even / Trailing Analysis
+* [ ] MTF Confirmation
+* [ ] Out-of-Sample Testing
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA096-M1-BASELINE-001`
+
+**Baseline #01 Result:** `PASS FOR FURTHER RESEARCH — Net Profit +$30.80 | PF 1.37 | Max Equity DD 1.44% | 86 trades`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+**Next Research Stage:** `Historical Sample → Extension ATR → Minimum Range Bars → Entry Confirmation → Exit Management → Directional Analysis → Session Analysis → OOS → Walk-Forward / Robustness Testing`
+
+### EA-097
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Number of Consecutive Candles Evaluation
+* [ ] Confirmation Candle Rule Evaluation
+* [ ] Shadow Filter Evaluation
+* [ ] SL / TP Evaluation
+* [ ] Break-Even / Trailing Analysis
+* [ ] BUY vs SELL Analysis
+* [ ] Session Analysis
+* [ ] MTF Confirmation
+* [ ] Out-of-Sample Testing
+* [ ] Robustness Testing
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA097-M1-BASELINE-001`
+
+**Baseline #01 Result:** `FAIL — Net Profit -$487.18 | PF 0.91 | Max Equity DD 61.57%`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+
+
+
+
+
 
 
 
