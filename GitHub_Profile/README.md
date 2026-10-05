@@ -1589,8 +1589,87 @@ The baseline result is not suitable for live trading and requires controlled res
 
 **Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
 
+### 📌 EA-098 — Large Candle Reversal
 
+**Strategy:** Large Candle Reversal using ATR-based candle size and midpoint reversal confirmation.
 
+**Entry Logic:**
+
+* Detect large candle using `ATR(14) × 2.0`
+* **BUY:** Large bearish candle + next candle closes above the large candle midpoint
+* **SELL:** Large bullish candle + next candle closes below the large candle midpoint
+
+**Baseline:** `EA098-M1-BASELINE-001`
+
+**Baseline Result:** `FAIL`
+
+**Research Focus:**
+
+* Large candle ATR threshold
+* Reversal confirmation
+* Candle midpoint / close location
+* BUY vs SELL
+* SL/TP
+* Break-even / trailing stop
+* Trading session
+* Market regime
+* Out-of-sample validation
+* Robustness / Walk-forward
+
+### 📌 EA-099 — Spike Reversion
+
+**Strategy:** ATR-based spike detection with momentum and reversal confirmation.
+
+**Entry Logic:**
+
+* Detect spike candle using `ATR(14) × 2.0`
+* Require spike body ratio ≥ `70%`
+* **BUY:** Bearish spike + bullish recovery candle closes above spike close and remains inside spike body
+* **SELL:** Bullish spike + bearish recovery candle closes below spike close and remains inside spike body
+
+**Baseline:** `EA099-M1-BASELINE-001`
+
+**Baseline Result:** `FAIL`
+
+**Research Focus:**
+
+* Spike ATR threshold
+* Spike body ratio
+* Reversal confirmation
+* Momentum filter
+* ATR period
+* BUY vs SELL
+* Exit management
+* Trading session
+* Out-of-sample validation
+* Robustness / Walk-forward
+
+### 📌 EA-100 — Bollinger + RSI
+
+**Strategy:** Bollinger Bands + RSI mean-reversion entry on XAUUSD M1.
+
+**Entry Logic:**
+
+* **BUY:** Shift 1 Low touches/penetrates Lower Bollinger Band + RSI < 30
+* **SELL:** Shift 1 High touches/penetrates Upper Bollinger Band + RSI > 70
+
+**Baseline:** `EA100-M1-BASELINE-001`
+
+**Baseline Result:** `PASS FOR FURTHER RESEARCH`
+
+**Research Focus:**
+
+* Bollinger Band parameters
+* RSI parameters and thresholds
+* Entry confirmation
+* Candle/shadow structure
+* BUY vs SELL
+* SL/TP
+* Break-even / trailing stop
+* Trading session
+* Market regime
+* Out-of-sample validation
+* Robustness / Walk-forward
 
 
 
@@ -7358,8 +7437,100 @@ The failed baseline is retained unchanged as the reference experiment against wh
 
 **Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
 
+### EA-098 — Large Candle Reversal
 
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Parameter Evaluation
+* [ ] Entry Confirmation Evaluation
+* [ ] BUY vs SELL Evaluation
+* [ ] Exit Management Evaluation
+* [ ] Trading Session Evaluation
+* [ ] Market Regime Evaluation
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Test
+* [ ] Live Trading
 
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA098-M1-BASELINE-001`
+
+**Baseline #01 Result:** `FAIL`
+
+**Key Result:** Net Profit **-$114.76** | Profit Factor **0.86** | Max Equity DD **13.22%** | Trades **646**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Baseline failed; controlled research required before optimization`
+
+### EA-099 — Spike Reversion
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Parameter Evaluation
+* [ ] Spike / Candle Structure Evaluation
+* [ ] Reversal Confirmation Evaluation
+* [ ] Momentum Filter Evaluation
+* [ ] BUY vs SELL Evaluation
+* [ ] Exit Management Evaluation
+* [ ] Trading Session Evaluation
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Test
+* [ ] Live Trading
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA099-M1-BASELINE-001`
+
+**Baseline #01 Result:** `FAIL`
+
+**Key Result:** Net Profit **-$24.50** | Profit Factor **0.98** | Max Equity DD **12.91%** | Trades **864**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Baseline failed; controlled research required before optimization`
+
+### EA-100 — Bollinger + RSI
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **PASS FOR FURTHER RESEARCH**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Parameter Evaluation
+* [ ] Entry Confirmation Evaluation
+* [ ] Candle / Shadow Structure Evaluation
+* [ ] BUY vs SELL Evaluation
+* [ ] Exit Management Evaluation
+* [ ] Trading Session Evaluation
+* [ ] Market Regime Evaluation
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Test
+* [ ] Live Trading
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA100-M1-BASELINE-001`
+
+**Baseline #01 Result:** `PASS FOR FURTHER RESEARCH`
+
+**Key Result:** Net Profit **+$694.91** | Profit Factor **1.20** | Max Equity DD **5.57%** | Trades **3,096**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `CONTROLLED RESEARCH ONLY — Broad optimization blocked until research stages are completed`
 
 
 
