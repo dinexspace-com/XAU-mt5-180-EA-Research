@@ -1671,6 +1671,46 @@ The baseline result is not suitable for live trading and requires controlled res
 * Out-of-sample validation
 * Robustness / Walk-forward
 
+### 📌 EA-101 (Bollinger Pin Bar - M1)
+
+A Bollinger Bands mean-reversion EA on XAUUSD M1 designed to test whether Pin Bar candle structure at the outer Bollinger Bands can provide a short-term reversal trading edge.
+
+BUY signals require a bullish candle, a lower shadow at least 2.0 times the candle body, lower shadow at least 50% of the candle range, and the candle Low to touch or penetrate the Lower Bollinger Band.
+
+SELL signals require a bearish candle, an upper shadow at least 2.0 times the candle body, upper shadow at least 50% of the candle range, and the candle High to touch or penetrate the Upper Bollinger Band.
+
+The baseline configuration uses Bollinger Period 20, Deviation 2.0, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 200).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-04-01 using 100% real ticks and produced **3,207 trades** with Net Profit **-$393.88**, Profit Factor **0.90**, Expected Payoff **-$0.12**, Maximum Equity Drawdown **41.62%**, and Win Rate **49.39%**.
+
+The baseline is classified as **FAIL** and retained as the reference experiment for future controlled research.
+
+The strategy is **not validated for live trading**.
+
+### 📌 EA-102 (VWAP + RSI Mean Reversion - M1)
+
+A VWAP and RSI mean-reversion EA on XAUUSD M1 designed to test whether price remaining on the same side of the intraday VWAP combined with an RSI reversal condition can provide a short-term reversal trading edge.
+
+BUY signals require the previous close and signal close to remain below the Daily VWAP, RSI to be below the oversold threshold, and RSI to turn upward.
+
+SELL signals require the previous close and signal close to remain above the Daily VWAP, RSI to be above the overbought threshold, and RSI to turn downward.
+
+The Daily VWAP uses Typical Price `(High + Low + Close) / 3` weighted by tick volume.
+
+The baseline configuration uses RSI Period 14, Oversold 30, Overbought 70, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 200).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-04-01 using 100% real ticks and produced **1,863 trades** with Net Profit **+$38.60**, Profit Factor **1.02**, Expected Payoff **+$0.02**, Maximum Equity Drawdown **13.57%**, and Win Rate **49.97%**.
+
+The baseline is classified as **PASS FOR FURTHER RESEARCH**, not as a validated trading strategy.
+
+The positive result remains preliminary because the Profit Factor is only slightly above 1.00 and the net profitability is small relative to the number of trades and drawdown.
+
+
+
+
+
+
+
 
 
 
@@ -7532,6 +7572,86 @@ The failed baseline is retained unchanged as the reference experiment against wh
 
 **Optimization Status:** `CONTROLLED RESEARCH ONLY — Broad optimization blocked until research stages are completed`
 
+### EA-101
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-101_Bollinger_Pin_Bar/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-101_Bollinger_Pin_Bar/`)
+* [x] Baseline Experiment `EA101-M1-BASELINE-001` Assessed: **FAIL**
+* [x] Research Documentation Updated (`Research/EA-101_Bollinger_Pin_Bar/`)
+* [x] Research Methodology Updated (`docs/methodology.md`)
+* [ ] EA101-RQ01: Bollinger Period / Deviation Evaluation
+* [ ] EA101-RQ02: Pin Bar Shadow-to-Body Ratio Evaluation
+* [ ] EA101-RQ03: Pin Bar Shadow-to-Range Ratio Evaluation
+* [ ] EA101-RQ04: Entry Confirmation Evaluation
+* [ ] EA101-RQ05: BUY vs SELL Directional Evaluation
+* [ ] EA101-RQ06: Break Even Evaluation
+* [ ] EA101-RQ07: Trailing Stop Evaluation
+* [ ] EA101-RQ08: Stop Loss / Take Profit Evaluation
+* [ ] EA101-RQ09: Trading Session Evaluation
+* [ ] EA101-RQ10: Market Regime Evaluation
+* [ ] EA101-RQ11: Timeframe Evaluation
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Bollinger 20 / Deviation 2.0 / Pin Bar Shadow-to-Body >= 2.0 / Shadow-to-Range >= 50% / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 200).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Baseline #01 Result:** 3,207 trades, Net Profit **-$393.88**, Profit Factor **0.90**, Expected Payoff **-$0.12**, Maximum Equity Drawdown **41.62%**, Win Rate **49.39%**.
+
+The baseline configuration is rejected as a profitable candidate. EA-101 remains under research because the failed baseline does not establish that the broader Bollinger Pin Bar reversal hypothesis has no trading edge.
+
+The next controlled research should focus first on **Pin Bar structure and entry quality**, while keeping the remaining baseline components unchanged.
+
+### EA-102
+
+* [x] Strategy Code & Technical Specifications Setup (`EAs/EA-102_VWAP_RSI/`)
+* [x] Baseline Backtest Completed (#01) (`Backtest/EA-102_VWAP_RSI/`)
+* [x] Baseline Experiment `EA102-M1-BASELINE-001` Assessed: **PASS FOR FURTHER RESEARCH**
+* [x] Research Documentation Updated (`Research/EA-102_VWAP_RSI/`)
+* [x] Research Methodology Updated (`docs/methodology.md`)
+* [ ] EA102-RQ01: RSI Period Evaluation
+* [ ] EA102-RQ02: RSI Oversold / Overbought Threshold Evaluation
+* [ ] EA102-RQ03: RSI Reversal Confirmation Evaluation
+* [ ] EA102-RQ04: VWAP Relationship Evaluation
+* [ ] EA102-RQ05: VWAP Distance Filter Evaluation
+* [ ] EA102-RQ06: Entry Confirmation Evaluation
+* [ ] EA102-RQ07: BUY vs SELL Directional Evaluation
+* [ ] EA102-RQ08: Stop Loss / Take Profit Evaluation
+* [ ] EA102-RQ09: Break Even Evaluation
+* [ ] EA102-RQ10: Trailing Stop Evaluation
+* [ ] EA102-RQ11: Trading Session Evaluation
+* [ ] EA102-RQ12: Market Regime Evaluation
+* [ ] EA102-RQ13: Out-of-Sample Validation
+* [ ] EA102-RQ14: Robustness Testing
+* [ ] EA102-RQ15: Walk-Forward Validation
+* [ ] Forward Testing
+
+**Current Research Status:** `IN PROGRESS`
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+**Baseline #01:** XAUUSD.PRO / M1 / Daily VWAP / RSI14 / Oversold 30 / Overbought 70 / SL 300 / TP 600 / Lot 0.01 / Maximum Spread 30 / Break Even ON (Trigger 150 / Offset 0) / Trailing Stop ON (Start 200 / Distance 200).
+
+**Test Period:** 2026-01-02 → 2026-04-01 using 100% real ticks.
+
+**Baseline #01 Result:** 1,863 trades, Net Profit **+$38.60**, Profit Factor **1.02**, Expected Payoff **+$0.02**, Maximum Equity Drawdown **13.57%**, Win Rate **49.97%**.
+
+The baseline configuration is retained as a research candidate because it produced slightly positive expectancy and Profit Factor above 1.00.
+
+However, the edge is currently too thin to justify live trading or broad optimization.
+
+The next controlled research stage should isolate **RSI reversal quality and VWAP relationship/distance** before modifying the broader strategy architecture.
 
 
 
