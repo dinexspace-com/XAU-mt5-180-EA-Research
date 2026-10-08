@@ -1705,6 +1705,84 @@ The baseline is classified as **PASS FOR FURTHER RESEARCH**, not as a validated 
 
 The positive result remains preliminary because the Profit Factor is only slightly above 1.00 and the net profitability is small relative to the number of trades and drawdown.
 
+## 🚀 Active Projects
+
+### 📌 EA-103 — EMA20 + RSI
+
+**Strategy:**
+XAUUSD M1 mean-reversion strategy combining EMA20 distance with RSI14 oversold/overbought conditions.
+
+**Baseline:** `EA103-M1-BASELINE-001`
+
+**Baseline Result:** `PASS FOR FURTHER RESEARCH`
+
+**Baseline Performance:**
+
+* Net Profit: **+$2,636.37**
+* Profit Factor: **1.54**
+* Max Equity Drawdown: **2.43%**
+* Total Trades: **4,460**
+* Expected Payoff: **+$0.59**
+* Recovery Factor: **35.48**
+* Sharpe Ratio: **61.83**
+
+**Research Focus:**
+
+* EMA period
+* Minimum EMA distance
+* RSI period
+* RSI thresholds
+* Entry confirmation
+* BUY vs SELL behaviour
+* SL / TP
+* Break-even
+* Trailing Stop
+* Session behaviour
+* Market regime
+* Out-of-Sample testing
+* Robustness testing
+* Walk-forward validation
+
+## 🚀 Active Projects
+
+### 📌 EA-104 — Two Spike Reversion
+
+**Strategy:**
+XAUUSD M1 mean-reversion strategy based on two consecutive abnormal same-direction spike candles followed by a reversal confirmation candle.
+
+**Baseline:** `EA104-M1-BASELINE-001`
+
+**Baseline Result:** `FAIL`
+
+**Baseline Performance:**
+
+* Net Profit: **-$129.77**
+* Profit Factor: **0.83**
+* Max Equity Drawdown: **16.08%**
+* Total Trades: **590**
+* Win Rate: **47.80%**
+
+**Research Focus:**
+
+* Spike ATR threshold
+* ATR period
+* Two-spike sequence structure
+* Spike candle body/range characteristics
+* Reversal confirmation
+* Close location
+* BUY vs SELL behaviour
+* SL / TP
+* Break-even
+* Trailing Stop
+* Session behaviour
+* Market regime
+* Out-of-Sample testing
+* Robustness testing
+* Walk-forward validation
+
+
+
+
 
 
 
@@ -7652,6 +7730,73 @@ The baseline configuration is retained as a research candidate because it produc
 However, the edge is currently too thin to justify live trading or broad optimization.
 
 The next controlled research stage should isolate **RSI reversal quality and VWAP relationship/distance** before modifying the broader strategy architecture.
+
+## 📈 Current Projects Status
+
+### EA-103 — EMA20 + RSI
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **PASS FOR FURTHER RESEARCH**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Parameter Evaluation
+* [ ] Entry Logic Research
+* [ ] Exit Management Research
+* [ ] Directional Analysis
+* [ ] Session Analysis
+* [ ] Market Regime Analysis
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+* [ ] Live Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA103-M1-BASELINE-001`
+
+**Baseline #01 Result:** `PASS FOR FURTHER RESEARCH`
+
+**Performance:** Net Profit **+$2,636.37** | PF **1.54** | Max Equity DD **2.43%** | Trades **4,460**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `CONTROLLED RESEARCH ONLY — Broad optimization blocked until research stages are completed`
+
+
+## 📈 Current Projects Status
+
+### EA-104 — Two Spike Reversion
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Parameter Evaluation
+* [ ] Entry Logic Research
+* [ ] Exit Management Research
+* [ ] Directional Analysis
+* [ ] Session Analysis
+* [ ] Market Regime Analysis
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+* [ ] Live Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA104-M1-BASELINE-001`
+
+**Baseline #01 Result:** `FAIL`
+
+**Performance:** Net Profit **-$129.77** | PF **0.83** | Max Equity DD **16.08%** | Trades **590**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
 
 
 
