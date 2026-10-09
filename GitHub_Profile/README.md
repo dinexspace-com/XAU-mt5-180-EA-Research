@@ -1780,6 +1780,25 @@ XAUUSD M1 mean-reversion strategy based on two consecutive abnormal same-directi
 * Robustness testing
 * Walk-forward validation
 
+### 📌 EA-105 (Range Midpoint - M1)
+
+A range-midpoint trading EA on XAUUSD M1 designed to test whether price behavior around a defined range midpoint can provide a standalone short-term trading edge.
+
+The baseline test produced **2,589 trades**, Net Profit **-$400.13**, Profit Factor **0.87**, and Maximum Equity Drawdown **44.56%**.
+
+The baseline is classified as **FAIL** and retained as a research reference. Further work should investigate entry conditions, range definition, BUY vs. SELL behavior, exit management, trading-session effects, and market-regime filtering before considering additional optimization.
+
+### 📌 EA-106 (Session Sweep Reversion - M1)
+
+A session-range sweep reversal EA on XAUUSD M1 designed to test whether price breaking beyond a session high or low and then closing back inside the range can provide a short-term reversal trading edge.
+
+SELL signals are generated when a completed candle breaks above the session high and closes back below it. BUY signals are generated when a completed candle breaks below the session low and closes back above it.
+
+The baseline configuration uses a session range from 00:00 to 08:00, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled, and Trailing Stop enabled.
+
+The baseline test produced **569 trades** with Net Profit **-$142.71**, Profit Factor **0.81**, and Maximum Equity Drawdown **19.06%**.
+
+The baseline is classified as **FAIL** and retained as a research reference. Further work should verify session boundaries and broker server time, evaluate BUY vs. SELL performance, review sweep confirmation, and assess exit management before further optimization.
 
 
 
@@ -7798,6 +7817,73 @@ The next controlled research stage should isolate **RSI reversal quality and VWA
 
 **Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
 
+## 📈 Current Projects Status
+
+### EA-105 — Range Midpoint
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Range Definition Evaluation
+* [ ] Entry Logic Evaluation
+* [ ] BUY vs SELL Directional Evaluation
+* [ ] Exit Management Evaluation
+* [ ] Trading Session Evaluation
+* [ ] Market Regime Analysis
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+* [ ] Live Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA105-M1-BASELINE-001`
+
+**Baseline #01 Result:** `FAIL`
+
+**Performance:** Net Profit **-$400.13** | PF **0.87** | Max Equity DD **44.56%** | Trades **2,589**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+---
+
+### EA-106 — Session Sweep Reversion
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Session Time and Boundary Verification
+* [ ] Session High / Low Calculation Evaluation
+* [ ] BUY vs SELL Directional Evaluation
+* [ ] Sweep Confirmation Evaluation
+* [ ] Stop Loss / Take Profit Evaluation
+* [ ] Break Even Evaluation
+* [ ] Trailing Stop Evaluation
+* [ ] Market Regime Analysis
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+* [ ] Live Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA106-M1-BASELINE-001`
+
+**Baseline #01 Result:** `FAIL`
+
+**Performance:** Net Profit **-$142.71** | PF **0.81** | Max Equity DD **19.06%** | Trades **569**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Verify session-time implementation and conduct controlled research before broad parameter optimization`
 
 
 
