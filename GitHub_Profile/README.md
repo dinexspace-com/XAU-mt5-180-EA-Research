@@ -1832,7 +1832,29 @@ BUY trades produced a **49.90%** win rate across 1,437 trades, while SELL trades
 
 The baseline is classified as **FAIL** and retained as a research reference. The current configuration is not suitable for live trading. Further research should investigate VWAP interaction conditions, rejection confirmation, BUY vs. SELL behavior, trading-session effects, and exit management before considering additional optimization.
 
+### 📌 EA-109 (RSI 50 Cross - M1)
 
+An RSI-based directional EA on XAUUSD M1 designed to test whether crossings of the RSI 50 level can provide a standalone short-term momentum trading edge.
+
+BUY signals are generated when RSI crosses above the 50 level, while SELL signals are generated when RSI crosses below the 50 level.
+
+The baseline configuration uses RSI Period 14, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 200).
+
+The baseline test produced **153 trades** with Net Profit **-$18.67**, Profit Factor **0.90**, and Maximum Equity Drawdown **3.92%**.
+
+The baseline is classified as **FAIL** and retained as a research reference. Further research should verify RSI buffer indexing and signal-crossing implementation before evaluating entry logic, exit management, and parameter sensitivity.
+
+### 📌 EA-110 (RSI 60/40 - M1)
+
+An RSI threshold-based EA on XAUUSD M1 designed to test whether crossings of the RSI 60 and 40 levels can provide a short-term directional trading edge.
+
+The current implementation evaluates RSI threshold conditions to generate trading signals around the 60 and 40 levels. RSI buffer indexing and the intended signal direction require verification before the entry logic can be considered validated.
+
+The baseline configuration uses RSI Period 14, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 200).
+
+The baseline test produced **205 trades** with Net Profit **+$81.46**, Profit Factor **1.36**, and Maximum Equity Drawdown **3.40%**.
+
+The baseline is classified as **PASS FOR FURTHER RESEARCH**, not as a validated trading strategy. Further research should verify RSI buffer indexing and signal direction, reproduce the baseline, and evaluate directional performance, parameter sensitivity, and out-of-sample robustness.
 
 
 
@@ -7987,7 +8009,77 @@ The next controlled research stage should isolate **RSI reversal quality and VWA
 
 **Optimization Status:** `BLOCKED — Investigate baseline weaknesses through controlled research before broad parameter optimization`
 
+### EA-109 — RSI 50 Cross
 
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] RSI Buffer Indexing and Signal Logic Verification
+* [ ] RSI 50-Level Crossing Evaluation
+* [ ] BUY vs SELL Directional Evaluation
+* [ ] Entry Logic Research
+* [ ] Stop Loss / Take Profit Evaluation
+* [ ] Break Even Evaluation
+* [ ] Trailing Stop Evaluation
+* [ ] Trading Session Analysis
+* [ ] Market Regime Analysis
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+* [ ] Live Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA109-M1-BASELINE-001`
+
+**Baseline #01 Result:** `FAIL`
+
+**Performance:** Net Profit **-$18.67** | PF **0.90** | Max Equity DD **3.92%** | Trades **153**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Verify RSI buffer indexing and signal implementation before further optimization`
+
+---
+
+### EA-110 — RSI 60/40
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **PASS FOR FURTHER RESEARCH**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] RSI Buffer Indexing and Signal Direction Verification
+* [ ] RSI 60/40 Threshold Logic Evaluation
+* [ ] BUY vs SELL Directional Evaluation
+* [ ] Entry Logic Research
+* [ ] Stop Loss / Take Profit Evaluation
+* [ ] Break Even Evaluation
+* [ ] Trailing Stop Evaluation
+* [ ] Trading Session Analysis
+* [ ] Market Regime Analysis
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+* [ ] Live Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA110-M1-BASELINE-001`
+
+**Baseline #01 Result:** `PASS FOR FURTHER RESEARCH`
+
+**Performance:** Net Profit **+$81.46** | PF **1.36** | Max Equity DD **3.40%** | Trades **205**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `CONTROLLED RESEARCH ONLY — Verify RSI buffer indexing and signal direction before parameter optimization`
+
+---
 
 
 
