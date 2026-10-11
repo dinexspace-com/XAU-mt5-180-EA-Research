@@ -1800,7 +1800,37 @@ The baseline test produced **569 trades** with Net Profit **-$142.71**, Profit F
 
 The baseline is classified as **FAIL** and retained as a research reference. Further work should verify session boundaries and broker server time, evaluate BUY vs. SELL performance, review sweep confirmation, and assess exit management before further optimization.
 
+### 📌 EA-107 (Previous Day Extreme Reversion - M1)
 
+A previous-day extreme reversion EA on XAUUSD M1 designed to test whether price breaking beyond the previous day's High or Low and then closing back inside the level can provide a short-term reversal trading edge.
+
+SELL signals are generated when a completed candle breaks above the Previous Day High and closes back below it. BUY signals are generated when a completed candle breaks below the Previous Day Low and closes back above it.
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 200).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-04-01 using 100% real ticks and produced **693 trades** with Net Profit **-$152.75**, Profit Factor **0.83**, Expected Payoff **-$0.22**, Maximum Equity Drawdown **18.51%**, and Win Rate **44.59%**.
+
+BUY trades produced a **43.84%** win rate across 333 trades, while SELL trades produced a **45.28%** win rate across 360 trades.
+
+The baseline is classified as **FAIL** and retained as a research reference. Further research should focus on previous-day level calculation, rejection confirmation, BUY vs. SELL behavior, trading-session effects, and exit management before considering additional optimization.
+
+### 📌 EA-108 (VWAP Crossback - M1)
+
+A daily VWAP-based reversal EA on XAUUSD M1 designed to test whether price interaction with the intraday Volume Weighted Average Price (VWAP), combined with candle-direction confirmation, can provide a short-term trading edge.
+
+BUY signals require the earlier completed candle to close below its corresponding VWAP, followed by a bullish candle whose Low reaches the VWAP interaction zone while its Close remains below VWAP.
+
+SELL signals require the earlier completed candle to close above its corresponding VWAP, followed by a bearish candle whose High reaches the VWAP interaction zone while its Close remains above VWAP.
+
+The daily VWAP is calculated using Typical Price `(High + Low + Close) / 3` weighted by tick volume, from the broker's daily start.
+
+The baseline configuration uses fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 200).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-04-01 using 100% real ticks and produced **4,557 trades** with Net Profit **-$992.86**, Profit Factor **0.82**, Expected Payoff **-$0.22**, Maximum Equity Drawdown **99.30%**, and Win Rate **47.36%**.
+
+BUY trades produced a **49.90%** win rate across 1,437 trades, while SELL trades produced a **46.19%** win rate across 3,120 trades.
+
+The baseline is classified as **FAIL** and retained as a research reference. The current configuration is not suitable for live trading. Further research should investigate VWAP interaction conditions, rejection confirmation, BUY vs. SELL behavior, trading-session effects, and exit management before considering additional optimization.
 
 
 
@@ -7885,7 +7915,77 @@ The next controlled research stage should isolate **RSI reversal quality and VWA
 
 **Optimization Status:** `BLOCKED — Verify session-time implementation and conduct controlled research before broad parameter optimization`
 
+---
 
+### EA-107 — Previous Day Extreme Reversion
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Previous-Day High / Low Calculation Verification
+* [ ] Rejection Confirmation Evaluation
+* [ ] BUY vs SELL Directional Evaluation
+* [ ] Stop Loss / Take Profit Evaluation
+* [ ] Break Even Evaluation
+* [ ] Trailing Stop Evaluation
+* [ ] Trading Session Analysis
+* [ ] Market Regime Analysis
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+* [ ] Live Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA107-M1-BASELINE-001`
+
+**Baseline #01 Result:** `FAIL`
+
+**Performance:** Net Profit **-$152.75** | PF **0.83** | Max Equity DD **18.51%** | Trades **693**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Controlled research required before broad parameter optimization`
+
+---
+
+### EA-108 — VWAP Crossback
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Daily VWAP Calculation Verification
+* [ ] VWAP Interaction and Rejection Evaluation
+* [ ] Candle Confirmation Evaluation
+* [ ] BUY vs SELL Directional Evaluation
+* [ ] VWAP Buffer Evaluation
+* [ ] Stop Loss / Take Profit Evaluation
+* [ ] Break Even Evaluation
+* [ ] Trailing Stop Evaluation
+* [ ] Trading Session Analysis
+* [ ] Market Regime Analysis
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+* [ ] Live Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA108-M1-BASELINE-001`
+
+**Baseline #01 Result:** `FAIL`
+
+**Performance:** Net Profit **-$992.86** | PF **0.82** | Max Equity DD **99.30%** | Trades **4,557**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Investigate baseline weaknesses through controlled research before broad parameter optimization`
 
 
 
