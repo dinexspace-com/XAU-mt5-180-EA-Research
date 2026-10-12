@@ -1856,7 +1856,27 @@ The baseline test produced **205 trades** with Net Profit **+$81.46**, Profit Fa
 
 The baseline is classified as **PASS FOR FURTHER RESEARCH**, not as a validated trading strategy. Further research should verify RSI buffer indexing and signal direction, reproduce the baseline, and evaluate directional performance, parameter sensitivity, and out-of-sample robustness.
 
+### 📌 EA-111 (RSI 70/30 Continuation - M1)
 
+An RSI-based continuation EA on XAUUSD M1 designed to investigate whether RSI threshold transitions around the 70 and 30 levels can provide a standalone short-term trading edge.
+
+The current implementation generates BUY signals when RSI crosses upward through 70 with a bullish candle, and SELL signals when RSI crosses downward through 30 with a bearish candle. These implemented signal directions require verification against the strategy's intended logic before further optimization.
+
+The baseline uses RSI threshold levels 70/30. The initial backtest produced **1,964 trades**, Net Profit **-$716.22**, Profit Factor **0.73**, and Maximum Equity Drawdown **71.88%**.
+
+The baseline is classified as **FAIL** and retained as a research reference. The next step is to verify RSI buffer indexing and signal direction, then analyze BUY/SELL behavior and entry quality before changing parameters or trade management.
+
+### 📌 EA-112 (MACD Histogram Expansion - M1)
+
+A MACD histogram momentum-continuation EA on XAUUSD M1 designed to test whether expansion of the MACD histogram can provide a standalone directional trading edge.
+
+BUY signals require the MACD histogram to remain above zero and increase across recent completed candles. SELL signals require the histogram to remain below zero and become progressively more negative.
+
+The baseline configuration uses MACD 12/26/9, fixed Lot 0.01, SL 300, TP 600, Maximum Spread 30, Break Even enabled (Start 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 200).
+
+The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-04-01 using 100% real ticks. It produced **3,918 trades**, Net Profit **-$993.33**, Profit Factor **0.80**, and Maximum Equity Drawdown **99.33%**.
+
+The baseline is classified as **FAIL** and retained as a research reference. Further work should verify histogram buffer indexing, inspect entry and exit behavior, and evaluate BUY/SELL performance before considering any controlled changes.
 
 
 
@@ -8080,7 +8100,75 @@ The next controlled research stage should isolate **RSI reversal quality and VWA
 **Optimization Status:** `CONTROLLED RESEARCH ONLY — Verify RSI buffer indexing and signal direction before parameter optimization`
 
 ---
+### EA-111 — RSI 70/30 Continuation
 
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] RSI Buffer Indexing and Signal Direction Verification
+* [ ] RSI 70/30 Threshold Logic Evaluation
+* [ ] BUY vs SELL Directional Evaluation
+* [ ] Entry Logic Research
+* [ ] Stop Loss / Take Profit Evaluation
+* [ ] Break Even Evaluation
+* [ ] Trailing Stop Evaluation
+* [ ] Trading Session Analysis
+* [ ] Market Regime Analysis
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+* [ ] Live Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA111-M1-BASELINE-001`
+
+**Baseline #01 Result:** `FAIL`
+
+**Performance:** Net Profit **-$716.22** | PF **0.73** | Max Equity DD **71.88%** | Trades **1,964**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Verify RSI buffer indexing and signal direction before further optimization`
+
+---
+
+### EA-112 — MACD Histogram Expansion
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] MACD Histogram Buffer Indexing Verification
+* [ ] Histogram Expansion Logic Evaluation
+* [ ] BUY vs SELL Directional Evaluation
+* [ ] Entry Signal Analysis
+* [ ] Stop Loss / Take Profit Evaluation
+* [ ] Break Even Evaluation
+* [ ] Trailing Stop Evaluation
+* [ ] Trading Session Analysis
+* [ ] Market Regime Analysis
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+* [ ] Live Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline #01:** `EA112-M1-BASELINE-001`
+
+**Baseline #01 Result:** `FAIL`
+
+**Performance:** Net Profit **-$993.33** | PF **0.80** | Max Equity DD **99.33%** | Trades **3,918**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `BLOCKED — Verify MACD histogram indexing and entry/exit behavior before further optimization`
 
 
 
