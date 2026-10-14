@@ -1878,7 +1878,73 @@ The baseline test was performed on XAUUSD.PRO M1 from 2026-01-02 to 2026-04-01 u
 
 The baseline is classified as **FAIL** and retained as a research reference. Further work should verify histogram buffer indexing, inspect entry and exit behavior, and evaluate BUY/SELL performance before considering any controlled changes.
 
+## 🚀 Active Projects
 
+### 📌 EA-113 (MACD Zero Cross - M1)
+
+**Strategy Overview:**  
+A MACD-based momentum strategy that generates trading signals when the MACD main line crosses the zero level.
+
+**Entry Logic:**
+- BUY: MACD main line crosses above the zero level.
+- SELL: MACD main line crosses below the zero level.
+- Uses a single-position restriction per symbol and Magic Number.
+- Includes Stop Loss, Take Profit, Break-Even, and Trailing Stop management.
+
+**Baseline #01:** `EA113-M1-BASELINE-001`
+
+**Baseline #01 Result:**
+- Symbol: XAUUSD.PRO
+- Timeframe: M1
+- Net Profit: -$775.88
+- Profit Factor: 0.79
+- Expected Payoff: -$0.27
+- Maximum Equity Drawdown: 79.62%
+- Total Trades: 2,830
+- Win Rate: 45.58%
+- **Classification: FAIL**
+
+**Research Focus:**
+- Verify MACD buffer indexing and zero-cross signal timing.
+- Assess entry-signal quality before parameter optimization.
+- Conduct controlled evaluations and out-of-sample testing only after the entry logic is verified.
+
+**Validation Status:** NOT VALIDATED FOR LIVE TRADING
+
+---
+
+### 📌 EA-114 (ROC 5 - M1)
+
+**Strategy Overview:**  
+A Rate of Change (ROC) momentum strategy that uses a 5-period price change and a percentage threshold to identify directional momentum.
+
+**Entry Logic:**
+- BUY: ROC is greater than +0.10%.
+- SELL: ROC is lower than -0.10%.
+- ROC Period: 5.
+- Evaluates entry signals on a new chart bar.
+- Includes Stop Loss, Take Profit, Break-Even, Trailing Stop, and maximum-spread filtering.
+
+**Baseline #01:** `EA114-M1-BASELINE-001`
+
+**Baseline #01 Result:**
+- Symbol: XAUUSD.PRO
+- Timeframe: M1
+- Net Profit: -$994.73
+- Profit Factor: 0.91
+- Expected Payoff: -$0.11
+- Maximum Equity Drawdown: 99.47%
+- Total Trades: 8,823
+- Win Rate: 45.31%
+- **Classification: FAIL**
+
+**Research Focus:**
+- Assess whether the ROC threshold provides a measurable entry edge.
+- Investigate the high trade frequency and transaction-cost sensitivity.
+- Review entry timing and signal quality before any broad parameter optimization.
+- Require controlled testing and out-of-sample validation before further advancement.
+
+**Validation Status:** NOT VALIDATED FOR LIVE TRADING
 
 
 
@@ -8170,7 +8236,57 @@ The next controlled research stage should isolate **RSI reversal quality and VWA
 
 **Optimization Status:** `BLOCKED — Verify MACD histogram indexing and entry/exit behavior before further optimization`
 
+## 📈 Current Projects Status
 
+### EA-113 — MACD Zero Cross
+
+- [x] EA implementation completed
+- [x] Baseline backtest completed
+- [x] Baseline performance assessed
+- [x] Research documentation prepared
+- [ ] Verify MACD buffer indexing and zero-cross timing
+- [ ] Conduct controlled entry-signal evaluation
+- [ ] Out-of-sample testing
+- [ ] Robustness testing
+- [ ] Forward testing
+
+**Current Research Status:** IN PROGRESS
+
+**Baseline #01:** `EA113-M1-BASELINE-001`
+
+**Key Result:** Net Profit -$775.88 | PF 0.79 | Equity DD 79.62% | 2,830 trades
+
+**Baseline Classification:** FAIL
+
+**Validation Status:** NOT VALIDATED FOR LIVE TRADING
+
+**Optimization Status:** BLOCKED — Verify signal implementation and establish entry edge before broad parameter optimization.
+
+---
+
+### EA-114 — ROC 5
+
+- [x] EA implementation completed
+- [x] Baseline backtest completed
+- [x] Baseline performance assessed
+- [x] Research documentation prepared
+- [ ] Conduct controlled ROC threshold evaluation
+- [ ] Assess transaction-cost sensitivity
+- [ ] Out-of-sample testing
+- [ ] Robustness testing
+- [ ] Forward testing
+
+**Current Research Status:** IN PROGRESS
+
+**Baseline #01:** `EA114-M1-BASELINE-001`
+
+**Key Result:** Net Profit -$994.73 | PF 0.91 | Equity DD 99.47% | 8,823 trades
+
+**Baseline Classification:** FAIL
+
+**Validation Status:** NOT VALIDATED FOR LIVE TRADING
+
+**Optimization Status:** BLOCKED — Establish a measurable entry edge and assess trade-frequency and cost sensitivity before broad parameter optimization.
 
 
 
