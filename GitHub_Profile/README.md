@@ -1946,7 +1946,122 @@ A Rate of Change (ROC) momentum strategy that uses a 5-period price change and a
 
 **Validation Status:** NOT VALIDATED FOR LIVE TRADING
 
+### 📌 EA-115 — Rate of Change (ROC 10)
 
+**Strategy:** Rate of Change momentum strategy using a 10-period ROC signal on XAUUSD M1.
+
+**Baseline Result:** `FAIL`
+
+**Performance:** Net Profit **-$991.85** | Profit Factor **0.88** | Maximum Equity Drawdown **99.20%** | Trades **6,185**
+
+**Research Focus:**
+
+- ROC signal direction and threshold
+- Momentum confirmation and entry timing
+- BUY vs SELL performance
+- Stop Loss and Take Profit behavior
+- Break-even and trailing-stop effects
+- Trading-session and market-regime filters
+- Out-of-sample and robustness validation
+
+**Assessment:** The baseline suffered near-total equity drawdown and negative net profit. The current configuration is rejected as a profitable candidate. Further work should begin with signal diagnostics and risk controls, not broad parameter optimization.
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `CONTROLLED RESEARCH ONLY — Broad optimization blocked until research stages are completed`
+
+[Source Code](../EAs/EA-115/) | [Backtest](../Backtest/EA-115/) | [Research](../Research/EA-115/)
+
+---
+
+### 📌 EA-116 — Price Velocity (3)
+
+**Strategy:** Short-horizon price-velocity strategy using a velocity lookback of 3 on XAUUSD M1.
+
+**Baseline Result:** `FAIL`
+
+**Performance:** Net Profit **-$994.08** | Profit Factor **0.91** | Relative Drawdown **99.47%** | Sharpe Ratio **-5.00** | Trades **8,025**
+
+**Research Focus:**
+
+- Velocity calculation and signal threshold
+- Short-term noise and false-signal reduction
+- Entry timing and confirmation
+- BUY vs SELL performance
+- Exit management and risk limits
+- Trading-session and market-regime filters
+- Out-of-sample and robustness validation
+
+**Assessment:** The baseline produced a severe loss and near-total relative drawdown. The high trade count did not translate into positive performance. The current configuration is rejected as a profitable candidate.
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `CONTROLLED RESEARCH ONLY — Broad optimization blocked until research stages are completed`
+
+[Source Code](../EAs/EA-116/) | [Backtest](../Backtest/EA-116/) | [Research](../Research/EA-116/)
+
+---
+
+### 📌 EA-117 — Price Velocity (8)
+
+**Strategy:** Price-velocity strategy using a longer lookback of 8 on XAUUSD M1, intended to investigate a different momentum measurement horizon.
+
+**Baseline Result:** `FAIL`
+
+**Performance:** Net Profit **-$992.62** | Profit Factor **0.90** | Relative Drawdown **99.32%** | Sharpe Ratio **-5.00** | Trades **7,128**
+
+**Research Focus:**
+
+- Compare velocity lookback 8 against the lookback-3 baseline
+- Evaluate signal sensitivity and entry frequency
+- Investigate false signals and momentum persistence
+- BUY vs SELL performance
+- Stop Loss, Take Profit and position management
+- Trading-session and market-regime filters
+- Out-of-sample and robustness validation
+
+**Assessment:** The baseline resulted in a near-total relative drawdown and negative net profit. The longer velocity lookback did not establish a profitable baseline. Any comparison with EA-116 should use controlled, comparable test conditions.
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `CONTROLLED RESEARCH ONLY — Broad optimization blocked until research stages are completed`
+
+[Source Code](../EAs/EA-117/) | [Backtest](../Backtest/EA-117/) | [Research](../Research/EA-117/)
+
+---
+
+### 📌 EA-118 — Body Momentum
+
+**Strategy:** Candle-body momentum strategy on XAUUSD M1. It looks for a large completed candle whose body is at least 1.5 times the average body size of the preceding 20 candles, with the close near the candle extreme.
+
+**Entry Logic:**
+
+- **BUY:** Bullish signal candle, body size meets the configured multiplier, and close-location ratio is at least 0.75.
+- **SELL:** Bearish signal candle, body size meets the configured multiplier, and close-location ratio is at least 0.75.
+
+**Baseline Result:** `FAIL`
+
+**Performance:** Net Profit **-$992.26** | Profit Factor **0.74** | Expected Payoff **-$0.34** | Sharpe Ratio **-5.00** | Maximum Equity Drawdown **99.24%** | Trades **2,911** | Win Rate **45.89%**
+
+**Baseline Configuration:** Lot 0.01 / SL 300 points / TP 600 points / Maximum Spread 30 / Break Even enabled (Trigger 150, Offset 0) / Trailing Stop enabled (Start 200, Distance 200) / Average Body Period 20 / Body Multiplier 1.50 / Extreme Close Ratio 0.75.
+
+**Research Focus:**
+
+- Body-size multiplier and average-body lookback
+- Close-location threshold
+- BUY vs SELL performance
+- Momentum continuation vs exhaustion
+- Stop Loss, Take Profit and trailing-stop behavior
+- Trading-session and market-regime filters
+- Out-of-sample and robustness validation
+
+**Assessment:** The baseline lost almost the entire initial deposit. Although the strategy generated 2,911 trades, its Profit Factor of 0.74 and negative expectancy indicate that the current configuration is not profitable in this test.
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `CONTROLLED RESEARCH ONLY — Broad optimization blocked until research stages are completed`
+
+[Source Code](../EAs/EA-118_Body_Momentum/) | [Backtest](../Backtest/EA-118_Body_Momentum/) | [Research](../Research/EA-118_Body_Momentum/)
 
 
 
@@ -8288,7 +8403,129 @@ The next controlled research stage should isolate **RSI reversal quality and VWA
 
 **Optimization Status:** BLOCKED — Establish a measurable entry edge and assess trade-frequency and cost sensitivity before broad parameter optimization.
 
+### EA-115 — Rate of Change (ROC 10)
 
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] ROC Threshold and Signal Evaluation
+* [ ] Entry Confirmation Evaluation
+* [ ] BUY vs SELL Directional Analysis
+* [ ] Exit Management Evaluation
+* [ ] Trading Session Analysis
+* [ ] Market Regime Analysis
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+* [ ] Live Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline Result:** `FAIL`
+
+**Performance:** Net Profit **-$991.85** | Profit Factor **0.88** | Maximum Equity DD **99.20%** | Trades **6,185**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `CONTROLLED RESEARCH ONLY — Broad optimization blocked until research stages are completed`
+
+---
+
+### EA-116 — Price Velocity (3)
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Velocity Calculation and Threshold Evaluation
+* [ ] Signal Noise and Entry Confirmation Evaluation
+* [ ] BUY vs SELL Directional Analysis
+* [ ] Exit Management Evaluation
+* [ ] Trading Session Analysis
+* [ ] Market Regime Analysis
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+* [ ] Live Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline Result:** `FAIL`
+
+**Performance:** Net Profit **-$994.08** | Profit Factor **0.91** | Relative DD **99.47%** | Sharpe Ratio **-5.00** | Trades **8,025**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `CONTROLLED RESEARCH ONLY — Broad optimization blocked until research stages are completed`
+
+---
+
+### EA-117 — Price Velocity (8)
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Velocity Lookback Comparison Against EA-116
+* [ ] Signal Threshold and Entry Confirmation Evaluation
+* [ ] BUY vs SELL Directional Analysis
+* [ ] Exit Management Evaluation
+* [ ] Trading Session Analysis
+* [ ] Market Regime Analysis
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+* [ ] Live Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline Result:** `FAIL`
+
+**Performance:** Net Profit **-$992.62** | Profit Factor **0.90** | Relative DD **99.32%** | Sharpe Ratio **-5.00** | Trades **7,128**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `CONTROLLED RESEARCH ONLY — Broad optimization blocked until research stages are completed`
+
+---
+
+### EA-118 — Body Momentum
+
+* [x] Strategy Code & Technical Specifications Setup
+* [x] Baseline Backtest Completed (#01)
+* [x] Baseline Experiment #01 Assessed: **FAIL**
+* [x] Research Documentation Updated
+* [x] Research Methodology Updated
+* [ ] Average Body Period Evaluation
+* [ ] Body Multiplier Evaluation
+* [ ] Extreme Close Ratio Evaluation
+* [ ] BUY vs SELL Directional Analysis
+* [ ] Momentum Continuation vs Exhaustion Analysis
+* [ ] Exit Management Evaluation
+* [ ] Trading Session Analysis
+* [ ] Market Regime Analysis
+* [ ] Out-of-Sample Validation
+* [ ] Robustness Testing
+* [ ] Walk-Forward Validation
+* [ ] Forward Testing
+* [ ] Live Validation
+
+**Current Research Status:** `IN PROGRESS`
+
+**Baseline Result:** `FAIL`
+
+**Performance:** Net Profit **-$992.26** | Profit Factor **0.74** | Expected Payoff **-$0.34** | Maximum Equity DD **99.24%** | Trades **2,911** | Win Rate **45.89%**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** `CONTROLLED RESEARCH ONLY — Broad optimization blocked until research stages are completed`
 
 
 
