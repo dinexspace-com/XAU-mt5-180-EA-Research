@@ -2063,7 +2063,31 @@ A Rate of Change (ROC) momentum strategy that uses a 5-period price change and a
 
 [Source Code](../EAs/EA-118_Body_Momentum/) | [Backtest](../Backtest/EA-118_Body_Momentum/) | [Research](../Research/EA-118_Body_Momentum/)
 
+### 📌 EA-119 — Three Candle Momentum
 
+**Strategy:** Three-Candle Momentum  
+**Market:** XAUUSD.PRO  
+**Timeframe:** M1  
+**Baseline:** `EA119-M1-BASELINE-001`
+
+**Entry Logic**
+- **BUY:** Three consecutive candles with strictly increasing closing prices.
+- **SELL:** Three consecutive candles with strictly decreasing closing prices.
+- Entries are evaluated on a new bar using completed candles.
+- Includes Stop Loss, Take Profit, Break-Even, Trailing Stop, and a maximum spread filter.
+
+**Baseline Result**
+- Net Profit: **-$992.47**
+- Profit Factor: **0.71**
+- Max Equity Drawdown: **99.27%**
+- Total Trades: **2,650**
+
+**Research Focus**
+- Investigate the negative expectancy and excessive drawdown.
+- Evaluate entry filters and exit management under controlled experiments.
+- Test robustness before considering further development.
+
+**Current Status:** ❌ FAIL — Baseline results do not support progression toward live trading.
 
 
 
@@ -8527,7 +8551,26 @@ The next controlled research stage should isolate **RSI reversal quality and VWA
 
 **Optimization Status:** `CONTROLLED RESEARCH ONLY — Broad optimization blocked until research stages are completed`
 
+## 📈 Current Projects Status
 
+### EA-119 — Three Candle Momentum
+
+- [x] EA source code implemented
+- [x] Baseline backtest completed
+- [x] Baseline results documented
+- [ ] Identify causes of negative expectancy
+- [ ] Conduct controlled parameter and filter experiments
+- [ ] Perform out-of-sample and robustness testing
+- [ ] Validate with additional market conditions
+- [ ] Approve for live trading
+
+**Current Research Status:** FAIL — Baseline  
+**Baseline ID:** `EA119-M1-BASELINE-001`  
+**Key Result:** Net Profit -$992.47 | Profit Factor 0.71 | Max Equity DD 99.27% | 2,650 trades  
+**Validation Status:** NOT VALIDATED FOR LIVE TRADING  
+**Optimization Status:** Broad optimization on hold pending controlled research
+
+**Decision:** Do not deploy this baseline to a live account. Investigate the strategy's expectancy and risk profile before proceeding.
 
 
 
