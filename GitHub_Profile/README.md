@@ -2089,7 +2089,25 @@ A Rate of Change (ROC) momentum strategy that uses a 5-period price change and a
 
 **Current Status:** ❌ FAIL — Baseline results do not support progression toward live trading.
 
+### 📌 EA-120 (Five Candle Momentum - M1)
 
+A short-term momentum research Expert Advisor designed to evaluate whether the directional movement represented by a five-period linear regression slope can provide a measurable trading edge on XAUUSD M1.
+
+The strategy calculates a linear regression slope using the closing prices of the previous five completed candles. The calculated slope is then used to determine the trade direction. When the slope is negative, the EA generates a BUY signal; when the slope is positive, it generates a SELL signal. No trade is opened when the slope equals zero.
+
+The EA evaluates entry conditions on each new M1 bar and applies a maximum spread filter before opening a position. It allows only one open position for the same symbol and Magic Number, helping control simultaneous exposure from this EA.
+
+The baseline configuration uses fixed Lot 0.01, Stop Loss 300 points, Take Profit 600 points, Maximum Spread 30 points, Break-Even enabled (Trigger 150 points / Offset 0), and Trailing Stop enabled (Start 200 points / Distance 200 points).
+
+The baseline test was performed on XAUUSD.PRO M1 from January 2 to April 1, 2026, using 100% real ticks and an initial deposit of $1,000. The test produced **5,012 trades**, Net Profit **-$992.60**, Profit Factor **0.84**, Expected Payoff **-$0.20**, Maximum Equity Drawdown **99.28%**, Win Rate **48.16%**, and Sharpe Ratio **-5.00**.
+
+The baseline is classified as **FAIL** because it produced negative net profit, a Profit Factor below 1.00, negative expected payoff, and near-total equity drawdown.
+
+**Implementation Note:** Despite the project name, the current implementation does not explicitly require five consecutive bullish or bearish candles. Its entry logic is based on a five-period linear regression slope, with negative slope mapped to BUY and positive slope mapped to SELL.
+
+The result is retained as the reference baseline for controlled research into slope calculation, signal direction, entry quality, BUY vs SELL performance, transaction costs, market conditions, and exit management.
+
+Further experiments should isolate the signal logic and investigate the causes of negative expectancy before broad parameter optimization. Out-of-sample validation, robustness testing, and forward testing are required before any live-trading consideration.
 
 
 
@@ -8572,7 +8590,33 @@ The next controlled research stage should isolate **RSI reversal quality and VWA
 
 **Decision:** Do not deploy this baseline to a live account. Investigate the strategy's expectancy and risk profile before proceeding.
 
+### EA-120 — Five Candle Momentum
 
+* [x] EA source code implemented
+* [x] Baseline backtest completed
+* [x] Baseline results documented
+* [ ] Verify linear regression slope calculation and BUY/SELL direction mapping
+* [ ] Investigate causes of negative expectancy
+* [ ] Conduct controlled entry logic and parameter experiments
+* [ ] Evaluate BUY vs SELL directional performance
+* [ ] Evaluate Break-Even and Trailing Stop behavior
+* [ ] Perform out-of-sample and robustness testing
+* [ ] Validate with additional market conditions
+* [ ] Approve for live trading
+
+**Current Research Status:** FAIL — Baseline
+
+**Baseline ID:** `EA120-M1-BASELINE-001`
+
+**Key Result:** Net Profit **-$992.60** | Profit Factor **0.84** | Max Equity DD **99.28%** | **5,012 trades** | Win Rate **48.16%**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** Broad optimization on hold pending signal logic verification and controlled research.
+
+**Implementation Note:** Despite the EA name, the current source code does not require five consecutive bullish or bearish candles. It uses a 5-period linear regression slope, with negative slope mapped to BUY and positive slope mapped to SELL.
+
+**Decision:** Do not deploy this baseline to a live account. Investigate the negative expectancy and near-total equity drawdown before proceeding with further experiments.
 
 
 
