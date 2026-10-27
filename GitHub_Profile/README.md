@@ -2109,7 +2109,189 @@ The result is retained as the reference baseline for controlled research into sl
 
 Further experiments should isolate the signal logic and investigate the causes of negative expectancy before broad parameter optimization. Out-of-sample validation, robustness testing, and forward testing are required before any live-trading consideration.
 
+### 📌 EA-121 (ADX Rising - M1)
 
+An ADX-based trend-following Expert Advisor on XAUUSD M1 designed to test whether increasing trend strength, combined with directional movement confirmation, can provide a standalone short-term directional trading edge.
+
+The strategy uses ADX Period 14. BUY and SELL decisions are based on a rising ADX main line and the relative strength of the +DI and -DI components. The EA evaluates directional strength rather than relying on a moving-average crossover.
+
+The baseline configuration uses fixed Lot 0.01, Stop Loss 300 points, Take Profit 600 points, Break-Even enabled (Trigger 150), Trailing Stop enabled (Start 200 / Distance 200), and Maximum Spread 30.
+
+The baseline test was performed on XAUUSD.PRO M1 using the documented Strategy Tester configuration. It produced **3,840 trades**, Net Profit **-$993.01**, Profit Factor **0.80**, Maximum Equity Drawdown approximately **99.30%**, and Win Rate **47.06%**.
+
+The baseline is classified as **FAIL** because the tested configuration generated negative net profit, a Profit Factor below 1.00, and near-total equity drawdown.
+
+The result is retained as a research reference for investigating ADX slope, directional movement strength, trend-regime selection, and exit management.
+
+### 📌 EA-122 (DI Cross - M1)
+
+A Directional Movement Index crossover EA on XAUUSD M1 designed to test whether changes in directional dominance between +DI and -DI, combined with an EMA20 trend filter, can provide a measurable short-term trading edge.
+
+BUY signals require a bullish directional movement crossover with the appropriate EMA20 confirmation. SELL signals use the corresponding bearish directional movement crossover and trend confirmation.
+
+The baseline configuration uses ADX Period 14, EMA20, fixed Lot 0.01, Stop Loss 300 points, Take Profit 600 points, Maximum Spread 30, Break-Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Distance 200).
+
+The baseline test produced **3,647 trades**, Net Profit **-$992.57**, Profit Factor **0.79**, Maximum Equity Drawdown approximately **99.30%**, and Win Rate **45.13%**.
+
+The baseline is classified as **FAIL**.
+
+The result indicates that the tested DI crossover and EMA20 filter combination did not establish positive expectancy under the documented historical conditions.
+
+Future research should focus on crossover quality, directional movement separation, EMA filter sensitivity, volatility conditions, and exit management.
+
+### 📌 EA-123 (EMA Distance Expansion - M1)
+
+An EMA distance-expansion EA on XAUUSD M1 designed to investigate whether increasing separation between fast and slow exponential moving averages can identify profitable trend-continuation opportunities.
+
+The strategy uses EMA8 and EMA21. BUY signals require bullish EMA alignment, an expanding EMA distance, and an upward fast-EMA slope. SELL signals require bearish alignment, expanding separation, and a downward fast-EMA slope.
+
+The default distance-expansion factor is 1.2, requiring the EMA gap to expand relative to its previous value.
+
+The baseline configuration uses fixed Lot 0.01, Stop Loss 300 points, Take Profit 600 points, Maximum Spread 30, Break-Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Distance 200).
+
+The baseline test produced **6,598 trades**, Net Profit **-$994.33**, Profit Factor **0.88**, Maximum Equity Drawdown **99.45%**, and Win Rate **46.15%**.
+
+The baseline is classified as **FAIL**.
+
+The tested EMA separation logic generated substantial trading activity but did not demonstrate positive expectancy.
+
+Further research should examine EMA distance thresholds, slope confirmation, volatility normalization, entry frequency, and trade-management behavior.
+
+### 📌 EA-124 (MACD Acceleration - M1)
+
+A MACD momentum-acceleration EA on XAUUSD M1 designed to test whether changes in MACD histogram direction and acceleration can provide a standalone short-term directional trading edge.
+
+The strategy evaluates MACD histogram behavior, including zero-line transitions and multi-bar acceleration patterns.
+
+BUY signals are associated with bullish histogram transitions or strengthening positive momentum. SELL signals use the corresponding bearish histogram conditions.
+
+The baseline configuration uses fixed Lot 0.01, Stop Loss 300 points, Take Profit 600 points, Maximum Spread 30, Break-Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Distance 200).
+
+The baseline test produced **3,860 trades**, Net Profit **-$992.01**, Profit Factor **0.80**, Maximum Equity Drawdown **99.20%**, and Win Rate **48.06%**.
+
+The baseline is classified as **FAIL**.
+
+The tested MACD acceleration logic did not establish positive expectancy, despite generating a substantial number of historical trades.
+
+Future research should distinguish histogram zero-crossing signals from acceleration signals, evaluate trend-regime filters, and examine the effects of Break-Even and Trailing Stop.
+
+### 📌 EA-125 (Breakout Momentum - M1)
+
+A multi-indicator breakout-momentum EA on XAUUSD M1 designed to test whether price-range breakouts confirmed by RSI and MACD momentum can provide a directional continuation edge.
+
+The strategy combines a historical price-range breakout with RSI and MACD directional confirmation.
+
+BUY signals require the latest completed candle to close above the previous breakout range, with bullish RSI and MACD conditions. SELL signals apply the inverse conditions below the historical range.
+
+The baseline configuration uses RSI Period 14, BUY threshold 55, SELL threshold 45, MACD 12/26/9, Breakout Lookback 10, fixed Lot 0.01, Stop Loss 300 points, Take Profit 600 points, Maximum Spread 30, Break-Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Distance 200).
+
+**Implementation Note:** The MACD confirmation evaluates the relationship between the MACD Main and Signal lines; it does not require a fresh MACD crossover event.
+
+The baseline test produced **3,707 trades**, Net Profit **-$992.17**, Profit Factor **0.81**, Maximum Equity Drawdown **99.22%**, and Win Rate **44.73%**.
+
+The baseline is classified as **FAIL**.
+
+The tested combination of range breakout, RSI confirmation, and MACD momentum did not establish a profitable historical edge.
+
+Future research should focus on breakout quality, indicator redundancy, momentum thresholds, and execution-cost sensitivity.
+
+### 📌 EA-126 (Impulse Follow-through - M1)
+
+A price-action momentum-continuation EA on XAUUSD M1 designed to test whether a strong impulse candle followed by a confirmed directional breakout can generate positive expectancy.
+
+The strategy uses ATR14 to identify unusually strong impulse candles.
+
+An impulse candle must have a body size at least 1.5 times its ATR reference value. The following completed candle must then confirm continuation by closing beyond the impulse candle's High or Low in the corresponding direction.
+
+The baseline configuration uses fixed Lot 0.01, Stop Loss 300 points, Take Profit 600 points, Maximum Spread 30, Break-Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Distance 200).
+
+The baseline test produced **1,085 trades**, Net Profit **-$211.69**, Profit Factor **0.85**, Maximum Equity Drawdown **24.46%**, and Win Rate **45.71%**.
+
+The baseline is classified as **FAIL**.
+
+Although the drawdown was lower than that of several preceding EA experiments, the tested impulse-follow-through configuration still generated negative expectancy.
+
+Future research should investigate impulse strength, confirmation quality, ATR thresholds, timeframe behavior, and exit management.
+
+### 📌 EA-127 (ATR High Regime - M1)
+
+An ATR-based volatility-regime EA on XAUUSD M1 designed to investigate whether trading during unusually high-volatility conditions, with EMA trend alignment, can provide a short-term directional trading edge.
+
+The strategy evaluates ATR14 on the M1 timeframe and compares the latest completed ATR value against a historical ATR average.
+
+The baseline high-volatility threshold is 1.3 times the reference average. BUY and SELL signals are then filtered using EMA20 and EMA50 directional alignment on the chart timeframe.
+
+The baseline configuration uses fixed Lot 0.01, Stop Loss 300 points, Take Profit 600 points, Maximum Spread 30, Break-Even enabled (Trigger 150), and Trailing Stop enabled (Start 200 / Distance 200).
+
+The baseline test produced **6,698 trades**, Net Profit **-$904.38**, Profit Factor **0.90**, Maximum Equity Drawdown **92.25%**, and Win Rate **46.16%**.
+
+The baseline is classified as **FAIL**.
+
+The tested high-volatility regime filter did not provide sufficient protection against negative expectancy and substantial drawdown.
+
+Future research should examine ATR regime thresholds, EMA alignment quality, volatility persistence, trading-session effects, and trade frequency.
+
+### 📌 EA-128 (ATR Low-to-High - M1)
+
+An ATR volatility-transition breakout EA on XAUUSD M1 designed to test whether movement from relatively low ATR conditions into expanding volatility, combined with a price-range breakout, can provide a directional continuation edge.
+
+The strategy compares the previous ATR value with its historical reference average and requires the latest completed ATR to increase relative to the preceding ATR value.
+
+BUY signals require a close above the historical range High, while SELL signals require a close below the historical range Low.
+
+The source-code defaults use ATR Period 14, ATR Lookback 30, Low ATR Factor 0.7, Expansion Factor 1.5, and Range Bars 10.
+
+**Important Configuration Note:** The supplied backtest did not use these source defaults for every parameter. The tested settings included Maximum Spread 35, Low ATR Factor 1.2, Expansion Factor 1.05, and Range Bars 3.
+
+Under the tested Low ATR Factor of 1.2, the previous ATR could be as high as 120% of the historical average and still satisfy the filter. Therefore, the tested configuration should not be described as requiring strict ATR contraction.
+
+The baseline test produced **2,987 trades**, Net Profit **-$993.34**, Profit Factor **0.75**, Maximum Equity Drawdown **99.38%**, and Win Rate **44.22%**.
+
+The baseline is classified as **FAIL**.
+
+The result is retained for controlled research into volatility transitions, ATR threshold sensitivity, breakout range length, and the effect of differences between source defaults and tested parameters.
+
+### 📌 EA-129 (ATR Expansion Breakout - M1)
+
+An ATR expansion-based breakout research EA on XAUUSD M1 designed to investigate whether increasing market volatility combined with directional price breakouts can provide a measurable short-term continuation edge.
+
+The strategy belongs to the volatility-expansion and breakout-continuation research family.
+
+Its research objective is to determine whether ATR-based expansion confirmation can improve the quality of directional breakout entries under the documented XAUUSD M1 test conditions.
+
+The supplied baseline comparison records **1,463 trades**, Net Profit **-$653.50**, Profit Factor **0.70**, Maximum Equity Drawdown **66.52%**, and Win Rate **41.22%**.
+
+The baseline is classified as **FAIL** because it produced negative net profit, a Profit Factor substantially below 1.00, and significant historical equity drawdown.
+
+The result is retained as a research reference for ATR expansion thresholds, breakout confirmation, market-regime selection, and exit management.
+
+Further conclusions about individual parameter contributions require controlled experiments.
+
+### 📌 EA-130 (ATR Contraction Reversal - M1)
+
+An ATR contraction and candlestick-rejection EA on XAUUSD M1 designed to test whether relatively low volatility, combined with price rejection near historical range boundaries, can generate profitable short-term reversal trades.
+
+The strategy uses ATR14 and compares the latest completed ATR with the average ATR of the preceding 30 completed candles.
+
+The default contraction condition requires current ATR to be no greater than 70% of the historical reference average.
+
+The EA calculates the Highest High and Lowest Low of a 20-candle historical range, excluding the signal candle.
+
+BUY signals require a bullish candle with a sufficiently long lower wick near the lower 10% range boundary. SELL signals require a bearish candle with a sufficiently long upper wick near the upper 10% range boundary.
+
+The default minimum rejection-wick-to-body ratio is 1.5.
+
+The baseline configuration uses fixed Lot 0.01, Stop Loss 300 points, Take Profit 600 points, Maximum Spread 30, Break-Even enabled (Trigger 150 / Offset 0), and Trailing Stop enabled (Start 200 / Distance 200).
+
+The baseline test was performed on XAUUSD.PRO M1 from January 2 to April 1, 2026, using 100% real ticks and an initial deposit of $1,000.
+
+The test produced **169 trades**, Net Profit **+$16.50**, Profit Factor **1.09**, Expected Payoff **+$0.10**, Maximum Equity Drawdown **2.85%**, Win Rate **53.85%**, and Recovery Factor **0.57**.
+
+The baseline is classified as **PASS FOR FURTHER RESEARCH — PROVISIONAL**, not as a validated live-trading strategy.
+
+Although the test produced positive net profit and low observed drawdown, the Profit Factor of 1.09 and relatively small sample of 169 trades indicate a narrow historical edge.
+
+Future research should focus on ATR contraction thresholds, historical range length, wick-to-body ratios, directional profitability, transaction costs, out-of-sample performance, and forward validation.
 
 
 
@@ -8618,7 +8800,268 @@ The next controlled research stage should isolate **RSI reversal quality and VWA
 
 **Decision:** Do not deploy this baseline to a live account. Investigate the negative expectancy and near-total equity drawdown before proceeding with further experiments.
 
+### EA-121 — ADX Rising
 
+- [x] EA source code implemented
+- [x] Baseline backtest completed
+- [x] Baseline results documented
+- [ ] Investigate ADX slope and directional movement thresholds
+- [ ] Evaluate market-regime and volatility filters
+- [ ] Analyze BUY vs SELL performance
+- [ ] Evaluate Break-Even and Trailing Stop effects
+- [ ] Perform out-of-sample and robustness testing
+- [ ] Validate with additional market conditions
+- [ ] Approve for live trading
+
+**Current Research Status:** FAIL — Baseline
+
+**Baseline ID:** `EA121-M1-BASELINE-001`
+
+**Key Result:** Net Profit **-$993.01** | Profit Factor **0.80** | Max Equity DD **99.30%** | **3,840 trades** | Win Rate **47.06%**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** Broad optimization on hold pending controlled ADX and directional movement research.
+
+**Decision:** Do not deploy this baseline to a live account. Investigate the negative expectancy and near-total equity drawdown before proceeding.
+
+### EA-122 — DI Cross
+
+- [x] EA source code implemented
+- [x] Baseline backtest completed
+- [x] Baseline results documented
+- [ ] Investigate +DI / -DI crossover quality
+- [ ] Evaluate EMA20 trend-filter sensitivity
+- [ ] Analyze BUY vs SELL directional results
+- [ ] Test alternative ADX and volatility conditions
+- [ ] Evaluate exit-management behavior
+- [ ] Perform out-of-sample and robustness testing
+- [ ] Approve for live trading
+
+**Current Research Status:** FAIL — Baseline
+
+**Baseline ID:** `EA122-M1-BASELINE-001`
+
+**Key Result:** Net Profit **-$992.57** | Profit Factor **0.79** | Max Equity DD **99.30%** | **3,647 trades** | Win Rate **45.13%**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** Broad optimization on hold pending controlled crossover and trend-filter experiments.
+
+**Decision:** Do not deploy the tested configuration. Retain it as a reference baseline for further research.
+
+### EA-123 — EMA Distance Expansion
+
+- [x] EA source code implemented
+- [x] Baseline backtest completed
+- [x] Baseline results documented
+- [ ] Investigate EMA8/21 distance-expansion thresholds
+- [ ] Evaluate fast-EMA slope confirmation
+- [ ] Analyze trade frequency and repeated-entry behavior
+- [ ] Test volatility-normalized EMA separation
+- [ ] Evaluate Break-Even and Trailing Stop effects
+- [ ] Perform independent out-of-sample validation
+- [ ] Approve for live trading
+
+**Current Research Status:** FAIL — Baseline
+
+**Baseline ID:** `EA123-M1-BASELINE-001`
+
+**Key Result:** Net Profit **-$994.33** | Profit Factor **0.88** | Max Equity DD **99.45%** | **6,598 trades** | Win Rate **46.15%**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** Broad optimization on hold pending controlled signal and trade-frequency analysis.
+
+**Decision:** Do not deploy this baseline. The historical test shows negative expectancy and near-total equity drawdown.
+
+### EA-124 — MACD Acceleration
+
+- [x] EA source code implemented
+- [x] Baseline backtest completed
+- [x] Baseline results documented
+- [ ] Separate MACD zero-crossing and histogram-acceleration signals
+- [ ] Investigate histogram acceleration thresholds
+- [ ] Evaluate trend and volatility filters
+- [ ] Analyze BUY vs SELL performance
+- [ ] Test alternative exit-management configurations
+- [ ] Perform out-of-sample and robustness testing
+- [ ] Approve for live trading
+
+**Current Research Status:** FAIL — Baseline
+
+**Baseline ID:** `EA124-M1-BASELINE-001`
+
+**Key Result:** Net Profit **-$992.01** | Profit Factor **0.80** | Max Equity DD **99.20%** | **3,860 trades** | Win Rate **48.06%**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** Broad optimization on hold pending controlled MACD signal-component research.
+
+**Decision:** Do not deploy this baseline. Investigate the negative expectancy before considering further validation.
+
+### EA-125 — Breakout Momentum
+
+- [x] EA source code implemented
+- [x] Baseline backtest completed
+- [x] Baseline results documented
+- [x] Identify MACD directional-state confirmation rather than fresh crossover
+- [ ] Evaluate breakout-range sensitivity
+- [ ] Investigate RSI and MACD confirmation thresholds
+- [ ] Test the individual contribution of each momentum filter
+- [ ] Evaluate trading-session and execution-cost sensitivity
+- [ ] Perform out-of-sample and robustness testing
+- [ ] Approve for live trading
+
+**Current Research Status:** FAIL — Baseline
+
+**Baseline ID:** `EA125-M1-BASELINE-001`
+
+**Key Result:** Net Profit **-$992.17** | Profit Factor **0.81** | Max Equity DD **99.22%** | **3,707 trades** | Win Rate **44.73%**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** Broad optimization on hold pending controlled breakout and momentum-filter research.
+
+**Implementation Note:** The MACD condition evaluates Main/Signal directional state rather than requiring a fresh crossover.
+
+**Decision:** Do not deploy the baseline. The tested configuration did not establish positive expectancy.
+
+### EA-126 — Impulse Follow-through
+
+- [x] EA source code implemented
+- [x] Baseline backtest completed
+- [x] Baseline results documented
+- [ ] Investigate ATR-based impulse thresholds
+- [ ] Evaluate follow-through candle confirmation
+- [ ] Analyze BUY vs SELL directional performance
+- [ ] Compare fixed exits against Break-Even and Trailing Stop
+- [ ] Test alternative timeframes and market regimes
+- [ ] Perform out-of-sample and robustness testing
+- [ ] Approve for live trading
+
+**Current Research Status:** FAIL — Baseline
+
+**Baseline ID:** `EA126-M1-BASELINE-001`
+
+**Key Result:** Net Profit **-$211.69** | Profit Factor **0.85** | Max Equity DD **24.46%** | **1,085 trades** | Win Rate **45.71%**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** Broad optimization on hold pending controlled impulse-quality and confirmation experiments.
+
+**Decision:** Do not deploy the tested configuration. The observed drawdown is lower than in several preceding experiments, but the historical expectancy remains negative.
+
+### EA-127 — ATR High Regime
+
+- [x] EA source code implemented
+- [x] Baseline backtest completed
+- [x] Baseline results documented
+- [ ] Investigate ATR high-regime thresholds
+- [ ] Evaluate EMA20/50 trend-alignment sensitivity
+- [ ] Analyze volatility persistence and trading-session effects
+- [ ] Investigate high trade frequency
+- [ ] Evaluate BUY vs SELL performance
+- [ ] Perform out-of-sample and robustness testing
+- [ ] Approve for live trading
+
+**Current Research Status:** FAIL — Baseline
+
+**Baseline ID:** `EA127-M1-BASELINE-001`
+
+**Key Result:** Net Profit **-$904.38** | Profit Factor **0.90** | Max Equity DD **92.25%** | **6,698 trades** | Win Rate **46.16%**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** Broad optimization on hold pending controlled volatility-regime research.
+
+**Implementation Note:** ATR is evaluated on the M1 timeframe, while the EMA trend filter uses the chart timeframe.
+
+**Decision:** Do not deploy the tested high-volatility regime configuration. The baseline remains unprofitable with substantial historical drawdown.
+
+### EA-128 — ATR Low-to-High
+
+- [x] EA source code implemented
+- [x] Baseline backtest completed
+- [x] Baseline results documented
+- [x] Identify source-default versus backtest-input differences
+- [ ] Reproduce the test using the exact reported parameters
+- [ ] Compare tested parameters against original source defaults
+- [ ] Investigate low-ATR and expansion-factor sensitivity
+- [ ] Evaluate breakout-range length
+- [ ] Analyze BUY vs SELL performance
+- [ ] Perform independent out-of-sample validation
+- [ ] Approve for live trading
+
+**Current Research Status:** FAIL — Baseline
+
+**Baseline ID:** `EA128-M1-BASELINE-001`
+
+**Key Result:** Net Profit **-$993.34** | Profit Factor **0.75** | Max Equity DD **99.38%** | **2,987 trades** | Win Rate **44.22%**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** Broad optimization on hold pending configuration reconciliation and controlled volatility-transition experiments.
+
+**Configuration Note:** The reported backtest used `InpMaxSpread=35`, `InpLowATRFactor=1.2`, `InpExpansionFactor=1.05`, and `InpRangeBars=3`, differing from the corresponding source defaults of 30, 0.7, 1.5, and 10.
+
+**Decision:** Do not deploy the tested configuration. Reconcile the input differences and investigate the negative expectancy before further validation.
+
+### EA-129 — ATR Expansion Breakout
+
+- [x] EA source code implemented
+- [x] Baseline backtest completed
+- [x] Baseline results documented
+- [ ] Investigate ATR expansion thresholds
+- [ ] Evaluate breakout confirmation quality
+- [ ] Analyze trade frequency and directional performance
+- [ ] Test volatility-regime and trading-session filters
+- [ ] Evaluate exit-management sensitivity
+- [ ] Perform out-of-sample and robustness testing
+- [ ] Approve for live trading
+
+**Current Research Status:** FAIL — Baseline
+
+**Baseline ID:** `EA129-M1-BASELINE-001`
+
+**Key Result:** Net Profit **-$653.50** | Profit Factor **0.70** | Max Equity DD **66.52%** | **1,463 trades** | Win Rate **41.22%**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** Broad optimization on hold pending controlled ATR expansion and breakout-confirmation research.
+
+**Decision:** Do not deploy the baseline. The tested configuration produced negative expectancy and significant historical equity drawdown.
+
+### EA-130 — ATR Contraction Reversal
+
+- [x] EA source code implemented
+- [x] Baseline backtest completed
+- [x] Baseline results documented
+- [x] Verify that reported backtest inputs match source defaults
+- [ ] Investigate ATR contraction thresholds
+- [ ] Evaluate historical range length and boundary sensitivity
+- [ ] Test rejection-wick-to-body ratios
+- [ ] Analyze BUY vs SELL profitability separately
+- [ ] Perform execution-cost and slippage stress testing
+- [ ] Conduct independent out-of-sample and walk-forward validation
+- [ ] Perform forward testing under realistic conditions
+- [ ] Approve for live trading
+
+**Current Research Status:** PASS FOR FURTHER RESEARCH — PROVISIONAL
+
+**Baseline ID:** `EA130-M1-BASELINE-001`
+
+**Key Result:** Net Profit **+$16.50** | Profit Factor **1.09** | Max Equity DD **2.85%** | **169 trades** | Win Rate **53.85%**
+
+**Validation Status:** `NOT VALIDATED FOR LIVE TRADING`
+
+**Optimization Status:** Controlled parameter-sensitivity and robustness research recommended. Avoid broad optimization without independent validation.
+
+**Configuration Note:** All reported backtest inputs match the supplied source-code defaults.
+
+**Research Note:** The historical test produced positive net profit and low observed drawdown, but the Profit Factor of 1.09 and limited sample of 169 trades provide insufficient evidence of a durable trading edge.
+
+**Decision:** Retain EA-130 as a provisional research candidate. Do not approve live capital scaling until out-of-sample, execution-cost, and forward validation requirements are satisfied.
 
 
 
